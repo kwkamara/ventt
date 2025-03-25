@@ -1,15 +1,17 @@
-<script lang="ts">
-import {defineComponent} from 'vue'
-
-export default defineComponent({
-  name: "Item"
-})
-</script>
-
 <template>
-
+<div>
+  {{ first_name }}
+</div>
 </template>
 
-<style scoped>
 
-</style>
+<script lang="js">
+export default defineComponent({
+  name: "Item",
+  data(){
+    return{
+      first_name : "esther"
+    }
+  }
+})
+</script>
