@@ -3,16 +3,11 @@
        class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 text-white text-sm flex align-items-center justify-content-center capitalize">
 
     <!-- Category Navigation -->
-    <div
-        v-for="(cat_name, ix) in ['men', 'women', 'kids']"
-        :key="ix"
-        @click="category_name = cat_name; $refs.categoriesPopup.hide(); $nextTick(() => { this.$refs.categoriesPopup.show($event); });"
-        class="w-3 xl:w-1 h-full border-left-1 border-purple-700 flex align-items-center justify-content-center gap-2 hover:bg-purple-800"
-        role="button"
-        tabindex="0"
-        :aria-label="`Show ${cat_name} categories`"
-        @keydown.enter="category_name = cat_name; $refs.categoriesPopup.hide(); $nextTick(() => { this.$refs.categoriesPopup.show($event); });"
-    >
+    <div v-for="(cat_name, ix) in ['men', 'women', 'kids']" :key="ix"
+         :aria-label="`Show ${cat_name} categories`"
+         class="w-3 xl:w-1 h-full border-left-1 border-purple-700 flex align-items-center justify-content-center gap-2 hover:bg-purple-800"
+         role="button" tabindex="0"
+         @click="category_name = cat_name; $refs.categoriesPopup.hide(); $nextTick(() => { this.$refs.categoriesPopup.show($event); });">
       <i class="pi pi-chevron-down" aria-hidden="true"/> {{ cat_name }}
     </div>
     <!-- Category Navigation -->
@@ -23,7 +18,8 @@
       <div aria-labelledby="categories-popover-title" class="flex gap-3 p-2 xl:p-3" role="menu">
 
         <!-- Official -->
-        <div class="w-6rem xl:w-18rem h-11rem xl:h-17rem overflow-hidden flex align-items-start justify-content-end border-round hover:shadow-3 text-white relative">
+        <div class="w-6rem xl:w-18rem h-11rem xl:h-17rem overflow-hidden flex align-items-start justify-content-end border-round hover:shadow-3 text-white relative"
+             @click="viewShop({official: true});">
           <img :alt="`Ventt Ecommerce Platform - ${category_name} Official`" :src="`${category_name}-official-1-288.webp`"
                aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round" loading="lazy"/>
 
@@ -33,19 +29,28 @@
         </div>
         <!-- /Official -->
 
+
         <!-- Casual and Accessories -->
         <div class="w-6rem xl:w-16rem flex flex-column gap-3 text-white">
-          <!-- Casual -->
-          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative">
-            <img :alt="`Ventt Ecommerce Platform - ${category_name} Casual`" class="w-full h-full absolute inset-0 object-cover border-round"
-                 :src="`${category_name}-casual-2-256.webp`" aria-hidden="true"/>
+
+          <!-- kids | casual -->
+          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative"
+               @click="viewShop({casual: true}); $refs.categoriesPopup.hide();">
+
+            <img :alt="`Ventt Ecommerce Platform - ${category_name} Casual`"
+                 :src="`${category_name}-casual-2-256.webp`" aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round"/>
+
             <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
               <Badge class="m-0 bg-purple-600 text-xs" value="Casual" size="small" aria-label="Casual Products"/>
             </div>
+
           </div>
+          <!-- /kids | casual -->
+
 
           <!-- Accessories -->
-          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative">
+          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative"
+               @click="viewShop({accessories: true}); $refs.categoriesPopup.hide();">
 
             <img :alt="`Ventt Ecommerce Platform - ${category_name} Accessories`" width="256"
                  :src="`${category_name}-accessories-1-288.webp`" aria-hidden="true"
@@ -61,10 +66,13 @@
         </div>
         <!-- /Casual and Accessories -->
 
+
         <!-- Hats and Shoes -->
         <div class="w-6rem xl:w-16rem flex flex-column gap-3">
+
           <!-- Hats Category -->
-          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative text-white">
+          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative text-white"
+               @click="viewShop({hats: true}); $refs.categoriesPopup.hide();">
             <img :alt="`Ventt Ecommerce Platform - ${category_name} Hats`" :src="`${category_name}-hats-2-256.webp`"
                  aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round"/>
             <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
@@ -72,8 +80,10 @@
             </div>
           </div>
 
+
           <!-- Shoes Category -->
-          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative text-white">
+          <div class="w-full h-5rem xl:h-8rem overflow-hidden border-round hover:shadow-3 relative text-white"
+               @click="viewShop({shoes: true}); $refs.categoriesPopup.hide();">
             <img :alt="`Ventt Ecommerce Platform - ${category_name} Shoes`"
                  :src="`${category_name}-shoes-1-288.webp`" aria-hidden="true"
                  class="w-full h-full absolute inset-0 object-cover border-round"/>
@@ -168,6 +178,20 @@ export default defineComponent({
         ]
       }
 
+    }
+  },
+
+
+  methods: {
+    //load shop UI.
+    viewShop(filters) {
+      //current category name.
+      filters[this.category_name] = true;
+
+      //change UI.
+      useState('filters').value = filters;
+      useState('ui').value      = 'shop';
+      this.$refs.categoriesPopup.hide();
     }
   },
 

@@ -7,12 +7,13 @@
       <div class="grid m-0 w-full mb-5 align-items-start text-xs">
 
         <div class="col-6 md:col-3">
-          <h3 class="h-3rem m-0 flex align-items-center title uppercase">
-            Ventt
-          </h3>
+
+          <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
+            <img src="/logo-ventt.webp" alt="ventt logo" width="50"/>
+          </div>
 
           <div class="flex flex flex-column gap-2 text-xs">
-            <div>ABC Building</div>
+            <div class="title uppercase">Ventt</div>
             <div>Nairobi, Kenya.</div>
             <div>+254 (0) 722 373 979</div>
           </div>
@@ -73,7 +74,7 @@
           <div class="text-green-300 white-space-nowrap">M-PESA</div>
         </div>
 
-        <div class="text-xs md:text-sm font-light flex-1 text-center">&copy; 2025. Ventt</div>
+        <div class="text-xs md:text-sm font-light flex-1 text-center title uppercase">&copy; 2025. Ventt</div>
 
         <div class="flex-1 text-right text-xs">www.ancesys.com</div>
       </div>

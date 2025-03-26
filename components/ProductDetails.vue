@@ -4,19 +4,19 @@
     <!-- Breadcrumb -->
     <div class="w-full h-4rem px-4 lg:pl-7 lg:pr-8 bg-gray-200 text-gray-800 flex align-items-center justify-content-between">
 
-      <div class="flex align-items-center gap-2">
-        <Button label="home" icon="pi pi-shop" text
-                class="hover:text-purple-300 text-gray-800 bg-transparent"
-                @click="useState('product').value=null"/>
+      <div class="flex align-items-center gap-3">
+
+        <Button class="hover:text-purple-300 text-gray-800 bg-transparent" icon="pi pi-shop" label="Shop" text size="small"
+                @click="useState('product').value=null; useState('ui').value='shop'"/>
 
         <i class="pi pi-chevron-right text-xs"/>
-        <span>{{ product.name }}</span></div>
+        <span>{{ product.name }}</span>
 
+      </div>
 
       <Button :aria-label="product.wishlist ? 'Remove from wishlist' : 'Add to wishlist'"
-              :class="`${product.wishlist ? 'text-white' : 'bg-white-alpha-70 text-purple-600'} text-lg border-none`"
-              :severity="product.wishlist ? 'help' : 'secondary'"
-              icon="pi pi-heart" raised rounded
+              :class="`${product.wishlist ? 'text-white bg-purple-600' : 'bg-white-alpha-70 text-purple-700'} text-lg border-none`"
+              icon="pi pi-heart" rounded
               @click="product.wishlist ? removeFromWishList() : addToWishList();"/>
 
     </div>
@@ -32,13 +32,13 @@
         <!-- main image -->
         <div class="h-20rem w-full">
           <img :alt="product.name" :src="productImage.url"
-                   class="w-full h-full"/>
+               class="w-full h-full fadein animation-duration-1000"/>
         </div>
         <!-- main image -->
 
 
         <!-- images -->
-        <div class="h-7rem px-3 flex align-items-center justify-content-between gap-1 shadow-1">
+        <div class="h-7rem px-4 flex align-items-center justify-content-between gap-1 shadow-1">
 
           <img v-for="image in product.images" :alt="product.name"
                :src="image.url" class="h-5rem border-round hover:shadow-3"
@@ -49,10 +49,11 @@
 
 
         <!-- Rel Products -->
-        <div class="grid m-0">
+        <div class="grid m-0 px-3 lg:p-0">
+
           <div class="col-12 pt-5 flex align-items-center">Related Products</div>
 
-          <div v-for="relProduct in relProducts.slice(0, 2)" class="col-12 lg:col-6 px-2">
+          <div v-for="relProduct in relProducts.slice(0, 2)" class="col-12 lg:col-6">
             <Product :product="relProduct"/>
           </div>
 
@@ -64,7 +65,7 @@
 
 
       <!-- Product Details -->
-      <div class="col-12 lg:col-6 px-3 py-0">
+      <div class="col-12 lg:col-6 px-4 py-0">
 
         <!-- header -->
         <div class="h-3rem flex align-items-start justify-content-between text-lg font-bold capitalize">
@@ -98,12 +99,12 @@
 
             <div class="capitalize py-2">
               <div>{{ product.weight || null }}</div>
-              <div class="text-xs text-gray-500">weight</div>
+              <div class="text-xs text-gray-500 pt-1">weight</div>
             </div>
 
             <div class="capitalize py-2">
               <div>{{ product.dimensions || null }}</div>
-              <div class="text-xs text-gray-500">dimensions</div>
+              <div class="text-xs text-gray-500 pt-1">dimensions</div>
             </div>
 
           </div>
@@ -126,11 +127,11 @@
           <div class="w-8 pl-2 flex gap-3 justify-content-end align-items-center">
             <Button aria-label="Add to cart" class="border-1 border-gray-100 text-xs" icon="pi pi-shopping-cart"
                     label="Add" outlined rounded severity="success" size="small"
-                    @click="addToCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>
+                    @click="addToCart(product, cart.value);"/>
 
             <Button v-if="product.cart" aria-label="Remove from cart" class="border-1 border-gray-100 text-xs"
                     icon="pi pi-shopping-cart" label="Remove" outlined rounded severity="warn" size="small"
-                    @click="removeFromCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>
+                    @click="removeFromCart(product, cart.value);"/>
           </div>
           <!-- Cart Controls -->
 
@@ -152,7 +153,7 @@
 
 
         <!-- Reviews -->
-        <div class="w-full pt-5">
+        <div class="w-full py-8">
 
           <!-- reviews header -->
           <div class="py-2 border-bottom-1 border-gray-200">
@@ -223,7 +224,23 @@ export default defineComponent({
     },
 
     relProducts() {
-      return useState('products').value.filter(pd => pd.documentId !== this.product.documentId);
+      //get current item categories.
+      const categories = Object.keys(this.product.categories);
+
+      //primary filter.
+      const main_cat      = categories[0];
+      const primary_items = useState('products').value
+          .filter(pd => pd.categories[main_cat] && pd.documentId !== this.product.documentId);
+
+      //secondary filter.
+      const second_cat      = categories[1];
+      const secondary_items = primary_items.filter(pd => pd.categories[second_cat]);
+      if (secondary_items.length > 1) return secondary_items;
+
+
+      //return primary items.
+      secondary_items.push(...primary_items.filter(pd => !secondary_items.includes(pd)))
+      return secondary_items;
     },
 
     //get main product.

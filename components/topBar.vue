@@ -1,56 +1,37 @@
 <template>
-  <header class="col-12 h-5rem px-3 md:px-8 flex align-items-center justify-content-between bg-bluegray-50" aria-label="Main Navigation">
+  <header class="col-12 h-5rem px-3 md:px-8 flex align-items-center justify-content-between bg-bluegray-50"
+          aria-label="Main Navigation">
 
-    <!-- Brand Logo -->
-    <div class="h-full w-1 md:w-2 font-bold flex align-items-center uppercase title hover:text-purple-600 cursor-pointer"
-         aria-label="Ventt Brand" @click="useState('product').value=null">
-      Ventt
+    <!-- Logo -->
+    <div aria-label="Ventt Brand"
+         class="h-full w-1 font-bold flex align-items-center uppercase title hover:text-purple-600 cursor-pointer"
+         @click="useState('product').value=null; useState('ui').value=null">
+      <img src="/logo-ventt.webp" alt="ventt logo" width="50"/>
     </div>
+    <!-- Logo -->
+
 
     <!-- Navigation Actions -->
     <div class="w-11 md:w-full flex align-items-center justify-content-end gap-2 md:gap-3">
 
       <!-- Product Search -->
-      <Button
-          icon="pi pi-search text-xs"
-          outlined
-          rounded
-          severity="secondary"
-          size="small"
-          aria-label="Search Products"
-          @click="$refs.productsPopover.toggle($event)"
-      />
+      <Button aria-label="Search Products" icon="pi pi-search text-xs" outlined rounded
+              severity="secondary" size="small" @click="$refs.productsPopover.toggle($event)"/>
       <Popover ref="productsPopover">
         <div class="w-22rem md:w-26rem">
-          <DataTable
-              v-model:filters="filters.dt1"
-              :globalFilterFields="['name', 'description', 'sku']"
-              :rows="5"
-              paginator
-              :show-headers="false"
-              row-hover
-              data-key="documentId"
-              :value="useState('products').value"
-          >
+          <DataTable v-model:filters="filters.dt1" :globalFilterFields="['name', 'description', 'sku']" :rows="5"
+                     :show-headers="false" :value="useState('products').value" data-key="documentId" paginator row-hover>
+
             <template #header>
               <div class="pl-2">
                 <IconField>
-                  <InputIcon
-                      @click="filters.dt1['global'].value=null; useState('selectedItems').value=[]"
-                      class="hover:text-orange-500"
-                      aria-label="Clear Search"
-                  >
+                  <InputIcon aria-label="Clear Search" class="hover:text-orange-500"
+                             @click="filters.dt1['global'].value=null; useState('selectedItems').value=[]">
                     <i class="pi pi-search" aria-hidden="true"/>
                   </InputIcon>
-                  <InputText
-                      autocomplete="off"
-                      id="search-ip"
-                      class="text-sm"
-                      placeholder="Search products"
-                      v-model="filters.dt1['global'].value"
-                      aria-label="Search products"
-                      fluid
-                  />
+
+                  <InputText id="search-ip" v-model="filters.dt1['global'].value" aria-label="Search products"
+                      autocomplete="off" class="text-sm" fluid placeholder="Search products"/>
                 </IconField>
               </div>
             </template>
@@ -58,18 +39,13 @@
             <Column field="name">
               <template #body="{data}">
                 <div class="pl-2 flex justify-content-between align-items-center text-sm">
+
                   {{ data.name }}
+
                   <div class="flex align-items-center gap-3">
-                    <Button
-                        severity="success"
-                        raised
-                        class="border-none"
-                        rounded
-                        outlined
-                        icon="pi pi-plus text-xs"
-                        aria-label="Add to Cart"
-                        @click="addToCart(data, 1)"
-                    />
+                    <Button aria-label="Add to Cart" class="border-none" icon="pi pi-plus text-xs"
+                        outlined raised rounded severity="success" @click="addToCart(data, 1)"/>
+
                     <template v-if="data.cart">
                       <Button
                           severity="warn"
@@ -92,24 +68,21 @@
                           @click="removeFromCart(data, data.cart)"
                       />
                     </template>
+
                   </div>
+
                 </div>
               </template>
             </Column>
+
           </DataTable>
         </div>
       </Popover>
       <!-- /Product Search -->
 
       <!-- User Profile -->
-      <Button
-          icon="pi pi-user text-xs"
-          outlined
-          rounded
-          severity="secondary"
-          size="small"
-          aria-label="User Profile"
-      />
+      <Button icon="pi pi-user text-xs" outlined rounded severity="secondary"
+          size="small" aria-label="User Profile"/>
 
       <!-- Wishlist -->
       <Button :class="`px-3 border-none shadow-1 ${wishlist.length ? 'bg-purple-600 text-white' : 'text-gray-600'}`"
@@ -157,11 +130,12 @@
       <!-- /Wishlist -->
 
       <!-- Shopping Cart -->
-      <Button :label="String(formatDecimal(cartData.total))" :disabled="!cartData.total"
-              aria-label="Shopping Cart" class="px-3 shadow-1" icon="pi pi-shopping-cart text-xs"
-              rounded severity="help" size="small" @click="$refs.shoppingCartPopover.toggle($event)"/>
+      <Button :disabled="!cartData.total" :label="String(formatDecimal(cartData.total))"
+              aria-label="Shopping Cart" class="px-3 shadow-1 bg-purple-600 text-white border-none"
+              icon="pi pi-shopping-cart text-xs" rounded size="small" @click="$refs.shoppingCartPopover.toggle($event)"/>
       <Popover ref="shoppingCartPopover">
         <div class="w-20rem md:w-26rem px-3">
+
           <div class="h-4rem flex align-items-center gap-2 border-bottom-1 border-gray-100">
             <i class="pi pi-shopping-cart" aria-hidden="true"/> My Shopping Cart
           </div>
@@ -180,7 +154,7 @@
                 <div class="text-right">{{ formatDecimal(product.cart * product.price) }}</div>
               </div>
 
-              <div class="w-full py-2 flex align-items-center gap-3">
+              <div class="w-full py-2 flex align-items-center justify-content-end gap-3">
                 <Button aria-label="Add One to Cart" class="border-1 border-gray-100 text-xs" icon="pi pi-plus text-xs"
                         label="add" outlined rounded severity="success" size="small"
                         @click="addToCart(product, 1); notify(`added to cart.`)"/>
@@ -225,6 +199,7 @@
       <!-- /Shopping Cart -->
 
     </div>
+
   </header>
 </template>
 

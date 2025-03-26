@@ -8,7 +8,10 @@
     <Categories/>
 
 
-    <template v-if="!useState('product').value">
+    <shop v-if="useState('ui').value"/>
+
+
+    <template v-else-if="!useState('product').value">
 
       <Hero/>
 
@@ -47,8 +50,10 @@
             <Product :product="product"/>
           </div>
 
+          <!-- men accessories display -->
           <div class="col-12 md:col-4 h-15rem lg:h-19rem">
-            <ProductDisplay image="/men-accessories-1-438.webp" discount="10% Off" name="Mens' Accessories"/>
+            <ProductDisplay :filters="{men: true, accessories: true}" discount="10% Off"
+                            image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
           </div>
 
         </div>
@@ -61,7 +66,8 @@
         <div class="grid m-0">
 
           <div class="col-12 md:col-6 h-16rem lg:h-26rem">
-            <ProductDisplay image="/women-1-664.webp" discount="15% Off" name="Women's Style"/>
+            <ProductDisplay :filters="{women: true}"
+                            discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>
           </div>
 
           <div class="col-12 md:col-6">
@@ -69,17 +75,20 @@
             <div class="lg:h-12rem w-full flex gap-3">
 
               <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay image="/women-suits-1-324.webp" discount="10% Off" name="women's suits"/>
+                <ProductDisplay :filters="{women: true, official: true}"
+                                discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>
               </div>
 
               <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>
+                <ProductDisplay :filters="{women: true, hats: true}"
+                                image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>
               </div>
 
             </div>
 
             <div class="h-8rem lg:h-12rem w-full mt-3">
-              <ProductDisplay image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>
+              <ProductDisplay :filters="{women: true, blouses: true}"
+                              image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>
             </div>
 
           </div>
@@ -99,11 +108,13 @@
             <div class="w-full flex gap-3">
 
               <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>
+                <ProductDisplay :filters="{kids: true, casual: true, boys: true}"
+                                image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>
               </div>
 
               <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>
+                <ProductDisplay :filters="{kids: true, casual: true, girls: true}"
+                                image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>
               </div>
 
             </div>
@@ -111,11 +122,13 @@
             <div class="w-full flex gap-3 mt-3">
 
               <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay image="/babies-1-324.webp" discount="10% Off" name="toddlers"/>
+                <ProductDisplay :filters="{kids: true}"
+                                discount="10% Off" image="/babies-1-324.webp" name="babies"/>
               </div>
 
               <div class="w-6  h-8rem lg:h-12rem">
-                <ProductDisplay image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>
+                <ProductDisplay :filters="{kids:true, pyjamas: true}"
+                                image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>
               </div>
 
             </div>
@@ -123,7 +136,8 @@
           </div>
 
           <div class="col-12 md:col-6 h-18rem lg:h-26rem">
-            <ProductDisplay image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
+            <ProductDisplay :filters="{kids:true, casual: true}"
+                            image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
           </div>
 
         </div>
@@ -158,65 +172,87 @@
 
 <script setup lang="js">
 useState('products', () => [
-
   {
-    color      : "Light Blue",
-    description: "Lightweight and breathable summer wear for men.",
-    dimensions : "38x28x4 inches",
+    categories : {men: 1, casual: 1},
+    color      : "White",
+    description: "A soft, breathable white hoodie made from premium cotton. Perfect for casual outings.",
+    dimensions : "30x24x3 inches",
     documentId : "3",
-    image      : "men-summer-1-211.webp",
+    image      : "men-white-hoodie-1-211.webp",
     images     : [
-      {url: "men-white-hoodie-1-b-454.webp"},
       {url: "men-white-hoodie-1-a-454.webp"},
+      {url: "men-white-hoodie-1-b-454.webp"},
       {url: "men-white-hoodie-1-c-454.webp"}
     ],
-    name       : "white hoodie 1",
+    name       : "White Hoodie",
     price      : 3000,
-    rating     : 5,
+    rating     : 4,
     reviews    : [
-      {review: "Very comfortable and stylish.", user: "user_707", rating: 5},
-      {review: "Great for hot weather.", user: "user_808", rating: 4},
-      {review: "Fabric feels a bit thin.", user: "user_909", rating: 3}
+      {review: "Super comfortable fabric.", user: "user_707", rating: 5},
+      {review: "Fits true to size.", user: "user_808", rating: 4},
+      {review: "Slightly thin for winter.", user: "user_909", rating: 3}
     ],
-    sku        : "SUMMER33445",
-    weight     : "0.8 kg"
+    sku        : "HOODIE33445",
+    weight     : "0.6 kg"
   },
-
   {
-    color      : "blue",
-    description: "A stylish and comfortable hoodie perfect for casual wear.",
-    dimensions : "30x20x5 inches",
+    categories : {men: 1, casual: 1},
+    color      : "Dark Blue",
+    description: "A heavyweight dark blue hoodie with a relaxed fit. Ideal for cooler weather.",
+    dimensions : "32x26x4 inches",
     documentId : "5",
     image      : "men-hoodie-1-211.webp",
     images     : [
       {url: "men-hoodie-2-a-454.webp"},
       {url: "men-hoodie-2-b-454.webp"},
-      {url: "men-hoodie-2-c-454.webp"},
+      {url: "men-hoodie-2-c-454.webp"}
     ],
-    name       : "hoodie 1",
+    name       : "Dark Blue Hoodie",
     price      : 1200,
-    rating     : 5,
+    rating     : 4,
     reviews    : [
-      // {review: "Great hoodie, very comfortable!", user: "user_123", rating: 4},
-      // {review: "Fits perfectly and looks stylish.", user: "user_456", rating: 5},
-      // {review: "Good quality but a bit pricey.", user: "user_789", rating: 3}
+      {review: "Warm and stylish.", user: "user_123", rating: 5},
+      {review: "Pockets are deep and practical.", user: "user_456", rating: 4},
+      {review: "Color fades slightly after washes.", user: "user_789", rating: 3}
     ],
     sku        : "HOODIE12345",
-    weight     : "0.5 kg"
+    weight     : "0.7 kg"
   },
-
   {
+    categories : {men: 1, casual: 1},
+    color      : "Black",
+    description: "Classic black cotton t-shirt with a slim fit. Versatile for layering or solo wear.",
+    dimensions : "28x20x2 inches",
+    documentId : "t-shirt-001",
+    images     : [
+      {url: "men-tshirt-1-a-454.webp"},
+      {url: "men-tshirt-1-b-454.webp"},
+      {url: "men-tshirt-1-c-454.webp"}
+    ],
+    name       : "Black T-Shirt",
+    price      : 1200,
+    rating     : 4,
+    reviews    : [
+      {review: "Soft and durable.", user: "user_101", rating: 5},
+      {review: "True to size.", user: "user_102", rating: 4},
+      {review: "Neckline stretches over time.", user: "user_103", rating: 3}
+    ],
+    sku        : "TSHIRT001",
+    weight     : "0.3 kg"
+  },
+  {
+    categories : {men: 1, official: 1},
     color      : "Navy Blue",
-    description: "A sleek and warm coat designed for the modern man.",
+    description: "A sleek and warm coat designed for the modern man. Features a tailored fit and premium wool blend.",
     dimensions : "40x30x8 inches",
     documentId : "1",
     image      : "men-coat-1.webp",
     images     : [
+      {url: "men-coat-1-a-454.webp"},
       {url: "men-coat-1-b-454.webp"},
-      {url: "men-coat-1-c-454.webp"},
-      {url: "men-coat-1-a-454.webp"}
+      {url: "men-coat-1-c-454.webp"}
     ],
-    name       : "men coat 1",
+    name       : "Navy Blue Official Coat",
     price      : 1200,
     rating     : 4,
     reviews    : [
@@ -227,10 +263,10 @@ useState('products', () => [
     sku        : "COAT67890",
     weight     : "1.2 kg"
   },
-
   {
+    categories : {men: 1, official: 1},
     color      : "Charcoal Gray",
-    description: "A premium suit for formal occasions, tailored to perfection.",
+    description: "A premium suit for formal occasions, tailored to perfection with reinforced stitching.",
     dimensions : "42x32x6 inches",
     documentId : "2",
     image      : "men-suits-1-211.webp",
@@ -239,7 +275,7 @@ useState('products', () => [
       {url: "men-suits-2-454.webp"},
       {url: "men-suits-3-454.webp"}
     ],
-    name       : "suit 1",
+    name       : "Charcoal Gray Suit",
     price      : 1200,
     rating     : 5,
     reviews    : [
@@ -250,19 +286,19 @@ useState('products', () => [
     sku        : "SUIT11223",
     weight     : "1.5 kg"
   },
-
   {
+    categories : {women: 1, casual: 1},
     color      : "Beige",
-    description: "A trendy casual jacket for women, combining style and comfort.",
+    description: "A trendy biker jacket with faux-leather finish. Edgy yet comfortable for everyday wear.",
     dimensions : "36x26x6 inches",
     documentId : "3",
-    image      : "woman-casual-jacket-1.webp",
+    image      : "women-biker-jacket-1.webp",
     images     : [
       {url: "women-biker-jacket-1-a-454.webp"},
       {url: "women-biker-jacket-1-b-454.webp"},
       {url: "women-biker-jacket-1-c-454.webp"}
     ],
-    name       : "bikers jacket",
+    name       : "Beige Biker Jacket",
     price      : 3000,
     rating     : 5,
     reviews    : [
@@ -273,102 +309,232 @@ useState('products', () => [
     sku        : "JACKET55667",
     weight     : "1.0 kg"
   },
-
   {
+    categories : {women: 1, official: 1},
     color      : "Black",
-    description: "Elegant suits for women, perfect for professional settings.",
+    description: "Elegant skirt suit with a tailored blazer and A-line skirt. Ideal for professional settings.",
     dimensions : "40x30x6 inches",
-    documentId : "4",
-    image      : "men-casual.webp",
+    documentId : "w-skirt-suit-001",
     images     : [
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"}
+      {url: "women-suit-1-a-454.webp"},
+      {url: "women-suit-1-b-454.webp"},
+      {url: "women-suit-1-c-454.webp"}
     ],
-    name       : "women suits",
+    name       : "Skirt Suit",
     price      : 1200,
-    rating     : 2,
+    rating     : 4,
     reviews    : [
       {review: "Looks professional but not very comfortable.", user: "user_1004", rating: 2},
       {review: "Fits well but fabric could be better.", user: "user_1005", rating: 3},
       {review: "Good for office wear.", user: "user_1006", rating: 4}
     ],
-    sku        : "WSUIT77889",
-    weight     : "1.3 kg"
+    sku        : "w-skirt-suit-001",
+    weight     : "1.0 kg"
+  },
+  {
+    categories : {women: 1, casual: 1, hats: 1},
+    description: "A chic beige sun hat with a wide brim for UV protection. Lightweight and foldable.",
+    dimensions : "14x14x6 inches",
+    documentId : "w-h-001",
+    images     : [
+      {url: "women-hat-1-a-454.webp"},
+      {url: "women-hat-1-b-454.webp"},
+      {url: "women-hat-1-c-454.webp"}
+    ],
+    name       : "Sun Hat",
+    price      : 600,
+    rating     : 4,
+    reviews    : [
+      {review: "Great for beach trips.", user: "user_2001", rating: 5},
+      {review: "Brim could be stiffer.", user: "user_2002", rating: 3},
+      {review: "Comfortable fit.", user: "user_2003", rating: 4}
+    ],
+    sku        : "WH001",
+    weight     : "0.2 kg"
+  },
+  {
+    categories : {women: 1, casual: 1, hats: 1},
+    color      : "Gray",
+    description: "A cozy woolen cap for winter, lined with fleece for extra warmth.",
+    dimensions : "10x10x5 inches",
+    documentId : "w-h-002",
+    images     : [
+      {url: "women-hat-2-a-454.webp"},
+      {url: "women-hat-2-b-454.webp"},
+      {url: "women-hat-2-c-454.webp"}
+    ],
+    name       : "Gray Woolen Cap",
+    price      : 600,
+    rating     : 4,
+    reviews    : [
+      {review: "Very warm and soft.", user: "user_2004", rating: 5},
+      {review: "Fits snugly.", user: "user_2005", rating: 4},
+      {review: "Could be thicker.", user: "user_2006", rating: 3}
+    ],
+    sku        : "WH002",
+    weight     : "0.3 kg"
+  },
+  {
+    categories : {women: 1, accessories: 1},
+    color      : "Cream",
+    description: "A lightweight wool scarf with a subtle herringbone pattern. Perfect for layering.",
+    dimensions : "70x30x2 inches",
+    documentId : "w-s-001",
+    images     : [
+      {url: "women-scarf-1-a-454.webp"},
+      {url: "women-scarf-1-b-454.webp"},
+      {url: "women-scarf-1-c-454.webp"}
+    ],
+    name       : "Cream Wool Scarf",
+    price      : 600,
+    rating     : 4,
+    reviews    : [
+      {review: "Soft and non-itchy.", user: "user_2007", rating: 5},
+      {review: "Length is perfect.", user: "user_2008", rating: 4},
+      {review: "Could be wider.", user: "user_2009", rating: 3}
+    ],
+    sku        : "WSCARF001",
+    weight     : "0.4 kg"
   },
 
   {
-    color      : "Dark Green",
-    description: "Warm and cozy winter wear to keep you comfortable in the cold.",
-    dimensions : "42x34x8 inches",
-    documentId : "6",
-    image      : "men-casual.webp",
+    categories : {women: 1, official: 1, shoes: 1},
+    description: "Elegant black heels with a cushioned insole for all-day comfort. Ideal for office wear.",
+    dimensions : "12x8x4 inches",
+    documentId : "w-heels-001",
     images     : [
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"}
+      {url: "women-shoes-1-a-454.webp"},
+      {url: "women-shoes-1-b-454.webp"},
+      {url: "women-shoes-1-c-454.webp"}
     ],
-    name       : "winter wear",
+    name       : "Black Formal Heels",
+    price      : 600,
+    rating     : 4,
+    reviews    : [
+      {review: "Surprisingly comfortable.", user: "user_3001", rating: 5},
+      {review: "Heel height is perfect.", user: "user_3002", rating: 4},
+      {review: "Slightly narrow toe box.", user: "user_3003", rating: 3}
+    ],
+    sku        : "w-heels-001",
+    weight     : "0.8 kg"
+  },
+
+  {
+    categories : {men: 1, accessories: 1},
+    color      : "Silver",
+    description: "A sleek stainless steel watch with a minimalist dial. Water-resistant up to 50m.",
+    dimensions : "8x6x2 inches",
+    documentId : "m-watch-001",
+    images     : [
+      {url: "men-watch-1-a-454.webp"},
+      {url: "men-watch-1-b-454.webp"},
+      {url: "men-watch-1-c-454.webp"}
+    ],
+    name       : "Silver Men's Watch",
+    price      : 600,
+    rating     : 5,
+    reviews    : [
+      {review: "Looks premium and stylish.", user: "user_4001", rating: 5},
+      {review: "Accurate timekeeping.", user: "user_4002", rating: 4},
+      {review: "Band could be more adjustable.", user: "user_4003", rating: 4}
+    ],
+    sku        : "MWATCH001",
+    weight     : "0.3 kg"
+  },
+  {
+    categories : {women: 1, official: 1},
+    description: "A professional trouser suit with a fitted blazer and straight-leg pants.",
+    dimensions : "40x30x6 inches",
+    documentId : "w-trouser-suit-001",
+    images     : [
+      {url: "women-suit-2-a-454.webp"},
+      {url: "women-suit-2-b-454.webp"},
+      {url: "women-suit-2-c-454.webp"}
+    ],
+    name       : "Navy Blue Trouser Suit",
+    price      : 1200,
+    rating     : 4,
+    reviews    : [
+      {review: "Perfect for office wear.", user: "user_5001", rating: 5},
+      {review: "Slightly tight around hips.", user: "user_5002", rating: 3},
+      {review: "High-quality fabric.", user: "user_5003", rating: 4}
+    ],
+    sku        : "w-trouser-suit-001",
+    weight     : "1.0 kg"
+  },
+  {
+    categories : {women: 1, casual: 1},
+    color      : "Pink",
+    description: "A fluffy winter coat with a soft inner lining for extra warmth. Oversized fit for comfort.",
+    dimensions : "42x34x8 inches",
+    documentId : "fluffy-coat",
+    images     : [
+      {url: "women-fluffy-coat-1-a-454.webp"},
+      {url: "women-fluffy-coat-1-b-454.webp"},
+      {url: "women-fluffy-coat-1-c-454.webp"}
+    ],
+    name       : "Pink Fluffy Coat",
     price      : 1200,
     rating     : 5,
     reviews    : [
-      {review: "Very warm and comfortable.", user: "user_1007", rating: 5},
-      {review: "Perfect for snowy weather.", user: "user_1008", rating: 4},
-      {review: "A bit bulky but does the job.", user: "user_1009", rating: 3}
+      {review: "Extremely warm and stylish.", user: "user_6001", rating: 5},
+      {review: "Lightweight but cozy.", user: "user_6002", rating: 4},
+      {review: "Perfect for winter.", user: "user_6003", rating: 5}
     ],
-    sku        : "WINTER99001",
-    weight     : "1.6 kg"
+    sku        : "FCOAT001",
+    weight     : "1.2 kg"
   },
-
   {
-    color      : "Gray",
-    description: "Relaxed and stylish casual wear for everyday use.",
-    dimensions : "38x28x5 inches",
-    documentId : "7",
-    image      : "men-casual.webp",
-    images     : [
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"},
-    ],
-    name       : "casual wear",
-    price      : 1200,
-    rating     : 4,
-    reviews    : [
-      {review: "Comfortable and stylish.", user: "user_1010", rating: 4},
-      {review: "Great for daily wear.", user: "user_1011", rating: 5},
-      {review: "Fabric could be more durable.", user: "user_1012", rating: 3}
-    ],
-    sku        : "CASUAL22334",
-    weight     : "0.9 kg"
-  },
-
-  {
-    color      : "Navy Blue",
-    description: "Sophisticated official wear for a polished look.",
-    dimensions : "40x30x6 inches",
+    categories : {men: 1, shoes: 1},
+    color      : "Brown",
+    description: "Classic brown leather shoes with a polished finish. Comfortable for all-day wear.",
+    dimensions : "14x10x6 inches",
     documentId : "8",
-    image      : "men-casual.webp",
     images     : [
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"},
-      {url: "men-casual.webp"}
+      {url: "men-shoes-1-a-454.webp"},
+      {url: "men-shoes-1-b-454.webp"},
+      {url: "men-shoes-1-c-454.webp"}
     ],
-    name       : "official wear",
+    name       : "Brown Leather Shoes",
     price      : 1200,
     rating     : 4,
     reviews    : [
-      {review: "Looks very professional.", user: "user_1013", rating: 5},
-      {review: "Fits well but a bit pricey.", user: "user_1014", rating: 3},
-      {review: "Great for formal events.", user: "user_1015", rating: 4}
+      {review: "Comfortable and polished.", user: "user_7001", rating: 5},
+      {review: "Great for formal events.", user: "user_7002", rating: 4},
+      {review: "Sole could be more cushioned.", user: "user_7003", rating: 3}
     ],
-    sku        : "OFFICIAL44556",
-    weight     : "1.4 kg"
-  }
+    sku        : "MSHOES001",
+    weight     : "1.2 kg"
+  },
+  {
+    categories : {men: 1, accessories: 1},
+    color      : "Brown",
+    description: "Classic brown leather shoes with a polished finish. Comfortable for all-day wear.",
+    dimensions : "14x10x6 inches",
+    documentId : "m-belt-001",
+    images     : [
+      {url: "men-belt-1-a-454.webp"},
+      {url: "men-belt-1-b-454.webp"},
+      {url: "men-belt-1-c-454.webp"}
+    ],
+    name       : "Black Belt",
+    price      : 1000,
+    rating     : 4,
+    reviews    : [
+      {review: "Comfortable and polished.", user: "user_7001", rating: 5},
+      {review: "Great for formal events.", user: "user_7002", rating: 4},
+    ],
+    sku        : "m-belt-001",
+    weight     : "0.2 kg"
+  },
 
 ]);
 
 useState('product', () => null);
+
+useState('filters', () => null);
+
+useState('prices', () => null);
 </script>
 
 
@@ -416,7 +582,13 @@ export default defineComponent({
 
       //no reviews
       else pd.rating = 3;
-    })
+    });
+
+    //shop filters init.
+    useState('filters').value = {men: true, women: true, kids: true, casual: true, official: true, accessories: true};
+
+    //price filters init.
+    useState('prices').value = {min: 0, max: 2000000};
   }
 
 })

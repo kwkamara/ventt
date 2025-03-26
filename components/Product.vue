@@ -1,6 +1,6 @@
 <template>
-  <article class="h-15rem lg:h-14rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:border-500"
-           @click="useState('product').value = product"
+  <article class="h-15rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
+           @click="useState('product').value = product; useState('ui').value=null"
            aria-labelledby="product-title">
 
 
@@ -13,49 +13,25 @@
     <!-- Wishlist | Shopping Cart Buttons -->
     <div class="w-full absolute">
 
-      <!-- Wishlist Button -->
-      <div class="w-full p-3 flex align-items-center justify-content-between">
-        <!-- Wishlist Button -->
-        <!--        <Button :aria-label="product.wishlist ? 'Remove from wishlist' : 'Add to wishlist'"-->
-        <!--                :class="`${product.wishlist ? 'text-white' : 'bg-white-alpha-70 text-purple-600'} text-lg border-none`"-->
-        <!--                :severity="product.wishlist ? 'help' : 'secondary'"-->
-        <!--                icon="pi pi-heart" raised rounded-->
-        <!--                @click="product.wishlist ? removeFromWishList() : addToWishList();"/>-->
-
-        <!-- Shopping Cart Button -->
-        <!--        <Button :aria-label="product.cart ? 'Remove from cart' : 'Add to cart'"-->
-        <!--            :class="`${product.cart ? 'text-white bg-purple-600' : 'bg-white-alpha-60 text-purple-600'} text-lg border-none`"-->
-        <!--            icon="pi pi-shopping-cart" raised rounded-->
-        <!--            @click="$refs.cartPopover.toggle($event)"/>-->
-      </div>
-      <!-- Shopping Cart Button -->
-
 
       <!-- product Name and Price -->
-      <div class="hover:bg-yellow-600 hover:text-white bg-white">
+      <div class="hover:bg-yellow-600 hover:text-white bg-white-alpha-90">
 
-        <!-- Product name -->
-        <div class="h-3rem py-3 pl-3  w-full flex align-items-center justify-content-between border-bottom-1 border-gray-100">
-
-          <h2 aria-label="product-title" class="capitalize text-sm font-light">{{ product.name }}</h2>
-
-          <!--          <Button :aria-label="product.cart ? 'Remove from cart' : 'Add to cart'"-->
-          <!--                  :class="`${product.cart ? 'text-white bg-purple-600' : 'bg-white-alpha-60 text-purple-600'} text-lg border-none bg-transparent`"-->
-          <!--                  icon="pi pi-shopping-cart" rounded-->
-          <!--                  @click="$refs.cartPopover.toggle($event)"/>-->
-        </div>
+        <h2 aria-label="product-title" class="m-0 px-3 pt-2 capitalize text-sm font-light">
+          {{ product.name }}
+        </h2>
 
         <!-- Rating | Price -->
-        <div class="h-3rem w-full p-3 flex justify-content-between align-items-center">
+        <div class="h-2rem px-3 pb-3 flex justify-content-between align-items-center">
 
-          <!-- Rating -->
-          <div class="flex gap-1 text-yellow-500">
+          <!-- name | rating -->
+          <div class="text-yellow-500 flex align-items-center gap-1" >
             <i v-for="(rating, ix) in product.rating" :key="ix"
                :class="`pi ${product.reviews.length ? 'pi-star-fill' : 'pi-star' } text-xs`" aria-hidden="true"/>
           </div>
 
           <!-- Price -->
-          <div aria-label="Product price">
+          <div aria-label="Product price" class="flex align-items-center">
             {{ formatDecimal(product.price) }}
           </div>
 
@@ -152,6 +128,7 @@ export default defineComponent({
 
   methods: {
 
+    //add item to wish list.
     addToWishList() {
       this.product.wishlist = new Date().getTime();
       this.notify('item added to wish list.');
@@ -161,7 +138,6 @@ export default defineComponent({
     notify(summary, severity = 'info') {
       this.$toast.add({severity: severity, summary: summary, life: 1000});
     },
-
 
   }
 })
