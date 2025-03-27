@@ -89,7 +89,7 @@
 
 
       <!-- products -->
-      <div v-for="product in products.slice( pagination.start, pagination.end )" class="col-12 lg:col-4">
+      <div v-for="product in products.slice( pagination.start, pagination.end )" class="col-6 lg:col-4">
         <Product :product="product" class="fadein animation-duration-1000"/>
       </div>
       <!-- /products -->

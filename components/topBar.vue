@@ -4,15 +4,17 @@
 
     <!-- Logo -->
     <div aria-label="Ventt Brand"
-         class="h-full w-1 font-bold flex align-items-center uppercase title hover:text-purple-600 cursor-pointer"
+         class="h-full w-1 flex align-items-end gap-1 font-bold uppercase title hover:text-purple-600 cursor-pointer"
          @click="useState('product').value=null; useState('ui').value=null">
-      <img src="/logo-ventt.webp" alt="ventt logo" width="50"/>
+
+      <NuxtImg src="/logo-ventt.svg" alt="ventt logo" width="50" height="50"/>
+      <span class="uppercase title hidden lg:block">Vent</span>
     </div>
     <!-- Logo -->
 
 
     <!-- Navigation Actions -->
-    <div class="w-11 md:w-full flex align-items-center justify-content-end gap-2 md:gap-3">
+    <div class="w-11 md:w-full flex align-items-center justify-content-end gap-3 md:gap-3">
 
       <!-- Product Search -->
       <Button aria-label="Search Products" icon="pi pi-search text-xs" outlined rounded

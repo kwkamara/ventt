@@ -16,11 +16,11 @@
       <Hero/>
 
       <!-- services -->
-      <div class="col-12 py-6 px-1 md:px-3 md:px-8 flex gap-3">
+      <div class="col-12 lg:py-6 px-1 md:px-3 md:px-4 lg:px-8 flex gap-3">
 
         <div class="grid m-0 w-full">
 
-          <div v-for="service in services" class="col-6 lg:col-3 h-8rem p-2  text-white">
+          <div v-for="service in services" class="col-6 lg:col-3 h-6rem lg:h-8rem p-2 text-white">
 
             <div class="h-full w-full relative">
               <NuxtImg :src="service.image" alt="Ventt Ecommerce Platform"
@@ -42,27 +42,38 @@
       <!-- /services -->
 
 
-      <!--  popular 1 -->
-      <div class="col-12 px-1 md:px-8 pb-6 pt-0">
-        <div class="grid m-0">
+      <!-- New Arrivals -->
+      <div class="col-12 md:px-4 lg:px-8 pt-0 px-1 lg:pb-6">
 
-          <div v-for="product in popularProducts.slice(0, 4)" class="col-6 md:col-2">
-            <Product :product="product"/>
+        <div class="grid m-0 align-items-end">
+
+          <div class="col-12 md:col-6 lg:col-9 px-0 lg:pr-0 bg-gray-700">
+            <div class="grid m-0">
+              <div class="col-12 h-3rem pt-0 flex align-items-center text-white text-xl font-bold uppercase">
+                New Arrivals
+              </div>
+
+              <div v-for="product in popularProducts.slice(0, 4)" class="col-6 lg:col-3 lg:pb-0">
+                <Product :product="product"/>
+              </div>
+
+            </div>
           </div>
 
           <!-- men accessories display -->
-          <div class="col-12 md:col-4 h-15rem lg:h-19rem">
+          <div class="col-12 md:col-6 lg:col-3 h-15rem lg:h-16rem pt-0 pb-3">
             <ProductDisplay :filters="{men: true, accessories: true}" discount="10% Off"
                             image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
           </div>
-
         </div>
+
       </div>
-      <!--  popular 2 -->
+      <!-- /New Arrivals -->
+
 
 
       <!--  section 2 -->
-      <div class="col-12 px-1 md:px-8 pb-6 pt-0">
+      <div class="col-12 px-1 md:px-4 lg:px-8 pb-6 pt-0">
         <div class="grid m-0">
 
           <div class="col-12 md:col-6 h-16rem lg:h-26rem">
@@ -135,7 +146,7 @@
 
           </div>
 
-          <div class="col-12 md:col-6 h-18rem lg:h-26rem">
+          <div class="col-12 md:col-6 h-15rem lg:h-26rem">
             <ProductDisplay :filters="{kids:true, casual: true}"
                             image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
           </div>
@@ -451,7 +462,7 @@ useState('products', () => [
       {url: "women-suit-2-b-454.webp"},
       {url: "women-suit-2-c-454.webp"}
     ],
-    name       : "Navy Blue Trouser Suit",
+    name       : "Trouser Suit",
     price      : 1200,
     rating     : 4,
     reviews    : [

@@ -1,30 +1,29 @@
 <template>
-  <article class="h-15rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
+  <article class="h-9rem lg:h-10rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
            @click="useState('product').value = product; useState('ui').value=null"
            aria-labelledby="product-title">
 
 
     <!-- Product Image -->
-    <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
-             width="454" class="w-full h-full absolute border-round"
+    <NuxtImg :alt="`Ventt Ecommerce Platform - ${product.name}`"
+             width="212" class="w-full h-full absolute border-round"
              loading="lazy" :src="product.images[0].url" aria-hidden="true"/>
 
 
-    <!-- Wishlist | Shopping Cart Buttons -->
+    <!-- product Name and Price -->
     <div class="w-full absolute">
-
 
       <!-- product Name and Price -->
       <div class="hover:bg-yellow-600 hover:text-white bg-white-alpha-90">
 
-        <h2 aria-label="product-title" class="m-0 px-3 pt-2 capitalize text-sm font-light">
+        <h2 aria-label="product-title" class="m-0 px-3 pt-2 capitalize text-sm font-light white-space-nowrap">
           {{ product.name }}
         </h2>
 
         <!-- Rating | Price -->
-        <div class="h-2rem px-3 pb-3 flex justify-content-between align-items-center">
+        <div class="h-2rem px-3 pb-3 pt-1 flex justify-content-between align-items-center">
 
-          <!-- name | rating -->
+          <!-- rating -->
           <div class="text-yellow-500 flex align-items-center gap-1" >
             <i v-for="(rating, ix) in product.rating" :key="ix"
                :class="`pi ${product.reviews.length ? 'pi-star-fill' : 'pi-star' } text-xs`" aria-hidden="true"/>
@@ -42,7 +41,7 @@
       <!-- /product Name and Price -->
 
     </div>
-    <!-- Wishlist | Shopping Cart Buttons -->
+    <!-- /product Name and Price -->
 
 
     <!-- Cart Popover -->

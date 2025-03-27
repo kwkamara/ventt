@@ -2,7 +2,7 @@
   <div class="col-12 p-0">
 
     <!-- Breadcrumb -->
-    <div class="w-full h-4rem px-4 lg:pl-7 lg:pr-8 bg-gray-200 text-gray-800 flex align-items-center justify-content-between">
+    <div class="w-full h-4rem px-3 lg:pl-7 lg:pr-8 bg-gray-200 text-gray-800 flex align-items-center justify-content-between">
 
       <div class="flex align-items-center gap-3">
 
@@ -30,7 +30,7 @@
       <div class="col-12 lg:col-4 p-0">
 
         <!-- main image -->
-        <div class="h-20rem w-full">
+        <div class="h-15rem lg:h-20rem w-full border-1 border-gray-200">
           <img :alt="product.name" :src="productImage.url"
                class="w-full h-full fadein animation-duration-1000"/>
         </div>
@@ -38,7 +38,7 @@
 
 
         <!-- images -->
-        <div class="h-7rem px-4 flex align-items-center justify-content-between gap-1 shadow-1">
+        <div class="h-7rem px-2 lg:px-4 flex align-items-center justify-content-between gap-1 border-1 border-gray-200 bg-gray-100">
 
           <img v-for="image in product.images" :alt="product.name"
                :src="image.url" class="h-5rem border-round hover:shadow-3"
@@ -49,11 +49,11 @@
 
 
         <!-- Rel Products -->
-        <div class="grid m-0 px-3 lg:p-0">
+        <div class="hidden lg:flex grid m-0 px-3 lg:p-0">
 
           <div class="col-12 pt-5 flex align-items-center">Related Products</div>
 
-          <div v-for="relProduct in relProducts.slice(0, 2)" class="col-12 lg:col-6">
+          <div v-for="relProduct in relProducts.slice(0, 2)" class="col-6">
             <Product :product="relProduct"/>
           </div>
 
@@ -185,6 +185,18 @@
         </div>
         <!-- Reviews -->
 
+
+        <!-- Rel Products -->
+        <div class="lg:hidden grid m-0 pb-4">
+
+          <div class="col-12 flex align-items-center">Related Products</div>
+
+          <div v-for="relProduct in relProducts.slice(0, 2)" class="col-6">
+            <Product :product="relProduct"/>
+          </div>
+
+        </div>
+        <!-- /Rel Products -->
       </div>
       <!-- /Product Details -->
 
@@ -245,9 +257,7 @@ export default defineComponent({
 
     //get main product.
     productImage() {
-      const image = this.product.images.find(img => img.active);
-      if (image) return image;
-      else return this.product.images[0];
+      return this.product.images.find(img => img.active) || this.product.images[0];
     }
 
   },

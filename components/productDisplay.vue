@@ -9,14 +9,14 @@
 
 
     <!-- discount | name | shop now -->
-    <div class="h-full w-full pt-2 pl-2 md:pr-3 flex align-items-start justify-content-end bg-black-alpha-20 hover:bg-black-alpha-60 absolute">
+    <div class="h-full w-full pt-2 pl-2 md:pr-2 flex align-items-start justify-content-end bg-black-alpha-20 hover:bg-black-alpha-60 absolute">
 
       <div class="pt-1 pr-2 md:text-right text-white text-sm flex flex-column justify-content-between">
 
         <!-- Discount and Name -->
-        <div>
-          <h2 aria-label="discount-title" class="md:text-4xl m-0">{{ discount }}</h2>
-          <h3 class="md:text-lg m-0 capitalize">{{ name }}</h3>
+        <div class="text-right">
+          <h2 aria-label="discount-title" class="text-lg md:text-xl m-0">{{ discount }}</h2>
+          <h3 class="md:text-lg m-0 capitalize md:font-light">{{ name }}</h3>
         </div>
         <!-- Discount and Name -->
 

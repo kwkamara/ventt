@@ -9,11 +9,11 @@
         <div class="col-6 md:col-3">
 
           <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
-            <img src="/logo-ventt.webp" alt="ventt logo" width="50"/>
+            <NuxtImg src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
           </div>
 
           <div class="flex flex flex-column gap-2 text-xs">
-            <div class="title uppercase">Ventt</div>
+            <div class="title uppercase text-lg">Ventt</div>
             <div>Nairobi, Kenya.</div>
             <div>+254 (0) 722 373 979</div>
           </div>
