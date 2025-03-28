@@ -3,7 +3,7 @@
 
     <!-- Category Navigation -->
     <div v-for="(cat_name, ix) in ['men', 'women', 'kids']" :key="ix" :aria-label="`Show ${cat_name} categories`"
-         class="w-full lg:w-1 h-full border-left-1 border-purple-700 flex align-items-center justify-content-center gap-2 hover:bg-purple-800"
+         :class="`w-full lg:w-1 h-full border-left-1 border-purple-700 flex align-items-center justify-content-center gap-2 hover:bg-purple-800 ${ix===2 ? 'border-right-1' : null}`"
          role="button" tabindex="0"
          @click="category_name=cat_name; $refs.categoriesPopup.hide(); $nextTick(() => this.$refs.categoriesPopup.show($event));">
       <i class="pi pi-chevron-down" aria-hidden="true"/> {{ cat_name }}
@@ -18,6 +18,7 @@
         <!-- Official -->
         <div class="w-8rem md:w-12rem lg:w-18rem h-10rem lg:h-17rem overflow-hidden flex align-items-start justify-content-end border-round hover:shadow-3 text-white text-xs relative"
              @click="viewShop({official: true});">
+
           <img :alt="`Ventt Ecommerce Platform - ${category_name} Official`" :src="`${category_name}-official-1-288.webp`"
                aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round" loading="lazy"/>
 

@@ -1,11 +1,11 @@
 <template>
-  <article class="h-9rem lg:h-10rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
-           @click="useState('product').value = product; useState('ui').value=null"
+  <article class="h-9rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
+           @click="useState('product').value = product; useState('ui').value=null; scrollToTop()"
            aria-labelledby="product-title">
 
 
     <!-- Product Image -->
-    <NuxtImg :alt="`Ventt Ecommerce Platform - ${product.name}`"
+    <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
              width="212" class="w-full h-full absolute border-round"
              loading="lazy" :src="product.images[0].url" aria-hidden="true"/>
 
@@ -107,6 +107,14 @@ const {formatDecimal} = useFormatDecimal();
 //shopping cart.
 const {addToCart}      = useAddToCart();
 const {removeFromCart} = useRemoveFromCart();
+
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth', // Adds smooth scrolling animation
+  });
+};
 </script>
 
 

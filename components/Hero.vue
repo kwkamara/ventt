@@ -23,7 +23,7 @@
             <h1 class="mb-0 text-2xl lg:text-4xl font-bold">Your Ultimate Fashion Destination</h1>
             <p class="text-sm lg:text-lg font-semibold line-height-3 mt-1 font-light">Discover Your Style, Elevate Your Wardrobe</p>
 
-            <h2 class="mt-5 text-yellow-400 text-xl lg:text-2xl">Enjoy Exclusive Discounts Up to 40% Off!</h2>
+            <h2 class="mt-5 text-yellow-700 text-xl lg:text-2xl">Enjoy Exclusive Discounts Up to 40% Off!</h2>
           </div>
         </div>
         <!-- /Message -->
@@ -32,7 +32,7 @@
         <!-- CTA -->
         <div class="h-6rem flex align-items-center md:align-items-start justify-content-center">
           <Button aria-label="Shop Now for Exclusive Discounts" class="bg-yellow-600 border-none" label="Shop Now"
-                  @click="useState('ui').value='shop'"/>
+                  @click="useState('filters').value={}; useState('ui').value='shop'"/>
         </div>
         <!-- /CTA -->
 

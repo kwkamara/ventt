@@ -1,6 +1,6 @@
 <template>
   <section class="h-full w-full flex align-items-center justify-content-center shadow-1 relative"
-           aria-labelledby="product category banner" @click="viewShop">
+           aria-labelledby="product category banner" @click="viewShop(); scrollToTop()">
 
     <!-- Product Image -->
     <NuxtImg :alt="`Ventt Ecommerce Platform - ${name}`" :src="image" aria-hidden="true"
@@ -11,7 +11,7 @@
     <!-- discount | name | shop now -->
     <div class="h-full w-full pt-2 pl-2 md:pr-2 flex align-items-start justify-content-end bg-black-alpha-20 hover:bg-black-alpha-60 absolute">
 
-      <div class="pt-1 pr-2 md:text-right text-white text-sm flex flex-column justify-content-between">
+      <div class="pt-1 pr-3 md:text-right text-white text-sm flex flex-column justify-content-between">
 
         <!-- Discount and Name -->
         <div class="text-right">
@@ -35,6 +35,13 @@
 
   </section>
 </template>
+
+
+<script setup lang="js">
+const scrollToTop = () => {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+};
+</script>
 
 
 <script lang="js">

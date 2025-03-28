@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 
     devtools: {enabled: true},
 
-    modules: ['@primevue/nuxt-module', '@nuxt/image', '@nuxt/fonts'],
+    modules: ['@primevue/nuxt-module', '@nuxt/image', '@nuxt/fonts', 'nuxt-purgecss'],
 
     primevue: {
         options: {
@@ -24,6 +24,11 @@ export default defineNuxtConfig({
         'primeflex/themes/primeone-light.css',
         'primeicons/primeicons.css',
     ],
+
+    purgecss: {
+        enabled: false,
+        safelist: ['my-class'],
+    },
 
     app: {
         baseURL: "/ventt/",

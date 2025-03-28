@@ -5,29 +5,25 @@
     <div class="w-full h-4rem px-3 lg:pl-7 lg:pr-8 bg-gray-200 text-gray-800 flex align-items-center justify-content-between">
 
       <div class="flex align-items-center gap-3">
-
         <Button class="hover:text-purple-300 text-gray-800 bg-transparent" icon="pi pi-shop" label="Shop" text size="small"
                 @click="useState('product').value=null; useState('ui').value='shop'"/>
 
         <i class="pi pi-chevron-right text-xs"/>
         <span>{{ product.name }}</span>
-
       </div>
 
       <Button :aria-label="product.wishlist ? 'Remove from wishlist' : 'Add to wishlist'"
               :class="`${product.wishlist ? 'text-white bg-purple-600' : 'bg-white-alpha-70 text-purple-700'} text-lg border-none`"
-              icon="pi pi-heart" rounded
-              @click="product.wishlist ? removeFromWishList() : addToWishList();"/>
-
+              icon="pi pi-heart" rounded @click="product.wishlist ? removeFromWishList() : addToWishList();"/>
     </div>
     <!-- /Breadcrumb -->
 
 
     <!-- Product -->
-    <div class="grid m-0 lg:p-8 gap-5 bg-white text-gray-800">
+    <div class="grid m-0 md:pt-4 lg:p-8 gap-5 bg-white text-gray-800">
 
-      <!-- images | related products -->
-      <div class="col-12 lg:col-4 p-0">
+      <!-- image | related products -->
+      <div class="col-12 md:col-8 md:col-offset-2 lg:col-offset-0 lg:col-4 p-0">
 
         <!-- main image -->
         <div class="h-15rem lg:h-20rem w-full border-1 border-gray-200">
@@ -38,11 +34,11 @@
 
 
         <!-- images -->
-        <div class="h-7rem px-2 lg:px-4 flex align-items-center justify-content-between gap-1 border-1 border-gray-200 bg-gray-100">
+        <div class="h-7rem px-2 md:px-3 lg:px-4 flex align-items-center justify-content-between gap-1 border-1 border-gray-200 bg-gray-100">
 
           <img v-for="image in product.images" :alt="product.name"
                :src="image.url" class="h-5rem border-round hover:shadow-3"
-               loading="lazy" @click="viewImage(image)"/>
+               loading="lazy" @click="viewImage(image);"/>
 
         </div>
         <!-- /images -->
@@ -65,7 +61,7 @@
 
 
       <!-- Product Details -->
-      <div class="col-12 lg:col-6 px-4 py-0">
+      <div class="col-12 md:col-8 md:col-offset-2 lg:col-offset-0 lg:col-6 px-4 md:px-0 py-0">
 
         <!-- header -->
         <div class="h-3rem flex align-items-start justify-content-between text-lg font-bold capitalize">
@@ -113,26 +109,25 @@
 
 
         <!-- Cart Data -->
-        <div class="h-6rem py-3 flex align-items-start justify-content-between border-top-1 border-gray-100">
+        <div class="h-6rem py-3 flex align-items-start justify-content-between gap-2 border-top-1 border-gray-100">
 
           <!-- Quantity Input -->
-          <div class="w-4">
-            <InputText id="cart-value" v-model.number="cart.value"
-                       fluid class="bg-gray-50" aria-label="Quantity"
-            />
-            <label class="text-xs" for="cart-value">Quantity</label>
+          <div class="w-full h-3rem flex">
+            <div class="w-6rem">
+              <InputText id="cart-value" v-model.number="cart.value"
+                         fluid class="h-full bg-gray-50 border-noround-right" aria-label="Quantity"/>
+              <label class="text-xs" for="cart-value">Quantity</label>
+            </div>
+
+            <Button aria-label="Add to cart" class="h-3rem border-none border-gray-100 border-noround-left" icon="pi pi-shopping-cart"
+                    label="Add to cart" severity="success"
+                    @click="addToCart(product, cart.value);"/>
           </div>
 
           <!-- Cart Controls -->
-          <div class="w-8 pl-2 flex gap-3 justify-content-end align-items-center">
-            <Button aria-label="Add to cart" class="border-1 border-gray-100 text-xs" icon="pi pi-shopping-cart"
-                    label="Add" outlined rounded severity="success" size="small"
-                    @click="addToCart(product, cart.value);"/>
-
-            <Button v-if="product.cart" aria-label="Remove from cart" class="border-1 border-gray-100 text-xs"
-                    icon="pi pi-shopping-cart" label="Remove" outlined rounded severity="warn" size="small"
-                    @click="removeFromCart(product, cart.value);"/>
-          </div>
+          <Button v-if="product.cart" aria-label="Remove from cart" class="border-1 border-gray-100 text-xs"
+                  icon="pi pi-shopping-cart" label="Remove" outlined rounded severity="warn" size="small"
+                  @click="removeFromCart(product, cart.value);"/>
           <!-- Cart Controls -->
 
         </div>
