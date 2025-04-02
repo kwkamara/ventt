@@ -4,7 +4,7 @@
 
     <div class="grid m-0">
 
-      <div class="col-12 lg:col-6 p-5 md:p-8 text-sm">
+      <div class="col-12 lg:col-6 p-5 md:p-8 text-sm capitalize">
 
         <!-- header -->
         <div class="h-5rem flex align-items-center text-xl font-bold">
@@ -27,7 +27,6 @@
               <div class="w-3 text-right">{{ formatDecimal(product.cart * product.price) }}</div>
             </div>
           </div>
-
 
         </div>
         <!-- /cart products -->

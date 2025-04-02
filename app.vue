@@ -28,6 +28,14 @@
   url('~/fonts/CormorantGaramond.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'MuseoModerno';
+  font-weight: 300;
+  font-style: normal;
+  src: url('~/fonts/MuseoModerno-VariableFont_wght.woff2') format('woff2'),
+  url('~/fonts/MuseoModerno-VariableFont_wght.woff') format('woff');
+}
+
 
 body {
   margin: 0;
@@ -37,6 +45,10 @@ body {
 
 .title {
   font-family: 'Garamond', serif;
+}
+
+.decimal {
+  font-family: 'MuseoModerno', serif;
 }
 
 .p-megamenu-item-content {

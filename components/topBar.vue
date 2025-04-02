@@ -16,79 +16,80 @@
     <!-- Navigation Actions -->
     <div class="w-11 md:w-full flex align-items-center justify-content-end gap-3 md:gap-3">
 
-            <Button aria-label="Login" label="login" icon="pi pi-user text-xs" outlined rounded
-                    severity="secondary" size="small" @click=""/>
+      <!-- Login -->
+      <Button aria-label="Login" icon="pi pi-user text-xs" label="login" outlined rounded
+              severity="secondary" size="small" @click="useState('ui').value='login'"/>
+
 
       <!-- Product Search -->
-<!--      <Button aria-label="Search Products" icon="pi pi-search text-xs" outlined rounded-->
-<!--              severity="secondary" size="small" @click="$refs.productsPopover.toggle($event)"/>-->
-<!--      <Popover ref="productsPopover">-->
-<!--        <div class="w-22rem md:w-26rem">-->
-<!--          <DataTable v-model:filters="filters.dt1" :globalFilterFields="['name', 'description', 'sku']" :rows="5"-->
-<!--                     :show-headers="false" :value="useState('products').value" data-key="documentId" paginator row-hover>-->
+      <!--      <Button aria-label="Search Products" icon="pi pi-search text-xs" outlined rounded-->
+      <!--              severity="secondary" size="small" @click="$refs.productsPopover.toggle($event)"/>-->
+      <!--      <Popover ref="productsPopover">-->
+      <!--        <div class="w-22rem md:w-26rem">-->
+      <!--          <DataTable v-model:filters="filters.dt1" :globalFilterFields="['name', 'description', 'sku']" :rows="5"-->
+      <!--                     :show-headers="false" :value="useState('products').value" data-key="documentId" paginator row-hover>-->
 
-<!--            <template #header>-->
-<!--              <div class="pl-2">-->
-<!--                <IconField>-->
-<!--                  <InputIcon aria-label="Clear Search" class="hover:text-orange-500"-->
-<!--                             @click="filters.dt1['global'].value=null; useState('selectedItems').value=[]">-->
-<!--                    <i class="pi pi-search" aria-hidden="true"/>-->
-<!--                  </InputIcon>-->
+      <!--            <template #header>-->
+      <!--              <div class="pl-2">-->
+      <!--                <IconField>-->
+      <!--                  <InputIcon aria-label="Clear Search" class="hover:text-orange-500"-->
+      <!--                             @click="filters.dt1['global'].value=null; useState('selectedItems').value=[]">-->
+      <!--                    <i class="pi pi-search" aria-hidden="true"/>-->
+      <!--                  </InputIcon>-->
 
-<!--                  <InputText id="search-ip" v-model="filters.dt1['global'].value" aria-label="Search products"-->
-<!--                      autocomplete="off" class="text-sm" fluid placeholder="Search products"/>-->
-<!--                </IconField>-->
-<!--              </div>-->
-<!--            </template>-->
+      <!--                  <InputText id="search-ip" v-model="filters.dt1['global'].value" aria-label="Search products"-->
+      <!--                      autocomplete="off" class="text-sm" fluid placeholder="Search products"/>-->
+      <!--                </IconField>-->
+      <!--              </div>-->
+      <!--            </template>-->
 
-<!--            <Column field="name">-->
-<!--              <template #body="{data}">-->
-<!--                <div class="pl-2 flex justify-content-between align-items-center text-sm">-->
+      <!--            <Column field="name">-->
+      <!--              <template #body="{data}">-->
+      <!--                <div class="pl-2 flex justify-content-between align-items-center text-sm">-->
 
-<!--                  {{ data.name }}-->
+      <!--                  {{ data.name }}-->
 
-<!--                  <div class="flex align-items-center gap-3">-->
-<!--                    <Button aria-label="Add to Cart" class="border-none" icon="pi pi-plus text-xs"-->
-<!--                        outlined raised rounded severity="success" @click="addToCart(data, 1)"/>-->
+      <!--                  <div class="flex align-items-center gap-3">-->
+      <!--                    <Button aria-label="Add to Cart" class="border-none" icon="pi pi-plus text-xs"-->
+      <!--                        outlined raised rounded severity="success" @click="addToCart(data, 1)"/>-->
 
-<!--                    <template v-if="data.cart">-->
-<!--                      <Button-->
-<!--                          severity="warn"-->
-<!--                          class="border-none"-->
-<!--                          raised-->
-<!--                          rounded-->
-<!--                          outlined-->
-<!--                          icon="pi pi-minus text-xs"-->
-<!--                          aria-label="Remove One from Cart"-->
-<!--                          @click="removeFromCart(data, 1)"-->
-<!--                      />-->
-<!--                      <Button-->
-<!--                          severity="danger"-->
-<!--                          class="border-none"-->
-<!--                          raised-->
-<!--                          rounded-->
-<!--                          outlined-->
-<!--                          icon="pi pi-times text-xs"-->
-<!--                          aria-label="Remove All from Cart"-->
-<!--                          @click="removeFromCart(data, data.cart)"-->
-<!--                      />-->
-<!--                    </template>-->
+      <!--                    <template v-if="data.cart">-->
+      <!--                      <Button-->
+      <!--                          severity="warn"-->
+      <!--                          class="border-none"-->
+      <!--                          raised-->
+      <!--                          rounded-->
+      <!--                          outlined-->
+      <!--                          icon="pi pi-minus text-xs"-->
+      <!--                          aria-label="Remove One from Cart"-->
+      <!--                          @click="removeFromCart(data, 1)"-->
+      <!--                      />-->
+      <!--                      <Button-->
+      <!--                          severity="danger"-->
+      <!--                          class="border-none"-->
+      <!--                          raised-->
+      <!--                          rounded-->
+      <!--                          outlined-->
+      <!--                          icon="pi pi-times text-xs"-->
+      <!--                          aria-label="Remove All from Cart"-->
+      <!--                          @click="removeFromCart(data, data.cart)"-->
+      <!--                      />-->
+      <!--                    </template>-->
 
-<!--                  </div>-->
+      <!--                  </div>-->
 
-<!--                </div>-->
-<!--              </template>-->
-<!--            </Column>-->
+      <!--                </div>-->
+      <!--              </template>-->
+      <!--            </Column>-->
 
-<!--          </DataTable>-->
-<!--        </div>-->
-<!--      </Popover>-->
+      <!--          </DataTable>-->
+      <!--        </div>-->
+      <!--      </Popover>-->
       <!-- /Product Search -->
 
       <!-- User Profile -->
-<!--      <Button icon="pi pi-user text-xs" outlined rounded severity="secondary"-->
-<!--          size="small" aria-label="User Profile"/>-->
-
+      <!--      <Button icon="pi pi-user text-xs" outlined rounded severity="secondary"-->
+      <!--          size="small" aria-label="User Profile"/>-->
 
 
       <!-- Wishlist -->
@@ -193,7 +194,7 @@
           <!-- Checkout -->
           <div v-if="cartData.total" class="h-5rem flex align-items-center border-top-1 border-gray-100">
             <Button aria-label="Proceed to Checkout" class="w-full bg-green-600" icon="pi pi-shopping-cart"
-                label="Checkout" raised @click="useState('ui').value='checkout'; $refs.shoppingCartPopover.hide()"/>
+                    label="Checkout" raised @click="useState('ui').value='checkout'; $refs.shoppingCartPopover.hide()"/>
           </div>
           <!-- /Checkout -->
 
@@ -312,7 +313,7 @@ export default defineComponent({
 
   computed: {
     cartData() {
-      let data        = {
+      let data = {
         quantity: 0,
         total   : 0
       };

@@ -27,7 +27,7 @@
 
 
             <!-- categories -->
-            <div class="py-5 p-4 lg:pl-2 flex justify-content-between align-items-center bg-black-alpha-20 text-xs">
+            <div class="py-5 p-4 lg:pl-2 lg:pr-2 flex justify-content-between align-items-center bg-black-alpha-20 text-xs">
 
               <!-- men | women | kids -->
               <div class="md:px-3 flex flex-column gap-4">
@@ -121,7 +121,7 @@
 <script lang="js">
 export default defineComponent({
 
-  name: "shop",
+  name: "Shop",
 
   data() {
 

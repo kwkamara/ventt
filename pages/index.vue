@@ -7,7 +7,10 @@
     <Categories/>
 
 
-    <shop v-if="useState('ui').value==='shop'"/>
+    <Login v-if="useState('ui').value==='login'"/>
+
+
+    <Shop v-else-if="useState('ui').value==='shop'"/>
 
 
     <Checkout v-else-if="useState('ui').value==='checkout'"/>
@@ -743,7 +746,7 @@ useState('products', () => [
       {url: "kids-shoes-3-b-454.webp"},
       {url: "kids-shoes-3-c-454.webp"}
     ],
-    name       : "Kids' Canvas Shoes",
+    name       : "Canvas Shoes",
     price      : 1499,
     rating     : 4,
     reviews    : [
@@ -765,7 +768,7 @@ useState('products', () => [
       {url: "kids-casual-4-b-454.webp"},
       {url: "kids-casual-4-c-454.webp"}
     ],
-    name       : "Kids' Cotton Pyjamas",
+    name       : "Cotton Pyjamas",
     price      : 999,
     rating     : 5,
     reviews    : [
@@ -787,7 +790,7 @@ useState('products', () => [
       {url: "kids-casual-5-b-454.webp"},
       {url: "kids-casual-5-c-454.webp"}
     ],
-    name       : "Kids' Denim Jeans",
+    name       : "Denim Jeans",
     price      : 1599,
     rating     : 4,
     reviews    : [
@@ -809,7 +812,7 @@ useState('products', () => [
       {url: "kids-hats-3-b-454.webp"},
       {url: "kids-hats-3-c-454.webp"}
     ],
-    name       : "Kids' Summer Sun Hat",
+    name       : "Sun Hat",
     price      : 1299,
     rating     : 4,
     reviews    : [
@@ -831,7 +834,7 @@ useState('products', () => [
       {url: "kids-official-1-b-454.webp"},
       {url: "kids-official-1-c-454.webp"}
     ],
-    name       : "Boys' Formal White Shirt",
+    name       : "Formal White Shirt",
     price      : 899,
     rating     : 4,
     reviews    : [
@@ -853,7 +856,7 @@ useState('products', () => [
       {url: "kids-official-2-b-454.webp"},
       {url: "kids-official-2-c-454.webp"}
     ],
-    name       : "Girls' Party Dress",
+    name       : "Party Dress",
     price      : 1499,
     rating     : 5,
     reviews    : [
@@ -875,7 +878,7 @@ useState('products', () => [
       {url: "kids-official-3-b-454.webp"},
       {url: "kids-official-3-c-454.webp"}
     ],
-    name       : "Boys' Brown Suit",
+    name       : "Brown Suit",
     price      : 2499,
     rating     : 4,
     reviews    : [
@@ -897,7 +900,7 @@ useState('products', () => [
       {url: "kids-casual-1-b-454.webp"},
       {url: "kids-casual-1-c-454.webp"}
     ],
-    name       : "Boys' Blue Sweater",
+    name       : "Blue Sweater",
     price      : 1299,
     rating     : 4,
     reviews    : [
@@ -919,7 +922,7 @@ useState('products', () => [
       {url: "kids-casual-2-b-454.webp"},
       {url: "kids-casual-2-c-454.webp"}
     ],
-    name       : "Boys' Winter Jacket",
+    name       : "Winter Jacket",
     price      : 2999,
     rating     : 5,
     reviews    : [
@@ -941,7 +944,7 @@ useState('products', () => [
       {url: "kids-hats-1-b-454.webp"},
       {url: "kids-hats-1-c-454.webp"}
     ],
-    name       : "Kids' Summer Sun Hat",
+    name       : "Sun Hat",
     price      : 799,
     rating     : 4,
     reviews    : [
@@ -963,7 +966,7 @@ useState('products', () => [
       {url: "kids-hats-2-b-454.webp"},
       {url: "kids-hats-2-c-454.webp"}
     ],
-    name       : "Kids' Woolen Winter Hat",
+    name       : "Woolen Winter Hat",
     price      : 899,
     rating     : 5,
     reviews    : [

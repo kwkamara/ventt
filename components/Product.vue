@@ -6,8 +6,8 @@
 
     <!-- Product Image -->
     <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
-             width="212" class="w-full h-full absolute border-round"
-             loading="lazy" :src="product.images[0].url" aria-hidden="true"/>
+         width="212" class="w-full h-full absolute border-round"
+         loading="lazy" :src="product.images[0].url" aria-hidden="true"/>
 
 
     <!-- product Name and Price -->
@@ -24,7 +24,7 @@
         <div class="h-2rem px-3 pb-3 pt-1 flex justify-content-between align-items-center">
 
           <!-- rating -->
-          <div class="text-yellow-500 flex align-items-center gap-1" >
+          <div class="text-yellow-500 flex align-items-center gap-1">
             <i v-for="(rating, ix) in product.rating" :key="ix"
                :class="`pi ${product.reviews.length ? 'pi-star-fill' : 'pi-star' } text-xs`" aria-hidden="true"/>
           </div>
@@ -99,28 +99,24 @@
 
 
 <script setup lang="js">
-import {useAddToCart} from "~/composables/addToCart.js";
-import {useRemoveFromCart} from "~/composables/removeFromCart.js";
-
+//decimal.
 const {formatDecimal} = useFormatDecimal();
 
 //shopping cart.
 const {addToCart}      = useAddToCart();
 const {removeFromCart} = useRemoveFromCart();
 
-
+//scroll.
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth', // Adds smooth scrolling animation
-  });
+  window.scrollTo({top: 0, behavior: 'smooth'});
 };
 </script>
 
 
 <script lang="js">
 export default defineComponent({
-  name : "Product",
+  name: "Product",
+
   props: ['product'],
 
   data() {

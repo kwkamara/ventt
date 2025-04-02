@@ -233,28 +233,39 @@ export default defineComponent({
     relProducts() {
       //get current item categories.
       const categories = Object.keys(this.product.categories);
+      let relItems     = [];
 
-      //primary filter.
-      const main_cat      = categories[0];
+
+      //cat1 filter.
+      const cat1          = categories[0];
       const primary_items = useState('products').value
-          .filter(pd => pd.categories[main_cat] && pd.documentId !== this.product.documentId);
+          .filter(pd => pd.categories[cat1] && pd.documentId !== this.product.documentId);
 
-      //secondary filter.
-      const second_cat      = categories[1];
-      const secondary_items = primary_items.filter(pd => pd.categories[second_cat]);
-      if (secondary_items.length > 1) return secondary_items;
+      //cat3 filter.
+      if (categories.length === 3) {
+        const cat3     = categories[2];
+        const relItems = primary_items.filter(pd => pd.categories[cat3]);
+        if (relItems.length >= 2) return relItems;
+      }
 
+      //cat2 filter.
+      if (categories.length === 2) {
+        const cat2       = categories[1];
+        const cat2_items = primary_items.filter(pd => pd.categories[cat2]);
+        relItems.push(...cat2_items);
+        if (relItems.length >= 2) return relItems;
+      }
+
+      //min count filler.
+      if (relItems.length < 2) relItems.push(...primary_items);
 
       //return primary items.
-      secondary_items.push(...primary_items.filter(pd => !secondary_items.includes(pd)))
-      return secondary_items;
+      return relItems;
     },
 
-    //get main product.
     productImage() {
       return this.product.images.find(img => img.active) || this.product.images[0];
     }
-
   },
 
   methods: {

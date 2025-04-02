@@ -2,7 +2,6 @@
 
 import Lara from '@primevue/themes/lara';
 
-
 export default defineNuxtConfig({
 
     compatibilityDate: '2024-11-01',
@@ -34,7 +33,7 @@ export default defineNuxtConfig({
         baseURL: "/ventt/",
 
         head: {
-            title: "Ventt - Your Modern Online Shopping Destination",
+            title: "Ventt - Smart Ecommerce",
             meta: [
                 {
                     name: "description",
@@ -64,7 +63,9 @@ export default defineNuxtConfig({
                     property: "og:url",
                     content: "https://www.ancesys.com/ventt"
                 },
-                // { property: "og:image", content: "https://www.ventt.com/images/ventt-logo.png" },
+
+                // { property: "og:image", content: "https://www.ancesys.com/ventt/ventt-logo.jpg" },
+
                 {
                     name: "twitter:card",
                     content: "summary_large_image"
@@ -77,7 +78,8 @@ export default defineNuxtConfig({
                     name: "twitter:description",
                     content: "Discover Ventt, the ultimate online shopping platform for a seamless and modern retail experience. Shop the latest trends, enjoy fast delivery, and explore exclusive deals tailored just for you."
                 },
-                // { name: "twitter:image", content: "https://www.ventt.com/images/ventt-logo.png" }
+
+                // { name: "twitter:image", content: "https://www.ancesys.com/ventt/ventt-logo.jpg" }
             ]
         }
 
