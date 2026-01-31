@@ -1,31 +1,38 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-
 import Material from '@primeuix/themes/material';
 
 export default defineNuxtConfig({
-
-    compatibilityDate: '2024-11-01',
+    compatibilityDate: '2025-07-15',
 
     devtools: {enabled: false},
 
     modules: [
         '@primevue/nuxt-module',
-        '@nuxt/image',
         '@nuxt/fonts'
     ],
 
     primevue: {
         options: {
+            ripple: true,
+            inputVariant: 'filled',
+
             theme: {
                 preset: Material
             }
+
         }
+    },
+
+
+    aos: {
+        duration: 800,
     },
 
     css: [
         'primeflex/primeflex.css',
-        'primeicons/primeicons.css',
     ],
 
+    fonts: {
+        provider: 'local',
+    },
 
 })
