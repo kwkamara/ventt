@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import Lara from '@primevue/themes/lara';
+import Material from '@primeuix/themes/material';
 
 export default defineNuxtConfig({
 
@@ -8,12 +8,16 @@ export default defineNuxtConfig({
 
     devtools: {enabled: true},
 
-    modules: ['@primevue/nuxt-module', '@nuxt/image', '@nuxt/fonts', 'nuxt-purgecss'],
+    modules: [
+        '@primevue/nuxt-module',
+        '@nuxt/image',
+        '@nuxt/fonts'
+    ],
 
     primevue: {
         options: {
             theme: {
-                preset: Lara
+                preset: Material
             }
         }
     },
@@ -30,7 +34,7 @@ export default defineNuxtConfig({
     },
 
     app: {
-        baseURL: "/ventt/",
+        //baseURL: "/ventt/",
 
         head: {
             title: "Ventt - Smart Ecommerce",

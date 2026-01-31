@@ -12,18 +12,16 @@
   "dependencies": {
     "@nuxt/fonts": "^0.11.0",
     "@nuxt/image": "^1.9.0",
+    "@primeuix/themes": "^2.0.3",
     "@primevue/themes": "^4.2.5",
     "chart.js": "^4.4.8",
-    "chartjs": "^0.3.24",
-    "nuxt": "^3.16.1",
-    "nuxt-purgecss": "^2.0.0",
+    "material-design-icons-iconfont": "^6.7.0",
+    "nuxt": "^3.20.0",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
-    "primevue": "^4.2.5",
-    "vue": "latest",
-    "vue-router": "latest"
+    "primevue": "^4.5.4"
   },
   "devDependencies": {
-    "@primevue/nuxt-module": "^4.2.5"
+    "@primevue/nuxt-module": "^4.5.4"
   }
 }
