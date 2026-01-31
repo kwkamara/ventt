@@ -3,7 +3,7 @@
            aria-labelledby="product category banner" @click="viewShop(); scrollToTop()">
 
     <!-- Product Image -->
-    <NuxtImg :alt="`Ventt Ecommerce Platform - ${name}`" :src="image" aria-hidden="true"
+    <img :alt="`Ventt Ecommerce Platform - ${name}`" :src="image" aria-hidden="true"
              class="w-full h-full absolute object-cover" format="webp"
              loading="lazy"/>
 

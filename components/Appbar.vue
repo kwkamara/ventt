@@ -3,7 +3,7 @@
 
     <!-- logo -->
     <div v-if="sidebar" class="w-3 md:w-2 lg:w-1 h-full p-3 bg-white flex align-items-center justify-content-center border-right-1 border-gray-200">
-      <NuxtImg src="/logo-ventt.svg" class="w-3rem"/>
+      <img src="/logo-ventt.svg" class="w-3rem"/>
     </div>
     <!-- /logo -->
 

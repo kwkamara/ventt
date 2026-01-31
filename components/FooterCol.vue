@@ -9,7 +9,7 @@
         <div class="col-6 md:col-3">
 
           <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
-            <NuxtImg src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
+            <img src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
           </div>
 
           <div class="flex flex flex-column gap-2 text-xs">

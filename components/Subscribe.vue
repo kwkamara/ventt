@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 h-8rem md:h-10rem px-3 md:px-8 flex align-items-center justify-content-center shadow-2 relative">
 
-    <NuxtImg alt="Ventt Ecommerce Platform" class="w-full h-full absolute inset-0 object-cover border-round"
+    <img alt="Ventt Ecommerce Platform" class="w-full h-full absolute inset-0 object-cover border-round"
              fit="cover" loading="lazy" src="/winter-1-1520.webp"/>
 
     <div class="flex absolute px-3">

@@ -28,7 +28,7 @@
           <div v-for="service in services" class="col-6 lg:col-3 h-6rem lg:h-8rem p-2 text-white">
 
             <div class="h-full w-full relative">
-              <NuxtImg :src="service.image" alt="Ventt Ecommerce Platform"
+              <img :src="service.image" alt="Ventt Ecommerce Platform"
                        class="w-full h-full absolute inset-0 object-cover border-round" fit="cover" sizes="200px"/>
 
               <div class="h-full w-full absolute bg-black-alpha-80 hover:bg-black-alpha-10 flex align-items-center justify-content-center border-round">

@@ -2,7 +2,7 @@
   <div class="col-12 h-26rem lg:h-30rem p-0 flex align-items-center shadow-2 relative">
 
     <!-- Background Image -->
-    <NuxtImg alt="Ventt Ecommerce Platform - Fashion Collection" aria-hidden="true"
+    <img alt="Ventt Ecommerce Platform - Fashion Collection" aria-hidden="true"
              class="w-full h-full absolute" format="webp" src="/blouses-1521.webp"/>
 
     <!-- Content Overlay -->

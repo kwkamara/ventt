@@ -7,7 +7,7 @@
          class="h-full w-1 flex align-items-center gap-1 font-bold uppercase title hover:text-purple-600 cursor-pointer"
          @click="useState('product').value=null; useState('ui').value=null">
 
-      <NuxtImg src="/logo-ventt.svg" alt="ventt logo" width="50" height="50"/>
+      <img src="/logo-ventt.svg" alt="ventt logo" width="50" height="50"/>
       <span class="uppercase title hidden lg:block align-self-end pb-2">Vent</span>
     </div>
     <!-- Logo -->
