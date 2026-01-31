@@ -28,10 +28,6 @@ export default defineNuxtConfig({
         'primeicons/primeicons.css',
     ],
 
-    purgecss: {
-        enabled: false,
-        safelist: ['my-class'],
-    },
 
     app: {
         //baseURL: "/ventt/",
