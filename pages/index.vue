@@ -1,175 +1,175 @@
 <template>
   <div class="grid m-0 text-gray-700 select-none bg-gray-700">
 
-    <TopBar/>
+    <Navbar/>
 
 
-    <Categories/>
+<!--    <Categories/>-->
 
 
-    <Login v-if="useState('ui').value==='login'"/>
+<!--    <Login v-if="useState('ui').value==='login'"/>-->
 
 
-    <Shop v-else-if="useState('ui').value==='shop'"/>
+<!--    <Shop v-else-if="useState('ui').value==='shop'"/>-->
 
 
-    <Checkout v-else-if="useState('ui').value==='checkout'"/>
+<!--    <Checkout v-else-if="useState('ui').value==='checkout'"/>-->
 
 
-    <template v-else-if="!useState('product').value">
+<!--    <template v-else-if="!useState('product').value">-->
 
-      <Hero/>
+<!--      <Hero/>-->
 
-      <!-- services -->
-      <div class="col-12 lg:py-6 px-1 md:px-3 md:px-4 lg:px-8 flex gap-3">
+<!--      &lt;!&ndash; services &ndash;&gt;-->
+<!--      <div class="col-12 lg:py-6 px-1 md:px-3 md:px-4 lg:px-8 flex gap-3">-->
 
-        <div class="grid m-0 w-full">
+<!--        <div class="grid m-0 w-full">-->
 
-          <div v-for="service in services" class="col-6 lg:col-3 h-6rem lg:h-8rem p-2 text-white">
+<!--          <div v-for="service in services" class="col-6 lg:col-3 h-6rem lg:h-8rem p-2 text-white">-->
 
-            <div class="h-full w-full relative">
-              <img :src="service.image" alt="Ventt Ecommerce Platform"
-                       class="w-full h-full absolute inset-0 object-cover border-round" fit="cover" sizes="200px"/>
+<!--            <div class="h-full w-full relative">-->
+<!--              <img :src="service.image" alt="Ventt Ecommerce Platform"-->
+<!--                       class="w-full h-full absolute inset-0 object-cover border-round" fit="cover" sizes="200px"/>-->
 
-              <div class="h-full w-full absolute bg-black-alpha-80 hover:bg-black-alpha-10 flex align-items-center justify-content-center border-round">
-                <div class="text-xl text-center">
-                  <i :class="`${service.icon} text-2xl`"/>
-                  <div class="mt-1 capitalize text-sm">{{ service.name }}</div>
-                </div>
-              </div>
-            </div>
+<!--              <div class="h-full w-full absolute bg-black-alpha-80 hover:bg-black-alpha-10 flex align-items-center justify-content-center border-round">-->
+<!--                <div class="text-xl text-center">-->
+<!--                  <i :class="`${service.icon} text-2xl`"/>-->
+<!--                  <div class="mt-1 capitalize text-sm">{{ service.name }}</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
 
-          </div>
+<!--          </div>-->
 
-        </div>
+<!--        </div>-->
 
-      </div>
-      <!-- /services -->
-
-
-      <!-- New Arrivals -->
-      <div class="col-12 md:px-4 lg:px-8 pt-0 px-1 lg:pb-6">
-
-        <div class="grid m-0 align-items-end">
-
-          <div class="col-12 md:col-6 lg:col-9 px-0 lg:pr-0 bg-gray-700">
-            <div class="grid m-0">
-              <div class="col-12 h-3rem pt-0 flex align-items-center text-white text-xl font-bold uppercase">
-                New Arrivals
-              </div>
-
-              <div v-for="product in popularProducts.slice(0, 4)" class="col-6 lg:col-3 lg:pb-0">
-                <Product :product="product"/>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- men accessories display -->
-          <div class="col-12 md:col-6 lg:col-3 h-15rem lg:h-16rem pt-0 pb-3 md:pb-2">
-            <ProductDisplay :filters="{men: true, accessories: true}" discount="10% Off"
-                            image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
-          </div>
-        </div>
-
-      </div>
-      <!-- /New Arrivals -->
+<!--      </div>-->
+<!--      &lt;!&ndash; /services &ndash;&gt;-->
 
 
-      <!--  section 2 -->
-      <div class="col-12 px-1 md:px-4 lg:px-8 pb-6 pt-0">
-        <div class="grid m-0">
+<!--      &lt;!&ndash; New Arrivals &ndash;&gt;-->
+<!--      <div class="col-12 md:px-4 lg:px-8 pt-0 px-1 lg:pb-6">-->
 
-          <div class="col-12 md:col-6 h-16rem lg:h-26rem">
-            <ProductDisplay :filters="{women: true}"
-                            discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>
-          </div>
+<!--        <div class="grid m-0 align-items-end">-->
 
-          <div class="col-12 md:col-6">
+<!--          <div class="col-12 md:col-6 lg:col-9 px-0 lg:pr-0 bg-gray-700">-->
+<!--            <div class="grid m-0">-->
+<!--              <div class="col-12 h-3rem pt-0 flex align-items-center text-white text-xl font-bold uppercase">-->
+<!--                New Arrivals-->
+<!--              </div>-->
 
-            <div class="lg:h-12rem w-full flex gap-3">
+<!--              <div v-for="product in popularProducts.slice(0, 4)" class="col-6 lg:col-3 lg:pb-0">-->
+<!--                <Product :product="product"/>-->
+<!--              </div>-->
 
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{women: true, official: true}"
-                                discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>
-              </div>
+<!--            </div>-->
+<!--          </div>-->
 
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{women: true, hats: true}"
-                                image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>
-              </div>
+<!--          &lt;!&ndash; men accessories display &ndash;&gt;-->
+<!--          <div class="col-12 md:col-6 lg:col-3 h-15rem lg:h-16rem pt-0 pb-3 md:pb-2">-->
+<!--            <ProductDisplay :filters="{men: true, accessories: true}" discount="10% Off"-->
+<!--                            image="/men-accessories-1-438.webp" name="Mens' Accessories"/>-->
+<!--          </div>-->
+<!--        </div>-->
 
-            </div>
-
-            <div class="h-8rem lg:h-12rem w-full mt-3">
-              <ProductDisplay :filters="{women: true, blouses: true}"
-                              image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!--  /section 2 -->
+<!--      </div>-->
+<!--      &lt;!&ndash; /New Arrivals &ndash;&gt;-->
 
 
-      <!--  section 3 -->
-      <div class="col-12 px-1 md:px-8 pb-6 pt-0">
+<!--      &lt;!&ndash;  section 2 &ndash;&gt;-->
+<!--      <div class="col-12 px-1 md:px-4 lg:px-8 pb-6 pt-0">-->
+<!--        <div class="grid m-0">-->
 
-        <div class="grid m-0">
+<!--          <div class="col-12 md:col-6 h-16rem lg:h-26rem">-->
+<!--            <ProductDisplay :filters="{women: true}"-->
+<!--                            discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>-->
+<!--          </div>-->
 
-          <div class="col-12 md:col-6">
+<!--          <div class="col-12 md:col-6">-->
 
-            <div class="w-full flex gap-3">
+<!--            <div class="lg:h-12rem w-full flex gap-3">-->
 
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{kids: true, casual: true, boys: true}"
-                                image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>
-              </div>
+<!--              <div class="w-6 h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{women: true, official: true}"-->
+<!--                                discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>-->
+<!--              </div>-->
 
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{kids: true, casual: true, girls: true}"
-                                image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>
-              </div>
+<!--              <div class="w-6 h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{women: true, hats: true}"-->
+<!--                                image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>-->
+<!--              </div>-->
 
-            </div>
+<!--            </div>-->
 
-            <div class="w-full flex gap-3 mt-3">
+<!--            <div class="h-8rem lg:h-12rem w-full mt-3">-->
+<!--              <ProductDisplay :filters="{women: true, blouses: true}"-->
+<!--                              image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>-->
+<!--            </div>-->
 
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{kids: true}"
-                                discount="10% Off" image="/babies-1-324.webp" name="babies"/>
-              </div>
+<!--          </div>-->
 
-              <div class="w-6  h-8rem lg:h-12rem">
-                <ProductDisplay :filters="{kids:true, pyjamas: true}"
-                                image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-12 md:col-6 h-15rem lg:h-26rem">
-            <ProductDisplay :filters="{kids:true, casual: true}"
-                            image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
-          </div>
-
-        </div>
-
-      </div>
-      <!--  /section 3 -->
-
-    </template>
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;  /section 2 &ndash;&gt;-->
 
 
-    <product-details v-else/>
+<!--      &lt;!&ndash;  section 3 &ndash;&gt;-->
+<!--      <div class="col-12 px-1 md:px-8 pb-6 pt-0">-->
+
+<!--        <div class="grid m-0">-->
+
+<!--          <div class="col-12 md:col-6">-->
+
+<!--            <div class="w-full flex gap-3">-->
+
+<!--              <div class="w-6 h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{kids: true, casual: true, boys: true}"-->
+<!--                                image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>-->
+<!--              </div>-->
+
+<!--              <div class="w-6 h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{kids: true, casual: true, girls: true}"-->
+<!--                                image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>-->
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--            <div class="w-full flex gap-3 mt-3">-->
+
+<!--              <div class="w-6 h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{kids: true}"-->
+<!--                                discount="10% Off" image="/babies-1-324.webp" name="babies"/>-->
+<!--              </div>-->
+
+<!--              <div class="w-6  h-8rem lg:h-12rem">-->
+<!--                <ProductDisplay :filters="{kids:true, pyjamas: true}"-->
+<!--                                image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>-->
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="col-12 md:col-6 h-15rem lg:h-26rem">-->
+<!--            <ProductDisplay :filters="{kids:true, casual: true}"-->
+<!--                            image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      &lt;!&ndash;  /section 3 &ndash;&gt;-->
+
+<!--    </template>-->
 
 
-    <Subscribe/>
+<!--    <product-details v-else/>-->
 
 
-    <FooterCol/>
+<!--    <Subscribe/>-->
+
+
+<!--    <FooterCol/>-->
 
     <!-- Toast -->
     <Toast position="top-center" class="w-15rem">

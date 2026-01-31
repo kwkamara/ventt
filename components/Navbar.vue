@@ -1,6 +1,6 @@
 <template>
-  <header class="col-12 h-5rem px-3 md:px-8 flex align-items-center justify-content-between bg-bluegray-50"
-          aria-label="Main Navigation">
+
+  <header class="col-12 h-5rem px-3 md:px-8 bg-white flex align-items-center justify-content-between" aria-label="Main Navigation">
 
     <!-- Logo -->
     <div aria-label="Ventt Brand"
@@ -8,17 +8,42 @@
          @click="useState('product').value=null; useState('ui').value=null">
 
       <img src="/logo-ventt.svg" alt="ventt logo" width="50" height="50"/>
-      <span class="uppercase title hidden lg:block align-self-end pb-2">Vent</span>
+      <h1 class="m-0 title hidden lg:block align-self-end pb-2 capitalize">Vent</h1>
     </div>
     <!-- Logo -->
 
 
-    <!-- Navigation Actions -->
+    <!-- menu -->
     <div class="w-11 md:w-full flex align-items-center justify-content-end gap-3 md:gap-3">
 
       <!-- Login -->
-      <Button aria-label="Login" icon="pi pi-user text-xs" label="login" outlined rounded
-              severity="secondary" size="small" @click="useState('ui').value='login'"/>
+      <Button aria-label="Login" rounded
+              class="bg-transparent border-none hover:shadow-1 text-purple-700"
+              size="small" @click="">
+        <span class="material-icons-outlined font-light text-4xl">account_circle</span>
+      </Button>
+
+      <!-- likes -->
+      <Button aria-label="Login" rounded
+              class="bg-transparent border-none hover:shadow-1 text-purple-700"
+              size="small"
+              @click="">
+        <span class="material-icons-outlined" style="font-size:30px">favorite_border</span>
+      </Button>
+
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path>
+      </svg>
+
+
+      <!-- likes -->
+      <Button aria-label="Login" rounded
+              class="bg-transparent border-1 border-purple-100 text-purple-700"
+              size="small"
+              @click="">
+        <span class="material-icons-outlined">shopping_cart</span>
+        <span>0.00</span>
+      </Button>
 
 
       <!-- Product Search -->
@@ -93,12 +118,12 @@
 
 
       <!-- Wishlist -->
-      <Button :class="`px-3 border-none shadow-1 ${wishlist.length ? 'bg-purple-600 text-white' : 'text-gray-600'}`"
-              :label="wishlist.length.toLocaleString()"
-              :disabled="!wishlist.length"
-              :outlined="!wishlist.length" aria-label="Wishlist"
-              icon="pi pi-heart-fill text-xs" rounded size="small"
-              @click="$refs.wishListPopover.toggle($event)"/>
+<!--      <Button :class="`px-3 border-none shadow-1 ${wishlist.length ? 'bg-purple-600 text-white' : 'text-gray-600'}`"-->
+<!--              :label="wishlist.length.toLocaleString()"-->
+<!--              :disabled="!wishlist.length"-->
+<!--              :outlined="!wishlist.length" aria-label="Wishlist"-->
+<!--              icon="pi pi-heart-fill text-xs" rounded size="small"-->
+<!--              @click="$refs.wishListPopover.toggle($event)"/>-->
       <Popover ref="wishListPopover">
         <div class="w-full md:w-26rem">
           <DataTable v-model:filters="filters.dt2" :globalFilterFields="['name', 'description', 'sku']"
@@ -138,9 +163,9 @@
       <!-- /Wishlist -->
 
       <!-- Shopping Cart -->
-      <Button :disabled="!cartData.total" :label="String(formatDecimal(cartData.total))"
-              aria-label="Shopping Cart" class="px-3 shadow-1 bg-purple-600 text-white border-none"
-              icon="pi pi-shopping-cart text-xs" rounded size="small" @click="$refs.shoppingCartPopover.toggle($event)"/>
+<!--      <Button :disabled="!cartData.total" :label="String(formatDecimal(cartData.total))"-->
+<!--              aria-label="Shopping Cart" class="px-3 shadow-1 bg-purple-600 text-white border-none"-->
+<!--              icon="pi pi-shopping-cart text-xs" rounded size="small" @click="$refs.shoppingCartPopover.toggle($event)"/>-->
       <Popover ref="shoppingCartPopover">
         <div class="w-20rem md:w-26rem px-3">
 
@@ -205,6 +230,7 @@
     </div>
 
   </header>
+
 </template>
 
 
@@ -222,7 +248,7 @@ const {removeFromCart} = useRemoveFromCart();
 import {FilterMatchMode} from "@primevue/core/api";
 
 export default defineComponent({
-  name: "topBar",
+  name: "Navbar",
 
   data() {
     return {

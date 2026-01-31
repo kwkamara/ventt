@@ -29,6 +29,8 @@ export default defineNuxtConfig({
 
     css: [
         'primeflex/primeflex.css',
+        'material-icons/iconfont/material-icons.css',
+        'material-icons/iconfont/outlined.css',
     ],
 
     fonts: {
