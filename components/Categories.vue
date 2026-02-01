@@ -133,7 +133,8 @@ export default defineComponent({
       //close popup.
       this.$refs.categoriesPopup.hide();
 
-      this.notify(type);
+      //emit.
+      this.$emit('update', true);
 
       //navigate.
       navigateTo('/Shop');

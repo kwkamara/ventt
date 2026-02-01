@@ -5,7 +5,7 @@
   <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
     <Navbar/>
 
-    <Categories/>
+    <Categories @update="updateFilters"/>
   </section>
   <!-- /Nav | Categories | Hero -->
 
@@ -21,6 +21,7 @@
         <!-- search | price reset -->
         <div class="pb-2 text-purple-700 flex justify-content-between gap-3">
           <InputText v-model="search"
+                     id="search-ip"
                      placeholder="search"
                      class="px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
                      fluid/>
@@ -59,11 +60,12 @@
         <!-- categories -->
         <div class="flex flex-column gap-4">
 
-          <div v-for="category in Object.keys(categories)"
+          <div v-for="(value, category) in categories"
                class="w-full flex gap-2">
             <Checkbox class="m-0"
+                      :id="category + '-ip'"
                       v-model="categories[category]"
-                      binary/>
+                      :binary="true"/>
             <span class="capitalize">{{ category }}</span>
           </div>
 
@@ -189,7 +191,7 @@ export default defineComponent({
 
 
       //menu filters update.
-      this.updateFilters();
+      //this.updateFilters();
 
 
       //price filter.
