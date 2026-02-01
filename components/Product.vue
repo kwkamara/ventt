@@ -1,100 +1,162 @@
 <template>
-  <article class="h-9rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"
-           @click="useState('product').value = product; useState('ui').value=null; scrollToTop()"
-           aria-labelledby="product-title">
 
 
-    <!-- Product Image -->
-    <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
-         width="212" class="w-full h-full absolute border-round"
-         loading="lazy" :src="product.images[0].url" aria-hidden="true"/>
+  <div class="col-12 md:col-4 lg:col-4">
 
+    <div class="border-1 border-purple-50 border-round-xl overflow-hidden hover:shadow-3">
 
-    <!-- product Name and Price -->
-    <div class="w-full absolute">
-
-      <!-- product Name and Price -->
-      <div class="hover:bg-yellow-600 hover:text-white bg-white-alpha-90">
-
-        <h2 aria-label="product-title" class="m-0 px-3 pt-2 capitalize text-sm font-light white-space-nowrap">
-          {{ product.name }}
-        </h2>
-
-        <!-- Rating | Price -->
-        <div class="h-2rem px-3 pb-3 pt-1 flex justify-content-between align-items-center">
-
-          <!-- rating -->
-          <div class="text-yellow-500 flex align-items-center gap-1">
-            <i v-for="(rating, ix) in product.rating" :key="ix"
-               :class="`pi ${product.reviews.length ? 'pi-star-fill' : 'pi-star' } text-xs`" aria-hidden="true"/>
+      <div class="h-12rem bg-gray-100 relative">
+        <!-- header -->
+        <div class="w-full p-2 absolute z-4 flex justify-content-between align-items-center">
+          <div>
+            <!-- likes -->
+            <Button aria-label="Login" class="bg-white-alpha-10 hover:bg-purple-900 hover:text-white border-none hover:shadow-3 text-purple-700"
+                    raised rounded size="small" @click="">
+              <span class="material-icons-outlined" style="font-size:30px">
+                favorite_border
+              </span>
+            </Button>
+            <!-- /likes -->
           </div>
-
-          <!-- Price -->
-          <div aria-label="Product price" class="flex align-items-center">
-            {{ formatDecimal(product.price) }}
+          <div>
+            <!-- shopping cart -->
+            <Button aria-label="Login" class="bg-white-alpha-10 hover:bg-purple-900 hover:text-white border-none hover:shadow-3 text-purple-700"
+                    raised rounded size="small" @click="">
+              <span class="material-icons-outlined">
+                shopping_cart
+              </span>
+            </Button>
+            <!-- /shopping cart -->
           </div>
-
         </div>
-        <!-- /Rating | Price -->
+        <!-- /header -->
 
+        <!-- image -->
+        <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
+             :src="`/${product.images[0].url}`"
+             class="w-full h-full absolute"
+             loading="lazy" width="212"/>
       </div>
-      <!-- /product Name and Price -->
+
+      <!-- footer -->
+      <div class="p-3 flex justify-content-between bg-purple-800 text-white">
+        <!-- name | rating -->
+        <div>
+          <div class="pb-1 capitalize">{{ product.name }}</div>
+          <!-- rating -->
+          <div class="text-yellow-500 flex align-items-center">
+            <span v-for="(rating, ix) in product.rating" class="material-icons text-sm">star</span>
+          </div>
+        </div>
+        <!-- /name | rating -->
+
+        <!-- price -->
+        <div>{{ formatDecimal(product.price) }}</div>
+      </div>
+      <!-- /footer -->
 
     </div>
-    <!-- /product Name and Price -->
+
+  </div>
 
 
-    <!-- Cart Popover -->
-    <Popover ref="cartPopover">
-      <div class="w-20rem lg:w-22rem px-3">
-        <!-- Product Details -->
-        <div class="flex align-items-center">
-          <div class="h-4rem flex align-items-center">{{ product.name }}</div>
-        </div>
 
-        <!-- Cart Data -->
-        <div class="h-6rem pt-3 pb-2 flex align-items-start justify-content-between border-top-1 border-gray-100">
-          <!-- Quantity Input -->
-          <div class="w-4">
-            <InputText
-                id="cart-value"
-                v-model.number="cart.value"
-                fluid
-                aria-label="Quantity"
-            />
-            <label class="text-xs" for="cart-value">Quantity</label>
-          </div>
+  <!--  <article class="h-9rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"-->
+  <!--           @click="useState('product').value = product; useState('ui').value=null; scrollToTop()"-->
+  <!--           aria-labelledby="product-title">-->
 
-          <!-- Cart Controls -->
-          <div class="w-8 pl-2 flex gap-3 justify-content-end align-items-center">
-            <Button aria-label="Add to cart" class="border-1 border-gray-100 text-xs"
-                    icon="pi pi-shopping-cart" label="Add" outlined rounded severity="success" size="small"
-                    @click="addToCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>
 
-            <Button v-if="product.cart" aria-label="Remove from cart" class="border-1 border-gray-100 text-xs"
-                    icon="pi pi-shopping-cart text-xs" label="Remove" outlined rounded severity="warn"
-                    @click="removeFromCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>
-          </div>
-        </div>
+  <!--    &lt;!&ndash; Product Image &ndash;&gt;-->
+  <!--    <img :alt="`Ventt Ecommerce Platform - ${product.name}`"-->
+  <!--         :src="`/${product.images[0].url}`" class="w-full h-full absolute border-round"-->
+  <!--         loading="lazy" width="212"/>-->
 
-        <!-- Cart Totals -->
-        <div v-if="product.cart" class="h-4rem border-top-1 border-gray-100 flex justify-content-between align-items-center">
-          <div>
-            <div class="text-lg font-bold">{{ product.cart.toLocaleString() }}</div>
-            <div class="text-xs">Quantity</div>
-          </div>
 
-          <div>
-            <div class="text-lg font-bold">{{ formatDecimal(product.cart * product.price) }}</div>
-            <div class="text-xs text-right">Total</div>
-          </div>
-        </div>
+  <!--    &lt;!&ndash; product Name and Price &ndash;&gt;-->
+  <!--    <div class="w-full absolute">-->
 
-      </div>
-    </Popover>
-    <!-- Cart Popover -->
+  <!--      &lt;!&ndash; product Name and Price &ndash;&gt;-->
+  <!--      <div class="hover:bg-yellow-600 hover:text-white bg-white-alpha-90">-->
 
-  </article>
+  <!--        <h2 aria-label="product-title" class="m-0 px-3 pt-2 capitalize text-sm font-light white-space-nowrap">-->
+  <!--          {{ product.name }}-->
+  <!--        </h2>-->
+
+  <!--        &lt;!&ndash; Rating | Price &ndash;&gt;-->
+  <!--        <div class="h-2rem px-3 pb-3 pt-1 flex justify-content-between align-items-center">-->
+
+  <!--          &lt;!&ndash; rating &ndash;&gt;-->
+  <!--          <div class="text-yellow-500 flex align-items-center gap-1">-->
+  <!--            <i v-for="(rating, ix) in product.rating" :key="ix"-->
+  <!--               :class="`pi ${product.reviews.length ? 'pi-star-fill' : 'pi-star' } text-xs`" aria-hidden="true"/>-->
+  <!--          </div>-->
+
+  <!--          &lt;!&ndash; Price &ndash;&gt;-->
+  <!--          <div aria-label="Product price" class="flex align-items-center">-->
+  <!--            {{ formatDecimal(product.price) }}-->
+  <!--          </div>-->
+
+  <!--        </div>-->
+  <!--        &lt;!&ndash; /Rating | Price &ndash;&gt;-->
+
+  <!--      </div>-->
+  <!--      &lt;!&ndash; /product Name and Price &ndash;&gt;-->
+
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /product Name and Price &ndash;&gt;-->
+
+
+  <!--    &lt;!&ndash; Cart Popover &ndash;&gt;-->
+  <!--    <Popover ref="cartPopover">-->
+  <!--      <div class="w-20rem lg:w-22rem px-3">-->
+  <!--        &lt;!&ndash; Product Details &ndash;&gt;-->
+  <!--        <div class="flex align-items-center">-->
+  <!--          <div class="h-4rem flex align-items-center">{{ product.name }}</div>-->
+  <!--        </div>-->
+
+  <!--        &lt;!&ndash; Cart Data &ndash;&gt;-->
+  <!--        <div class="h-6rem pt-3 pb-2 flex align-items-start justify-content-between border-top-1 border-gray-100">-->
+  <!--          &lt;!&ndash; Quantity Input &ndash;&gt;-->
+  <!--          <div class="w-4">-->
+  <!--            <InputText-->
+  <!--                id="cart-value"-->
+  <!--                v-model.number="cart.value"-->
+  <!--                fluid-->
+  <!--                aria-label="Quantity"-->
+  <!--            />-->
+  <!--            <label class="text-xs" for="cart-value">Quantity</label>-->
+  <!--          </div>-->
+
+  <!--          &lt;!&ndash; Cart Controls &ndash;&gt;-->
+  <!--          <div class="w-8 pl-2 flex gap-3 justify-content-end align-items-center">-->
+  <!--            <Button aria-label="Add to cart" class="border-1 border-gray-100 text-xs"-->
+  <!--                    icon="pi pi-shopping-cart" label="Add" outlined rounded severity="success" size="small"-->
+  <!--                    @click="addToCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>-->
+
+  <!--            <Button v-if="product.cart" aria-label="Remove from cart" class="border-1 border-gray-100 text-xs"-->
+  <!--                    icon="pi pi-shopping-cart text-xs" label="Remove" outlined rounded severity="warn"-->
+  <!--                    @click="removeFromCart(product, cart.value); notify(`${cart.value} product(s) added to cart.`)"/>-->
+  <!--          </div>-->
+  <!--        </div>-->
+
+  <!--        &lt;!&ndash; Cart Totals &ndash;&gt;-->
+  <!--        <div v-if="product.cart" class="h-4rem border-top-1 border-gray-100 flex justify-content-between align-items-center">-->
+  <!--          <div>-->
+  <!--            <div class="text-lg font-bold">{{ product.cart.toLocaleString() }}</div>-->
+  <!--            <div class="text-xs">Quantity</div>-->
+  <!--          </div>-->
+
+  <!--          <div>-->
+  <!--            <div class="text-lg font-bold">{{ formatDecimal(product.cart * product.price) }}</div>-->
+  <!--            <div class="text-xs text-right">Total</div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+
+  <!--      </div>-->
+  <!--    </Popover>-->
+  <!--    &lt;!&ndash; Cart Popover &ndash;&gt;-->
+
+  <!--  </article>-->
 </template>
 
 
@@ -103,7 +165,7 @@
 const {formatDecimal} = useFormatDecimal();
 
 //shopping cart.
-const {addToCart}      = useAddToCart();
+const {addToCart} = useAddToCart();
 const {removeFromCart} = useRemoveFromCart();
 
 //scroll.

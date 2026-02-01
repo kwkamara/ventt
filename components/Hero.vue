@@ -1,40 +1,33 @@
 <template>
-  <div class="col-12 h-26rem lg:h-30rem p-0 flex align-items-center shadow-2 relative">
+  <div class="col-12 p-0 flex align-items-center shadow-2 relative overflow-hidden"
+       style="height: 60vh">
 
-    <!-- Background Image -->
-    <img alt="Ventt Ecommerce Platform - Fashion Collection" aria-hidden="true"
-             class="w-full h-full absolute" format="webp" src="/blouses-1521.webp"/>
+    <!-- backgrounds -->
+    <Transition name="fade">
+      <img :key="hero_ix"
+           :src="hero_images[hero_ix]"
+           alt="Ventt ecommerce"
+           class="absolute w-full top-0"/>
+    </Transition>
+    <!-- /backgrounds -->
+
 
     <!-- Content Overlay -->
-    <div class="w-full md:w-7 px-3 lg:py-5 lg:pl-8 absolute flex align-items-center">
+    <div class="w-full h-full p-3 md:px-7 absolute flex align-items-center bg-black-alpha-50">
 
-      <div class="px-4 lg:px-6 lg:pb-3 pt-5 bg-white-alpha-70 text-purple-800 hover:bg-purple-800 hover:text-white shadow-1 border-round">
-
-<!--        &lt;!&ndash; Header &ndash;&gt;-->
-<!--        <div class="h-5rem lg:h-5rem flex align-items-end justify-content-center">-->
-<!--          <p class="text-sm lg:text-lg font-semibold line-height-3">Discover Your Style, Elevate Your Wardrobe</p>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; /Header &ndash;&gt;-->
-
+      <div class="p-4 text-white border-round">
 
         <!-- Message -->
-        <div class="flex align-items-center justify-content-center">
-          <div class="text-center">
-            <h1 class="mb-0 text-2xl lg:text-4xl font-bold">Your Ultimate Fashion Destination</h1>
-            <p class="text-sm lg:text-lg font-semibold line-height-3 mt-1 font-light">Discover Your Style, Elevate Your Wardrobe</p>
+        <div>
+          <h2 class="m-0 text-2xl lg:text-6xl font-light">Discover Your Style</h2>
+          <p class="m-0 pb-2 text-left text-sm lg:text-lg font-light line-height-3">
+            Elevate Your Wardrobe
+          </p>
 
-            <h2 class="mt-5 text-yellow-700 text-xl lg:text-2xl">Enjoy Exclusive Discounts Up to 40% Off!</h2>
-          </div>
         </div>
         <!-- /Message -->
 
 
-        <!-- CTA -->
-        <div class="h-6rem flex align-items-center md:align-items-start justify-content-center">
-          <Button aria-label="Shop Now for Exclusive Discounts" class="bg-yellow-600 border-none" label="Shop Now"
-                  @click="useState('filters').value={}; useState('ui').value='shop'"/>
-        </div>
-        <!-- /CTA -->
 
       </div>
 
@@ -44,10 +37,32 @@
 </template>
 
 
-
 <script lang="js">
 export default defineComponent({
-  name: "Hero"
+
+  name: "Hero",
+
+  data() {
+    return {
+      //hero section.
+      hero_ix      : 0,
+      hero_interval: null,
+      hero_images  : [
+        '/hero-img-1.webp',
+        '/hero-img-2.webp',
+        '/hero-img-3.webp',
+        '/hero-img-4.webp'
+      ],
+    }
+  },
+
+  mounted() {
+    // 4 secs per slide.
+    this.hero_interval = setInterval(() => {
+      if (this.hero_ix === (this.hero_images.length - 1)) this.hero_ix = 0;
+      else this.hero_ix++;
+    }, 4000);
+  }
 })
 </script>
 

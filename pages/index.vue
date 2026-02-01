@@ -1,191 +1,144 @@
 <template>
-  <div class="grid m-0 text-gray-700 select-none bg-gray-700">
 
+  <!-- Intro -->
+  <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
     <Navbar/>
 
+    <Categories/>
 
-<!--    <Categories/>-->
-
-
-<!--    <Login v-if="useState('ui').value==='login'"/>-->
-
-
-<!--    <Shop v-else-if="useState('ui').value==='shop'"/>-->
+    <Hero/>
+  </section>
+  <!-- Intro -->
 
 
-<!--    <Checkout v-else-if="useState('ui').value==='checkout'"/>-->
+  <!-- New Arrivals -->
+  <section class="grid m-0 md:p-4 lg:px-7 py-4 select-none overflow-hidden">
+
+    <!-- title -->
+    <div class="col-12">
+      <h2 class="font-light">New Arrivals</h2>
+    </div>
+    <!-- /title -->
 
 
-<!--    <template v-else-if="!useState('product').value">-->
-
-<!--      <Hero/>-->
-
-<!--      &lt;!&ndash; services &ndash;&gt;-->
-<!--      <div class="col-12 lg:py-6 px-1 md:px-3 md:px-4 lg:px-8 flex gap-3">-->
-
-<!--        <div class="grid m-0 w-full">-->
-
-<!--          <div v-for="service in services" class="col-6 lg:col-3 h-6rem lg:h-8rem p-2 text-white">-->
-
-<!--            <div class="h-full w-full relative">-->
-<!--              <img :src="service.image" alt="Ventt Ecommerce Platform"-->
-<!--                       class="w-full h-full absolute inset-0 object-cover border-round" fit="cover" sizes="200px"/>-->
-
-<!--              <div class="h-full w-full absolute bg-black-alpha-80 hover:bg-black-alpha-10 flex align-items-center justify-content-center border-round">-->
-<!--                <div class="text-xl text-center">-->
-<!--                  <i :class="`${service.icon} text-2xl`"/>-->
-<!--                  <div class="mt-1 capitalize text-sm">{{ service.name }}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--          </div>-->
-
-<!--        </div>-->
-
-<!--      </div>-->
-<!--      &lt;!&ndash; /services &ndash;&gt;-->
+    <!-- arrivals product list -->
+    <div class="col-12 lg:col-8 p-0">
+      <div class="grid m-0">
+        <Product v-for="pd in newProducts" :product="pd"/>
+      </div>
+    </div>
+    <!-- /arrivals product list -->
 
 
-<!--      &lt;!&ndash; New Arrivals &ndash;&gt;-->
-<!--      <div class="col-12 md:px-4 lg:px-8 pt-0 px-1 lg:pb-6">-->
+    <!-- offers display -->
+    <div class="col-12 lg:col-4 md:flex lg:flex-column align-items-start gap-3">
+      <ProductDisplay :filters="{men: true, accessories: true}"
+                      discount="10% Off"
+                      class="h-16rem"
+                      image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
+      <ProductDisplay :filters="{women: true, accessories: true}"
+                      discount="10% Off"
+                      class="pt-4 md:pt-0 xl:pt-2 h-16rem"
+                      image="/women-1-664.webp"
+                      name="Women Casual"/>
+    </div>
+    <!-- /offers display -->
 
-<!--        <div class="grid m-0 align-items-end">-->
-
-<!--          <div class="col-12 md:col-6 lg:col-9 px-0 lg:pr-0 bg-gray-700">-->
-<!--            <div class="grid m-0">-->
-<!--              <div class="col-12 h-3rem pt-0 flex align-items-center text-white text-xl font-bold uppercase">-->
-<!--                New Arrivals-->
-<!--              </div>-->
-
-<!--              <div v-for="product in popularProducts.slice(0, 4)" class="col-6 lg:col-3 lg:pb-0">-->
-<!--                <Product :product="product"/>-->
-<!--              </div>-->
-
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash; men accessories display &ndash;&gt;-->
-<!--          <div class="col-12 md:col-6 lg:col-3 h-15rem lg:h-16rem pt-0 pb-3 md:pb-2">-->
-<!--            <ProductDisplay :filters="{men: true, accessories: true}" discount="10% Off"-->
-<!--                            image="/men-accessories-1-438.webp" name="Mens' Accessories"/>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--      </div>-->
-<!--      &lt;!&ndash; /New Arrivals &ndash;&gt;-->
+  </section>
+  <!-- /New Arrivals -->
 
 
-<!--      &lt;!&ndash;  section 2 &ndash;&gt;-->
-<!--      <div class="col-12 px-1 md:px-4 lg:px-8 pb-6 pt-0">-->
-<!--        <div class="grid m-0">-->
+  <!--  section 2 -->
+  <section class="grid m-0 md:p-4 lg:px-7 py-4 select-none overflow-hidden bg-purple-900">
+    <div class="col-12 px-0 ">
+      <div class="grid m-0">
 
-<!--          <div class="col-12 md:col-6 h-16rem lg:h-26rem">-->
-<!--            <ProductDisplay :filters="{women: true}"-->
-<!--                            discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>-->
-<!--          </div>-->
-
-<!--          <div class="col-12 md:col-6">-->
-
-<!--            <div class="lg:h-12rem w-full flex gap-3">-->
-
-<!--              <div class="w-6 h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{women: true, official: true}"-->
-<!--                                discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>-->
-<!--              </div>-->
-
-<!--              <div class="w-6 h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{women: true, hats: true}"-->
-<!--                                image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>-->
-<!--              </div>-->
-
-<!--            </div>-->
-
-<!--            <div class="h-8rem lg:h-12rem w-full mt-3">-->
-<!--              <ProductDisplay :filters="{women: true, blouses: true}"-->
-<!--                              image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>-->
-<!--            </div>-->
-
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--      &lt;!&ndash;  /section 2 &ndash;&gt;-->
-
-
-<!--      &lt;!&ndash;  section 3 &ndash;&gt;-->
-<!--      <div class="col-12 px-1 md:px-8 pb-6 pt-0">-->
-
-<!--        <div class="grid m-0">-->
-
-<!--          <div class="col-12 md:col-6">-->
-
-<!--            <div class="w-full flex gap-3">-->
-
-<!--              <div class="w-6 h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{kids: true, casual: true, boys: true}"-->
-<!--                                image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>-->
-<!--              </div>-->
-
-<!--              <div class="w-6 h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{kids: true, casual: true, girls: true}"-->
-<!--                                image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>-->
-<!--              </div>-->
-
-<!--            </div>-->
-
-<!--            <div class="w-full flex gap-3 mt-3">-->
-
-<!--              <div class="w-6 h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{kids: true}"-->
-<!--                                discount="10% Off" image="/babies-1-324.webp" name="babies"/>-->
-<!--              </div>-->
-
-<!--              <div class="w-6  h-8rem lg:h-12rem">-->
-<!--                <ProductDisplay :filters="{kids:true, pyjamas: true}"-->
-<!--                                image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>-->
-<!--              </div>-->
-
-<!--            </div>-->
-
-<!--          </div>-->
-
-<!--          <div class="col-12 md:col-6 h-15rem lg:h-26rem">-->
-<!--            <ProductDisplay :filters="{kids:true, casual: true}"-->
-<!--                            image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>-->
-<!--          </div>-->
-
-<!--        </div>-->
-
-<!--      </div>-->
-<!--      &lt;!&ndash;  /section 3 &ndash;&gt;-->
-
-<!--    </template>-->
-
-
-<!--    <product-details v-else/>-->
-
-
-<!--    <Subscribe/>-->
-
-
-<!--    <FooterCol/>-->
-
-    <!-- Toast -->
-    <Toast position="top-center" class="w-15rem">
-      <template #container="{ message }">
-
-        <div class="h-4rem border-none text-xs flex align-items-center justify-content-center">
-          {{ message.summary }}
+        <div class="col-12 md:col-6 h-16rem lg:h-26rem">
+          <ProductDisplay :filters="{women: true}"
+                          discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>
         </div>
 
-      </template>
-    </Toast>
-  </div>
+        <div class="col-12 md:col-6">
+
+          <div class="lg:h-12rem w-full flex gap-3">
+
+            <div class="w-6 h-8rem lg:h-12rem">
+              <ProductDisplay :filters="{women: true, official: true}"
+                              discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>
+            </div>
+
+            <div class="w-6 h-8rem lg:h-12rem">
+              <ProductDisplay :filters="{women: true, hats: true}"
+                              image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>
+            </div>
+
+          </div>
+
+          <div class="h-8rem lg:h-12rem w-full mt-3">
+            <ProductDisplay :filters="{women: true, blouses: true}"
+                            image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--  /section 2 -->
+
+
+  <!--  kids section -->
+  <section class="grid m-0 lg:px-7 lg:py-5 py-2 select-none">
+
+    <div class="col-12 md:col-6 px-0">
+      <div class="w-full px-2 flex gap-3">
+        <div class="w-6 h-8rem lg:h-12rem">
+          <ProductDisplay :filters="{kids: true, casual: true, boys: true}"
+                          image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>
+        </div>
+        <div class="w-6 h-8rem lg:h-12rem">
+          <ProductDisplay :filters="{kids: true, casual: true, girls: true}"
+                          image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>
+        </div>
+      </div>
+
+      <div class="w-full px-2 flex gap-3 mt-3">
+        <ProductDisplay class="w-6 h-8rem lg:h-12rem"
+                        discount="10% Off" image="/babies-1-324.webp" name="babies"/>
+
+
+        <ProductDisplay class="w-6 h-8rem lg:h-12rem"
+                        image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6 px-2 h-15rem lg:h-26rem">
+      <ProductDisplay :filters="{kids:true, casual: true}"
+                      image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
+    </div>
+
+  </section>
+  <!--  /kids section -->
+
+
+  <VFooter class="select-none"/>
+
+  <!-- Toast -->
+  <Toast position="top-center" class="w-15rem">
+    <template #container="{ message }">
+
+      <div class="h-4rem border-none text-xs flex align-items-center justify-content-center">
+        {{ message.summary }}
+      </div>
+
+    </template>
+  </Toast>
+
 </template>
 
 
 <script setup lang="js">
+
 useState('products', () => [
 
   //men.
@@ -389,6 +342,7 @@ useState('products', () => [
     name       : "Ivy Hat",
     price      : 1499,
     rating     : 4,
+    "new"      : true,
     reviews    : [
       {review: "Lightweight and stylish.", user: "user_6001", rating: 5},
       {review: "Fits slightly small.", user: "user_6002", rating: 3},
@@ -461,7 +415,8 @@ useState('products', () => [
       {review: "Fits large heads perfectly.", user: "user_7003", rating: 5}
     ],
     sku        : "m-glasses-1",
-    weight     : "0.25 kg"
+    weight     : "0.25 kg",
+    "new"      : true
   },
 
 
@@ -509,7 +464,8 @@ useState('products', () => [
       {review: "Worth every penny.", user: "user_5004", rating: 4}
     ],
     sku        : "w-trouser-suit-001",
-    weight     : "1.1 kg"
+    weight     : "1.1 kg",
+    "new"      : true,
   },
 
   {
@@ -733,7 +689,8 @@ useState('products', () => [
       {review: "A bit stiff at first but breaks in nicely.", user: "user_7003", rating: 4}
     ],
     sku        : "k-shoes-2-001",
-    weight     : "0.6 kg"
+    weight     : "0.6 kg",
+    "new"      : true,
   },
 
   {
@@ -799,7 +756,8 @@ useState('products', () => [
       {review: "True to size chart measurements.", user: "user_10003", rating: 4}
     ],
     sku        : "k-casual-5-001",
-    weight     : "0.35 kg"
+    weight     : "0.35 kg",
+    "new"      : true,
   },
 
   {
@@ -887,7 +845,8 @@ useState('products', () => [
       {review: "Pants have adjustable waist - brilliant!", user: "user_14003", rating: 4}
     ],
     sku        : "k-official-3-001",
-    weight     : "0.7 kg"
+    weight     : "0.7 kg",
+    "new"      : true,
   },
 
   {
@@ -985,7 +944,6 @@ useState('product', () => null);
 useState('filters', () => null);
 
 useState('prices', () => null);
-
 </script>
 
 
@@ -1012,6 +970,9 @@ export default defineComponent({
 
     popularProducts() {
       return useState('products').value.filter(pd => pd.rating >= 4);
+    },
+    newProducts() {
+      return useState('products').value.filter(pd => pd.new);
     }
   },
 

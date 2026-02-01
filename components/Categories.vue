@@ -1,9 +1,15 @@
 <template>
-  <nav aria-label="Product Categories" class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 text-white text-sm flex align-items-center justify-content-center capitalize">
+
+  <nav aria-label="Product Categories" class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 text-white text-sm flex align-items-center justify-content-center capitalize shadow-3">
 
     <!-- Category Navigation -->
-    <div v-for="(cat_name, ix) in ['men', 'women', 'kids']" :key="ix" :aria-label="`Show ${cat_name} categories`"
-         :class="`w-full lg:w-1 h-full border-left-1 border-purple-700 flex align-items-center justify-content-center gap-2 hover:bg-purple-800 ${ix===2 ? 'border-right-1' : null}`"
+    <div v-for="(cat_name, ix) in ['men', 'women', 'kids']"
+         :key="ix"
+         :aria-label="`Show ${cat_name} categories`"
+
+         :class="`w-6rem lg:w-8rem h-full border-left-1 border-purple-700 uppercase text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
+          (ix === 2 ? 'border-right-1' : null)"
+
          role="button" tabindex="0"
          @click="category_name=cat_name; $refs.categoriesPopup.hide(); $nextTick(() => this.$refs.categoriesPopup.show($event));">
       <i class="pi pi-chevron-down" aria-hidden="true"/> {{ cat_name }}
@@ -100,6 +106,7 @@
     <!-- Categories Popover -->
 
   </nav>
+
 </template>
 
 
@@ -181,7 +188,6 @@ export default defineComponent({
 
     }
   },
-
 
   methods: {
     //load shop UI.
