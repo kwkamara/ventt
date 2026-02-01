@@ -25,9 +25,9 @@
           </h3>
 
           <div class="flex flex flex-column gap-2 text-xs">
-            <div>Platforms Supported</div>
-            <div>Technologies</div>
-            <div>Technical Support</div>
+            <div>Nuxt JS</div>
+            <div>Node JS</div>
+            <div>HTML5 | CSS3</div>
           </div>
         </div>
 
@@ -61,18 +61,20 @@
 
 
       <!-- Copyright bar -->
-      <div class="w-full h-5rem flex align-items-center justify-content-between border-top-1 border-gray-900">
-        <div class="title text-xs md:text-lg font-bold flex align-items-center gap-3 flex-1">
-          <div class="font-italic">
-            <span class="text-blue-200">Pay</span>
-            <span class="text-blue-300">Pal</span>
-          </div>
+      <div class="w-full h-5rem flex align-items-center justify-content-between border-top-1 border-gray-800">
 
-          <div class="text-gray-900">|</div>
-
-          <div class="text-green-300 white-space-nowrap">M-PESA</div>
+        <!-- payments -->
+        <div class="text-xs md:text-lg text-gray-400 flex align-items-center gap-1 flex-1">
+          <span>Paypal</span>
+          <Divider layout="vertical" class="h-1rem"/>
+          <span class="white-space-nowrap">M-PESA</span>
         </div>
+
+
+        <!-- copyright -->
         <div class="text-xs md:text-sm font-light flex-1 text-center uppercase">&copy; 2025. Ventt</div>
+
+        <!-- developer -->
         <div class="flex-1 text-right text-xs">
           Developed By:<br>
           <NuxtLink to="https://linkedin.com/in/kwkamara" target="_blank"
@@ -80,6 +82,7 @@
             Kevin <span class="font-bold">Kamara</span>
           </NuxtLink>
         </div>
+
       </div>
       <!-- /Copyright bar -->
 

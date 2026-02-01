@@ -1,6 +1,6 @@
 <template>
 
-  <!-- Intro -->
+  <!-- Nav | Categories | Hero -->
   <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
     <Navbar/>
 
@@ -8,7 +8,7 @@
 
     <Hero/>
   </section>
-  <!-- Intro -->
+  <!-- /Nav | Categories | Hero -->
 
 
   <!-- New Arrivals -->
@@ -121,16 +121,16 @@
   <!--  /kids section -->
 
 
+  <!--  footer -->
   <VFooter class="select-none"/>
+
 
   <!-- Toast -->
   <Toast position="top-center" class="w-15rem">
     <template #container="{ message }">
-
       <div class="h-4rem border-none text-xs flex align-items-center justify-content-center">
         {{ message.summary }}
       </div>
-
     </template>
   </Toast>
 
@@ -138,7 +138,14 @@
 
 
 <script setup lang="js">
+//categories init.
+useState('categories', () => ['men', 'women', 'kids']);
 
+//shop struct.
+useState('shop', () => null);
+
+
+//products init.
 useState('products', () => [
 
   //men.
@@ -236,7 +243,7 @@ useState('products', () => [
 
   {
     categories : {men: 1, official: 1},
-    color      : "Navy Blue",
+    color      : "Brown",
     description: "A sleek and warm coat designed for the modern man. Features a tailored fit and premium wool blend.",
     dimensions : "42x31x7 inches",
     documentId : "men-coat-001",
@@ -246,7 +253,7 @@ useState('products', () => [
       {url: "men-coat-1-b-454.webp"},
       {url: "men-coat-1-c-454.webp"}
     ],
-    name       : "Navy Blue Official Coat",
+    name       : "Brown Coat",
     price      : 8999,
     rating     : 4,
     reviews    : [
@@ -1001,6 +1008,9 @@ export default defineComponent({
 
     //price filters init.
     useState('prices').value = {min: 0, max: 2000000};
+
+    //shop reset.
+    useState('shop').value = null;
   }
 
 })

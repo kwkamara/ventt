@@ -64,8 +64,10 @@
 
             <!-- product display -->
             <div class="h-15rem md:h-10rem lg:h-15rem w-full">
-              <ProductDisplay :filters="{'men': true, 'accessories':true}" discount="10% Off"
-                              image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
+              <ProductDisplay :filters="{'men': true, 'accessories':true}"
+                              discount="10% Off"
+                              image="/men-accessories-1-438.webp"
+                              name="Mens' Accessories"/>
             </div>
             <!-- /product display -->
 

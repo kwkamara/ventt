@@ -1,105 +1,70 @@
 <template>
 
-  <nav aria-label="Product Categories" class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 text-white text-sm flex align-items-center justify-content-center capitalize shadow-3">
+  <nav aria-label="Product Categories"
+       class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 text-white text-sm select-none flex align-items-center justify-content-center lg:justify-content-start capitalize shadow-3">
 
     <!-- Category Navigation -->
-    <div v-for="(cat_name, ix) in ['men', 'women', 'kids']"
+    <div v-for="(cat_name, ix) in categories"
          :key="ix"
          :aria-label="`Show ${cat_name} categories`"
 
          :class="`w-6rem lg:w-8rem h-full border-left-1 border-purple-700 uppercase text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
+         ( (shop && shop.category === cat_name) || (category === cat_name) ? 'bg-purple-800 text-yellow-800 ' : '' ) +
           (ix === 2 ? 'border-right-1' : null)"
 
          role="button" tabindex="0"
-         @click="category_name=cat_name; $refs.categoriesPopup.hide(); $nextTick(() => this.$refs.categoriesPopup.show($event));">
+         @click="viewCategoryMenu(cat_name, $event)">
       <i class="pi pi-chevron-down" aria-hidden="true"/> {{ cat_name }}
     </div>
     <!-- Category Navigation -->
 
 
     <!-- Categories Popover -->
-    <Popover ref="categoriesPopup">
-      <div aria-labelledby="categories-popover-title" class="flex gap-2 lg:gap-3 p-2 lg:p-3" role="menu">
+    <Popover ref="categoriesPopup"
+             class="bg-purple-800 border-none shadow-2"
+             close-on-escape unstyled>
 
-        <!-- Official -->
-        <div class="w-8rem md:w-12rem lg:w-18rem h-10rem lg:h-17rem overflow-hidden flex align-items-start justify-content-end border-round hover:shadow-3 text-white text-xs relative"
-             @click="viewShop({official: true});">
+      <div aria-labelledby="categories-popover-title"
+           class="grid m-0 lg:w-30rem select-none"
+           role="menu">
 
-          <img :alt="`Ventt Ecommerce Platform - ${category_name} Official`" :src="`${category_name}-official-1-288.webp`"
-               aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round" loading="lazy"/>
-
-          <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 hover:text-white flex align-items-end lg:align-items-start justify-content-end absolute">
-            <Badge class="m-0 bg-purple-600" value="Official" size="small" aria-label="Official Products"/>
-          </div>
+        <!-- official -->
+        <div class="col-12 md:col-4 h-10rem lg:h-17rem p-0 overflow-hidden hover:shadow-3 text-white text-xs relative">
+          <ProductType :image="`${category}-official-1-288.webp`"
+                       type="official"
+                       @click="viewShop('official');"/>
         </div>
-        <!-- /Official -->
+        <!-- /official -->
 
 
-        <!-- Casual and Accessories -->
-        <div class="h-10rem md:w-9rem lg:h-17rem w-6rem lg:w-16rem flex flex-column gap-2 text-white text-xs">
-
-          <!-- casual -->
-          <div class="w-full h-full overflow-hidden border-round hover:shadow-3 relative"
-               @click="viewShop({casual: true}); $refs.categoriesPopup.hide();">
-
-            <img :alt="`Ventt Ecommerce Platform - ${category_name} Casual`" :src="`${category_name}-casual-2-256.webp`"
-                 aria-hidden="true" class="w-full h-full absolute border-round"/>
-
-            <div class="w-full h-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
-              <Badge aria-label="Casual Products" class="m-0 bg-purple-600" size="small" value="Casual"/>
-            </div>
-
-          </div>
-          <!-- casual -->
-
+        <!-- Casual | Accessories -->
+        <div class="col-12 md:col-4 p-0 px-1 h-10rem lg:h-17rem flex flex-column gap-1">
+          <!-- Casual -->
+          <ProductType :image="`${category}-casual-2-256.webp`"
+                       type="casual"
+                       @click="viewShop('casual');"/>
 
           <!-- Accessories -->
-          <div class="w-full h-full overflow-hidden border-round hover:shadow-3 relative text-xs"
-               @click="viewShop({accessories: true}); $refs.categoriesPopup.hide();">
-
-            <img :alt="`Ventt Ecommerce Platform - ${category_name} Accessories`" width="256"
-                 :src="`${category_name}-accessories-1-288.webp`" aria-hidden="true"
-                 class="w-full h-full absolute inset-0 object-cover border-round"/>
-
-            <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
-              <Badge class="m-0 bg-purple-600" value="Accessories" size="small" aria-label="Accessories Products"/>
-            </div>
-
-          </div>
-          <!-- Accessories -->
-
+          <ProductType :image="`${category}-accessories-1-288.webp`"
+                       type="accessories"
+                       @click="viewShop('accessories');"/>
         </div>
         <!-- /Casual and Accessories -->
 
 
-        <!-- Hats and Shoes -->
-        <div class="h-10rem md:w-9rem lg:h-17rem w-6rem xl:w-16rem flex flex-column gap-2">
-
+        <!-- Hats | Shoes -->
+        <div class="col-12 md:col-4 h-10rem lg:h-17rem p-0 flex flex-column gap-1">
           <!-- Hats -->
-          <div class="w-full h-full overflow-hidden border-round hover:shadow-3 relative text-white text-xs"
-               @click="viewShop({hats: true}); $refs.categoriesPopup.hide();">
-            <img :alt="`Ventt Ecommerce Platform - ${category_name} Hats`" :src="`${category_name}-hats-2-256.webp`"
-                 aria-hidden="true" class="w-full h-full absolute inset-0 object-cover border-round"/>
-
-            <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
-              <Badge class="m-0 bg-purple-600" value="Hats" size="small" aria-label="Hats Products"/>
-            </div>
-          </div>
-
+          <ProductType :image="`${category}-hats-2-256.webp`"
+                       type="hats"
+                       @click="viewShop('hats');"/>
 
           <!-- Shoes -->
-          <div class="w-full h-full overflow-hidden border-round hover:shadow-3 relative text-white text-xs"
-               @click="viewShop({shoes: true}); $refs.categoriesPopup.hide();">
-            <img :alt="`Ventt Ecommerce Platform - ${category_name} Shoes`"
-                 :src="`${category_name}-shoes-1-288.webp`" aria-hidden="true"
-                 class="w-full h-full absolute inset-0 object-cover border-round"/>
-
-            <div class="h-full w-full p-2 xl:p-3 hover:bg-black-alpha-50 flex align-items-end lg:align-items-start justify-content-end absolute">
-              <Badge class="m-0 bg-purple-600" value="Shoes" size="small" aria-label="Shoes Products"/>
-            </div>
-          </div>
+          <ProductType :image="`${category}-shoes-1-288.webp`"
+                       type="shoes"
+                       @click="viewShop('shoes');"/>
         </div>
-        <!-- /Hats and Shoes -->
+        <!-- /Hats | Shoes -->
 
       </div>
     </Popover>
@@ -116,96 +81,63 @@ export default defineComponent({
 
   data() {
     return {
-
-      category_name: 'men',
-
-      categories: [
-        {
-          name       : "summer wear",
-          documentId : "123",
-          description: "Lightweight and breathable clothing designed for warm weather. Includes items like t-shirts, shorts, sundresses, and sandals."
-        },
-        {
-          name       : "winter wear",
-          documentId : "456",
-          description: "Insulated and layered clothing to keep you warm during cold weather. Includes items like coats, sweaters, scarves, and boots."
-        },
-        {
-          name       : "casual wear",
-          documentId : "789",
-          description: "Comfortable and relaxed clothing suitable for everyday wear. Includes items like jeans, t-shirts, hoodies, and sneakers."
-        },
-        {
-          name       : "official wear",
-          documentId : "1234",
-          description: "Formal attire designed for professional or formal occasions. Includes items like suits, dress shirts, ties, and formal shoes."
-        }
-      ],
-
-      menu: {
-        items: [
-          {
-            label: 'Women',
-            items: [
-              {label: 'Official', image: "/women-1.webp"},
-              {label: 'Casual', image: "/women-suits-1.webp"},
-              {label: 'Shoes', image: "/women-hats-1.webp"},
-            ]
-          },
-          {
-            label: 'Men',
-            items: [
-              {label: 'Official', image: "/men-suits-1.webp"},
-              {label: 'Casual', image: "/men-casual-1.webp"},
-              {label: 'Shoes', image: "/men-2.webp"},
-            ]
-          },
-          {
-            label: 'Kids',
-            items: [
-              {label: 'Casual Tops'},
-              {label: 'Dresses'},
-              {label: 'T-Shirts'},
-              {label: 'Jeans'},
-              {label: 'Shorts'},
-              {label: 'Jackets'},
-              {label: 'Shoes'},
-              {label: 'Accessories'}
-            ]
-          },
-          {
-            label: 'Pyjamas',
-            items: [
-              {label: 'Women\'s Pyjamas'},
-              {label: 'Men\'s Pyjamas'},
-              {label: 'Kids\' Pyjamas'},
-              {label: 'Nightgowns'},
-              {label: 'Robes'}
-            ]
-          }
-        ]
-      }
-
-    }
-  },
-
-  methods: {
-    //load shop UI.
-    viewShop(filters) {
-      //current category name.
-      filters[this.category_name] = true;
-
-      //change UI.
-      useState('filters').value = filters;
-      useState('ui').value      = 'shop';
-      this.$refs.categoriesPopup.hide();
+      category: null,
     }
   },
 
   computed: {
-    headerCategories() {
-      return this.categories.slice(0, 8)
+    //item categories.
+    categories() {
+      return useState('categories').value;
+    },
+
+    //item categories.
+    shop() {
+      return useState('shop').value;
+    },
+  },
+
+  methods: {
+
+    //notify popup.
+    notify(summary, severity = 'info') {
+      this.$toast.add({severity: severity, summary: summary, life: 1000});
+    },
+
+
+    //view category menu
+    viewCategoryMenu(cat_name, $event) {
+      //validate.
+      if (!cat_name) return;
+
+      //update active category.
+      this.category = cat_name;
+
+      //show popup.
+      this.$refs.categoriesPopup.hide();
+      this.$nextTick(() => this.$refs.categoriesPopup.show($event));
+    },
+
+
+    //load shop UI.
+    viewShop(type) {
+      //validate.
+      if (!type) return;
+
+      //update UI.
+      useState('shop').value = {
+        category: this.category,
+        type    : type
+      };
+
+      //close popup.
+      this.$refs.categoriesPopup.hide();
+
+      this.notify(type);
+
+      //navigate.
+      navigateTo('/Shop');
     }
-  }
+  },
 })
 </script>

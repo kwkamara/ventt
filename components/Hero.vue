@@ -39,7 +39,6 @@
 
 <script lang="js">
 export default defineComponent({
-
   name: "Hero",
 
   data() {
@@ -51,7 +50,10 @@ export default defineComponent({
         '/hero-img-1.webp',
         '/hero-img-2.webp',
         '/hero-img-3.webp',
-        '/hero-img-4.webp'
+        '/hero-img-4.webp',
+        '/hero-img-5.webp',
+        '/hero-img-6.webp',
+        '/hero-img-7.webp',
       ],
     }
   },
@@ -61,7 +63,7 @@ export default defineComponent({
     this.hero_interval = setInterval(() => {
       if (this.hero_ix === (this.hero_images.length - 1)) this.hero_ix = 0;
       else this.hero_ix++;
-    }, 4000);
+    }, 3000);
   }
 })
 </script>

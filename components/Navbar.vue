@@ -5,7 +5,7 @@
     <!-- Logo -->
     <div aria-label="Ventt Brand"
          class="h-full w-4 flex align-items-center gap-2 font-bold uppercase title hover:text-purple-600 cursor-pointer"
-         @click="useState('product').value=null; useState('ui').value=null">
+         @click="navigateTo('/')">
 
       <img alt="ventt logo" height="50" src="/logo-ventt.svg" width="50"/>
 
@@ -18,17 +18,6 @@
 
     <!-- menu -->
     <div class="w-8 flex align-items-center justify-content-end gap-3 md:gap-1">
-
-<!--      <div class="uppercase flex gap-1 align-items-center font-light text-xl">-->
-<!--        <span class="hover:text-yellow-900">Men</span>-->
-<!--        <Divider layout="vertical" class="h-2rem hidden md:block"/>-->
-
-<!--        <span>Women</span>-->
-<!--        <Divider layout="vertical" class="h-2rem hidden md:block"/>-->
-
-<!--        <span>Kids</span>-->
-<!--      </div>-->
-
 
       <div class="flex align-items-center gap-3 md:gap-1">
         <!-- Login -->

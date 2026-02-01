@@ -1,33 +1,16 @@
 <template>
 
-
   <div class="col-12 md:col-4 lg:col-4">
-
     <div class="border-1 border-purple-50 border-round-xl overflow-hidden hover:shadow-3">
 
       <div class="h-12rem bg-gray-100 relative">
         <!-- header -->
-        <div class="w-full p-2 absolute z-4 flex justify-content-between align-items-center">
-          <div>
-            <!-- likes -->
-            <Button aria-label="Login" class="bg-white-alpha-10 hover:bg-purple-900 hover:text-white border-none hover:shadow-3 text-purple-700"
-                    raised rounded size="small" @click="">
-              <span class="material-icons-outlined" style="font-size:30px">
-                favorite_border
-              </span>
-            </Button>
-            <!-- /likes -->
-          </div>
-          <div>
-            <!-- shopping cart -->
-            <Button aria-label="Login" class="bg-white-alpha-10 hover:bg-purple-900 hover:text-white border-none hover:shadow-3 text-purple-700"
-                    raised rounded size="small" @click="">
-              <span class="material-icons-outlined">
-                shopping_cart
-              </span>
-            </Button>
-            <!-- /shopping cart -->
-          </div>
+        <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
+          <!-- like -->
+          <VButton icon="favorite_border"/>
+
+          <!-- shopping cart -->
+          <VButton icon="shopping_cart"/>
         </div>
         <!-- /header -->
 
@@ -56,9 +39,7 @@
       <!-- /footer -->
 
     </div>
-
   </div>
-
 
 
   <!--  <article class="h-9rem lg:h-12rem flex align-items-end shadow-1 border-round overflow-hidden relative hover:shadow-7 border-yellow-600"-->
