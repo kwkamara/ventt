@@ -43,7 +43,8 @@
         <!-- shopping cart -->
         <Button aria-label="Login" rounded
                 class="bg-transparent border-none hover:shadow-1 text-purple-700"
-                size="small" @click="$refs.shoppingCartPopover.toggle($event)">
+                size="small"
+                @click="$refs.shoppingCartPopover.toggle($event)">
           <span class="material-icons-outlined">shopping_cart</span>
           <span>0.00</span>
         </Button>

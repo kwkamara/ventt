@@ -19,10 +19,27 @@
 
         <!-- Message -->
         <div>
-          <h2 class="m-0 text-2xl lg:text-6xl font-light">Discover Your Style</h2>
-          <p class="m-0 pb-2 text-left text-sm lg:text-lg font-light line-height-3">
-            Elevate Your Wardrobe
+          <!-- title -->
+          <h2 class="m-0 text-2xl lg:text-7xl font-light">Discover Your Style</h2>
+
+          <!-- subtitle -->
+          <p class="m-0 lg:w-6 pb-2 text-left text-sm lg:text-lg font-light line-height-3">
+            Elevate your wardrobe with our curated collection of luxury fashion pieces crafted for the modern connoisseur.
           </p>
+
+          <!-- CTA -->
+          <div class="pt-3 flex gap-3">
+            <Button class="bg-purple-800 text-white border-none">
+              <span class="font-bold">Shop now</span>
+              <span class="material-icons-outlined">chevron_right</span>
+            </Button>
+
+            <Button class="bg-gray-300 text-purple-800 border-none" outlined>
+              <span>New Arrivals</span>
+              <span class="material-icons-outlined">chevron_right</span>
+            </Button>
+          </div>
+          <!-- CTA -->
 
         </div>
         <!-- /Message -->
