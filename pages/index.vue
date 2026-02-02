@@ -94,7 +94,7 @@
       <div class="w-full px-2 flex gap-3">
         <div class="w-6 h-8rem lg:h-12rem">
           <ProductDisplay :filters="{kids: true, casual: true, boys: true}"
-                          image="/kids-casual-1-324.webp" discount="10% Off" name="boys"/>
+                          image="/kids-casual-1-324.webp" discount="10% Off" name="kids | casual"/>
         </div>
         <div class="w-6 h-8rem lg:h-12rem">
           <ProductDisplay :filters="{kids: true, casual: true, girls: true}"
@@ -143,6 +143,9 @@ useState('categories', () => ['men', 'women', 'kids']);
 
 //shop struct.
 useState('shop', () => null);
+
+//cart struct.
+useState('cart', () => {});
 
 
 //products init.

@@ -20,7 +20,7 @@
         <!-- Message -->
         <div>
           <!-- title -->
-          <h2 class="m-0 text-2xl lg:text-7xl font-light">Discover Your Style</h2>
+          <h2 class="m-0 text-2xl lg:text-7xl font-light">Discover Your <span class="text-gold">Style</span></h2>
 
           <!-- subtitle -->
           <p class="m-0 lg:w-6 pb-2 text-left text-sm lg:text-lg font-light line-height-3">
@@ -29,10 +29,12 @@
 
           <!-- CTA -->
           <div class="pt-3 flex gap-3">
-            <Button class="bg-purple-800 text-white border-none">
-              <span class="font-bold">Shop now</span>
-              <span class="material-icons-outlined">chevron_right</span>
-            </Button>
+            <NuxtLink to="/shop">
+              <Button class="bg-purple-800 text-white border-none">
+                <span class="font-bold">Shop now</span>
+                <span class="material-icons-outlined">chevron_right</span>
+              </Button>
+            </NuxtLink>
 
             <Button class="bg-gray-300 text-purple-800 border-none" outlined>
               <span>New Arrivals</span>

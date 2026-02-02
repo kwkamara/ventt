@@ -102,7 +102,7 @@
     </div>
     <!-- /filter section -->
 
-
+    <!-- products -->
     <div class="col-12 lg:col-8">
 
       <!-- product grid -->
@@ -138,7 +138,7 @@
       <!-- /product grid -->
 
     </div>
-
+    <!-- /products -->
 
   </section>
 
@@ -255,7 +255,7 @@ export default defineComponent({
   methods: {
 
     //update filters
-    updateFilters(){
+    updateFilters() {
       //reset filter.
       this.resetFilter();
 
@@ -278,8 +278,10 @@ export default defineComponent({
   },
 
   mounted() {
-    useState('shop').value.category ? this.categories[useState('shop').value.category] = true : null;
-    useState('shop').value.type ? this.types[useState('shop').value.type] = true : null;
+    if (useState('shop').value) {
+      useState('shop').value.category ? this.categories[useState('shop').value.category] = true : null;
+      useState('shop').value.type ? this.types[useState('shop').value.type] = true : null;
+    }
   }
 
 })

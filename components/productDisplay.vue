@@ -1,6 +1,7 @@
 <template>
   <section class="h-full w-full relative"
            aria-labelledby="product category banner"
+           data-aos="fade-up"
            @click="viewShop(); scrollToTop()">
 
     <!-- Product Image -->
@@ -21,12 +22,14 @@
 
       <!-- CTA -->
       <div class="lg:mt-3 text-right">
-        <Button :aria-label="`Shop Now for ${name}`"
-                class="bg-purple-800 border-none hover:bg-purple-500 hover:text-white"
-                size="small">
-          <span>Shop Now</span>
-          <span class="material-icons">chevron_right</span>
-        </Button>
+        <NuxtLink to="/shop">
+          <Button :aria-label="`Shop Now for ${name}`"
+                  class="bg-purple-800 border-none hover:bg-purple-500 hover:text-white"
+                  size="small">
+            <span>Shop Now</span>
+            <span class="material-icons">chevron_right</span>
+          </Button>
+        </NuxtLink>
       </div>
       <!-- CTA -->
     </div>

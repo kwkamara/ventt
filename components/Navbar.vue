@@ -1,17 +1,19 @@
 <template>
 
-  <header class="col-12 h-5rem px-3 md:px-8 bg-white flex align-items-center" aria-label="Main Navigation">
+  <header class="col-12 h-5rem px-3 md:px-8 bg-white flex align-items-center animation-duration-1000 fadein"
+          aria-label="Main Navigation">
 
     <!-- Logo -->
     <div aria-label="Ventt Brand"
-         class="h-full w-4 flex align-items-center gap-2 font-bold uppercase title hover:text-purple-600 cursor-pointer"
-         @click="navigateTo('/')">
+         class="h-full w-4 flex align-items-center gap-2 font-bold uppercase title hover:text-purple-600 cursor-pointer">
 
-      <img alt="ventt logo" height="50" src="/logo-ventt.svg" width="50"/>
+      <NuxtLink to="/" class="flex gap-2 align-items-center no-underline">
+        <img alt="ventt logo" height="50" src="/logo-ventt.svg" width="50"/>
 
-      <h1 class="m-0 title hidden lg:block align-self-end pb-2 capitalize font-light text-purple-700" style="letter-spacing:0.1em">
-        Ventt
-      </h1>
+        <h1 class="m-0 title hidden lg:block align-self-end capitalize font-light text-purple-700" style="letter-spacing:0.1em">
+          Ventt
+        </h1>
+      </NuxtLink>
     </div>
     <!-- Logo -->
 
@@ -59,61 +61,28 @@
 
   <!-- shoppingCartPopover -->
   <Popover ref="shoppingCartPopover">
-    <div class="w-20rem md:w-26rem px-3">
+    <div class="grid m-0 lg:w-18rem">
 
-      <div class="h-4rem flex align-items-center gap-2 border-bottom-1 border-gray-100">
-        <i class="pi pi-shopping-cart" aria-hidden="true"/> My Shopping Cart
+      <!-- Header -->
+      <div class="col-12 py-2">
+        <h2 class="m-0 font-light">My Shopping Cart</h2>
       </div>
+      <!-- /Header -->
 
-      <div v-for="(product, ix) in useState('products').value.filter(pt => pt.cart)"
-           :key="ix" class="h-6rem border-bottom-1 border-gray-100 hover:text-purple-600 flex align-items-center">
 
-        <div class="w-full">
-
-          <div class="w-full flex align-items-center justify-content-between gap-2">
-            <div class="w-full flex justify-content-between align-items-center">
-              <div class="capitalize text-sm">{{ product.name }}</div>
-              <Badge :value="`${product.cart.toLocaleString()} pc(s)`" size="small" class="text-xs w-4rem"/>
-            </div>
-
-            <div class="text-right">{{ formatDecimal(product.cart * product.price) }}</div>
-          </div>
-
-          <div class="w-full py-2 flex align-items-center justify-content-end gap-3">
-            <Button aria-label="Add One to Cart" class="border-1 border-gray-100 text-xs" icon="pi pi-plus text-xs"
-                    label="add" outlined rounded severity="success" size="small"
-                    @click="addToCart(product, 1);"/>
-            <Button severity="warn" class="border-1 border-gray-100 text-xs" size="small"
-                    label="remove" rounded outlined icon="pi pi-minus text-xs" aria-label="Remove One from Cart"
-                    @click="removeFromCart(product, 1);"/>
-            <Button severity="danger" class="border-1 border-gray-100 text-xs" rounded label="clear" size="small"
-                    outlined icon="pi pi-times text-xs" aria-label="Remove All from Cart"
-                    @click="removeFromCart(product, product.cart); "/>
-          </div>
-
-        </div>
+      <!-- products -->
+      <div v-for="product in cart"
+           :key="product.id" class="col-12 py-2">
 
       </div>
+      <!-- /products -->
 
-      <!-- Totals -->
-      <div class="h-4rem flex align-items-center justify-content-between">
-        <div>
-          <div class="font-bold">{{ cartData.quantity.toLocaleString() }}</div>
-          <div class="text-xs">Quantity</div>
-        </div>
-        <div>
-          <div class="font-bold">{{ formatDecimal(cartData.total) }}</div>
-          <div class="text-xs text-right">Total</div>
-        </div>
-      </div>
-      <!-- /Totals -->
 
-      <!-- Checkout -->
-      <div v-if="cartData.total" class="h-5rem flex align-items-center border-top-1 border-gray-100">
-        <Button aria-label="Proceed to Checkout" class="w-full bg-green-600" icon="pi pi-shopping-cart"
-                label="Checkout" raised @click="useState('ui').value='checkout'; $refs.shoppingCartPopover.hide()"/>
+      <!-- Totals | checkout -->
+      <div class="col-12 py-2">
+
       </div>
-      <!-- /Checkout -->
+      <!-- /Totals | checkout -->
 
     </div>
   </Popover>
@@ -265,19 +234,8 @@ export default defineComponent({
   },
 
   computed: {
-    cartData() {
-      let data = {
-        quantity: 0,
-        total   : 0
-      };
-
-      const cartItems = useState('products').value.filter(product => product.cart);
-      cartItems.forEach(product => {
-        data.quantity += product.cart;
-        data.total += product.cart * product.price;
-      });
-
-      return data;
+    cart() {
+      return useState('cart').value;
     },
     wishlist() {
       return useState('products').value.filter(pd => pd.wishlist);

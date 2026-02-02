@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-full overflow-hidden hover:shadow-3 relative text-white">
+  <div class="w-full h-full overflow-hidden hover:shadow-3 relative text-white" data-aos="fade-up">
 
     <!-- image -->
     <img :alt="`Ventt Ecommerce Platform - ${category} ${type}`"
-         :src="image"
+         :src="'/' + image"
          aria-hidden="true"
          class="w-full h-full absolute"/>
 

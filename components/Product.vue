@@ -1,6 +1,6 @@
 <template>
 
-  <div class="col-12 md:col-4 lg:col-4" @click="viewItem()">
+  <div class="col-12 md:col-4 lg:col-4" @click="viewItem()" data-aos="fade-up">
     <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
 
       <div class="h-12rem bg-gray-100 relative">
