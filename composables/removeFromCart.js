@@ -1,8 +1,12 @@
 export const useRemoveFromCart = () => {
 
-    const removeFromCart = (product, value = 1) => {
-        product.cart -= value;
-        if (product.cart <= 0) delete product.cart;
+    const removeFromCart = (product) => {
+        //missing cart
+        if (!useState('cart').value) return;
+
+        //delete product from cart.
+        product.cart = 1;
+        delete useState('cart').value[product.documentId];
     };
 
     return {removeFromCart};

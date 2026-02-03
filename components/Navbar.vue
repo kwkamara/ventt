@@ -20,67 +20,54 @@
 
     <!-- menu -->
     <div class="w-8 flex align-items-center justify-content-end gap-3 md:gap-1">
+      <!-- Login -->
+      <VButton icon="person"/>
+      <Divider layout="vertical" class="h-2rem hidden md:block"/>
 
-      <div class="flex align-items-center gap-3 md:gap-1">
-        <!-- Login -->
-        <Button aria-label="Login" rounded
-                class="bg-transparent border-none hover:shadow-1 text-purple-700"
-                size="small" @click="">
-          <span class="material-icons-outlined font-light text-4xl">account_circle</span>
-        </Button>
-        <!-- /Login -->
+      <!-- wishlist -->
+      <VButton icon="favorite_border" :disabled="!Object.keys(wishlist).length"
+               @click="$refs.wishListPopover.toggle($event)"/>
+      <Divider layout="vertical" class="h-2rem hidden md:block"/>
 
-        <Divider layout="vertical" class="h-2rem hidden md:block"/>
-
-        <!-- likes -->
-        <Button aria-label="Login" rounded
-                class="bg-transparent border-none hover:shadow-1 text-purple-700"
-                size="small" @click="">
-          <span class="material-icons-outlined" style="font-size:30px">favorite_border</span>
-        </Button>
-        <!-- /likes -->
-
-        <Divider layout="vertical" class="h-2rem hidden md:block"/>
-
-        <!-- shopping cart -->
-        <Button aria-label="Login" rounded
-                class="bg-transparent border-none hover:shadow-1 text-purple-700"
-                size="small"
-                @click="$refs.shoppingCartPopover.toggle($event)">
-          <span class="material-icons-outlined">shopping_cart</span>
-          <span>0.00</span>
-        </Button>
-        <!-- /shopping cart -->
-
-      </div>
-
+      <!-- shopping cart -->
+      <VButton icon="shopping_cart"
+               :disabled="!Object.keys(cart).length"
+               @click="$refs.shoppingCartPopover.toggle($event)"/>
     </div>
+    <!-- /menu -->
 
   </header>
 
 
   <!-- shoppingCartPopover -->
   <Popover ref="shoppingCartPopover">
-    <div class="grid m-0 lg:w-18rem">
+    <div class="grid m-0 lg:w-18rem select-none">
 
       <!-- Header -->
-      <div class="col-12 py-2">
-        <h2 class="m-0 font-light">My Shopping Cart</h2>
+      <div class="col-12 p-3 text-right">
+        <div class="m-0 font-light text-2xl">{{ formatDecimal(cartTotal) }}</div>
+        <span class="m-0 font-light text-xs uppercase">cart total</span>
       </div>
       <!-- /Header -->
 
-
       <!-- products -->
       <div v-for="product in cart"
-           :key="product.id" class="col-12 py-2">
-
+           @click="viewItem(product)"
+           :key="product.documentId"
+           :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
+        <span class="w-full">{{ product.name }}</span>
+        <span>({{ product.cart || 1 }})</span>
+        <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
       </div>
       <!-- /products -->
 
-
       <!-- Totals | checkout -->
-      <div class="col-12 py-2">
+      <div v-if="cartTotal" class="col-12 px-3 pb-4 pt-4 border-top-1 border-gray-200 flex justify-content-between">
+        <NuxtLink to="/cart">
+          <VButtonCube text="cart" icon="shopping_cart"/>
+        </NuxtLink>
 
+        <VButtonCube text="checkout" icon="shopping_cart_checkout" fill="true"/>
       </div>
       <!-- /Totals | checkout -->
 
@@ -88,41 +75,28 @@
   </Popover>
   <!-- /shoppingCartPopover -->
 
+
   <!-- wishListPopover -->
   <Popover ref="wishListPopover">
-    <div class="w-full md:w-26rem">
-      <DataTable v-model:filters="filters.dt2" :globalFilterFields="['name', 'description', 'sku']"
-                 :rows="5" :paginator="wishlist.length > 5"
-                 :show-headers="false" row-hover data-key="documentId"
-                 :value="useState('products').value.filter(pd => pd.wishlist)">
+    <div class="grid m-0 lg:w-18rem select-none">
 
-        <template #header>
-          <div class="pl-2">
-            <IconField>
-              <InputIcon aria-label="Clear Search" class="hover:text-orange-500" @click="filters.dt2['global'].value=null;">
-                <i class="pi pi-search" aria-hidden="true"/>
-              </InputIcon>
+      <!-- Header -->
+      <div class="col-12 p-3 text-right">
+        <span class="m-0 font-light text-xs uppercase">my</span>
+        <div class="m-0 font-light text-2xl">Wishlist</div>
+      </div>
+      <!-- /Header -->
 
-              <InputText id="search-ip" v-model="filters.dt2['global'].value" aria-label="Search wishlist"
-                         autocomplete="off" class="text-sm" fluid placeholder="Search wishlist"/>
-            </IconField>
-          </div>
-        </template>
+      <!-- products -->
+      <div v-for="product in wishlist"
+           @click="viewItem(product)"
+           :key="product.documentId"
+           :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
+        <span class="w-full">{{ product.name }}</span>
+        <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
+      </div>
+      <!-- /products -->
 
-
-        <Column field="name">
-          <template #body="{data}">
-            <div class="pl-2 flex justify-content-between align-items-center text-sm">
-              {{ data.name }}
-              <div class="flex align-items-center gap-3">
-                <Button aria-label="Remove from Wishlist" class="border-1 border-gray-100 text-xs" icon="pi pi-times text-xs"
-                        outlined size="small" rounded label="clear" severity="danger" @click="delete data.wishlist"/>
-              </div>
-            </div>
-          </template>
-        </Column>
-
-      </DataTable>
     </div>
   </Popover>
   <!-- /wishListPopover -->
@@ -131,114 +105,32 @@
 
 
 <script setup lang="js">
-import {useAddToCart} from "~/composables/addToCart.js";
-import {useRemoveFromCart} from "~/composables/removeFromCart.js";
-
 const {formatDecimal} = useFormatDecimal();
-const {addToCart} = useAddToCart();
-const {removeFromCart} = useRemoveFromCart();
 </script>
 
 
 <script lang="js">
-import {FilterMatchMode} from "@primevue/core/api";
-
 export default defineComponent({
   name: "Navbar",
 
   data() {
-    return {
-      //table
-      filters: {
-        dt1: {
-          global: {
-            value    : null,
-            matchMode: FilterMatchMode.CONTAINS
-          },
-        },
-        dt2: {
-          global: {
-            value    : null,
-            matchMode: FilterMatchMode.CONTAINS
-          },
-        },
-      },
-      items  : [
-        {
-          label: "Categories",
-          icon : "pi-th-large",
-          items: [
-            [
-              {
-                label: 'Women',
-                items: [
-                  {label: 'Casual Tops'},
-                  {label: 'Official Blouses'},
-                  {label: 'Casual Dresses'},
-                  {label: 'Official Suits'},
-                  {label: 'Jeans'},
-                  {label: 'Skirts'},
-                  {label: 'Jackets'},
-                  {label: 'Shoes'},
-                  {label: 'Accessories'}
-                ]
-              }
-            ],
-            [
-              {
-                label: 'Men',
-                items: [
-                  {label: 'Casual Shirts'},
-                  {label: 'Official Shirts'},
-                  {label: 'T-Shirts'},
-                  {label: 'Suits'},
-                  {label: 'Jeans'},
-                  {label: 'Trousers'},
-                  {label: 'Jackets'},
-                  {label: 'Shoes'},
-                  {label: 'Accessories'}
-                ]
-              }
-            ],
-            [
-              {
-                label: 'Kids',
-                items: [
-                  {label: 'Casual Tops'},
-                  {label: 'Dresses'},
-                  {label: 'T-Shirts'},
-                  {label: 'Jeans'},
-                  {label: 'Shorts'},
-                  {label: 'Jackets'},
-                  {label: 'Shoes'},
-                  {label: 'Accessories'}
-                ]
-              }
-            ],
-            [
-              {
-                label: 'Pyjamas',
-                items: [
-                  {label: 'Women\'s Pyjamas'},
-                  {label: 'Men\'s Pyjamas'},
-                  {label: 'Kids\' Pyjamas'},
-                  {label: 'Nightgowns'},
-                  {label: 'Robes'}
-                ]
-              }
-            ]
-          ]
-        }
-      ]
-    }
+    return {}
   },
 
   computed: {
     cart() {
       return useState('cart').value;
     },
+    cartTotal() {
+      const product_keys = Object.keys(this.cart);
+      if (!product_keys.length) return 0;
+
+      let total = 0;
+      product_keys.forEach(key => total += this.cart[key].price * (this.cart[key].cart));
+      return total;
+    },
     wishlist() {
-      return useState('products').value.filter(pd => pd.wishlist);
+      return useState('wishlist').value;
     }
   },
 
@@ -247,6 +139,12 @@ export default defineComponent({
     notify(summary, severity = 'info') {
       this.$toast.add({severity: severity, summary: summary, life: 1000});
     },
+
+    //view product.
+    viewItem(product) {
+      useState('product').value = product;
+      navigateTo(`/Product/${encodeURIComponent(product.name)}`);
+    }
   }
 })
 </script>

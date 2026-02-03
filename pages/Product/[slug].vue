@@ -23,7 +23,11 @@
                :src="'/'+product.images[image_ix].url"
                class="top-0 w-full h-full absolute"/>
 
-          <VButton icon="favorite_outline" class="absolute mt-2 ml-3 left-0"/>
+          <!-- wishlist -->
+          <VButton :fill="wishlist[product.documentId]"
+                   class="left-0 ml-3 mt-3"
+                   @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
+                   icon="favorite_border"/>
         </div>
         <!-- image | icons -->
 
@@ -32,7 +36,7 @@
         <div class="col-12 lg:col-3 p-0 px-2 flex lg:flex-column gap-3">
           <img v-for="(image, ix) in product.images"
                :alt="product.name"
-               :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix===ix ? 'shadow-3 border-2 border-purple-200' : 'border-1 border-purple-100')"
+               :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
                :src="'/'+image.url"
                @click="image_ix = ix"/>
         </div>
@@ -41,12 +45,10 @@
 
         <!-- icons -->
         <div class="col-12 pt-3 flex gap-3 align-items-center">
-
           <template v-for="(icon, ix) in ['shield', 'local_shipping', 'payments']" :key="ix">
             <VButton :icon="icon"/>
-            <Divider v-if="ix<2" class="h-2rem" layout="vertical"/>
+            <Divider v-if="ix<2"  layout="vertical" unstyled class="border-left-1 h-2rem border-gray-200"/>
           </template>
-
         </div>
         <!-- /icons -->
 
@@ -78,9 +80,13 @@
       </div>
       <!-- /product name | like -->
 
+      <Divider/>
 
       <!-- description -->
-      <div>{{ product.description }}</div>
+      <div>
+        <div class="pb-3 uppercase text-xs text-gray-600">product code: {{product.sku}}</div>
+        <p class="m-0">{{ product.description }}</p>
+      </div>
 
 
       <!-- cart -->
@@ -91,25 +97,42 @@
         <div class="flex align-items-center justify-content-between gap-3 pb-5">
 
           <div class="flex align-items-center gap-4">
-            <VButton icon="remove" @click="quantity > 1 ? quantity-- : null"/>
-            <span class="w-3rem inline-block text-center text-3xl font-bold">{{ quantity }}</span>
-            <VButton icon="add" @click="quantity++"/>
+            <VButton icon="remove" :disabled="product.cart===1" @click="product.cart > 1 ? product.cart-- : null"/>
+            <span class="w-3rem inline-block text-center text-3xl font-bold">{{ product.cart || 1 }}</span>
+            <VButton fill="1" icon="add" @click="product.cart ? product.cart++ : product.cart = 2"/>
           </div>
 
         </div>
 
         <Divider/>
 
-        <!-- add to cart -->
+        <!-- total | cart controls -->
         <div class="flex justify-content-between align-items-center">
-          <div class="">
+          <!-- total -->
+          <div>
             <div class="text-4xl">{{ formatDecimal(product.price * quantity) }}</div>
             <span class="uppercase text-sm">Total</span>
           </div>
 
-          <VButtonCube icon="add_shopping_cart" text="Add to Cart" fill="true"/>
+          <!-- controls -->
+          <div class="text-right">
+            <VButtonCube v-if="cart[product.documentId]"
+                         class="w-full"
+                         icon="remove_shopping_cart"
+                         text="Remove from cart"
+                         @click="removeFromCart(product); notify('cart')"/>
+
+            <VButtonCube v-else
+                         class="w-full"
+                         fill="true"
+                         icon="add_shopping_cart"
+                         text="Add to cart"
+                         @click="addToCart(product); notify('cart')"/>
+          </div>
+          <!-- /controls -->
+
         </div>
-        <!-- add to cart -->
+        <!-- /total | cart controls -->
 
       </div>
       <!-- cart -->
@@ -128,9 +151,16 @@
 
 
 <script setup lang="js">
-import VButtonCube from "~/components/VButtonCube.vue";
+//decimal.
+const {formatDecimal} = useFormatDecimal();
 
-const {formatDecimal} = useFormatDecimal()
+//shopping cart.
+const {addToCart} = useAddToCart();
+const {removeFromCart} = useRemoveFromCart();
+
+//wishlist.
+const {addToWishList} = useAddToWishList();
+const {removeFromWishList} = useRemoveFromWishList();
 </script>
 
 
@@ -148,7 +178,30 @@ export default defineComponent({
   computed: {
     product() {
       return useState('product').value;
-    }
+    },
+
+    cart() {
+      return useState('cart').value;
+    },
+
+    wishlist() {
+      return useState('wishlist').value;
+    },
+  },
+
+  methods: {
+
+    //notify popup.
+    notify(state) {
+      //message setup.
+      let info = "";
+      if (state === 'cart') info = this.cart[this.product.documentId] ? 'item added to cart' : 'item removed from cart';
+      else info = this.wishlist[this.product.documentId] ? 'item added to wishlist' : 'item removed from wishlist';
+
+      //show popup.
+      this.$toast.add({severity: "info", summary: info, life: 1500});
+    },
+
   },
 
   mounted() {

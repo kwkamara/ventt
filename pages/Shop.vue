@@ -10,7 +10,7 @@
   <!-- /Nav | Categories | Hero -->
 
 
-  <section class="grid m-0 lg:px-7">
+  <section class="grid m-0 lg:px-7 pb-5">
 
     <!-- filter section -->
     <div class="col-12 lg:col-4 pt-3">
@@ -142,15 +142,16 @@
 
   </section>
 
+
+  <!--  footer -->
+  <VFooter class="select-none"/>
 </template>
 
 
 <script lang="js">
-import VButton from "../components/VButton.vue";
 
 export default defineComponent({
   name      : "Shop",
-  components: {VButton},
 
   data() {
 
@@ -188,10 +189,6 @@ export default defineComponent({
       //products init.
       let products = useState('products').value;
       if (!products) navigateTo('/');
-
-
-      //menu filters update.
-      //this.updateFilters();
 
 
       //price filter.

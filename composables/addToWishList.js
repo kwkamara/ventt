@@ -1,7 +1,7 @@
 export const useAddToWishList = () => {
 
     const addToWishList = (product, value = 1) => {
-        product.wishlist ? delete product.wishlist : product.wishlist = new Date().getTime();
+        useState('wishlist').value[product.documentId] = product;
     };
 
     return {addToWishList};

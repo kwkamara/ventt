@@ -90,6 +90,12 @@
   </section>
 </template>
 
+<script setup lang="js">
+//scroll.
+const scrollToTop = () => {
+  window.scrollTo({top: 0, behavior: "smooth"});
+};
+</script>
 
 <script lang="js">
 export default defineComponent({

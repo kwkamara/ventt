@@ -1,16 +1,21 @@
 <template>
 
   <div class="col-12 md:col-4 lg:col-4" @click="viewItem()" data-aos="fade-up">
+
     <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
 
       <div class="h-12rem bg-gray-100 relative">
         <!-- header -->
         <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
-          <!-- like -->
-          <VButton icon="favorite_border"/>
+          <!-- wishlist -->
+          <VButton :fill="wishlist[product.documentId]"
+                   @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
+                   icon="favorite_border"/>
 
           <!-- shopping cart -->
-          <VButton icon="shopping_cart"/>
+          <VButton :fill="cart[product.documentId]"
+                   icon="shopping_cart"
+                   @click.stop="cart[product.documentId] ? removeFromCart(product) : addToCart(product); notify('cart');"/>
         </div>
         <!-- /header -->
 
@@ -53,10 +58,9 @@ const {formatDecimal} = useFormatDecimal();
 const {addToCart} = useAddToCart();
 const {removeFromCart} = useRemoveFromCart();
 
-//scroll.
-const scrollToTop = () => {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-};
+//wishlist.
+const {addToWishList} = useAddToWishList();
+const {removeFromWishList} = useRemoveFromWishList();
 </script>
 
 
@@ -67,31 +71,39 @@ export default defineComponent({
   props: ['product'],
 
   data() {
-    return {
-      cart: {
-        value: 1
-      }
-    }
+    return {}
   },
 
-  computed: {},
+  computed: {
+    cart() {
+      return useState('cart').value;
+    },
+    wishlist() {
+      return useState('wishlist').value;
+    },
+  },
 
   methods: {
 
-    //add item to wish list.
-    addToWishList() {
-      this.product.wishlist = new Date().getTime();
-      this.notify('item added to wish list.');
-    },
-
     //notify popup.
-    notify(summary, severity = 'info') {
-      this.$toast.add({severity: severity, summary: summary, life: 1000});
+    notify(state) {
+      //message setup.
+      let info = "";
+      if (state === 'cart') info = this.cart[this.product.documentId] ? 'Item added to cart' : 'Item removed from cart';
+      else info = this.wishlist[this.product.documentId] ? 'Item added to wishlist' : 'item removed from wishlist';
+
+      //show popup.
+      this.$toast.add({
+        severity: "info",
+        summary : info,
+        life    : 1500
+      });
     },
 
+    //view item.
     viewItem() {
-      navigateTo(`/Product/${encodeURIComponent(this.product.name)}`);
       useState('product').value = this.product;
+      navigateTo(`/Product/${encodeURIComponent(this.product.name)}`);
     }
 
   }

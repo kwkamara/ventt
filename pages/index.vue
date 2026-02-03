@@ -32,15 +32,19 @@
 
     <!-- offers display -->
     <div class="col-12 lg:col-4 md:flex lg:flex-column align-items-start gap-3">
-      <ProductDisplay :filters="{men: true, accessories: true}"
-                      discount="10% Off"
+      <ProductDisplay category="men"
                       class="h-16rem"
-                      image="/men-accessories-1-438.webp" name="Mens' Accessories"/>
-      <ProductDisplay :filters="{women: true, accessories: true}"
                       discount="10% Off"
+                      image="/men-accessories-1-438.webp"
+                      name="Mens' Accessories"
+                      type="accessories"/>
+
+      <ProductDisplay category="women"
                       class="pt-4 md:pt-0 xl:pt-2 h-16rem"
+                      discount="10% Off"
                       image="/women-1-664.webp"
-                      name="Women Casual"/>
+                      name="Women Casual"
+                      type="casual"/>
     </div>
     <!-- /offers display -->
 
@@ -54,8 +58,11 @@
       <div class="grid m-0">
 
         <div class="col-12 md:col-6 h-16rem lg:h-26rem">
-          <ProductDisplay :filters="{women: true}"
-                          discount="15% Off" image="/women-1-664.webp" name="Women's Style"/>
+          <ProductDisplay category="women"
+                          discount="15% Off"
+                          image="/women-1-664.webp"
+                          name="Women's Style"
+                          type="casual"/>
         </div>
 
         <div class="col-12 md:col-6">
@@ -63,20 +70,29 @@
           <div class="lg:h-12rem w-full flex gap-3">
 
             <div class="w-6 h-8rem lg:h-12rem">
-              <ProductDisplay :filters="{women: true, official: true}"
-                              discount="10% Off" image="/women-suits-1-324.webp" name="women's suits"/>
+              <ProductDisplay category="women"
+                              discount="10% Off"
+                              image="/women-suits-1-324.webp"
+                              name="women's suits"
+                              type="official"/>
             </div>
 
             <div class="w-6 h-8rem lg:h-12rem">
-              <ProductDisplay :filters="{women: true, hats: true}"
-                              image="/women-hats-1-324.webp" discount="10% Off" name="women's hats"/>
+              <ProductDisplay category="women"
+                              discount="10% Off"
+                              image="/women-hats-1-324.webp"
+                              name="women's hats"
+                              type="hats"/>
             </div>
 
           </div>
 
           <div class="h-8rem lg:h-12rem w-full mt-3">
-            <ProductDisplay :filters="{women: true, blouses: true}"
-                            image="/women-blouses-1-664.webp" discount="5% Off" name="women's blouses"/>
+            <ProductDisplay category="women"
+                            discount="5% Off"
+                            image="/women-blouses-1-664.webp"
+                            name="women's blouses"
+                            type="casual"/>
           </div>
 
         </div>
@@ -93,28 +109,42 @@
     <div class="col-12 md:col-6 px-0">
       <div class="w-full px-2 flex gap-3">
         <div class="w-6 h-8rem lg:h-12rem">
-          <ProductDisplay :filters="{kids: true, casual: true, boys: true}"
-                          image="/kids-casual-1-324.webp" discount="10% Off" name="kids | casual"/>
+          <ProductDisplay category="kids"
+                          discount="10% Off"
+                          image="/kids-casual-1-324.webp"
+                          name="kids | casual" type="casual"/>
         </div>
         <div class="w-6 h-8rem lg:h-12rem">
-          <ProductDisplay :filters="{kids: true, casual: true, girls: true}"
-                          image="/kids-casual-3-324.webp" discount="20% Off" name="girls"/>
+          <ProductDisplay category="kids"
+                          discount="20% Off"
+                          image="/kids-casual-3-324.webp"
+                          name="girls" type="casual"/>
         </div>
       </div>
 
       <div class="w-full px-2 flex gap-3 mt-3">
         <ProductDisplay class="w-6 h-8rem lg:h-12rem"
-                        discount="10% Off" image="/babies-1-324.webp" name="babies"/>
+                        discount="10% Off"
+                        category="kids"
+                        type="casual"
+                        image="/babies-1-324.webp"
+                        name="babies"/>
 
 
         <ProductDisplay class="w-6 h-8rem lg:h-12rem"
-                        image="/kids-pyjamas-1-324.webp" discount="10% Off" name="pyjamas"/>
+                        image="/kids-pyjamas-1-324.webp"
+                        category="kids"
+                        type="casual"
+                        discount="10% Off" name="pyjamas"/>
       </div>
     </div>
 
     <div class="col-12 md:col-6 px-2 h-15rem lg:h-26rem">
-      <ProductDisplay :filters="{kids:true, casual: true}"
-                      image="/kids-casual-4-664.webp" discount="15% Off" name="kids fashion"/>
+      <ProductDisplay category="kids"
+                      discount="15% Off"
+                      image="/kids-casual-4-664.webp"
+                      name="kids fashion"
+                      type="casual"/>
     </div>
 
   </section>
@@ -125,15 +155,6 @@
   <VFooter class="select-none"/>
 
 
-  <!-- Toast -->
-  <Toast position="top-center" class="w-15rem">
-    <template #container="{ message }">
-      <div class="h-4rem border-none text-xs flex align-items-center justify-content-center">
-        {{ message.summary }}
-      </div>
-    </template>
-  </Toast>
-
 </template>
 
 
@@ -141,11 +162,11 @@
 //categories init.
 useState('categories', () => ['men', 'women', 'kids']);
 
-//shop struct.
-useState('shop', () => null);
-
 //cart struct.
-useState('cart', () => {});
+useState('cart', () => ({}));
+
+//wishlist struct.
+useState('wishlist', () => ({}));
 
 
 //products init.
@@ -951,9 +972,6 @@ useState('products', () => [
 
 useState('product', () => null);
 
-useState('filters', () => null);
-
-useState('prices', () => null);
 </script>
 
 

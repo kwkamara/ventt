@@ -1,5 +1,16 @@
 <template>
   <NuxtPage/>
+
+  <!-- Toast -->
+  <Toast position="top-right" unstyled>
+    <template #container="{ message }">
+      <div class="w-full h-full p-3 border-none flex align-items-center gap-2 bg-purple-700 text-white border-round-2xl">
+        <span class="material-icons-outlined">check_circle</span>
+        <span class="text-lg">{{ message.summary }}</span>
+      </div>
+    </template>
+  </Toast>
+
 </template>
 
 
@@ -21,15 +32,6 @@ h1, h2, h3, .title {
 
 .p-popover-content {
   padding: 0 !important;
-}
-
-.material-icons,
-.material-icons-outlined,
-.material-icons-sharp,
-.material-icons-round {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 
@@ -55,5 +57,9 @@ h1, h2, h3, .title {
 
 .bg-gold {
   background-color: rgb(204, 162, 36) !important;
+}
+
+input:focus {
+  outline: none;
 }
 </style>
