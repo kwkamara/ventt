@@ -62,4 +62,11 @@ h1, h2, h3, .title {
 input:focus {
   outline: none;
 }
+
+
+@media screen and (min-width: 992px) {
+  .lg\:w-36rem {
+    width: 36rem !important;
+  }
+}
 </style>

@@ -1,27 +1,29 @@
 <template>
 
-  <nav aria-label="Product Categories"
-       class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 animation-duration-1000 fadein text-white text-sm select-none capitalize shadow-3">
+  <section class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 animation-duration-1000 fadein text-white text-sm select-none capitalize shadow-3">
+
+
     <div class="grid m-0 h-full">
+
       <!-- Category Navigation -->
-      <div class="col-6 lg:col-4 p-0 h-full flex align-items-center justify-content-center lg:justify-content-start">
+      <div class="col-9 lg:col-4 h-full p-0 bg-purple-800 flex align-items-center justify-content-center lg:justify-content-start">
         <div v-for="(cat_name, ix) in categories"
              :key="ix"
              :aria-label="`Show ${cat_name} categories`"
-
-             :class="`w-6rem lg:w-8rem h-full bg-purple-800 border-left-1 border-purple-700 uppercase text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
+             :class="`w-6rem lg:w-8rem h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
          ( (shop && shop.category === cat_name) || (category === cat_name) ? 'bg-purple-800 text-yellow-800 ' : '' ) +
           (ix === 2 ? 'border-right-1' : null)"
 
              role="button" tabindex="0"
              @click="viewCategoryMenu(cat_name, $event)">
-          <i class="pi pi-chevron-down" aria-hidden="true"/> {{ cat_name }}
+          {{ cat_name }}
+          <span class="material-icons-outlined">keyboard_arrow_down</span>
         </div>
       </div>
       <!-- Category Navigation -->
 
       <!-- Search -->
-      <div class="col-6 lg:col-8 pr-0 text-right">
+      <div class="col-3 lg:col-8 pr-4 md:pr-0 text-right">
         <VButton fill="1"
                  icon="search"
                  @click="$refs.searchPopover.toggle($event)"/>
@@ -32,13 +34,16 @@
 
     <!-- searchPopover -->
     <Popover ref="searchPopover">
-      <div class="grid m-0 lg:w-26rem select-none">
+      <div class="grid m-0 w-20rem lg:w-26rem select-none overflow-hidden">
 
+        <!-- search -->
         <div class="col-12">
           <InputText v-model="search"
-                     class="bg-transparent" fluid
-                     placeholder="search"/>
+                     class="w-full h-4rem bg-transparent border-none border-bottom-1 border-gray-400"
+                     fluid placeholder="Search Products"
+                     unstyled/>
         </div>
+        <!-- search -->
 
         <!-- products -->
         <div v-for="product in products"
@@ -49,21 +54,21 @@
           <!-- image -->
           <img :src="'/' + product.images[0].url"
                :alt="product.name"
-               class="lg:w-4rem border-round"/>
+               class="w-4rem border-round"/>
 
           <!-- name | price | categories -->
           <div class="w-full">
             <!-- name | price -->
             <div class="flex justify-content-between">
-              <span class="w-full font-bold">{{ product.name }}</span>
-              <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
+              <div class="w-full">{{ product.name }}</div>
+              <div class="w-full text-right">{{ formatDecimal(product.price) }}</div>
             </div>
             <!-- /name | price -->
 
             <!-- categories -->
-            <div class="pt-1 flex gap-1">
+            <div class="pt-2 flex gap-1 text-xs">
               <template v-for="(key, category) in product.categories">
-                <span class="uppercase text-xs">{{ category }}</span>
+                <span class="uppercase">{{ category }}</span>
                 <Divider layout="vertical" class="h-1rem"/>
               </template>
             </div>
@@ -74,7 +79,6 @@
         </div>
         <!-- /products -->
 
-
       </div>
     </Popover>
     <!-- /searchPopover -->
@@ -82,39 +86,42 @@
 
     <!-- Categories Popover -->
     <Popover ref="categoriesPopup"
-             class="bg-purple-800 border-none shadow-2"
+             class="border-none shadow-2"
              close-on-escape unstyled>
 
       <div aria-labelledby="categories-popover-title"
-           class="grid m-0 w-full select-none"
+           class="grid m-0 w-18rem md:w-30rem lg:w-36rem select-none"
            role="menu">
 
         <!-- official -->
-        <div class="col-12 md:col-4 lg:w-16rem h-10rem lg:h-17rem p-0 overflow-hidden hover:shadow-3 text-white text-xs relative">
+        <div class="col-12 md:col-4 p-0 h-16rem md:h-14rem lg:h-15rem overflow-hidden hover:shadow-3 text-white text-xs relative">
           <ProductType :image="`${category}-official-1-288.webp`"
                        type="official"
+                       class="border-bottom-1 md:border-right-1 md:border-bottom-none border-gray-500"
                        @click="viewShop('official');"/>
         </div>
         <!-- /official -->
 
 
         <!-- Casual | Accessories -->
-        <div class="col-12 md:col-4 lg:w-14rem h-10rem lg:h-17rem p-0 px-1 flex flex-column gap-1">
+        <div class="col-6 md:col-4 h-10rem md:h-14rem lg:h-15rem p-0 flex flex-column overflow-hidden">
           <!-- Casual -->
           <ProductType :image="`${category}-casual-2-256.webp`"
                        type="casual"
+                       class="border-gray-500 border-right-1"
                        @click="viewShop('casual');"/>
 
           <!-- Accessories -->
           <ProductType :image="`${category}-accessories-1-288.webp`"
                        type="accessories"
+                       class="border-gray-500 border-top-1 border-right-1"
                        @click="viewShop('accessories');"/>
         </div>
         <!-- /Casual and Accessories -->
 
 
         <!-- Hats | Shoes -->
-        <div class="col-12 md:col-4 lg:w-14rem h-10rem lg:h-17rem p-0 flex flex-column gap-1">
+        <div class="col-6 md:col-4 h-10rem md:h-14rem lg:h-15rem p-0 flex flex-column overflow-hidden">
           <!-- Hats -->
           <ProductType :image="`${category}-hats-2-256.webp`"
                        type="hats"
@@ -123,6 +130,7 @@
           <!-- Shoes -->
           <ProductType :image="`${category}-shoes-1-288.webp`"
                        type="shoes"
+                       class="border-gray-500 border-top-1"
                        @click="viewShop('shoes');"/>
         </div>
         <!-- /Hats | Shoes -->
@@ -132,7 +140,7 @@
     </Popover>
     <!-- Categories Popover -->
 
-  </nav>
+  </section>
 
 </template>
 

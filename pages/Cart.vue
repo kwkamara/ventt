@@ -13,7 +13,7 @@
 
     <!-- cart summary -->
     <div class="col-12 lg:col-6 py-3 px-4">
-      <div class="p-4 border-1 border-purple-200 shadow-1">
+      <div class="p-4 border-1 border-purple-200 shadow-1 border-round-xl">
 
         <!-- header -->
        <div class="pb-2">
@@ -27,11 +27,11 @@
        <div v-for="product in cart"
             @click="viewItem(product)"
             :key="product.documentId"
-            :class="'py-3 flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 '">
+            class="py-4 flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 hover:text-yellow-800">
 
          <!-- name | sku -->
          <div class="w-full">
-           <div class="font-bold text-lg">{{ product.name }}</div>
+           <div class="pb-1 font-bold text-lg">{{ product.name }}</div>
            <div class="text-xs uppercase">{{ product.sku }}</div>
          </div>
          <!-- /name | sku -->
@@ -70,7 +70,7 @@
     <!-- order summary -->
     <div class="col-12 lg:col-6 py-3 px-4">
 
-      <div class="p-4 border-1 border-purple-200 shadow-1">
+      <div class="p-4 border-1 border-purple-200 shadow-1 border-round-xl">
 
         <!-- header -->
         <div class="pb-2">
@@ -124,8 +124,9 @@
 
 
         <!-- checkout -->
-        <div v-if="cartTotal" class="pb-4 pt-4 border-top-1 border-gray-200 flex justify-content-between">
-          <VButtonCube text="checkout" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
+        <div v-if="cartTotal" class="pb-2 pt-4 border-top-1 border-gray-200 flex justify-content-between gap-3 lg:gap-5">
+          <VButtonCubeBlue text="Paypal checkout" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
+          <VButtonCubeGreen text="MPESA checkout" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
         </div>
         <!-- /Totals | checkout -->
 

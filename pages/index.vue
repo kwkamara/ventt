@@ -361,7 +361,7 @@ useState('products', () => [
   },
 
   {
-    categories : {men: 1, casual: 1, hats: 1},
+    categories : {men: 1, casual: 1, hats: 1, "new": 1},
     description: "Classic ivy cap made from breathable cotton. Ideal for sunny days.",
     dimensions : "12x10x4 inches",
     documentId : "m-hats-1-001",
@@ -373,7 +373,6 @@ useState('products', () => [
     name       : "Ivy Hat",
     price      : 1499,
     rating     : 4,
-    "new"      : true,
     reviews    : [
       {review: "Lightweight and stylish.", user: "user_6001", rating: 5},
       {review: "Fits slightly small.", user: "user_6002", rating: 3},
@@ -428,7 +427,7 @@ useState('products', () => [
   },
 
   {
-    categories : {men: 1, accessories: 1},
+    categories : {men: 1, accessories: 1, "new": 1},
     description: "Classic aviator sunglasses with UV400 protection and lightweight metal frame.",
     dimensions : "15x6x3 inches",
     documentId : "m-glasses-1",
@@ -907,21 +906,23 @@ useState('products', () => [
     description: "Padded winter jacket with water-resistant shell. Reflective strips for visibility.",
     dimensions : "16x14x4 inches",
     documentId : "k-casual-2-001",
-    images     : [
-      {url: "kids-casual-2-a-454.webp"},
-      {url: "kids-casual-2-b-454.webp"},
-      {url: "kids-casual-2-c-454.webp"}
+
+    images: [
+      {url: "kids-winter-jacket-1.webp"},
+      {url: "kids-winter-jacket-2.webp"},
+      {url: "kids-winter-jacket-3.webp"},
     ],
-    name       : "Winter Jacket",
-    price      : 2999,
-    rating     : 5,
-    reviews    : [
+
+    name   : "Kids Winter Jacket",
+    price  : 2999,
+    rating : 5,
+    reviews: [
       {review: "Kept my son warm in -10°C weather!", user: "user_16001", rating: 5},
       {review: "Zipper gets stuck sometimes.", user: "user_16002", rating: 3},
       {review: "Hood stays up in wind - great design.", user: "user_16003", rating: 5}
     ],
-    sku        : "k-casual-2-001",
-    weight     : "0.8 kg"
+    sku    : "k-casual-2-001",
+    weight : "0.8 kg"
   },
 
   {
@@ -958,6 +959,7 @@ useState('products', () => [
     ],
     name       : "Woolen Winter Hat",
     price      : 899,
+    new        : 1,
     rating     : 5,
     reviews    : [
       {review: "Soft and doesn't itch - miracle for wool!", user: "user_18001", rating: 5},
@@ -996,11 +998,8 @@ export default defineComponent({
       return useState('products').value;
     },
 
-    popularProducts() {
-      return useState('products').value.filter(pd => pd.rating >= 4);
-    },
     newProducts() {
-      return useState('products').value.filter(pd => pd.new);
+      return this.products.filter(pd => pd.new);
     }
   },
 

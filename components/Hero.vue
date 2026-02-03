@@ -7,7 +7,7 @@
       <img :key="hero_ix"
            :src="hero_images[hero_ix]"
            alt="Ventt ecommerce"
-           class="absolute w-full top-0"/>
+           class="absolute h-full md:h-auto md:w-full top-0 right-0"/>
     </Transition>
     <!-- /backgrounds -->
 
@@ -15,28 +15,30 @@
     <!-- Content Overlay -->
     <div class="w-full h-full p-3 md:px-7 absolute flex align-items-center bg-black-alpha-50">
 
-      <div class="p-4 text-white border-round">
+      <div class="text-white">
 
         <!-- Message -->
         <div>
           <!-- title -->
-          <h2 class="m-0 text-2xl lg:text-7xl font-light">Discover Your <span class="text-gold">Style</span></h2>
+          <h2 class="m-0 text-6xl lg:text-7xl font-light">
+            Discover Your <span class="text-gold">Style</span>
+          </h2>
 
           <!-- subtitle -->
-          <p class="m-0 lg:w-6 pb-2 text-left text-sm lg:text-lg font-light line-height-3">
+          <p class="m-0 lg:w-6 py-3 text-left lg:text-lg font-light line-height-3">
             Elevate your wardrobe with our curated collection of luxury fashion pieces crafted for the modern connoisseur.
           </p>
 
           <!-- CTA -->
-          <div class="pt-3 flex gap-3">
+          <div class="pt-3 flex align-items-center gap-3">
             <NuxtLink to="/shop">
-              <Button class="bg-purple-800 text-white border-none">
+              <Button class="bg-purple-800 text-white border-none white-space-nowrap">
                 <span class="font-bold">Shop now</span>
                 <span class="material-icons-outlined">chevron_right</span>
               </Button>
             </NuxtLink>
 
-            <Button class="bg-gray-300 text-purple-800 border-none" outlined>
+            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">
               <span>New Arrivals</span>
               <span class="material-icons-outlined">chevron_right</span>
             </Button>
@@ -45,8 +47,6 @@
 
         </div>
         <!-- /Message -->
-
-
 
       </div>
 
@@ -75,6 +75,21 @@ export default defineComponent({
         '/hero-img-7.webp',
       ],
     }
+  },
+
+  methods: {
+    //load shop UI.
+    viewShop(type) {
+
+      //update UI.
+      useState('shop').value = {
+        category: "new",
+        type    : null
+      };
+
+      //navigate.
+      navigateTo('/Shop');
+    },
   },
 
   mounted() {

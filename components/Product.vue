@@ -1,11 +1,11 @@
 <template>
 
-  <div class="col-12 md:col-4 lg:col-4" @click="viewItem()" data-aos="fade-up">
+  <div class="col-6 md:col-4 lg:col-4" @click="viewItem()" data-aos="fade-up">
 
     <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
 
-      <div class="h-12rem bg-gray-100 relative">
-        <!-- header -->
+      <div class="h-9rem md:h-12rem bg-gray-100 relative">
+        <!-- wishlist | cart -->
         <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
           <!-- wishlist -->
           <VButton :fill="wishlist[product.documentId]"
@@ -17,7 +17,8 @@
                    icon="shopping_cart"
                    @click.stop="cart[product.documentId] ? removeFromCart(product) : addToCart(product); notify('cart');"/>
         </div>
-        <!-- /header -->
+        <!-- wishlist | cart -->
+
 
         <!-- image -->
         <img :alt="`Ventt Ecommerce Platform - ${product.name}`"
@@ -26,8 +27,10 @@
              loading="lazy" width="212"/>
       </div>
 
+
       <!-- footer -->
-      <div class="p-3 flex justify-content-between bg-purple-800 text-white">
+      <div class="p-3 md:flex justify-content-between bg-purple-800 text-white">
+
         <!-- name | rating -->
         <div>
           <div class="pb-1 capitalize">{{ product.name }}</div>
@@ -39,12 +42,13 @@
         <!-- /name | rating -->
 
         <!-- price -->
-        <div>{{ formatDecimal(product.price) }}</div>
+        <div class="pt-3 md:pt-0">{{ formatDecimal(product.price) }}</div>
 
       </div>
       <!-- /footer -->
 
     </div>
+
   </div>
 
 </template>

@@ -1,6 +1,5 @@
 <template>
 
-
   <!-- Nav | Categories | Hero -->
   <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
     <Navbar/>
@@ -10,6 +9,7 @@
   <!-- /Nav | Categories | Hero -->
 
 
+  <!-- Shop -->
   <section class="grid m-0 lg:px-7 pb-5">
 
     <!-- filter section -->
@@ -23,8 +23,9 @@
           <InputText v-model="search"
                      id="search-ip"
                      placeholder="search"
-                     class="px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
+                     class="w-8 px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
                      fluid/>
+
           <VButton icon="restart_alt"
                    @click="min_price=0; max_price=50000; search=null"/>
         </div>
@@ -34,16 +35,16 @@
         <!-- min | max price -->
         <div class="flex justify-content-between gap-2 align-items-center text-gray-700">
           <div class="w-full py-2 text-xs">
-            <InputNumber id="min-price-ip"
-                         v-model="min_price"
-                         class="shadow-1 bg-white" fluid/>
+            <InputText id="min-price-ip" v-model="min_price"
+                       class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
+                       type="number" unstyled/>
             <label for="min-price-ip">Min. Price</label>
           </div>
 
           <div class="w-full text-xs text-right">
-            <InputNumber id="max-price-ip"
-                         v-model="max_price"
-                         class="shadow-1 bg-white" fluid/>
+            <InputText id="max-price-ip" v-model="max_price"
+                       class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
+                       type="number" unstyled/>
             <label for="max-price-ip">Max. Price</label>
           </div>
         </div>
@@ -102,6 +103,7 @@
     </div>
     <!-- /filter section -->
 
+
     <!-- products -->
     <div class="col-12 lg:col-8">
 
@@ -141,6 +143,7 @@
     <!-- /products -->
 
   </section>
+  <!-- /Shop -->
 
 
   <!--  footer -->
@@ -151,7 +154,7 @@
 <script lang="js">
 
 export default defineComponent({
-  name      : "Shop",
+  name: "Shop",
 
   data() {
 
@@ -218,6 +221,7 @@ export default defineComponent({
             }
           });
         });
+
 
         //update.
         products = active_products;

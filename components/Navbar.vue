@@ -1,6 +1,7 @@
 <template>
 
-  <header class="col-12 h-5rem px-3 md:px-8 bg-white flex align-items-center animation-duration-1000 fadein"
+
+  <section class="col-12 h-5rem px-4 md:px-6 lg:px-8 bg-white flex align-items-center animation-duration-1000 fadein"
           aria-label="Main Navigation">
 
     <!-- Logo -->
@@ -19,9 +20,11 @@
 
 
     <!-- menu -->
-    <div class="w-8 flex align-items-center justify-content-end gap-3 md:gap-1">
+    <nav class="w-10 lg:w-8 flex align-items-center justify-content-end gap-5 md:gap-1">
       <!-- Login -->
-      <VButton icon="person"/>
+      <NuxtLink to="/login">
+        <VButton icon="person"/>
+      </NuxtLink>
       <Divider layout="vertical" class="h-2rem hidden md:block"/>
 
       <!-- wishlist -->
@@ -33,10 +36,10 @@
       <VButton icon="shopping_cart"
                :disabled="!Object.keys(cart).length"
                @click="$refs.shoppingCartPopover.toggle($event)"/>
-    </div>
+    </nav>
     <!-- /menu -->
 
-  </header>
+  </section>
 
 
   <!-- shoppingCartPopover -->
@@ -118,9 +121,12 @@ export default defineComponent({
   },
 
   computed: {
+    //cart.
     cart() {
-      return useState('cart').value;
+      return useState('cart').value || [];
     },
+
+    //cart total.
     cartTotal() {
       const product_keys = Object.keys(this.cart);
       if (!product_keys.length) return 0;
@@ -129,8 +135,10 @@ export default defineComponent({
       product_keys.forEach(key => total += this.cart[key].price * (this.cart[key].cart));
       return total;
     },
+
+    //wishlist.
     wishlist() {
-      return useState('wishlist').value;
+      return useState('wishlist').value || [];
     }
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full overflow-hidden hover:shadow-3 relative text-white" data-aos="fade-up">
+  <div class="w-full h-full overflow-hidden hover:shadow-3 relative text-white" data-aos="fade-down">
 
     <!-- image -->
     <img :alt="`Ventt Ecommerce Platform - ${category} ${type}`"
@@ -8,7 +8,7 @@
          class="w-full h-full absolute"/>
 
     <!-- type -->
-    <div class="h-full w-full p-2 xl:p-3 bg-black-alpha-50 hover:bg-black-alpha-10 absolute">
+    <div class="h-full w-full p-3 xl:p-3 bg-black-alpha-50 hover:bg-black-alpha-10 absolute">
       <h2 class="m-0 text-xl font-light capitalize text-right">{{ type }}</h2>
     </div>
 
