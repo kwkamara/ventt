@@ -33,7 +33,7 @@
 
         <!-- name | rating -->
         <div>
-          <div class="pb-1 capitalize">{{ product.name }}</div>
+          <div class="pb-1 capitalize white-space-nowrap">{{ product.name }}</div>
           <!-- rating -->
           <div class="text-yellow-500 flex align-items-center">
             <span v-for="(rating, ix) in product.rating" class="material-icons text-sm">star</span>

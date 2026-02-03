@@ -15,10 +15,10 @@
 
 
     <!-- right col -->
-    <div class="col-12 md:col-6 lg:py-7 flex align-items-center justify-content-center select-none">
+    <div class="col-12 md:col-6 py-5 lg:py-7 flex align-items-center justify-content-center select-none">
 
       <!-- login box -->
-      <div class="lg:w-5">
+      <div class="w-9 lg:w-5">
 
         <!-- email -->
         <div class="pb-3">

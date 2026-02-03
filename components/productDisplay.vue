@@ -11,7 +11,8 @@
          loading="lazy"/>
 
 
-    <div class="w-full h-full p-2 lg:p-4 absolute text-white bg-black-alpha-30 border-round-xl hover:bg-black-alpha-10">
+    <div @click="viewShop()"
+         class="w-full h-full p-2 lg:p-4 absolute text-white bg-black-alpha-30 border-round-xl hover:bg-black-alpha-10">
       <!-- Discount and Name -->
       <div class="w-full text-right">
         <h2 aria-label="discount-title" class="m-0 text-xl md:text-4xl">{{ discount }}</h2>
@@ -22,9 +23,8 @@
 
       <!-- CTA -->
       <div class="lg:mt-3 text-right">
-        <Button @click="viewShop()"
-                :aria-label="`Shop Now for ${name}`"
-                class="bg-purple-800 border-none hover:bg-purple-500 hover:text-white"
+        <Button :aria-label="`Shop Now for ${name}`"
+                class="hidden bg-purple-800 border-none hover:bg-purple-500 hover:text-white"
                 size="small">
           <span>Shop Now</span>
           <span class="material-icons">chevron_right</span>
@@ -37,12 +37,6 @@
   </section>
 </template>
 
-
-<script setup lang="js">
-const scrollToTop = () => {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-};
-</script>
 
 
 <script lang="js">

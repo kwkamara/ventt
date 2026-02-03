@@ -12,7 +12,7 @@
 
 
   <!-- New Arrivals -->
-  <section class="grid m-0 md:p-4 lg:px-7 py-4 select-none overflow-hidden">
+  <section class="grid m-0 pb-7 md:p-4 lg:px-7 select-none overflow-hidden">
 
     <!-- title -->
     <div class="col-12">

@@ -17,7 +17,7 @@
       <div class="grid m-0">
 
         <!-- image | icons -->
-        <div class="col-12 lg:col-9 lg:h-18rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
+        <div class="col-12 lg:col-9 h-14rem lg:h-17rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
           <!-- image -->
           <img :alt="product.name"
                :src="'/'+product.images[image_ix].url"
@@ -33,18 +33,22 @@
 
 
         <!-- thumbnails -->
-        <div class="col-12 lg:col-3 p-0 px-2 flex lg:flex-column gap-3">
-          <img v-for="(image, ix) in product.images"
-               :alt="product.name"
-               :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
-               :src="'/'+image.url"
-               @click="image_ix = ix"/>
+        <div class="col-12 lg:col-3 h-6rem lg:pt-0 flex lg:flex-column gap-2 lg:gap-3">
+         <div class="grid m-0">
+           <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:p-0">
+             <img
+                  :alt="product.name"
+                  :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
+                  :src="'/'+image.url"
+                  @click="image_ix = ix"/>
+           </div>
+         </div>
         </div>
         <!-- /thumbnails -->
 
 
         <!-- icons -->
-        <div class="col-12 pt-3 flex gap-3 align-items-center">
+        <div class="col-12 pt-3 flex gap-3 align-items-center justify-content-center lg:justify-content-start">
           <template v-for="(icon, ix) in ['shield', 'local_shipping', 'payments']" :key="ix">
             <VButton :icon="icon"/>
             <Divider v-if="ix<2"  layout="vertical" unstyled class="border-left-1 h-2rem border-gray-200"/>

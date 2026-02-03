@@ -5,11 +5,10 @@
       <!-- footer box -->
       <div class="grid m-0 pb-2 w-full mb-5 align-items-start">
 
-        <div class="col-6 md:col-3">
+        <div class="col-12 md:col-3 pb-4 md:pb-0">
           <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
             <img src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
           </div>
-
           <div class="flex flex flex-column gap-2 text-xs">
             <div class="title uppercase text-lg">
               Ventt | <span class="uppercase">Ecommerce</span>
@@ -31,10 +30,9 @@
 
 
         <div class="col-6 md:col-3">
-          <h3 class="h-3rem m-0 flex align-items-center font-light">
+          <h3 class="m-0 pb-3 flex align-items-center font-light">
             Product Range
           </h3>
-
           <div class="flex flex flex-column gap-3 text-sm capitalize">
             <div v-for="category in [ `men's`, `women's`, `kids'`]">
               {{ category }} Collection
@@ -43,11 +41,10 @@
         </div>
 
 
-        <div class="col-6 md:col-3">
-          <h3 class="h-3rem flex align-items-center m-0 font-light">
+        <div class="col-6 md:col-3 text-right md:text-left">
+          <h3 class="m-0 pb-3 font-light text-right md:text-left">
             Help
           </h3>
-
           <div class="flex flex flex-column gap-3 text-sm">
             <div>FAQ</div>
             <div>Shipping and Returns</div>
@@ -55,12 +52,12 @@
           </div>
         </div>
 
-        <div class="col-6 md:col-3">
+
+        <div class="col-12 md:col-3">
           <h3 class="h-3rem m-0 flex align-items-center font-light">
-            Join Our News Letter
+            Join Our Mailing List
           </h3>
           <p class="m-0 text-sm">Subscribe for exclusive offers and updates.</p>
-
           <div>
             <InputText unstyled fluid
                        placeholder="Enter you email"

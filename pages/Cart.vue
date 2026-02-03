@@ -27,27 +27,26 @@
        <div v-for="product in cart"
             @click="viewItem(product)"
             :key="product.documentId"
-            class="py-4 flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 hover:text-yellow-800">
+            class="py-4 md:flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 hover:text-yellow-800">
 
          <!-- name | sku -->
-         <div class="w-full">
+         <div class="w-full pb-3 lg:p-0">
            <div class="pb-1 font-bold text-lg">{{ product.name }}</div>
            <div class="text-xs uppercase">{{ product.sku }}</div>
          </div>
          <!-- /name | sku -->
 
          <!-- quantity -->
-         <div class="flex align-items-center gap-4">
+         <div class="flex align-items-center gap-3 md:gap-4">
            <VButton icon="remove" :disabled="product.cart===1" @click.stop="product.cart > 1 ? product.cart-- : null"/>
            <span class="w-3rem inline-block text-center text-3xl font-bold">{{ product.cart || 1 }}</span>
            <VButton fill="1" icon="add" @click.stop="product.cart ? product.cart++ : product.cart = 2"/>
-
            <VButton icon="delete" @click.stop="removeFromCart(product)"/>
          </div>
          <!-- /quantity -->
 
          <!-- total -->
-         <div class="w-full text-right text-lg">
+         <div class="w-full pt-3 lg:p-0 md:text-right text-lg">
            {{ formatDecimal(product.price * product.cart) }}
          </div>
          <!-- /total -->
@@ -125,8 +124,8 @@
 
         <!-- checkout -->
         <div v-if="cartTotal" class="pb-2 pt-4 border-top-1 border-gray-200 flex justify-content-between gap-3 lg:gap-5">
-          <VButtonCubeBlue text="Paypal checkout" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
-          <VButtonCubeGreen text="MPESA checkout" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
+          <VButtonCubeBlue text="Paypal" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
+          <VButtonCubeGreen text="MPESA" icon="shopping_cart_checkout" fill="true" class="w-full h-3rem"/>
         </div>
         <!-- /Totals | checkout -->
 
