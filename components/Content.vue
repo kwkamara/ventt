@@ -247,10 +247,28 @@
 
 
         <!-- manage -->
-        <div v-if="manage" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden">
+        <div v-if="manage" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden">
+
+          <!-- search -->
+          <template v-if="manage==='items'">
+            <div class="pb-4 pt-2 px-4 flex justify-content-between align-items-center">
+              <InputText v-model="filters['global'].value"
+                         class="h-3rem text-gray-700 border-1 border-gray-200 border-round-3xl"
+                         placeholder="Search"/>
+              <VButtonCube text="new" icon="add" fill="1" @click="manage='edit'"/>
+            </div>
+
+            <Divider unstyled class="border-bottom-1 border-gray-300"/>
+          </template>
+          <!-- /search -->
+
 
           <!-- items -->
-          <DataTable v-if="manage==='items'" :rows="8"
+          <DataTable v-if="manage==='items' && !item"
+                     v-model:filters="filters"
+                     :globalFilterFields="['name', 'id', 'description', 'customer']"
+                     filterDisplay="row"
+                     :rows="8"
                      :show-headers="false"
                      :value="category.data"
                      data-key="documentId" paginator row-hover
@@ -280,25 +298,32 @@
 
               </template>
             </Column>
-
-            <template #paginatorend>
-              <VButtonCube text="new" icon="add" fill="1" @click="manage='edit'"/>
-            </template>
-
           </DataTable>
           <!-- /items -->
 
 
           <!-- header -->
-          <div v-if="item" class="p-3 pb-2 flex justify-content-between align-items-center">
-            <h2 class="m-0 font-light"> {{ item.name || item.id }}</h2>
+          <div v-if="manage !=='items'"
+               class="p-3 pt-0 pb-2 flex justify-content-between align-items-center">
+
+            <!-- category name | item id -->
+            <div class="m-0 font-light text-xl capitalize flex gap-2">
+              <span>{{ category.name }} </span>
+              <Icon icon="chevron_right"/>
+              <!--              <Divider unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>-->
+              <span>{{ item ? (item.name || item.id) : 'New Item' }}</span>
+            </div>
+            <!-- /category name | item id -->
 
             <!-- controls -->
             <div class="flex align-items-center gap-3">
-              <VButton v-if="manage!=='edit'" icon="edit" @click="manage='edit';"/>
-              <VButton v-if="manage!=='info'" icon="info" @click="manage='info';"/>
 
-              <Divider unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>
+              <template v-if="item">
+                <VButton v-if="manage!=='edit'" icon="edit" @click="manage='edit';"/>
+                <VButton v-if="manage!=='info'" icon="info" @click="manage='info';"/>
+                <Divider unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>
+              </template>
+
               <VButton icon="close" @click="manage='items'; item=null"/>
             </div>
             <!-- /controls -->
@@ -306,36 +331,37 @@
           <!-- header -->
 
 
-          <Divider v-if="item"/>
+          <Divider v-if="manage!=='items'"/>
 
 
           <!-- details grid -->
           <div class="grid m-0 px-3" v-if="manage==='info' && item">
-            <!-- name | Description -->
-            <div v-for="prop_name in ['name', 'description']" class="col-12 py-3">
-              {{ item[prop_name] }}
+            <!-- Key props -->
+            <div v-for="prop in category.props.filter(p => p.key && item[p.name])" class="col-12 py-3">
+              <div>{{ item[prop.name] }}</div>
+              <span class="mt-1 text-xs">{{ prop.header || prop.name }}</span>
             </div>
             <!-- /name | Description -->
 
             <!-- props -->
-            <div v-for="prop in category.props.filter(p => !p.no_info && !['name', 'description'].includes(p.name))"
-                 class="col-6 py-3">
+            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-12 py-3">
               <div>{{ item[prop.name] }}</div>
               <span class="mt-1 text-xs">{{ prop.name }}</span>
             </div>
+
           </div>
           <!-- /details grid -->
 
 
           <!-- edit -->
-          <template v-if="manage==='edit'">
+          <div v-if="manage==='edit'" class="pt-3">
             <!-- form -->
             <ItemForm :item="item || {}"
                       @update="pushItem($event)"
                       :categories="menu"
                       :category="category"/>
             <!-- /form -->
-          </template>
+          </div>
           <!-- /edit -->
 
         </div>
@@ -435,7 +461,7 @@
             <!-- /items -->
 
             <!-- item -->
-            <div v-else class="p-4 flex flex-column gap-4 text-sm animation-duration-500 fadein">
+            <div v-else class="p-4 pt-6 flex flex-column gap-4 text-sm animation-duration-500 fadein">
               <ItemForm @update="updateItem()"/>
             </div>
             <!-- /item -->
@@ -632,11 +658,17 @@ const {formatDecimal} = useFormatDecimal();
 
 
 <script lang="js">
+import {FilterMatchMode} from '@primevue/core/api';
+
 export default defineComponent({
   name: "Content",
 
   data() {
     return {
+      filters: {
+        global: {value: null, matchMode: FilterMatchMode.CONTAINS},
+      },
+
       //manage.
       manage: false,
 
@@ -670,7 +702,8 @@ export default defineComponent({
 
             {
               name  : "description",
-              no_tbl: 1
+              no_tbl: 1,
+              key   : 1
             },
 
             {
@@ -683,7 +716,6 @@ export default defineComponent({
             {
               name: "status",
               enum: ['delivered', 'shipped', 'processing', 'cancelled', 'approved', 'returned'],
-              key : 1
             },
 
             {
@@ -695,6 +727,7 @@ export default defineComponent({
             {
               name  : "customer",
               select: "customers",
+              rel   : "name"
             },
           ],
 
@@ -892,6 +925,8 @@ export default defineComponent({
         },
 
         {
+          name: "customers",
+
           icon: "group",
 
           items: [
@@ -921,14 +956,11 @@ export default defineComponent({
             }
           ],
 
-          name: "customers",
-
           props: [
-            {name: "description", header: "details"},
-            {extra: 1, key: 1, name: "name"},
-            {extra: 1, key: 1, name: "orders", number: 1, hidden: 1},
-            {extra: 1, key: 1, name: "status", hidden: 1},
-            // {enum: ['active', 'suspended', 'banned'], extra: 1, key: 1, name: "status", select: 1},
+            {name: "name", key: 1},
+            {name: "description", key: 1},
+            {name: "orders", decimal: 1, no_edit: 1},
+            {name: "status", enum: ["active", "banned", "review"]},
           ],
 
           //status | state.
@@ -936,8 +968,12 @@ export default defineComponent({
           state : {retailer: 0, wholesaler: 0, institution: 0},
 
           //analysis.
-          props_r1: {ltv: 0, frequency: 0},
-          props_r2: {local: 0, foreign: 0},
+          metrics_1: {ltv: 0, frequency: 0},
+          metrics_2: {local: 0, foreign: 0},
+
+          data: [
+            {name: "Kevin", id: "001"}
+          ]
         },
 
         {
@@ -1170,8 +1206,26 @@ export default defineComponent({
 
     //push item.
     pushItem(item) {
-      this.category.data.push(item);
-      this.item = item;
+      //new item.
+      if (!item.id) {
+
+        //item ID init.
+        item.id = new Date().getTime();
+
+        //add item.
+        this.category.data.push(item);
+
+        //set active.
+        this.item = item;
+
+        //switch UI.
+        this.manage = 'info';
+
+        //return.
+        return;
+      }
+
+      //switch mode.
       this.manage = 'info';
     },
 
@@ -1408,7 +1462,6 @@ export default defineComponent({
 
     }
   },
-
 
   beforeMount() {
     //load first category.

@@ -1,25 +1,24 @@
 <template>
 
   <!-- name | Description -->
-  <div v-for="prop_name in ['name', 'description']" class="px-4">
-    <InputText :id="prop_name + '-ip'"
+  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 text-gray-700">
+    <InputText :id="prop.name + '-ip'"
                autocomplete="off"
                class="text-xs bg-transparent h-3rem border-none border-bottom-1 border-gray-300"
-               v-model="item[prop_name]"
+               v-model="item[prop.name]"
                fluid/>
 
-    <label class="block pb-1 text-xs text-purple-600 capitalize"
-           :for="prop_name + '-ip'">{{ prop_name }}
+    <label class="mt-1 block text-xs capitalize text-right"
+           :for="prop.name + '-ip'">{{ prop.name }}
     </label>
   </div>
   <!-- /name | Description -->
 
 
   <!-- props -->
-  <div class="grid m-0 pt-4 ">
+  <div class="grid m-0 pt-4 text-gray-700">
 
-    <div v-for="prop in category.props.filter(p => !p.no_edit && !['name', 'description'].includes(p.name))"
-         class="col-6 px-4">
+    <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 p-4">
 
       <InputNumber v-if="prop.decimal"
                    :id="prop.name + '-ip'"
@@ -47,8 +46,8 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              class="bg-transparent border-none border-bottom-1 border-gray-400"
-              fluid
+              class="bg-transparent border-none border-bottom-1 border-gray-400" fluid
+              :option-label="prop.rel || 'name'"
               option-value="documentId"/>
 
       <InputText v-else
@@ -57,7 +56,7 @@
                  v-model="item[prop.name]"
                  fluid/>
 
-      <label class="mt-1 pb-1 block text-xs text-purple-600 capitalize"
+      <label class="mt-1 pb-1 block text-xs capitalize"
              :for="prop.name + '-ip'">
         {{ prop.header || prop.name }}
       </label>
@@ -69,10 +68,11 @@
 
   <!-- submit -->
   <div class="p-4 flex align-items-center justify-content-end">
-    <Button class="bg-purple-700 border-none"
-            icon="pi pi-check"
-            label="Submit"
-            @click="updateItem()"/>
+    <VButtonCube :text="item.documentId? 'Update' : 'Submit' "
+                 icon="check_circle_outline"
+                 class="w-full"
+                 fill="1"
+                 @click="updateItem()"/>
   </div>
   <!-- /submit -->
 
