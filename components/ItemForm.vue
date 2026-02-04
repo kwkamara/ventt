@@ -1,38 +1,66 @@
 <template>
 
   <!-- name | Description -->
-  <template v-for="prop_name in ['name', 'description']">
-    <div v-if="prop_names.has(prop_name)" class="w-full h-4rem px-2">
-      <label class="block pb-1 text-xs text-purple-600 capitalize" :for="`${prop_name}-ip`">{{ prop_name }}</label>
-      <InputText :id="`${prop_name}-ip`" autocomplete="off" class="text-xs" v-model="useState('item').value[prop_name]" fluid/>
-    </div>
-  </template>
+  <div v-for="prop_name in ['name', 'description']" class="px-4">
+    <InputText :id="prop_name + '-ip'"
+               autocomplete="off"
+               class="text-xs bg-transparent h-3rem border-none border-bottom-1 border-gray-300"
+               v-model="item[prop_name]"
+               fluid/>
+
+    <label class="block pb-1 text-xs text-purple-600 capitalize"
+           :for="prop_name + '-ip'">{{ prop_name }}
+    </label>
+  </div>
   <!-- /name | Description -->
 
 
   <!-- props -->
-  <div class="grid m-0">
+  <div class="grid m-0 pt-4 ">
 
-    <div v-for="prop in props.filter(p => (p.extra && !p.hidden))" class="col-6 lg:col-4">
+    <div v-for="prop in category.props.filter(p => !p.no_edit && !['name', 'description'].includes(p.name))"
+         class="col-6 px-4">
 
-      <label class="block pb-1 text-xs text-purple-600 capitalize" :for="`${prop.name}-ip`">
+      <InputNumber v-if="prop.decimal"
+                   :id="prop.name + '-ip'"
+                   v-model="item[prop.name]"
+                   :min-fraction-digits="2"
+                   class="pl-0 text-sm border-none border-bottom-1 border-gray-400"
+                   fluid use-grouping/>
+
+      <Select v-else-if="prop.enum"
+              class="bg-transparent border-none border-bottom-1 border-gray-400"
+              :id="prop.name + '-ip'"
+              v-model="item[prop.name]"
+              :options="prop.enum"
+              :placeholder="prop.header || prop.name"
+              fluid/>
+
+      <DatePicker v-else-if="prop.date"
+                  :id="prop.name + '-ip'"
+                  v-model="item[prop.name]"
+                  fluid/>
+
+      <Select v-else-if="prop.select"
+              :id="prop.name + '-ip'"
+              v-model="item[prop.name]"
+              :optionLabel="prop.label"
+              :options="getCategoryByName(prop.select).data"
+              :placeholder="prop.header || prop.name"
+              class="bg-transparent border-none border-bottom-1 border-gray-400"
+              fluid
+              option-value="documentId"/>
+
+      <InputText v-else
+                 :id="prop.name + '-ip'"
+                 class="pl-0 border-none border-bottom-1 border-gray-400"
+                 v-model="item[prop.name]"
+                 fluid/>
+
+      <label class="mt-1 pb-1 block text-xs text-purple-600 capitalize"
+             :for="prop.name + '-ip'">
         {{ prop.header || prop.name }}
       </label>
-
-      <InputNumber v-if="prop.decimal" :id="`${prop.name}-ip`" v-model="useState('item').value[prop.name]"
-                   :min-fraction-digits="2" class="text-sm" fluid use-grouping/>
-
-      <Select v-else-if="prop.enum" :id="`${prop.name}-ip`" v-model="useState('item').value[prop.name]"
-              :options="prop.enum" :placeholder="`${prop.header || prop.name}`" fluid/>
-
-      <DatePicker v-else-if="prop.date" :id="`${prop.name}-ip`" v-model="useState('item').value[prop.name]" fluid/>
-
-      <Select v-else-if="prop.select" v-model="useState('item').value[prop.name]" :optionLabel="prop.label"
-              :options="getCategoryByName(prop.select).items" :placeholder="`${prop.header || prop.name}`"
-              fluid option-value="documentId"/>
-
-      <InputText v-else :id="`${prop.name}-ip`" v-model="useState('item').value[prop.name]" class="text-sm" fluid/>
-
     </div>
 
   </div>
@@ -40,9 +68,11 @@
 
 
   <!-- submit -->
-  <div class="h-4rem pr-2 flex align-items-center justify-content-end">
-    <Button class="bg-purple-700 border-none" icon="pi pi-check" label="Submit"
-            @click="useState('item').value=null; $emit('update')"/>
+  <div class="p-4 flex align-items-center justify-content-end">
+    <Button class="bg-purple-700 border-none"
+            icon="pi pi-check"
+            label="Submit"
+            @click="updateItem()"/>
   </div>
   <!-- /submit -->
 
@@ -51,32 +81,27 @@
 
 <script lang="js">
 export default defineComponent({
+  name : "ItemForm",
+  props: ['item', 'category', 'categories'],
   emits: ['update'],
 
-  name: "ItemForm",
-
-  computed: {
-
-    category() {
-      return useState('category').value;
+  methods: {
+    getCategoryByName(category_name) {
+      if (!this.categories) return [];
+      return this.categories.find(cat => cat.name === category_name);
     },
 
-    props() {
-      return useState('category').value.props;
-    },
+    //item update.
+    updateItem() {
+      //emit.
+      this.$emit('update', this.item);
 
-    prop_names() {
-      return new Set(this.props.map(prop => prop.name));
-    },
+      //notify popup.
+      this.$toast.add({severity: "info", summary: "item updated", life: 1000});
+    }
+
 
   },
 
-  methods: {
-
-    getCategoryByName(category_name) {
-      return useState('categories').value.find(cat => cat.name === category_name);
-    }
-
-  }
 })
 </script>

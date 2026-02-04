@@ -53,13 +53,14 @@
         </div>
 
 
-        <div class="col-12 md:col-3">
-          <h3 class="h-3rem m-0 flex align-items-center font-light">
+        <div class="col-12 md:col-3 pt-4 md:pt-2">
+          <h3 class="m-0 pb-3 flex align-items-center font-light">
             Join Our Mailing List
           </h3>
           <p class="m-0 text-sm">Subscribe for exclusive offers and updates.</p>
           <div>
             <InputText unstyled fluid
+                       autocomplete="off"
                        placeholder="Enter you email"
                        class="h-3rem w-full pl-0 bg-transparent shadow-1 border-none border-bottom-1 border-gray-700 text-gray-200"/>
             <div class="pt-3">
@@ -75,10 +76,12 @@
       <div class="w-full h-5rem flex align-items-center justify-content-between border-top-1 border-gray-800">
 
         <!-- payments -->
-        <div class="text-xs md:text-lg text-gray-400 flex align-items-center gap-1 flex-1">
+        <div class="flex-1 flex justify-content-start gap-3 text-xs">
           <span>Paypal</span>
-          <Divider layout="vertical" class="h-1rem"/>
-          <span class="white-space-nowrap">M-PESA</span>
+          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
+          <span>M-PESA</span>
+          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
+          <NuxtLink to="/dashboard" class="no-underline text-gray-400">Dashboard</NuxtLink>
         </div>
 
 
@@ -94,9 +97,9 @@
         </div>
 
         <!-- Terms -->
-        <div class="flex-1 flex justify-content-end gap-1 text-xs">
+        <div class="flex-1 flex justify-content-end gap-3 text-xs">
           <span>Privacy Policy</span>
-          <Divider layout="vertical"/>
+          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
           <span>Terms of Service</span>
         </div>
         <!-- Terms -->

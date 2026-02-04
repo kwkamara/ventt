@@ -38,10 +38,10 @@
               </Button>
             </NuxtLink>
 
-            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">
-              <span>New Arrivals</span>
-              <span class="material-icons-outlined">chevron_right</span>
-            </Button>
+<!--            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">-->
+<!--              <span>New Arrivals</span>-->
+<!--              <span class="material-icons-outlined">chevron_right</span>-->
+<!--            </Button>-->
           </div>
           <!-- CTA -->
 

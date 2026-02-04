@@ -12,10 +12,10 @@
 
 
   <!-- New Arrivals -->
-  <section class="grid m-0 pb-7 md:p-4 lg:px-7 select-none overflow-hidden">
+  <section class="grid m-0 pb-7 md:px-7 select-none overflow-hidden">
 
     <!-- title -->
-    <div class="col-12">
+    <div class="col-12 pb-0 pl-2">
       <h2 class="font-light">New Arrivals</h2>
     </div>
     <!-- /title -->
@@ -31,7 +31,7 @@
 
 
     <!-- offers display -->
-    <div class="col-12 lg:col-4 md:flex lg:flex-column align-items-start gap-3">
+    <div class="col-12 lg:col-4 lg:pt-1 md:flex lg:flex-column align-items-start gap-3">
       <ProductDisplay category="men"
                       class="h-16rem"
                       discount="10% Off"
@@ -171,7 +171,6 @@ useState('wishlist', () => ({}));
 
 //products init.
 useState('products', () => [
-
   //men.
   {
     categories : {men: 1, casual: 1},
@@ -522,13 +521,39 @@ useState('products', () => [
 
   {
     categories : {women: 1, casual: 1, shoes: 1},
+    description: "Trendy open-toe blue wedges with ankle straps for a secure fit. Great for summer outings.",
+    dimensions : "10x8x4 inches",
+    documentId : "w-shoes-2-001",
+
+    images     : [
+      {url: "women-blue-wedges-1.webp"},
+      {url: "women-blue-wedges-2.webp"},
+      {url: "women-blue-wedges-3.webp"},
+    ],
+
+    name       : "Blue Open Wedges",
+    price      : 3499,
+    rating     : 4,
+
+    reviews    : [
+      {review: "Comfortable even for long walks.", user: "user_4001", rating: 5},
+      {review: "Straps dig into ankles after hours.", user: "user_4002", rating: 3},
+      {review: "Breathable and stylish.", user: "user_4003", rating: 4}
+    ],
+
+    sku        : "b-wedges-001",
+    weight     : "0.9 kg"
+  },
+
+  {
+    categories : {women: 1, casual: 1, shoes: 1},
     description: "Chunky black boots with a lace-up design. Water-resistant and durable for all seasons.",
     dimensions : "14x10x6 inches",
     documentId : "w-shoes-4-001",
     images     : [
-      {url: "women-shoes-4-a-454.webp"},
-      {url: "women-shoes-4-b-454.webp"},
-      {url: "women-shoes-4-c-454.webp"}
+      {url: "women-black-boots-1.webp"},
+      {url: "women-black-boots-2.webp"},
+      {url: "women-black-boots-3.webp"}
     ],
     name       : "Black Boots",
     price      : 5999,
@@ -729,9 +754,9 @@ useState('products', () => [
     dimensions : "7x5x3 inches",
     documentId : "k-shoes-3-001",
     images     : [
-      {url: "kids-shoes-3-a-454.webp"},
-      {url: "kids-shoes-3-b-454.webp"},
-      {url: "kids-shoes-3-c-454.webp"}
+      {url: "kids-canvas-shoes-1.webp"},
+      {url: "kids-canvas-shoes-2.webp"},
+      {url: "kids-canvas-shoes-2.webp"},
     ],
     name       : "Canvas Shoes",
     price      : 1499,
@@ -751,9 +776,9 @@ useState('products', () => [
     dimensions : "12x10x1 inches",
     documentId : "k-casual-4-001",
     images     : [
-      {url: "kids-casual-4-a-454.webp"},
-      {url: "kids-casual-4-b-454.webp"},
-      {url: "kids-casual-4-c-454.webp"}
+      {url: "kids-pyjamas-1.webp"},
+      {url: "kids-pyjamas-2.webp"},
+      {url: "kids-pyjamas-3.webp"},
     ],
     name       : "Cotton Pyjamas",
     price      : 999,
@@ -984,12 +1009,7 @@ export default defineComponent({
 
   data() {
     return {
-      services: [
-        {name: 'free shipping', icon: "pi pi-truck", image: "/delivery-324.webp"},
-        {name: 'secure payment', icon: "pi pi-lock", image: "/payment-324.webp"},
-        {name: 'support 24/7', icon: "pi pi-comment", image: "/support-324.webp"},
-        {name: 'money back', icon: "pi pi-dollar", image: "/money-324.webp"},
-      ]
+
     }
   },
 
@@ -997,7 +1017,6 @@ export default defineComponent({
     products() {
       return useState('products').value;
     },
-
     newProducts() {
       return this.products.filter(pd => pd.new);
     }
@@ -1023,9 +1042,6 @@ export default defineComponent({
       else pd.rating = 3;
     });
 
-    //shop filters init.
-    useState('filters').value = {men: true, women: true, kids: true, casual: true, official: true, accessories: true};
-
     //price filters init.
     useState('prices').value = {min: 0, max: 2000000};
 
@@ -1035,3 +1051,15 @@ export default defineComponent({
 
 })
 </script>
+
+<style scoped>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, .title {
+  font-family: 'Playfair Display', serif;
+}
+</style>

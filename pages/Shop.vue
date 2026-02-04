@@ -16,13 +16,13 @@
     <div class="col-12 lg:col-4 pt-3">
 
       <!-- search | price filter -->
-      <div class="p-3 shadow-1 border-1 border-purple-100 border-round-xl">
+      <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl">
 
         <!-- search | price reset -->
         <div class="pb-2 text-purple-700 flex justify-content-between gap-3">
           <InputText v-model="search"
                      id="search-ip"
-                     placeholder="search"
+                     placeholder="Search"
                      class="w-8 px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
                      fluid/>
 
@@ -38,14 +38,15 @@
             <InputText id="min-price-ip" v-model="min_price"
                        class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
                        type="number" unstyled/>
-            <label for="min-price-ip">Min. Price</label>
+            <label for="min-price-ip" class="block pt-1">Min. Price</label>
           </div>
 
           <div class="w-full text-xs text-right">
-            <InputText id="max-price-ip" v-model="max_price"
-                       class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
+            <InputText id="max-price-ip"
+                       v-model="max_price"
+                       class="h-3rem pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
                        type="number" unstyled/>
-            <label for="max-price-ip">Max. Price</label>
+            <label for="max-price-ip" class="block pt-1">Max. Price</label>
           </div>
         </div>
         <!-- /min | max price -->
@@ -118,7 +119,7 @@
 
 
         <!-- pagination -->
-        <div v-if="products.length" class="col-12 flex align-items-center justify-content-between">
+        <div v-if="products.length > 9" class="col-12 pt-5 flex align-items-center justify-content-between">
           <VButton :disabled="!pagination.start"
                    icon="chevron_left"
                    @click="pagination.start -= 9; pagination.end -= 9"/>
@@ -131,10 +132,11 @@
 
 
         <!-- no products -->
-        <div v-else class="col-12 text-center text-orange-600">
+        <div v-if="!products.length" class="col-12 text-center text-orange-600">
           <span class="material-icons text-5xl">error_outline</span>
           <h2 class="text-3xl font-light">No Products Available</h2>
         </div>
+        <!-- /no products -->
 
       </div>
       <!-- /product grid -->
@@ -287,3 +289,16 @@ export default defineComponent({
 
 })
 </script>
+
+
+<style scoped>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, .title {
+  font-family: 'Playfair Display', serif;
+}
+</style>

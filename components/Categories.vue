@@ -1,6 +1,6 @@
 <template>
 
-  <section class="col-12 p-0 xl:px-8 h-4rem bg-purple-600 animation-duration-1000 fadein text-white text-sm select-none capitalize shadow-3">
+  <section class="col-12 p-0 md:px-7 h-4rem bg-purple-600 animation-duration-1000 fadein text-white text-sm select-none capitalize shadow-3">
 
 
     <div class="grid m-0 h-full">
@@ -40,6 +40,7 @@
         <div class="col-12">
           <InputText v-model="search"
                      class="w-full h-4rem bg-transparent border-none border-bottom-1 border-gray-400"
+                     autofocus
                      fluid placeholder="Search Products"
                      unstyled/>
         </div>

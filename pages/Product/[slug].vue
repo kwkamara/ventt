@@ -17,7 +17,7 @@
       <div class="grid m-0">
 
         <!-- image | icons -->
-        <div class="col-12 lg:col-9 h-14rem lg:h-17rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
+        <div class="col-12 lg:col-9 h-14rem lg:h-18rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
           <!-- image -->
           <img :alt="product.name"
                :src="'/'+product.images[image_ix].url"
@@ -33,25 +33,25 @@
 
 
         <!-- thumbnails -->
-        <div class="col-12 lg:col-3 h-6rem lg:pt-0 flex lg:flex-column gap-2 lg:gap-3">
-         <div class="grid m-0">
-           <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:p-0">
-             <img
+        <div class="col-12 lg:col-3 h-6rem lg:pt-0 flex align-items-center lg:flex-column gap-2 lg:gap-3">
+          <div class="grid m-0">
+            <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:px-0 lg:py-1">
+              <img
                   :alt="product.name"
                   :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
                   :src="'/'+image.url"
                   @click="image_ix = ix"/>
-           </div>
-         </div>
+            </div>
+          </div>
         </div>
         <!-- /thumbnails -->
 
 
         <!-- icons -->
-        <div class="col-12 pt-3 flex gap-3 align-items-center justify-content-center lg:justify-content-start">
+        <div class="col-12 pt-3 lg:pt-0 pl-0 flex gap-3 align-items-start justify-content-center lg:justify-content-start">
           <template v-for="(icon, ix) in ['shield', 'local_shipping', 'payments']" :key="ix">
             <VButton :icon="icon"/>
-            <Divider v-if="ix<2"  layout="vertical" unstyled class="border-left-1 h-2rem border-gray-200"/>
+            <Divider v-if="ix<2" layout="vertical" unstyled class="border-left-1 h-2rem border-gray-200"/>
           </template>
         </div>
         <!-- /icons -->
@@ -65,7 +65,9 @@
     <div class="col-12 md:col-6 pt-3 lg:px-6 lg:pb-3">
 
       <!-- product name | like -->
-      <div class="py-3 flex justify-content-between">
+      <div class="pt-2 pb-3 flex justify-content-between">
+
+        <!-- product name | rating -->
         <div>
           <h2 class="m-0 text-4xl font-light capitalize">{{ product.name }}</h2>
           <!-- rating -->
@@ -73,6 +75,8 @@
             <span v-for="(rating, ix) in product.rating" class="material-icons text-2xl">star</span>
           </div>
         </div>
+        <!-- /product name | rating -->
+
 
         <!-- price -->
         <div class="text-right">
@@ -88,7 +92,14 @@
 
       <!-- description -->
       <div>
-        <div class="pb-3 uppercase text-xs text-gray-600">product code: {{product.sku}}</div>
+        <div class="pb-4 uppercase text-xs text-gray-600 flex gap-2 text-spaced">
+          <div>{{ product.sku }}</div>
+          <Divider class="h-1rem" layout="vertical"/>
+          <div>{{ product.dimensions }}</div>
+          <Divider class="h-1rem" layout="vertical"/>
+          <div>{{ product.weight }}</div>
+        </div>
+
         <p class="m-0">{{ product.description }}</p>
       </div>
 
@@ -148,6 +159,24 @@
   </section>
   <!-- /product -->
 
+
+
+  <section class="grid m-0 px-3 lg:px-7 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
+
+    <div class="col-12">
+      <h2 class="m-0 font-light text-3xl">Reviews</h2>
+    </div>
+
+    <div v-for="review in product.reviews" class="col-12 lg:col-6 py-2 border-top-1 border-gray-200">
+      <div>{{review.user}}</div>
+      <div class="pb-3 text-yellow-600 flex align-items-center">
+        <span v-for="(rating, ix) in product.rating" class="material-icons text-xl">star</span>
+      </div>
+
+      <p class="m-0">{{review.review}}</p>
+    </div>
+
+  </section>
 
   <!--  footer -->
   <VFooter class="select-none"/>

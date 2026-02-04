@@ -1,7 +1,6 @@
 <template>
 
-
-  <section class="col-12 h-5rem px-4 md:px-6 lg:px-8 bg-white flex align-items-center animation-duration-1000 fadein"
+  <section class="col-12 h-5rem px-4 md:px-7 bg-white flex align-items-center animation-duration-1000 fadein"
           aria-label="Main Navigation">
 
     <!-- Logo -->
@@ -58,19 +57,17 @@
            @click="viewItem(product)"
            :key="product.documentId"
            :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
-        <span class="w-full">{{ product.name }}</span>
+        <span class="w-full capitalize">{{ product.name }}</span>
         <span>({{ product.cart || 1 }})</span>
         <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
       </div>
       <!-- /products -->
 
       <!-- Totals | checkout -->
-      <div v-if="cartTotal" class="col-12 px-3 pb-4 pt-4 border-top-1 border-gray-200 flex justify-content-between">
+      <div v-if="cartTotal" class="col-12 px-3 pb-4 pt-4 border-top-1 border-gray-200 text-right">
         <NuxtLink to="/cart">
-          <VButtonCube text="cart" icon="shopping_cart"/>
+          <VButtonCube text="cart" icon="shopping_cart" fill="1"/>
         </NuxtLink>
-
-        <VButtonCube text="checkout" icon="shopping_cart_checkout" fill="true"/>
       </div>
       <!-- /Totals | checkout -->
 
@@ -95,7 +92,7 @@
            @click="viewItem(product)"
            :key="product.documentId"
            :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
-        <span class="w-full">{{ product.name }}</span>
+        <span class="w-full capitalize">{{ product.name }}</span>
         <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
       </div>
       <!-- /products -->

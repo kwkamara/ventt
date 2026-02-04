@@ -126,3 +126,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, .title {
+  font-family: 'Playfair Display', serif;
+}
+</style>
