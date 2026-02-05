@@ -73,10 +73,10 @@
       <!-- /footer box -->
 
       <!-- Copyright bar -->
-      <div class="w-full h-5rem flex align-items-center justify-content-between border-top-1 border-gray-800">
+      <div class="w-full pt-3 lg:pt-4 md:flex align-items-center justify-content-between border-top-1 border-gray-800">
 
         <!-- payments -->
-        <div class="flex-1 flex justify-content-start gap-3 text-xs">
+        <div class="py-2 md:p-0 flex-1 flex justify-content-center lg:justify-content-start gap-3 text-xs text-center">
           <span>Paypal</span>
           <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
           <span>M-PESA</span>
@@ -86,7 +86,7 @@
 
 
         <!-- copyright -->
-        <div class="text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center uppercase">
+        <div class="py-2 md:p-0 text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center uppercase">
           <span>&copy; 2026. Ventt</span>
           <Divider layout="vertical"/>
           <NuxtLink to="https://linkedin.com/in/kwkamara"
@@ -97,7 +97,7 @@
         </div>
 
         <!-- Terms -->
-        <div class="flex-1 flex justify-content-end gap-3 text-xs">
+        <div class="pt-2 md:p-0 flex-1 flex justify-content-center lg:justify-content-end gap-3 text-xs">
           <span>Privacy Policy</span>
           <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
           <span>Terms of Service</span>
