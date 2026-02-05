@@ -120,12 +120,10 @@
         <!-- chart -->
         <div v-if="!manage"
              class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between bg-white">
-          <ClientOnly>
-            <Chart type="bar"
-                   :data="chartData"
-                   :options="chartOptions"
-                   class="lg:h-12rem w-full"/>
-          </ClientOnly>
+          <Chart type="bar"
+                 :data="chartData"
+                 :options="chartOptions"
+                 class="lg:h-12rem w-full"/>
         </div>
         <!-- /chart -->
 
@@ -936,9 +934,12 @@ export default defineComponent({
       ],
 
 
-      //chart data.
+      //chart options.
       chartOptions: {
-        animations         : true,
+        animation          : {
+          duration: 1000,
+          easing  : 'easeOutQuart'
+        },
         responsive         : true,
         maintainAspectRatio: false,
         scales             : {
@@ -956,10 +957,10 @@ export default defineComponent({
             },
           }
         },
-        plugins            : {
-          legend: false,
-        },
+
       },
+
+      chartData: {},
 
       months: ['Jan', "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 
@@ -995,35 +996,6 @@ export default defineComponent({
     //category name.
     category_name() {
       return this.category ? this.category.name : '-';
-    },
-
-
-    //chart data.
-    chartData() {
-      return {
-        labels  : this.months,
-        datasets: [
-          {
-            label          : this.category.name,
-            data           : this.category.annual,
-            backgroundColor: [
-              'rgba(249, 115, 22, 0.6)',   // Vibrant Orange
-              'rgba(6, 182, 212, 0.6)',     // Cyan
-              'rgba(107, 114, 128, 0.6)',   // Cool Gray
-              'rgba(139, 92, 246, 0.6)',    // Soft Purple
-              'rgba(16, 185, 129, 0.6)',    // Emerald Green
-              'rgba(244, 63, 94, 0.6)',     // Pink-Red
-              'rgba(234, 179, 8, 0.6)',     // Gold
-              'rgba(59, 130, 246, 0.6)',    // Blue
-              'rgba(20, 184, 166, 0.6)',    // Teal
-              'rgba(217, 70, 239, 0.6)',    // Fuchsia
-              'rgba(5, 150, 105, 0.6)',     // Dark Green
-              'rgba(220, 38, 38, 0.6)'      // Crimson
-            ],
-            borderRadius   : 20
-          }
-        ]
-      }
     },
 
 
@@ -1077,6 +1049,9 @@ export default defineComponent({
 
       //analyse status.
       this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+
+      //update charts.
+      this.updateCharts();
     },
 
     // ITEM
@@ -1269,11 +1244,42 @@ export default defineComponent({
       // cat.props_r2['return rate'] = cat.state.returned ? (cat.state.returned / item_count).toFixed(2) : 0;
       // cat.props_r2['error rate']  = cat.status.cancelled ? (cat.status.cancelled / item_count).toFixed(2) : 0;
     },
+
+    //chart data.
+    updateCharts() {
+      this.chartData = {
+        labels  : this.months,
+        datasets: [
+          {
+            label          : this.category.name,
+            data           : this.category.annual,
+            backgroundColor: [
+              'rgba(249, 115, 22, 0.6)',   // Vibrant Orange
+              'rgba(6, 182, 212, 0.6)',     // Cyan
+              'rgba(107, 114, 128, 0.6)',   // Cool Gray
+              'rgba(139, 92, 246, 0.6)',    // Soft Purple
+              'rgba(16, 185, 129, 0.6)',    // Emerald Green
+              'rgba(244, 63, 94, 0.6)',     // Pink-Red
+              'rgba(234, 179, 8, 0.6)',     // Gold
+              'rgba(59, 130, 246, 0.6)',    // Blue
+              'rgba(20, 184, 166, 0.6)',    // Teal
+              'rgba(217, 70, 239, 0.6)',    // Fuchsia
+              'rgba(5, 150, 105, 0.6)',     // Dark Green
+              'rgba(220, 38, 38, 0.6)'      // Crimson
+            ],
+            borderRadius   : 20
+          }
+        ]
+      }
+    },
   },
 
   beforeMount() {
     //load first category.
     this.viewCategory(this.menu[0]);
+
+    //charts.
+    this.updateCharts();
   }
 })
 </script>

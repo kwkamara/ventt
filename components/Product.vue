@@ -8,12 +8,12 @@
         <!-- wishlist | cart -->
         <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
           <!-- wishlist -->
-          <VButton :fill="1"
+          <VButton :fill="wishlist[product.documentId]"
                    @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
                    icon="favorite_border"/>
 
           <!-- shopping cart -->
-          <VButton :fill="1"
+          <VButton :fill="cart[product.documentId]"
                    icon="shopping_cart"
                    @click.stop="cart[product.documentId] ? removeFromCart(product) : addToCart(product); notify('cart');"/>
         </div>
