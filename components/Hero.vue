@@ -1,6 +1,5 @@
 <template>
-  <div class="col-12 p-0 flex align-items-center shadow-2 relative overflow-hidden"
-       style="height: 60vh">
+  <div id="hero" class="col-12 p-0 flex align-items-center shadow-2 relative overflow-hidden">
 
     <!-- backgrounds -->
     <Transition name="fade">
@@ -38,10 +37,10 @@
               </Button>
             </NuxtLink>
 
-<!--            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">-->
-<!--              <span>New Arrivals</span>-->
-<!--              <span class="material-icons-outlined">chevron_right</span>-->
-<!--            </Button>-->
+            <!--            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">-->
+            <!--              <span>New Arrivals</span>-->
+            <!--              <span class="material-icons-outlined">chevron_right</span>-->
+            <!--            </Button>-->
           </div>
           <!-- CTA -->
 
@@ -51,6 +50,7 @@
       </div>
 
     </div>
+    <!-- /Content Overlay -->
 
   </div>
 </template>
@@ -103,3 +103,21 @@ export default defineComponent({
 })
 </script>
 
+
+<style scoped>
+#hero {
+  height: 60vh;
+}
+
+@media screen and (min-width: 768px) {
+  #hero {
+    height: 40vh;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #hero {
+    height: 60vh;
+  }
+}
+</style>

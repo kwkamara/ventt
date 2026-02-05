@@ -9,10 +9,10 @@
           <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
             <img src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
           </div>
-          <div class="flex flex flex-column gap-2 text-xs">
-            <div class="title uppercase text-lg">
+          <div class="pt-2 flex flex flex-column gap-2 text-xs">
+            <h2 class="m-0 title uppercase text-lg font-light">
               Ventt | <span class="uppercase">Ecommerce</span>
-            </div>
+            </h2>
             <div>The Premium Ecommerce Solution</div>
 
 
@@ -83,7 +83,7 @@
           <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
           <NuxtLink to="/dashboard" class="no-underline text-gray-400">Dashboard</NuxtLink>
         </div>
-
+        <!-- /payments -->
 
         <!-- copyright -->
         <div class="py-2 md:p-0 text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center uppercase">

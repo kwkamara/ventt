@@ -1,5 +1,5 @@
 <template>
-  <section id="dashboard" class="grid m-0 flex-column text-gray-700 sans-serif">
+  <section id="dashboard" class="grid m-0 flex-column text-gray-700 sans-serif bg-white">
 
     <DNav/>
 

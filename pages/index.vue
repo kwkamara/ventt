@@ -1,7 +1,7 @@
 <template>
 
   <!-- Nav | Categories | Hero -->
-  <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
+  <section class="grid m-0 text-gray-700 select-none overflow-hidden bg-white">
     <Navbar/>
 
     <Categories/>
@@ -12,7 +12,7 @@
 
 
   <!-- New Arrivals -->
-  <section class="grid m-0 pb-7 md:px-7 select-none overflow-hidden">
+  <section class="grid m-0 pb-7 md:px-7 select-none overflow-hidden bg-white">
 
     <!-- title -->
     <div class="col-12 pb-0 pl-2">
@@ -31,7 +31,7 @@
 
 
     <!-- offers display -->
-    <div class="col-12 lg:col-4 lg:pt-1 md:flex lg:flex-column align-items-start gap-3">
+    <div class="col-12 lg:col-4 lg:pt-1 md:flex lg:flex-column align-items-start gap-3 bg-white">
       <ProductDisplay category="men"
                       class="h-16rem"
                       discount="10% Off"
@@ -104,7 +104,7 @@
 
 
   <!--  kids section -->
-  <section class="grid m-0 lg:px-7 lg:py-5 py-2 select-none">
+  <section class="grid m-0 px-3 lg:px-7 lg:py-5 py-2 select-none">
 
     <div class="col-12 md:col-6 px-0">
       <div class="w-full px-2 flex gap-3">

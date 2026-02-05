@@ -1,14 +1,28 @@
 <template>
 
   <!-- name | Description -->
-  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 text-gray-700">
-    <InputText :id="prop.name + '-ip'"
+  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 py-2 text-gray-700">
+
+    <Select v-if="prop.select"
+            :id="prop.name + '-ip'"
+            v-model="item[prop.name]"
+            :optionLabel="prop.label"
+            :options="getCategoryByName(prop.select).data"
+            :placeholder="prop.header || prop.name"
+            class="bg-transparent border-none border-bottom-1 border-gray-400" fluid
+            :option-label="prop.rel || 'name'"
+            option-value="id"/>
+
+    <Textarea v-else-if="prop.name ==='description'" class="w-full bg-white text-sm"/>
+
+    <InputText v-else
+               :id="prop.name + '-ip'"
                autocomplete="off"
                class="text-xs bg-transparent h-3rem border-none border-bottom-1 border-gray-300"
                v-model="item[prop.name]"
                fluid/>
 
-    <label class="mt-1 block text-xs capitalize text-right"
+    <label class="mt-1 text-xs uppercase"
            :for="prop.name + '-ip'">{{ prop.name }}
     </label>
   </div>
@@ -16,7 +30,7 @@
 
 
   <!-- props -->
-  <div class="grid m-0 pt-4 ">
+  <div class="grid m-0 pt-2">
 
     <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 p-4">
 
@@ -63,8 +77,7 @@
                  v-model="item[prop.name]"
                  fluid/>
 
-      <label class="mt-1 pb-1 block text-xs capitalize"
-             :for="prop.name + '-ip'">
+      <label class="mt-1 pb-1 block text-xs capitalize" :for="prop.name + '-ip'">
         {{ prop.header || prop.name }} {{ prop.suffix }}
       </label>
     </div>

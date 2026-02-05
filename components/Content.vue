@@ -21,13 +21,13 @@
 
 
     <!-- content -->
-    <div :class="(is_sidebar ? 'w-9 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none'">
+    <div :class="(is_sidebar ? 'w-9 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none bg-gray-100'">
 
       <!-- left col -->
       <div class="col-12 lg:col-7 md:pl-0 flex flex-column gap-3">
 
         <!-- title bar -->
-        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl">
+        <div class="px-3 py-4 lg:px-4 shadow-1 border-round-xl bg-white">
 
           <!-- category name | category total | dates -->
           <div class="pb-4 md:flex justify-content-between">
@@ -47,8 +47,7 @@
                 <DatePicker id="start-date"
                             date-format="dd/mm/yy"
                             v-model="startDate"
-                            class="lg:w-10rem md:pl-3 mb-1 border-1 border-gray-300 border-round-3xl" fluid/>
-                <label for="start-date">start</label>
+                            class="lg:w-10rem md:pl-3 mb-1 border-1 border-gray-300 border-round-3xl text-white" fluid/>
               </div>
               <!-- /start -->
 
@@ -58,7 +57,6 @@
                             date-format="dd/mm/yy"
                             v-model="endDate"
                             class="lg:w-10rem pl-3 mb-1 border-1 border-gray-300 border-round-3xl" fluid/>
-                <label for="end-date">end</label>
               </div>
               <!-- /end -->
             </div>
@@ -70,11 +68,10 @@
           <!-- report | manage -->
           <Divider unstyled class="pt-3 border-top-1 border-gray-200"/>
           <div class="lg:pt-2 flex justify-content-between align-items-center justify-content-end gap-3">
-            <VButtonCube text="report" icon="article" class="w-8rem border-round-3xl"/>
-            <VButtonCube text="manage"
-                         icon="settings"
-                         class="w-8rem border-round-3xl"
-                         @click="manage ? manage = null : manage='items'"/>
+            <VButton icon="article" class="border-round-3xl"/>
+            <VButton icon="settings"
+                     class="border-round-3xl"
+                     @click="manage ? manage = null : manage='items'"/>
           </div>
           <!-- /report | manage -->
 
@@ -83,34 +80,35 @@
 
 
         <!-- metrics -->
-        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
-          <div v-for="metric in category.metrics" class="w-4">
-            <h2 class="m-0 font-light">{{ metric.value }}</h2>
-
-            <div class="capitalize flex align-items-center gap-1 text-sm">
-              <Icon :icon="metric.icon" class=""/>
-              <span class="">{{ metric.name }}</span>
+        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
+          <template v-for="(metric, ix) in category.metrics">
+            <div>
+              <h2 class="m-0 font-light">{{ metric.value }}</h2>
+              <div class="capitalize flex align-items-center gap-1 text-sm">
+                <Icon :icon="metric.icon" class="text-sm lg:text-base"/>
+                <span>{{ metric.name }}</span>
+              </div>
             </div>
-
-          </div>
+            <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
+          </template>
         </div>
         <!-- /metrics -->
 
 
         <!-- status -->
-        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
-          <div v-for="status in category.status" class="w-4">
-            <h2 class="m-0 font-light">{{ status.value }}</h2>
-
-            <div class="capitalize flex align-items-center gap-1 text-sm">
-              <Icon :icon="status.icon" class=""/>
-              <span class="">{{ status.name }}</span>
+        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
+          <template v-for="(status, ix) in category.status">
+            <div>
+              <h2 class="m-0 font-light">{{ status.value }}</h2>
+              <div class="capitalize flex align-items-center gap-1 text-sm">
+                <Icon :icon="status.icon" class=""/>
+                <span class="">{{ status.name }}</span>
+              </div>
             </div>
-
-          </div>
+            <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
+          </template>
         </div>
         <!-- /status -->
-
 
       </div>
       <!-- /left col -->
@@ -121,7 +119,7 @@
 
         <!-- chart -->
         <div v-if="!manage"
-             class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
+             class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between bg-white">
           <ClientOnly>
             <Chart type="bar"
                    :data="chartData"
@@ -133,7 +131,7 @@
 
 
         <!-- recent -->
-        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden">
+        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-round-xl overflow-hidden bg-white">
 
           <!-- header -->
           <div class="px-3 md:px-4 pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
@@ -171,7 +169,7 @@
 
 
         <!-- manage -->
-        <div v-if="manage" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden">
+        <div v-if="manage" class="pt-3 shadow-1 border-round-xl overflow-hidden bg-white">
 
           <!-- search -->
           <template v-if="manage==='items'">
@@ -211,7 +209,7 @@
             <!-- /columns -->
 
             <!-- edit -->
-            <Column claass="4rem">
+            <Column class="w-4rem">
               <template #body="{data}">
                 <Button class="bg-transparent text-gray-400 hover:text-yellow-600 lg:justify-content-end"
                         text @click.stop="editItem(data)">
@@ -228,15 +226,20 @@
           <div v-if="manage !=='items'" class="p-3 pt-0 pb-2 flex justify-content-between align-items-center">
 
             <!-- category name | item id -->
-            <div class="m-0 lg:pl-2 font-light text-xl capitalize flex gap-1 align-items-center">
-              <span>{{ category.name }} </span>
-              <Icon icon="chevron_right"/>
-              <span>{{ item ? (item.name || item.id) : 'New Item' }}</span>
+            <div class="m-0 lg:pl-2 font-light text-xl text-purple-800 capitalize flex gap-1 align-items-center">
+              <div>
+                <div>{{ item ? (item.name || item.id) : 'New Item' }}</div>
+                <div class="mt-1 flex align-items-center">
+                  <Icon :icon="category.icon" class="text-sm text-gray-700"/>
+                  <span class="ml-1 text-xs uppercase text-gray-700">{{ category.name }} </span>
+                </div>
+              </div>
+
             </div>
             <!-- /category name | item id -->
 
             <!-- controls -->
-            <div class="flex align-items-center gap-3">
+            <div class="pr-2 flex align-items-center gap-3">
 
               <template v-if="item">
                 <VButton v-if="manage!=='edit'" icon="edit" @click="manage='edit';"/>
@@ -260,8 +263,11 @@
 
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])" class="col-12 py-3">
-              <div>{{ prop.prefix }} {{ item[prop.name] }} {{ prop.suffix }}</div>
-              <span class="mt-1 text-xs capitalize text-gray-500">{{ prop.header || prop.name }}</span>
+              <div>{{ prop.prefix }} {{ item[prop.name] }}</div>
+              <span class="mt-1 text-xs capitalize text-gray-500">
+                {{ prop.header || prop.name }}
+                {{ prop.suffix }}
+              </span>
             </div>
             <!-- /Key props -->
 
@@ -274,10 +280,11 @@
 
               <div v-else>
                 {{ prop.prefix }}
-                {{ item[prop.name] }}
-                {{ prop.suffix }}
+                {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
               </div>
-              <span class="mt-1 text-xs capitalize">{{ prop.name }}</span>
+              <span class="mt-1 text-xs capitalize">
+                {{ prop.name }} {{ prop.suffix }}
+              </span>
             </div>
             <!-- /other props -->
 
@@ -338,6 +345,7 @@ export default defineComponent({
           description: "Client global orders",
           icon       : "shopping_cart",
           total      : 0,
+          annual     : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
           //struct.
           props: [
@@ -481,9 +489,10 @@ export default defineComponent({
 
         //PRODUCTS.
         {
-          name : "products",
-          icon : "grid_view",
-          total: 0,
+          name  : "products",
+          icon  : "grid_view",
+          total : 0,
+          annual: [100, 325, 300, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
           //struct.
           props: [
@@ -681,9 +690,10 @@ export default defineComponent({
 
         //CUSTOMERS.
         {
-          name : "customers",
-          icon : "group",
-          total: 0,
+          name  : "customers",
+          icon  : "group",
+          total : 0,
+          annual: [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
           //struct.
           props: [
@@ -749,7 +759,6 @@ export default defineComponent({
             },
           ],
 
-
           //analysis.
           metrics_1: {local: 0, foreign: 0},
 
@@ -771,6 +780,7 @@ export default defineComponent({
           icon    : "group_add",
           quantity: 0,
           total   : 0,
+          annual  : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
           //struct.
           props: [
@@ -928,10 +938,7 @@ export default defineComponent({
 
       //chart data.
       chartOptions: {
-        animation          : {
-          duration: 1000,
-          easing  : 'easeOutQuart'
-        },
+        animations         : true,
         responsive         : true,
         maintainAspectRatio: false,
         scales             : {
@@ -997,9 +1004,8 @@ export default defineComponent({
         labels  : this.months,
         datasets: [
           {
-            // barThickness   : 50,
-            label          : "Orders",
-            data           : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
+            label          : this.category.name,
+            data           : this.category.annual,
             backgroundColor: [
               'rgba(249, 115, 22, 0.6)',   // Vibrant Orange
               'rgba(6, 182, 212, 0.6)',     // Cyan
@@ -1014,9 +1020,7 @@ export default defineComponent({
               'rgba(5, 150, 105, 0.6)',     // Dark Green
               'rgba(220, 38, 38, 0.6)'      // Crimson
             ],
-            // borderColor    : ['rgb(249, 115, 22)', 'rgb(6, 182, 212)', 'rgb(107, 114, 128)', 'rgb(139, 92, 246)'],
-            // borderWidth    : 1,
-            borderRadius: 20
+            borderRadius   : 20
           }
         ]
       }
@@ -1056,11 +1060,8 @@ export default defineComponent({
       //load products.
       if (category.name === 'products') this.loadProducts();
 
-      //analyse metrics.
-      //metrics init.
-      this.category.metrics
-          .forEach(metric => metric.value = this.category.data
-              .filter(item => item.status === metric.name).length);
+      //process category.
+      this.processCategory();
     },
 
     //get category.
@@ -1068,6 +1069,15 @@ export default defineComponent({
       return this.menu.find(cat => cat.name === cat_name);
     },
 
+
+    //processCategory
+    processCategory() {
+      //analyse metrics.
+      this.category.metrics.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+
+      //analyse status.
+      this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+    },
 
     // ITEM
     viewItem(item) {
@@ -1103,6 +1113,9 @@ export default defineComponent({
 
       //switch mode.
       this.manage = 'info';
+
+      //process category.
+      this.processCategory();
     },
 
     loadProducts() {
