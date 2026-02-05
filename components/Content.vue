@@ -27,7 +27,7 @@
       <div class="col-12 lg:col-7 md:pl-0 flex flex-column gap-3">
 
         <!-- title bar -->
-        <div class="px-3 py-4 lg:px-4 shadow-1 border-round-xl bg-white">
+        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl bg-white">
 
           <!-- category name | category total | dates -->
           <div class="pb-4 md:flex justify-content-between">
@@ -131,7 +131,7 @@
 
 
         <!-- recent -->
-        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-round-xl overflow-hidden bg-white">
+        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
 
           <!-- header -->
           <div class="px-3 md:px-4 pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
@@ -169,7 +169,7 @@
 
 
         <!-- manage -->
-        <div v-if="manage" class="pt-3 shadow-1 border-round-xl overflow-hidden bg-white">
+        <div v-if="manage" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
 
           <!-- search -->
           <template v-if="manage==='items'">
