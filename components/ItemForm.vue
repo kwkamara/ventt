@@ -16,7 +16,7 @@
 
 
   <!-- props -->
-  <div class="grid m-0 pt-4 text-gray-700">
+  <div class="grid m-0 pt-4 ">
 
     <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 p-4">
 
@@ -48,7 +48,14 @@
               :placeholder="prop.header || prop.name"
               class="bg-transparent border-none border-bottom-1 border-gray-400" fluid
               :option-label="prop.rel || 'name'"
-              option-value="documentId"/>
+              option-value="id"/>
+
+      <InputText v-else-if="prop.number"
+                 type="number"
+                 :id="prop.name + '-ip'"
+                 class="pl-0 border-none border-bottom-1 border-gray-400"
+                 v-model="item[prop.name]"
+                 fluid/>
 
       <InputText v-else
                  :id="prop.name + '-ip'"
@@ -58,7 +65,7 @@
 
       <label class="mt-1 pb-1 block text-xs capitalize"
              :for="prop.name + '-ip'">
-        {{ prop.header || prop.name }}
+        {{ prop.header || prop.name }} {{ prop.suffix }}
       </label>
     </div>
 
@@ -93,11 +100,16 @@ export default defineComponent({
 
     //item update.
     updateItem() {
-      //emit.
-      this.$emit('update', this.item);
 
       //notify popup.
-      this.$toast.add({severity: "info", summary: "item updated", life: 1000});
+      this.$toast.add({
+        severity: "info",
+        summary : this.item.documentId ? "item updated" : "item added",
+        life    : 1000
+      });
+
+      //emit.
+      this.$emit('update', this.item);
     }
 
 

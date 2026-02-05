@@ -19,78 +19,80 @@
 
       <!-- login box -->
       <div class="w-9 lg:w-5">
+        <form autocomplete="off">
+          <!-- email -->
+          <div class="pb-3">
+            <InputText id="email-ip"
+                       class="h-3rem w-full block border-none border-bottom-1 border-gray-400 bg-white"
+                       fluid placeholder="Enter your email"
+                       autoComplete="new-password"
+                       type="text" unstyled/>
+            <label for="email-ip" class="text-xs text-gray-600">Email</label>
+          </div>
+          <!-- /email -->
 
-        <!-- email -->
-        <div class="pb-3">
-          <InputText id="email-ip"
-                     class="h-3rem w-full block border-none border-bottom-1 border-gray-400 bg-white"
-                     fluid placeholder="Enter your email"
-                     type="text" unstyled/>
-          <label for="email-ip" class="text-xs text-gray-600">Email</label>
-        </div>
-        <!-- /email -->
 
+          <!-- password -->
+          <div v-if="['register','login'].includes(mode)">
+            <InputText id="password-ip"
+                       :feedback="false"
+                       class="h-3rem w-full block border-none border-bottom-1 border-gray-400" fluid
+                       placeholder="Password"
+                       type="password" unstyled/>
 
-        <!-- password -->
-        <div v-if="['register','login'].includes(mode)">
-          <InputText id="password-ip"
-                     :feedback="false"
-                     class="h-3rem w-full block border-none border-bottom-1 border-gray-400" fluid
-                     placeholder="Password"
-                     type="password" unstyled/>
+            <div class="pb-3 flex justify-content-between">
 
-          <div class="pb-3 flex justify-content-between">
+              <label for="password-ip" class="block pt-1 text-xs text-gray-600">
+                Password
+              </label>
 
-            <label for="password-ip" class="block pt-1 text-xs text-gray-600">
-              Password
-            </label>
-
-            <!-- reset password -->
-            <div v-if="mode==='login'" class="text-right">
+              <!-- reset password -->
+              <div v-if="mode==='login'" class="text-right">
               <span class="text-gray-700 hover:text-purple-700 text-xs cursor-pointer" @click="mode='reset password'">
                 forgot password?
               </span>
+              </div>
+              <!-- reset password -->
             </div>
-            <!-- reset password -->
+
           </div>
-
-        </div>
-        <!-- /password -->
+          <!-- /password -->
 
 
-        <!-- confirm password -->
-        <div v-if="mode==='register'" class="pb-6 flex flex-column gap-1">
-          <InputText id="password-confirm-ip"
-                     :feedback="false"
-                     class="h-3rem w-full block border-none border-bottom-1 border-gray-400" fluid
-                     placeholder="Password"
-                     type="password" unstyled/>
-          <label for="password-confirm-ip" class="block text-xs text-gray-600">
-            Confirm password
-          </label>
-        </div>
-        <!-- /confirm password -->
+          <!-- confirm password -->
+          <div v-if="mode==='register'" class="pb-6 flex flex-column gap-1">
+            <InputText id="password-confirm-ip"
+                       :feedback="false"
+                       class="h-3rem w-full block border-none border-bottom-1 border-gray-400" fluid
+                       placeholder="Password"
+                       type="password" unstyled/>
+            <label for="password-confirm-ip" class="block text-xs text-gray-600">
+              Confirm password
+            </label>
+          </div>
+          <!-- /confirm password -->
 
 
-        <!-- submit -->
-        <div class="pb-3">
-          <VButtonCube :text="mode"
-                       class="w-full"
-                       :icon="mode==='login' ? 'lock' : 'account_circle'" fill="1"/>
-        </div>
-        <!-- /submit -->
+          <!-- submit -->
+          <div class="pb-3">
+            <VButtonCube :text="mode"
+                         class="w-full"
+                         :icon="mode==='login' ? 'lock' : 'account_circle'" fill="1"/>
+          </div>
+          <!-- /submit -->
 
 
-        <Divider/>
-        <div class="pb-1 uppercase text-gray-600 text-center"> or</div>
+          <Divider/>
+          <div class="pb-1 uppercase text-gray-600 text-center"> or</div>
 
 
-        <!-- login | register -->
-        <div class="h-4rem flex justify-content-end align-items-center gap-4">
-          <VButtonCube v-if="mode!=='register'" class="w-full" text="Register" icon="person_add" @click="mode='register'"/>
-          <VButtonCube v-if="mode!=='login'" class="w-full" text="Login" icon="account_circle" @click="mode='login'"/>
-        </div>
-        <!-- /login | register -->
+          <!-- login | register -->
+          <div class="h-4rem flex justify-content-end align-items-center gap-4">
+            <VButtonCube v-if="mode!=='register'" class="w-full" text="Register" icon="person_add" @click="mode='register'"/>
+            <VButtonCube v-if="mode!=='login'" class="w-full" text="Login" icon="account_circle" @click="mode='login'"/>
+          </div>
+          <!-- /login | register -->
+        </form>
 
       </div>
       <!-- /login box -->

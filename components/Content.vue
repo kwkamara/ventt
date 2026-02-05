@@ -4,7 +4,7 @@
     <!-- menu -->
     <div v-if="is_sidebar"
          @click="useState('item').value=null;"
-         class="w-3 md:w-2 lg:w-1 py-5 px-2 h-full bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
+         class="w-3 md:w-2 lg:w-1 py-5 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
 
       <Button v-for="cat in menu.filter(m => !m.parent)"
               @click="viewCategory(cat)"
@@ -12,7 +12,7 @@
               ' w-5rem h-4rem border-none shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
         <div class="text-center">
           <span class="material-icons-outlined">{{ cat.icon }}</span>
-          <div class="text-xs capitalize pt-1">{{ cat.name }}</div>
+          <div class="text-xs capitalize">{{ cat.name }}</div>
         </div>
       </Button>
 
@@ -21,7 +21,7 @@
 
 
     <!-- content -->
-    <div :class="(is_sidebar ? 'w-9 lg:w-11' : 'w-full') + ' grid m-0 lg:px-5 pt-4 select-none'">
+    <div :class="(is_sidebar ? 'w-9 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none'">
 
       <!-- left col -->
       <div class="col-12 lg:col-7 md:pl-0 flex flex-column gap-3">
@@ -30,15 +30,15 @@
         <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl">
 
           <!-- category name | category total | dates -->
-          <div class="pb-4 flex justify-content-between">
+          <div class="pb-4 md:flex justify-content-between">
             <!-- category name | category total -->
             <div class="lg:w-6 text-2xl capitalize">
-              <div class="m-0">{{ category.name }}</div>
-              <span class="m-0">{{ formatDecimal(category.total) }}</span>
+              <div>{{ category.name }}</div>
+              <span>{{ category.data.length }}</span>
             </div>
             <!-- category name | category total -->
 
-            <Divider layout="vertical" unstyled class="h-3rem pr-3 border-left-1 border-gray-200"/>
+            <Divider layout="vertical" unstyled class="hidden md:block h-3rem pr-3 border-left-1 border-gray-200"/>
 
             <!-- dates -->
             <div class="flex gap-3 justify-content-end text-sm text-gray-700">
@@ -47,7 +47,7 @@
                 <DatePicker id="start-date"
                             date-format="dd/mm/yy"
                             v-model="startDate"
-                            class="lg:w-10rem pl-3 mb-1 border-1 border-gray-300 border-round-3xl" fluid/>
+                            class="lg:w-10rem md:pl-3 mb-1 border-1 border-gray-300 border-round-3xl" fluid/>
                 <label for="start-date">start</label>
               </div>
               <!-- /start -->
@@ -84,9 +84,14 @@
 
         <!-- metrics -->
         <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
-          <div v-for="(amount, metric) in category.metrics">
-            <h2 class="m-0 font-light">{{ formatDecimal(amount) }}</h2>
-            <span class="text-sm">{{ metric }}</span>
+          <div v-for="metric in category.metrics" class="w-4">
+            <h2 class="m-0 font-light">{{ metric.value }}</h2>
+
+            <div class="capitalize flex align-items-center gap-1 text-sm">
+              <Icon :icon="metric.icon" class=""/>
+              <span class="">{{ metric.name }}</span>
+            </div>
+
           </div>
         </div>
         <!-- /metrics -->
@@ -94,116 +99,18 @@
 
         <!-- status -->
         <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
-          <div v-for="(amount, metric) in category.status">
-            <h2 class="m-0 font-light">{{ formatDecimal(amount) }}</h2>
-            <span class="text-sm">{{ metric }}</span>
+          <div v-for="status in category.status" class="w-4">
+            <h2 class="m-0 font-light">{{ status.value }}</h2>
+
+            <div class="capitalize flex align-items-center gap-1 text-sm">
+              <Icon :icon="status.icon" class=""/>
+              <span class="">{{ status.name }}</span>
+            </div>
+
           </div>
         </div>
         <!-- /status -->
 
-
-        <!-- chart | table | item -->
-        <div v-if="false" class="w-full lg:h-fit overflow-hidden bg-white border-1 border-gray-200 border-round-top overflow-hidden">
-
-          <!-- header -->
-          <div class="h-3rem pl-2 flex align-items-center justify-content-between border-bottom-1 border-gray-200 bg-purple-700">
-
-            <!-- item table toggle -->
-            <Button :label="category_name"
-                    class="text-white text-sm font-light capitalize bg-transparent hover:text-yellow-600"
-                    text
-                    @click="useState('item').value=null"/>
-
-
-            <div class="flex gap-4 pr-3">
-              <template v-if="!item">
-                <!-- set dates -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-calendar text-lg" text @click="$refs.datePickerPop.toggle($event)"/>
-                <Popover ref="datePickerPop">
-                  <div class="w-20rem p-4 flex flex-column gap-3 text-purple-600">
-
-                    <!-- start date -->
-                    <div>
-                      <div class="text-xs pb-1">start</div>
-                      <DatePicker v-model="startDate" date-format="dd-mm-yy" fluid show-time/>
-                    </div>
-
-                    <!-- end date -->
-                    <div>
-                      <div class="text-xs pb-1">end</div>
-                      <DatePicker v-model="endDate" date-format="dd-mm-yy" fluid show-time/>
-                    </div>
-
-                    <!-- submit -->
-                    <div class="h-4rem flex align-items-center">
-                      <Button icon="pi pi-check" label="submit" class="w-full" @click="$refs.datePickerPop.hide()"/>
-                    </div>
-
-                  </div>
-                </Popover>
-
-                <!-- chart | table toggle -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-chart-line text-lg" text @click="displayChart=!displayChart"/>
-
-                <!-- new -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-plus text-lg" text @click="newItemInit"/>
-              </template>
-
-              <template v-else>
-
-              </template>
-            </div>
-
-          </div>
-          <!-- /header -->
-
-          <!-- chart | table | item -->
-          <div>
-            <!-- chart -->
-            <div v-if="displayChart" class="px-4 py-4 lg:pt-5 fadein animation-duration-400">
-              <Chart type="bar" :data="chartData" :options="chartOptions" class="lg:h-18rem"/>
-            </div>
-            <!-- /chart -->
-
-            <!-- items -->
-            <DataTable v-else-if="!item" :rows="8" :show-headers="false" :value="category.items"
-                       data-key="documentId" paginator row-hover table-class="text-xs animation-duration-500 fadein">
-
-              <Column :field="key_props[0]">
-                <template #body="{data}">
-
-                  <div class="w-full h-2rem pl-2 flex align-items-center justify-content-between">
-
-                    <div class="w-full flex align-items-center gap-3 w-full">
-                      <div v-for="column in key_columns" :class="`w-4 lg:w-2 ${ column.decimal ? 'decimal': ''}`">
-                        {{ column.decimal ? formatDecimal(data[column.name]) : data[column.name] }}
-                      </div>
-                    </div>
-
-                    <!-- edit -->
-                    <div class="w-1 pr-3 text-right">
-                      <Button class="bg-transparent text-gray-300 hover:text-yellow-600 lg:justify-content-end"
-                              icon="pi pi-pencil" text @click="viewItem(data)"/>
-                    </div>
-
-                  </div>
-
-                </template>
-              </Column>
-
-            </DataTable>
-            <!-- /items -->
-
-            <!-- item -->
-            <div v-else class="p-4 flex flex-column gap-4 text-sm animation-duration-500 fadein">
-              <ItemForm @update="updateItem()"/>
-            </div>
-            <!-- /item -->
-          </div>
-          <!-- /chart | table | item -->
-
-        </div>
-        <!-- /chart | table | item -->
 
       </div>
       <!-- /left col -->
@@ -215,18 +122,22 @@
         <!-- chart -->
         <div v-if="!manage"
              class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between">
-          <Chart type="bar"
-                 :data="chartData"
-                 :options="chartOptions"
-                 class="lg:h-12rem w-full"/>
+          <ClientOnly>
+            <Chart type="bar"
+                   :data="chartData"
+                   :options="chartOptions"
+                   class="lg:h-12rem w-full"/>
+          </ClientOnly>
         </div>
         <!-- /chart -->
 
 
         <!-- recent -->
-        <div v-if="!manage" class="p-4 pt-3 shadow-1 border-1 border-purple-100 border-round-xl">
+        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden">
 
-          <div class="pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
+          <!-- header -->
+          <div class="px-3 md:px-4 pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
+
             <div class="flex gap-1 align-items-center">
               <span class="material-icons-outlined">access_time</span>
               <h3 class="m-0 font-light">Recent {{ category.name }}</h3>
@@ -234,13 +145,26 @@
 
             <VButton icon="settings" @click="manage='items'"/>
           </div>
+          <!-- /header -->
 
-          <div v-for="item in category.data" :key="item.documentId"
-               class="py-4 text-sm flex justify-content-between border-bottom-1 border-gray-200 hover:text-purple-700">
-            <span v-for="prop in key_props">
-              {{ prop.prefix }} {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
-            </span>
-          </div>
+          <DataTable :show-headers="false"
+                     :value="category.data.slice(0, 4)"
+                     data-key="documentId" row-hover striped-rows
+                     table-class="text-xs animation-duration-500 fadein">
+
+            <!-- columns -->
+            <Column v-for="prop in key_props.filter(p => p.name!== 'description')" :field="prop.name">
+              <template #body="{data}">
+                <div class="py-2 pl-2" @click="manage='info'; item=data">
+                  {{ prop.prefix }}
+                  {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
+                  {{ prop.suffix }}
+                </div>
+              </template>
+            </Column>
+            <!-- columns -->
+
+          </DataTable>
 
         </div>
         <!-- /recent -->
@@ -251,7 +175,7 @@
 
           <!-- search -->
           <template v-if="manage==='items'">
-            <div class="pb-4 pt-2 px-4 flex justify-content-between align-items-center">
+            <div class="pb-4 pt-2 px-3 md:px-4 flex justify-content-between align-items-center gap-2">
               <InputText v-model="filters['global'].value"
                          class="h-3rem text-gray-700 border-1 border-gray-200 border-round-3xl"
                          placeholder="Search"/>
@@ -268,49 +192,45 @@
                      v-model:filters="filters"
                      :globalFilterFields="['name', 'id', 'description', 'customer']"
                      filterDisplay="row"
-                     :rows="8"
+                     :rows="5"
                      :show-headers="false"
                      :value="category.data"
                      data-key="documentId" paginator row-hover
                      table-class="text-xs animation-duration-500 fadein">
 
-            <Column :field="key_props[0].field">
+            <!-- columns -->
+            <Column v-for="(prop, ix) in tbl_columns" :field="prop.name">
               <template #body="{data}">
-
-                <div class="pl-2 flex align-items-center justify-content-between"
-                     @click="viewItem(data)">
-
-                  <!-- item data -->
-                  <div class="w-full flex align-items-center gap-3 w-full">
-                    <div v-for="column in tbl_columns"
-                         :class="`w-4 lg:w-2 ${ column.decimal ? 'decimal': ''}`">
-                      {{ column.prefix }} {{ column.decimal ? formatDecimal(data[column.name]) : data[column.name] }}
-                    </div>
-                  </div>
-                  <!-- /item data -->
-
-                  <!-- edit -->
-                  <Button class="bg-transparent text-gray-400 hover:text-yellow-600 lg:justify-content-end"
-                          text @click.stop="editItem(data)">
-                    <span class="material-icons-outlined">edit</span>
-                  </Button>
+                <div class="py-2 pl-3 white-space-nowrap" @click="manage='info'; item=data">
+                  {{ prop.prefix }}
+                  {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
+                  {{ prop.suffix }}
                 </div>
-
               </template>
             </Column>
+            <!-- /columns -->
+
+            <!-- edit -->
+            <Column claass="4rem">
+              <template #body="{data}">
+                <Button class="bg-transparent text-gray-400 hover:text-yellow-600 lg:justify-content-end"
+                        text @click.stop="editItem(data)">
+                  <span class="material-icons-outlined">edit</span>
+                </Button>
+              </template>
+            </Column>
+
           </DataTable>
           <!-- /items -->
 
 
           <!-- header -->
-          <div v-if="manage !=='items'"
-               class="p-3 pt-0 pb-2 flex justify-content-between align-items-center">
+          <div v-if="manage !=='items'" class="p-3 pt-0 pb-2 flex justify-content-between align-items-center">
 
             <!-- category name | item id -->
-            <div class="m-0 font-light text-xl capitalize flex gap-2">
+            <div class="m-0 lg:pl-2 font-light text-xl capitalize flex gap-1 align-items-center">
               <span>{{ category.name }} </span>
               <Icon icon="chevron_right"/>
-              <!--              <Divider unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>-->
               <span>{{ item ? (item.name || item.id) : 'New Item' }}</span>
             </div>
             <!-- /category name | item id -->
@@ -327,6 +247,7 @@
               <VButton icon="close" @click="manage='items'; item=null"/>
             </div>
             <!-- /controls -->
+
           </div>
           <!-- header -->
 
@@ -335,19 +256,30 @@
 
 
           <!-- details grid -->
-          <div class="grid m-0 px-3" v-if="manage==='info' && item">
+          <div class="grid m-0 px-3 pb-2" v-if="manage==='info' && item">
+
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])" class="col-12 py-3">
-              <div>{{ item[prop.name] }}</div>
-              <span class="mt-1 text-xs">{{ prop.header || prop.name }}</span>
+              <div>{{ prop.prefix }} {{ item[prop.name] }} {{ prop.suffix }}</div>
+              <span class="mt-1 text-xs capitalize text-gray-500">{{ prop.header || prop.name }}</span>
             </div>
-            <!-- /name | Description -->
+            <!-- /Key props -->
 
-            <!-- props -->
-            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-12 py-3">
-              <div>{{ item[prop.name] }}</div>
-              <span class="mt-1 text-xs">{{ prop.name }}</span>
+            <!-- other props -->
+            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 py-3">
+              <!-- rating -->
+              <div v-if="prop.name === 'rating'" class="flex align-items-center">
+                <span v-for="rate in Number(item.rating)" class="material-icons text-xl text-yellow-600">star</span>
+              </div>
+
+              <div v-else>
+                {{ prop.prefix }}
+                {{ item[prop.name] }}
+                {{ prop.suffix }}
+              </div>
+              <span class="mt-1 text-xs capitalize">{{ prop.name }}</span>
             </div>
+            <!-- /other props -->
 
           </div>
           <!-- /details grid -->
@@ -366,281 +298,6 @@
 
         </div>
         <!-- /manage -->
-
-
-        <!-- chart | table | item -->
-        <div v-if="false" class="w-full lg:h-fit overflow-hidden bg-white border-1 border-gray-200 border-round-top overflow-hidden">
-
-          <!-- header -->
-          <div class="h-3rem pl-2 flex align-items-center justify-content-between border-bottom-1 border-gray-200 bg-purple-700">
-
-            <!-- item table toggle -->
-            <Button :label="category_name"
-                    class="text-white text-sm font-light capitalize bg-transparent hover:text-yellow-600"
-                    text
-                    @click="useState('item').value=null"/>
-
-
-            <div class="flex gap-4 pr-3">
-              <template v-if="!item">
-                <!-- set dates -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-calendar text-lg" text @click="$refs.datePickerPop.toggle($event)"/>
-                <Popover ref="datePickerPop">
-                  <div class="w-20rem p-4 flex flex-column gap-3 text-purple-600">
-
-                    <!-- start date -->
-                    <div>
-                      <div class="text-xs pb-1">start</div>
-                      <DatePicker v-model="startDate" date-format="dd-mm-yy" fluid show-time/>
-                    </div>
-
-                    <!-- end date -->
-                    <div>
-                      <div class="text-xs pb-1">end</div>
-                      <DatePicker v-model="endDate" date-format="dd-mm-yy" fluid show-time/>
-                    </div>
-
-                    <!-- submit -->
-                    <div class="h-4rem flex align-items-center">
-                      <Button icon="pi pi-check" label="submit" class="w-full" @click="$refs.datePickerPop.hide()"/>
-                    </div>
-
-                  </div>
-                </Popover>
-
-                <!-- chart | table toggle -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-chart-line text-lg" text @click="displayChart=!displayChart"/>
-
-                <!-- new -->
-                <Button class="text-white bg-transparent hover:text-yellow-600" icon="pi pi-plus text-lg" text @click="newItemInit"/>
-              </template>
-
-              <template v-else>
-
-              </template>
-            </div>
-
-          </div>
-          <!-- /header -->
-
-          <!-- chart | table | item -->
-          <div>
-            <!-- chart -->
-            <div v-if="displayChart" class="px-4 py-4 lg:pt-5 fadein animation-duration-400">
-              <Chart type="bar" :data="chartData" :options="chartOptions" class="lg:h-18rem"/>
-            </div>
-            <!-- /chart -->
-
-            <!-- items -->
-            <DataTable v-else-if="!item" :rows="8" :show-headers="false" :value="category.items"
-                       data-key="documentId" paginator row-hover table-class="text-xs animation-duration-500 fadein">
-
-              <Column :field="key_props[0]">
-                <template #body="{data}">
-
-                  <div class="w-full h-2rem pl-2 flex align-items-center justify-content-between">
-
-                    <div class="w-full flex align-items-center gap-3 w-full">
-                      <div v-for="column in key_columns" :class="`w-4 lg:w-2 ${ column.decimal ? 'decimal': ''}`">
-                        {{ column.decimal ? formatDecimal(data[column.name]) : data[column.name] }}
-                      </div>
-                    </div>
-
-                    <!-- edit -->
-                    <div class="w-1 pr-3 text-right">
-                      <Button class="bg-transparent text-gray-300 hover:text-yellow-600 lg:justify-content-end"
-                              icon="pi pi-pencil" text @click="viewItem(data)"/>
-                    </div>
-
-                  </div>
-
-                </template>
-              </Column>
-
-            </DataTable>
-            <!-- /items -->
-
-            <!-- item -->
-            <div v-else class="p-4 pt-6 flex flex-column gap-4 text-sm animation-duration-500 fadein">
-              <ItemForm @update="updateItem()"/>
-            </div>
-            <!-- /item -->
-          </div>
-          <!-- /chart | table | item -->
-
-        </div>
-        <!-- /chart | table | item -->
-
-      </div>
-      <!-- /right col -->
-
-
-      <!-- right col -->
-      <div v-if="false" class="col-12 lg:col-4 lg:pt-0 px-3 flex flex-column">
-
-        <!-- item gallery | properties | files -->
-        <div class="fadein animation-duration-400" v-if="item">
-
-          <!-- header -->
-          <div class="h-3rem flex align-items-center cursor-pointer justify-content-between border-bottom-1 border-gray-200 text-white text-sm capitalize border-round-top overflow-hidden">
-            <Button :class="`h-full w-full pl-4 border-noround-right border-noround-bottom font-light text-sm ${right_col==='gallery'? 'bg-purple-700 text-white':'bg-gray-200 text-gray-600'}`"
-                    :disabled="!item.documentId" label="Gallery" text @click="right_col='gallery'"/>
-
-            <Button :class="`h-full w-full pl-4 border-noround font-light text-sm ${right_col==='properties'? 'bg-purple-700 text-white':'bg-gray-300 text-gray-600'}`"
-                    label="Properties" text @click="right_col='properties'"/>
-
-            <Button :class="`h-full w-full pl-4 border-noround-left border-noround-bottom font-light text-sm ${right_col==='files'? 'bg-purple-700 text-white':'bg-gray-200 text-gray-600'}`"
-                    :disabled="!item.documentId" label="Files" text @click="right_col='files'"/>
-          </div>
-          <!-- /header -->
-
-
-          <!-- gallery -->
-          <template v-if="right_col==='gallery'">
-            <div v-for="ix in [0,1,2]" class="h-8rem p-3 my-1 bg-white border-1 border-gray-200 border-round hover:shadow-1 flex justify-content-between align-items-end fadein animation-duration-400">
-              <img :src="item.images[ix] ? item.images[ix].url : '/missing.webp'"
-                   class="w-4 h-full border-round shadow-1" :alt="item.name"/>
-
-              <div class="text-xs w-4 flex align-items-center">
-                <Button v-if="item.images[ix]" class="text-gray-500 hover:text-red-500 bg-transparent" icon="pi pi-trash" text @click="$refs.delImagePopover.toggle($event)"/>
-                <FileUpload v-else :disabled="!item.documentId" choose-icon="pi pi-image" choose-label="update" class="h-2rem text-xs w-8rem" :max-file-size="1000000" accept=".jpg, .webp"
-                            mode="basic"/>
-              </div>
-            </div>
-          </template>
-          <!-- /gallery -->
-
-
-          <!-- properties -->
-          <div v-else-if="right_col==='properties'" class="border-1 border-gray-200 bg-white fadein animation-duration-400">
-
-            <div class="h-4rem pl-4 flex align-items-center">{{ item.name || 'New Item' }}</div>
-
-            <!-- categories -->
-            <div v-if="category_name==='products'"
-                 class="py-5 p-4 lg:pl-2 lg:pr-2 flex justify-content-between align-items-center text-xs">
-
-              <!-- men | women | kids -->
-              <div class="md:px-3 flex flex-column gap-5">
-                <div v-for="cat in ['men', 'women', 'kids', 'girls', 'boys']" class="w-full flex align-items-end gap-2">
-                  <Checkbox v-model="useState('item').value.categories[cat]" binary class="m-0"/>
-                  <span class="capitalize">{{ cat }}</span>
-                </div>
-              </div>
-              <!-- /men | women | kids -->
-
-
-              <!-- official | casual | accessories -->
-              <div class="lg:px-4 flex flex-column align-items-end gap-5">
-                <div v-for="cat in ['official', 'casual', 'accessories', 'shoes', 'hats']" class="w-full flex align-items-end justify-content-end gap-2">
-                  <span class="capitalize">{{ cat }}</span>
-                  <Checkbox class="m-0" v-model="useState('item').value.categories[cat]" binary/>
-                </div>
-              </div>
-              <!-- /official | casual | accessories -->
-
-            </div>
-            <!-- /categories -->
-
-            <!-- statuses -->
-            <div class="fadein animation-duration-400">
-
-              <!-- status | priority -->
-              <div class="py-5 p-4 lg:pl-2 lg:pr-2 flex justify-content-between align-items-center bg-white border-top-1 border-gray-200 text-xs">
-
-                <!-- status -->
-                <div class="md:px-3 flex flex-column gap-5">
-                  <div v-for="(val, prop) in category.status" class="w-full flex align-items-center gap-2">
-                    <RadioButton v-model="useState('item').value.status" :value="prop" class="m-0" name="status"/>
-                    <span class="capitalize">{{ prop }}</span>
-                  </div>
-                </div>
-                <!-- /status -->
-
-                <!-- priority -->
-                <div class="lg:px-4 flex flex-column align-items-end gap-5">
-                  <div v-for="(val, prop) in category.state"
-                       class="w-full flex align-items-center justify-content-end gap-2">
-                    <span class="capitalize">{{ prop }}</span>
-                    <RadioButton class="m-0" v-model="useState('item').value.state" name="state" :value="prop"/>
-                  </div>
-                </div>
-                <!-- /priority -->
-
-              </div>
-              <!-- status | priority -->
-
-            </div>
-            <!-- /statuses -->
-
-          </div>
-          <!-- /properties -->
-
-
-          <!-- files -->
-          <template v-if="right_col==='files'">
-
-            <!-- new file -->
-            <div class="p-4 flex flex-column align-items-start gap-3 bg-black-alpha-10">
-
-              <FileUpload :disabled="!item.documentId"
-                          accept=".doc, .docx., .pdf, .txt, .png, .jpg, .webp" choose-icon="pi pi-file" choose-label="File"
-                          class="h-2rem text-xs w-8rem bg-purple-700 text-white border-none" max-file-size="1000000" mode="basic"/>
-
-              <div class="flex flex-column gap-3 w-full">
-                <div>
-                  <label for="filename-ip" class="text-xs">file details</label>
-                  <InputText id="filename-ip" class="pt-1" fluid/>
-                </div>
-                <Button class="bg-purple-700 text-white text-sm border-none" label="upload"/>
-              </div>
-
-            </div>
-            <!-- /new file -->
-
-
-            <div v-for="ix in [0,1,2]"
-                 class="h-3rem pl-4 pr-2 my-2 bg-white capitalize border-1 border-gray-200 border-round hover:shadow-1 flex justify-content-between align-items-center fadein animation-duration-400">
-
-              <div class="flex align-items-center gap-3">
-                <i class="pi pi-paperclip text-lg"/>
-                <span class="text-sm">Attachment name</span>
-              </div>
-
-
-              <div class="text-xs w-4 flex align-items-center justify-content-end gap-4">
-                <Button class="text-gray-500 hover:text-yellow-600 bg-transparent" icon="pi pi-info-circle" text
-                        @click="$refs.attachmentInfoPopover.toggle($event)"/>
-
-                <Button class="text-gray-500 hover:text-red-500 bg-transparent" icon="pi pi-trash" text
-                        @click="$refs.delImagePopover.toggle($event)"/>
-              </div>
-
-            </div>
-
-          </template>
-          <!-- /files -->
-
-
-          <!-- delete image -->
-          <Popover ref="delImagePopover">
-            <div class="w-10rem p-3 flex">
-              <Button class="w-full text-sm" icon="pi pi-trash" label="Confirm" severity="danger"
-                      @click="$refs.delImagePopover.hide()"/>
-            </div>
-          </Popover>
-          <!-- /delete image -->
-
-          <!-- attachment info -->
-          <Popover ref="attachmentInfoPopover">
-            <div class="w-30rem p-3 flex">
-              File / image details here...
-            </div>
-          </Popover>
-          <!-- /attachment info -->
-
-        </div>
-        <!-- /item gallery | properties | files -->
 
       </div>
       <!-- /right col -->
@@ -712,7 +369,6 @@ export default defineComponent({
               decimal: 1
             },
 
-            //enums.
             {
               name: "status",
               enum: ['delivered', 'shipped', 'processing', 'cancelled', 'approved', 'returned'],
@@ -726,35 +382,55 @@ export default defineComponent({
 
             {
               name  : "customer",
+              key   : 1,
               select: "customers",
-              rel   : "name"
+              rel   : "name",
+              prefix: "cust-"
             },
           ],
 
           //metrics.
-          metrics: {
-            approved  : 0,
-            processing: 0,
-            cancelled : 0
-          },
+          metrics: [
+            {
+              name : "approved",
+              value: 0,
+              icon : "beenhere"
+            },
+            {
+              name : "processing",
+              value: 0,
+              icon : "info"
+            },
+            {
+              name : "cancelled",
+              value: 0,
+              icon : "block"
+            },
+          ],
 
           //status.
-          status: {
-            shipped  : 0,
-            delivered: 0,
-            returned : 0
-          },
+          status: [
+            {
+              name : "shipped",
+              value: 0,
+              icon : "local_shipping"
+            },
+            {
+              name : "delivered",
+              value: 0,
+              icon : "check_box"
+            },
+            {
+              name : "returned",
+              value: 0,
+              icon : "assignment_return"
+            },
+          ],
 
           //metrics_1.
           metrics_1: {
-            aov              : 0,
-            "items per order": 0
-          },
-
-          //metrics_2.
-          metrics_2: {
-            "error rate" : 0,
-            "return rate": 0
+            aov       : 0,
+            conversion: 0
           },
 
           //data.
@@ -762,8 +438,7 @@ export default defineComponent({
             {
               id        : "001",
               amount    : 315.75,
-              categories: {},
-              customer  : "c-001",
+              customer  : "001",
               date      : "2023-06-15",
               documentId: "ord-001",
               files     : [],
@@ -783,8 +458,7 @@ export default defineComponent({
             {
               id        : "002",
               amount    : 189.50,
-              categories: {},
-              customer  : "c-002",
+              customer  : "002",
               date      : "2023-06-14",
               documentId: "ord-002",
               files     : [],
@@ -805,6 +479,7 @@ export default defineComponent({
         },
 
 
+        //PRODUCTS.
         {
           name : "products",
           icon : "grid_view",
@@ -813,26 +488,105 @@ export default defineComponent({
           //struct.
           props: [
             //key props.
-            {key: 1, name: "name", header: "name"},
-            {name: "description", header: "description"},
+            {
+              name: "name",
+              key : 1,
+            },
 
-            //extra.
-            {key: 1, extra: 1, name: "price", decimal: 1, header: "price"},
-            {key: 1, extra: 1, name: "cost", decimal: 1, header: "cost"},
-            {key: 1, extra: 1, name: "amount", hidden: 1},
+            {
+              name: "sku",
+              key : 1,
+            },
 
-            {extra: 1, name: "weight", header: "weight"},
-            {extra: 1, name: "dimensions", header: "dimensions"},
-            {extra: 1, name: "discount", select: "discounts", label: "code"},
+            {
+              name  : "description",
+              key   : 1,
+              no_tbl: 1
+            },
+
+
+            {
+              name   : "price",
+              decimal: 1,
+            },
+
+
+            {
+              name   : "cost",
+              key    : 1,
+              decimal: 1
+            },
+
+
+            {
+              name   : "amount",
+              hidden : 1,
+              no_edit: 1
+            },
+
+            {
+              name   : "weight",
+              no_tbl : 1,
+              suffix : "(grams)",
+              decimal: 1
+            },
+
+            {
+              name  : "dimensions",
+              no_tbl: 1
+            },
+
+            {
+              name   : "discount",
+              no_tbl : 1,
+              decimal: 1,
+              suffix : "%"
+            },
           ],
 
-          //status | state.
-          status: {approved: 0, processing: 0, suspended: 0},
-          state : {"in stock": 0, "low stock": 0, "out of stock": 0},
+          //metrics
+          metrics: [
+            {
+              name : "in stock",
+              value: 0,
+              icon : "beenhere"
+            },
+            {
+              name : "low stock",
+              value: 0,
+              icon : "report"
+            },
+            {
+              name : "out of stock",
+              value: 0,
+              icon : "report_problem"
+            },
+          ],
 
-          //analysis.
-          props_r1: {"avg price": 0, "avg cost": 0},
-          // props_r2: {"best seller": 0, "return rate": 0},
+          //status
+          status: [
+            {
+              name : "approved",
+              value: 0,
+              icon : "check"
+            },
+            {
+              name : "processing",
+              value: 0,
+              icon : "report"
+            },
+            {
+              name : "suspended",
+              value: 0,
+              icon : "lock"
+            },
+          ],
+
+          //metrics_1.
+          metrics_1: {
+            "avg price": 0,
+            "avg cost" : 0
+          },
 
           //items.
           data: []
@@ -924,115 +678,205 @@ export default defineComponent({
           parent: "products"
         },
 
+
+        //CUSTOMERS.
         {
-          name: "customers",
+          name : "customers",
+          icon : "group",
+          total: 0,
 
-          icon: "group",
-
-          items: [
+          //struct.
+          props: [
             {
-              categories : {},
-              description: null,
-              documentId : "C-001",
-              files      : [],
-              images     : [],
-              last_active: "2023-06-14",
-              name       : "Sarah K.",
-              orders     : 12,
-              state      : "wholesaler",
-              status     : "active",
+              name: "name",
+              key : 1
+            },
+
+            {
+              name  : "description",
+              key   : 1,
+              no_tbl: 1
+            },
+
+            {
+              name   : "orders",
+              decimal: 1,
+              no_edit: 1
+            },
+
+            {
+              name: "status",
+              key : 1,
+              enum: ["active", "banned", "review"]
+            },
+          ],
+
+          //metrics.
+          metrics: [
+            {
+              name : "active",
+              value: 0,
+              icon : "check"
             },
             {
-              categories : {},
-              description: null,
-              documentId : "C-002",
-              files      : [],
-              images     : [],
-              last_active: "2023-06-15",
-              name       : "Tech Solutions Ltd",
-              orders     : 47,
-              state      : "retailer",
-              status     : "active",
-            }
+              name : "review",
+              value: 0,
+              icon : "info"
+            },
+            {
+              name : "banned",
+              value: 0,
+              icon : "block"
+            },
           ],
 
-          props: [
-            {name: "name", key: 1},
-            {name: "description", key: 1},
-            {name: "orders", decimal: 1, no_edit: 1},
-            {name: "status", enum: ["active", "banned", "review"]},
+          //status.
+          status: [
+            {
+              name : "retailers",
+              value: 0,
+              icon : "group"
+            },
+            {
+              name : "wholesalers",
+              value: 0,
+              icon : "home_work"
+            },
+            {
+              name : "institution",
+              value: 0,
+              icon : "corporate_fare"
+            },
           ],
 
-          //status | state.
-          status: {active: 0, banned: 0, inactive: 0},
-          state : {retailer: 0, wholesaler: 0, institution: 0},
 
           //analysis.
-          metrics_1: {ltv: 0, frequency: 0},
-          metrics_2: {local: 0, foreign: 0},
+          metrics_1: {local: 0, foreign: 0},
 
+          //data.
           data: [
-            {name: "Kevin", id: "001"}
+            {
+              name       : "Kevin Kamara",
+              id         : "001",
+              description: "https://linkedin.com/in/kwkamara",
+              status     : "active"
+            }
           ]
         },
 
+
+        //SUPPLIERS
         {
           name    : "suppliers",
           icon    : "group_add",
           quantity: 0,
-          total   : 18750.80,
+          total   : 0,
 
+          //struct.
           props: [
-            {name: "description", header: "details"},
-            {key: 1, name: "name"},
-            {key: 1, name: "rating", rating: 1},
-          ],
-
-          //status | state.
-          status: {active: 12, review: 3, blacklisted: 5},
-          state : {artisans: 9, distributors: 6, manufacturers: 4},
-
-          props_r1: {"avg rating": 4.6, "lead time": 3.8},
-          props_r2: {"on time rate": 94.7, "defect rate": 1.2},
-
-          items: [
             {
-              categories: {},
-              documentId: "S-001",
-              files     : [],
-              images    : [],
-              name      : "Nairobi Fiber",
-              rating    : 4,
-              status    : "active",
-              state     : "distributors",
+              name: "name",
+              key : 1
             },
 
             {
+              name  : "description",
+              key   : 1,
+              no_tbl: 1
+            },
+
+            {
+              name  : "rating",
+              rating: 1,
+              no_tbl: 1,
+              number: 1
+            },
+          ],
+
+          //metrics.
+          metrics: [
+            {
+              name : "active",
+              value: 0,
+              icon : "check"
+            },
+            {
+              name : "review",
+              value: 0,
+              icon : "info"
+            },
+            {
+              name : "banned",
+              value: 0,
+              icon : "block"
+            },
+          ],
+
+          //status.
+          status: [
+            {
+              name : "artisans",
+              value: 0,
+              icon : "group"
+            },
+            {
+              name : "distributors",
+              value: 0,
+              icon : "warehouse"
+            },
+            {
+              name : "manufacturers",
+              value: 0,
+              icon : "factory"
+            },
+          ],
+
+          //metrics 1.
+          metrics_1: {
+            "avg rating": 4.6,
+            "lead time" : 3.8
+          },
+
+          //items.
+          data: [
+            {
+              name       : "Nairobi Fiber",
+              description: "",
+              categories : {},
+              documentId : "S-001",
+              files      : [],
+              images     : [],
+              rating     : 5,
+              status     : "active",
+              state      : "distributors",
+            },
+
+            {
+              name       : "Top Cloth",
+              description: "",
               categories : {},
               documentId : "S-002",
               files      : [],
               images     : [],
-              name       : "Top Cloth",
-              description: null,
-              rating     : 5,
+              rating     : 3,
               status     : "review",
               state      : "distributors",
             },
 
             {
+              name       : "Zippers",
+              description: "",
               categories : {},
               documentId : "S-004",
               files      : [],
               images     : [],
-              name       : "Zippers",
-              description: null,
-              rating     : 5,
+              rating     : 2,
               status     : "review",
               state      : "distributors",
             },
-
           ]
         },
+
 
         {
           name    : "discounts",
@@ -1073,6 +917,7 @@ export default defineComponent({
           parent: "products"
         },
 
+
         {
           name  : "report",
           icon  : "pi pi-file",
@@ -1083,6 +928,10 @@ export default defineComponent({
 
       //chart data.
       chartOptions: {
+        animation          : {
+          duration: 1000,
+          easing  : 'easeOutQuart'
+        },
         responsive         : true,
         maintainAspectRatio: false,
         scales             : {
@@ -1104,7 +953,8 @@ export default defineComponent({
           legend: false,
         },
       },
-      months      : ['Jan', "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+
+      months: ['Jan', "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 
       //dates.
       startDate: null,
@@ -1122,7 +972,6 @@ export default defineComponent({
   },
 
   computed: {
-
     //key props.
     key_props() {
       if (!this.category) return [];
@@ -1130,15 +979,19 @@ export default defineComponent({
     },
 
 
+    //sidebar active.
     is_sidebar() {
       return useState('sidebar').value;
     },
 
+
+    //category name.
     category_name() {
       return this.category ? this.category.name : '-';
     },
 
 
+    //chart data.
     chartData() {
       return {
         labels  : this.months,
@@ -1169,48 +1022,71 @@ export default defineComponent({
       }
     },
 
-    props() {
-      //validate
-      if (!this.category) return [];
 
-      const cat_props = this.category.props.map(prop => prop.name);
-
-      //update props.
-      useState('props').value = cat_props;
-
-      return cat_props;
-    },
-
-
+    //category key columns.
     key_columns() {
-      //validate
       if (!this.category) return [];
-
       return this.category.props.filter(prop => prop.key);
     },
 
 
+    //category table columns.
     tbl_columns() {
-      //validate
       if (!this.category) return [];
-
       return this.category.props.filter(prop => !prop.no_tbl);
     },
 
+
+    //system products.
     products() {
       return useState('products').value;
     }
   },
 
   methods: {
+    //CATEGORY.
+    //view category.
+    viewCategory(category) {
+      //set active.
+      this.category = category;
 
-    //push item.
+      //manage reset.
+      this.manage = null;
+
+      //load products.
+      if (category.name === 'products') this.loadProducts();
+
+      //analyse metrics.
+      //metrics init.
+      this.category.metrics
+          .forEach(metric => metric.value = this.category.data
+              .filter(item => item.status === metric.name).length);
+    },
+
+    //get category.
+    getCategoryByName(cat_name) {
+      return this.menu.find(cat => cat.name === cat_name);
+    },
+
+
+    // ITEM
+    viewItem(item) {
+      this.item = item;
+      this.manage = "info";
+    },
+
+    editItem(item) {
+      this.item = item;
+      this.manage = "edit";
+    },
+
     pushItem(item) {
       //new item.
       if (!item.id) {
 
         //item ID init.
         item.id = new Date().getTime();
+        item.documentId = new Date().getTime();
 
         //add item.
         this.category.data.push(item);
@@ -1229,75 +1105,11 @@ export default defineComponent({
       this.manage = 'info';
     },
 
-    //get category.
-    getCategoryByName(cat_name) {
-      return this.menu.find(cat => cat.name === cat_name);
+    loadProducts() {
+      if (this.category.name === 'products') {
+        this.category.data = useState('products').value;
+      }
     },
-
-
-    //CATEGORY.
-    //view category.
-    viewCategory(category) {
-      this.category = category;
-      return;
-
-      //ANALYSIS.
-      //orders.
-      if (cat.name === 'orders') this.analyseOrders();
-      else if (cat.name === 'products') this.analyseProducts();
-      else if (cat.name === 'intakes') this.analyseIntakes();
-    },
-
-
-    //ITEM.
-    async loadItems() {
-    },
-
-
-    //load item UI.
-    viewItem(item) {
-      this.item = item;
-      this.manage = "info";
-    },
-
-    //load item UI.
-    editItem(item) {
-      this.item = item;
-      this.manage = "edit";
-    },
-
-    newItemInit() {
-      //UI reset.
-      this.displayChart = false;
-      this.right_col = "properties";
-
-      useState('item').value = {categories: {}, images: []};
-    },
-
-    submitItem() {
-
-    },
-
-    async createItem() {
-    },
-
-    async updateItem() {
-      if (this.category_name === 'orders') this.analyseOrders();
-      else if (this.category_name === 'products') this.analyseProducts();
-      else if (this.category_name === 'intakes') this.analyseIntakes();
-    },
-
-    async deleteItem() {
-    },
-
-
-    //ATTACHMENT.
-    uploadAttachment() {
-    },
-
-    deleteAttachment() {
-    },
-
 
     //ANALYSIS.
     //orders.
@@ -1444,23 +1256,6 @@ export default defineComponent({
       // cat.props_r2['return rate'] = cat.state.returned ? (cat.state.returned / item_count).toFixed(2) : 0;
       // cat.props_r2['error rate']  = cat.status.cancelled ? (cat.status.cancelled / item_count).toFixed(2) : 0;
     },
-
-
-    //discounts.
-    analyseDiscounts() {
-
-    },
-
-
-    //customers.
-    analyseCustomers() {
-
-    },
-
-    //suppliers.
-    analyseSuppliers() {
-
-    }
   },
 
   beforeMount() {

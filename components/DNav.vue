@@ -20,7 +20,7 @@
         menu
       </span>
 
-        <Icon icon="person"/>
+<!--        <Icon icon="person"/>-->
       </div>
       <!-- /toggle | profile -->
 
@@ -36,7 +36,7 @@
         <Divider layout="vertical"/>
 
         <!-- sign out -->
-        <Icon icon="logout" class="text-red-700"/>
+        <Icon icon="logout" class="text-red-700" @click="logout"/>
       </div>
       <!-- /messages | sign out -->
 
