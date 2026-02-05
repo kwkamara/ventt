@@ -66,6 +66,7 @@ export default defineComponent({
       hero_ix      : 0,
       hero_interval: null,
       hero_images  : [
+        '/hero-img-0.webp',
         '/hero-img-1.webp',
         '/hero-img-2.webp',
         '/hero-img-3.webp',
