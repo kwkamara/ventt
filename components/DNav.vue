@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 h-4rem p-0 lg:pr-2 flex align-items-center justify-content-between border-bottom-1 border-gray-200 select-none">
+  <div class="col-12 h-4rem p-0 lg:pr-2 bg-white shadow-1 flex align-items-center justify-content-between border-bottom-1 border-gray-200 select-none">
 
     <!-- logo -->
     <div v-if="sidebar" class="w-3 md:w-2 lg:w-1 h-full p-3 flex align-items-center justify-content-center border-right-1 border-gray-200 hover:shadow-2 hover:bg-purple-50"

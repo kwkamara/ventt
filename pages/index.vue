@@ -54,18 +54,16 @@
 
     <!--  section 2 -->
     <section class="grid m-0 md:p-4 lg:px-7 py-4 select-none overflow-hidden bg-purple-900">
-      <div class="col-12 px-0 ">
+      <div class="col-12 px-0">
         <div class="grid m-0">
-
-          <div class="col-12 md:col-6 h-16rem lg:h-26rem">
+          <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3">
             <ProductDisplay category="women"
                             discount="15% Off"
                             image="/women-1-664.webp"
                             name="Women's Style"
                             type="casual"/>
           </div>
-
-          <div class="col-12 md:col-6">
+          <div class="col-12 md:col-6 px-3">
 
             <div class="lg:h-12rem w-full flex gap-3">
 
@@ -96,7 +94,6 @@
             </div>
 
           </div>
-
         </div>
       </div>
     </section>
@@ -104,7 +101,7 @@
 
 
     <!--  kids section -->
-    <section class="grid m-0 px-3 lg:px-7 lg:py-5 py-2 select-none">
+    <section class="grid m-0 px-2 lg:px-7 lg:py-5 py-2 select-none">
 
       <div class="col-12 md:col-6 px-0">
         <div class="w-full px-2 flex gap-3">

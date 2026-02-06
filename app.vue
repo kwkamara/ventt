@@ -20,7 +20,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1},
     description: "A soft, breathable white hoodie made from premium cotton. Perfect for casual outings.",
-    dimensions : "31x25x3.5 inches",
+    dimensions : "31x25x3.5 ",
     documentId : "w-hoodie-001",
     images     : [
       {url: "men-white-hoodie-1-a-454.webp"},
@@ -43,7 +43,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1},
     description: "A heavyweight dark blue hoodie with a relaxed fit. Ideal for cooler weather.",
-    dimensions : "33x27x4.5 inches",
+    dimensions : "33x27x4.5 ",
     documentId : "blue-hoodie-001",
     images     : [
       {url: "men-hoodie-2-a-454.webp"},
@@ -66,7 +66,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1},
     description: "Classic black cotton t-shirt with a slim fit. Versatile for layering or solo wear.",
-    dimensions : "29x21x2.5 inches",
+    dimensions : "29x21x2.5 ",
     documentId : "w-t-shirt-001",
     images     : [
       {url: "men-tshirt-1-a-454.webp"},
@@ -89,7 +89,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1},
     description: "A stylish puffer jacket with insulation for cold weather. Lightweight yet warm.",
-    dimensions : "34x28x6 inches",
+    dimensions : "34x28x6 ",
     documentId : "m-jacket-01",
     images     : [
       {url: "men-casual-1-a-454.webp"},
@@ -113,7 +113,7 @@ useState('products', () => [
     categories : {men: 1, official: 1},
     color      : "Brown",
     description: "A sleek and warm coat designed for the modern man. Features a tailored fit and premium wool blend.",
-    dimensions : "42x31x7 inches",
+    dimensions : "42x31x7 ",
     documentId : "men-coat-001",
     image      : "men-coat-1.webp",
     images     : [
@@ -137,7 +137,7 @@ useState('products', () => [
   {
     categories : {men: 1, official: 1},
     description: "A premium suit for formal occasions, tailored to perfection with reinforced stitching.",
-    dimensions : "44x33x5 inches",
+    dimensions : "44x33x5 ",
     documentId : "m-suit-01",
     images     : [
       {url: "men-suits-1-454.webp"},
@@ -161,7 +161,7 @@ useState('products', () => [
     categories : {men: 1, accessories: 1},
     color      : "Silver",
     description: "A sleek stainless steel watch with a minimalist dial. Water-resistant up to 50m.",
-    dimensions : "9x7x2 inches",
+    dimensions : "9x7x2 ",
     documentId : "m-watch-001",
     images     : [
       {url: "men-watch-1-a-454.webp"},
@@ -184,7 +184,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1, shoes: 1},
     description: "Durable black boots with cushioned insoles for all-day comfort.",
-    dimensions : "42x31x12 inches",
+    dimensions : "42x31x12 ",
     documentId : "m-shoes-2-001",
     images     : [
       {url: "men-shoes-2-a-454.webp"},
@@ -207,7 +207,7 @@ useState('products', () => [
   {
     categories : {men: 1, casual: 1, hats: 1, "new": 1},
     description: "Classic ivy cap made from breathable cotton. Ideal for sunny days.",
-    dimensions : "12x10x4 inches",
+    dimensions : "12x10x4 ",
     documentId : "m-hats-1-001",
     images     : [
       {url: "men-hats-1-a-454.webp"},
@@ -229,7 +229,7 @@ useState('products', () => [
   {
     categories : {men: 1, shoes: 1},
     description: "Classic brown leather shoes with a polished finish. Comfortable for all-day wear.",
-    dimensions : "15x11x6 inches",
+    dimensions : "15x11x6 ",
     documentId : "m-shoes-1-001",
     images     : [
       {url: "men-shoes-1-a-454.webp"},
@@ -252,7 +252,7 @@ useState('products', () => [
     categories : {men: 1, accessories: 1},
     color      : "Brown",
     description: "Classic brown leather shoes with a polished finish. Comfortable for all-day wear.",
-    dimensions : "14x10x6 inches",
+    dimensions : "14x10x6 ",
     documentId : "m-belt-001",
     images     : [
       {url: "men-belt-1-a-454.webp"},
@@ -273,7 +273,7 @@ useState('products', () => [
   {
     categories : {men: 1, accessories: 1, "new": 1},
     description: "Classic aviator sunglasses with UV400 protection and lightweight metal frame.",
-    dimensions : "15x6x3 inches",
+    dimensions : "15x6x3 ",
     documentId : "m-glasses-1",
     images     : [
       {url: "men-accessories-1-a-454.webp"},
@@ -298,7 +298,7 @@ useState('products', () => [
   {
     categories : {women: 1, official: 1, shoes: 1},
     description: "Elegant black heels with a cushioned insole for all-day comfort. Ideal for office wear.",
-    dimensions : "11x7x3.5 inches",
+    dimensions : "11x7x3.5 ",
     documentId : "w-heels-001",
     images     : [
       {url: "women-shoes-1-a-454.webp"},
@@ -321,7 +321,7 @@ useState('products', () => [
   {
     categories : {women: 1, official: 1},
     description: "A professional trouser suit with a fitted blazer and straight-leg pants.",
-    dimensions : "42x32x5 inches",
+    dimensions : "42x32x5 ",
     documentId : "w-trouser-suit-001",
     images     : [
       {url: "women-suit-2-a-454.webp"},
@@ -345,7 +345,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1, shoes: 1},
     description: "Trendy open-toe wedges with ankle straps for a secure fit. Great for summer outings.",
-    dimensions : "10x8x4 inches",
+    dimensions : "10x8x4 ",
     documentId : "w-shoes-2-001",
     images     : [
       {url: "women-shoes-2-a-454.webp"},
@@ -367,7 +367,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1, shoes: 1},
     description: "Trendy open-toe blue wedges with ankle straps for a secure fit. Great for summer outings.",
-    dimensions : "10x8x4 inches",
+    dimensions : "10x8x4 ",
     documentId : "w-shoes-2-001",
 
     images     : [
@@ -393,7 +393,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1, shoes: 1},
     description: "Chunky black boots with a lace-up design. Water-resistant and durable for all seasons.",
-    dimensions : "14x10x6 inches",
+    dimensions : "14x10x6 ",
     documentId : "w-shoes-4-001",
     images     : [
       {url: "women-black-boots-1.webp"},
@@ -415,7 +415,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1},
     description: "A fluffy winter coat with a soft inner lining for extra warmth. Oversized fit for comfort.",
-    dimensions : "44x36x9 inches",
+    dimensions : "44x36x9 ",
     documentId : "fluffy-coat-01",
     images     : [
       {url: "women-fluffy-coat-1-a-454.webp"},
@@ -437,7 +437,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1},
     description: "A trendy biker jacket with faux-leather finish. Edgy yet comfortable for everyday wear.",
-    dimensions : "38x28x5 inches",
+    dimensions : "38x28x5 ",
     documentId : "w-biker-jacket-001",
     image      : "women-biker-jacket-1.webp",
     images     : [
@@ -460,7 +460,7 @@ useState('products', () => [
   {
     categories : {women: 1, official: 1},
     description: "Elegant skirt suit with a tailored blazer and A-line skirt. Ideal for professional settings.",
-    dimensions : "42x32x5 inches",
+    dimensions : "42x32x5 ",
     documentId : "w-skirt-suit-001",
     images     : [
       {url: "women-suit-1-a-454.webp"},
@@ -482,7 +482,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1, hats: 1},
     description: "A chic beige sun hat with a wide brim for UV protection. Lightweight and foldable.",
-    dimensions : "16x16x4 inches",
+    dimensions : "16x16x4 ",
     documentId : "w-h-001",
     images     : [
       {url: "women-hat-1-a-454.webp"},
@@ -504,7 +504,7 @@ useState('products', () => [
   {
     categories : {women: 1, casual: 1, hats: 1},
     description: "A cozy woolen cap for winter, lined with fleece for extra warmth.",
-    dimensions : "12x12x6 inches",
+    dimensions : "12x12x6 ",
     documentId : "w-h-002",
     images     : [
       {url: "women-hat-2-a-454.webp"},
@@ -527,7 +527,7 @@ useState('products', () => [
     categories : {women: 1, accessories: 1},
     color      : "Cream",
     description: "A lightweight wool scarf with a subtle herringbone pattern. Perfect for layering.",
-    dimensions : "72x32x1 inches",
+    dimensions : "72x32x1 ",
     documentId : "w-scarf-001",
     images     : [
       {url: "women-scarf-1-a-454.webp"},
@@ -551,7 +551,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, shoes: 1},
     description: "Colorful sneakers with velcro straps for easy wear. Flexible soles support active play.",
-    dimensions : "8x5x3 inches",
+    dimensions : "8x5x3 ",
     documentId : "k-shoes-1-001",
     images     : [
       {url: "kids-shoes-1-a-454.webp"},
@@ -573,7 +573,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, shoes: 1},
     description: "Waterproof rain boots with fun animal prints. Perfect for puddle jumping.",
-    dimensions : "9x6x4 inches",
+    dimensions : "9x6x4 ",
     documentId : "k-shoes-2-001",
     images     : [
       {url: "kids-shoes-2-a-454.webp"},
@@ -596,7 +596,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, shoes: 1},
     description: "Breathable canvas shoes with reinforced toes for durability. Machine washable.",
-    dimensions : "7x5x3 inches",
+    dimensions : "7x5x3 ",
     documentId : "k-shoes-3-001",
     images     : [
       {url: "kids-canvas-shoes-1.webp"},
@@ -618,7 +618,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1},
     description: "Soft cotton pajama set with elastic waistband. Hypoallergenic and tagless for comfort.",
-    dimensions : "12x10x1 inches",
+    dimensions : "12x10x1 ",
     documentId : "k-casual-4-001",
     images     : [
       {url: "kids-pyjamas-1.webp"},
@@ -640,7 +640,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1},
     description: "Stretch denim jeans with adjustable waist. Reinforced knees for active kids.",
-    dimensions : "14x12x2 inches",
+    dimensions : "14x12x2 ",
     documentId : "k-casual-5-001",
     images     : [
       {url: "kids-casual-5-a-454.webp"},
@@ -663,7 +663,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, hats: 1},
     description: "Wide-brim sun hat with UPF 50+ protection. Chin strap keeps it secure in wind.",
-    dimensions : "10x10x4 inches",
+    dimensions : "10x10x4 ",
     documentId : "k-hats-3-001",
     images     : [
       {url: "kids-hats-3-a-454.webp"},
@@ -685,7 +685,7 @@ useState('products', () => [
   {
     categories : {kids: 1, official: 1, boys: 1},
     description: "Crisp white dress shirt with adjustable collar and easy-care fabric. Perfect for school events and formal occasions.",
-    dimensions : "12x10x1 inches",
+    dimensions : "12x10x1 ",
     documentId : "k-official-1-001",
     images     : [
       {url: "kids-official-1-a-454.webp"},
@@ -707,7 +707,7 @@ useState('products', () => [
   {
     categories : {kids: 1, official: 1, girls: 1},
     description: "Charming A-line dress with satin ribbon detail. Wrinkle-resistant fabric for special occasions.",
-    dimensions : "14x12x2 inches",
+    dimensions : "14x12x2 ",
     documentId : "k-official-2-001",
     images     : [
       {url: "kids-official-2-a-454.webp"},
@@ -729,7 +729,7 @@ useState('products', () => [
   {
     categories : {kids: 1, official: 1, boys: 1},
     description: "Two-piece suit with adjustable waist trousers. Stain-resistant fabric for active kids.",
-    dimensions : "15x13x3 inches",
+    dimensions : "15x13x3 ",
     documentId : "k-official-3-001",
     images     : [
       {url: "kids-official-3-a-454.webp"},
@@ -752,7 +752,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, boys: 1},
     description: "Soft cotton-blend sweater with reinforced elbows. Machine washable for easy care.",
-    dimensions : "13x11x2 inches",
+    dimensions : "13x11x2 ",
     documentId : "k-casual-1-001",
     images     : [
       {url: "kids-casual-1-a-454.webp"},
@@ -774,7 +774,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, boys: 1},
     description: "Padded winter jacket with water-resistant shell. Reflective strips for visibility.",
-    dimensions : "16x14x4 inches",
+    dimensions : "16x14x4 ",
     documentId : "k-casual-2-001",
 
     images: [
@@ -798,7 +798,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, hats: 1},
     description: "UPF 50+ sun hat with neck flap. Lightweight and packable for travel.",
-    dimensions : "10x10x3 inches",
+    dimensions : "10x10x3 ",
     documentId : "k-hats-1-001",
     images     : [
       {url: "kids-hats-1-a-454.webp"},
@@ -820,7 +820,7 @@ useState('products', () => [
   {
     categories : {kids: 1, casual: 1, hats: 1},
     description: "Knit wool hat with fleece lining. Ear flaps provide extra warmth in winter.",
-    dimensions : "9x9x4 inches",
+    dimensions : "9x9x4 ",
     documentId : "k-hats-2-001",
     images     : [
       {url: "kids-hats-2-a-454.webp"},
@@ -894,7 +894,7 @@ h1, h2, h3{
 }
 
 /* input text */
-input:focus,
+input:focus, textarea,
 input:not(:placeholder-shown) {
   background-color: transparent;
   outline: none;

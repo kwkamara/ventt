@@ -28,10 +28,10 @@ export default defineNuxtConfig({
     },
 
     css: [
-        'primeflex/primeflex.css',
-        'primeicons/primeicons.css',
         'material-icons/iconfont/material-icons.css',
         'material-icons/iconfont/outlined.css',
+        'primeflex/primeflex.css',
+        'primeicons/primeicons.css',
     ],
 
     fonts: {

@@ -21,71 +21,89 @@
 
 
     <!-- content -->
-    <div :class="(is_sidebar ? 'w-9 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none bg-gray-100'">
+    <div :class="(is_sidebar ? 'w-9 md:w-10 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none'">
+
+      <!-- profile | dates -->
+      <div class="col-12 pl-0 pt-0 flex justify-content-between align-items-center">
+
+        <!-- profile -->
+        <div class="flex align-items-center gap-2">
+          <VButton icon="person"/>
+          <span>Admin</span>
+        </div>
+        <!-- /profile -->
+
+        <!-- dates -->
+        <div class="flex gap-1 align-items-center justify-content-end">
+          <Icon icon="calendar_month"/>
+          <!-- start -->
+          <DatePicker id="start-date"
+                      aria-label="start date"
+                      input-class="text-sm text-gray-700 lg:w-7rem hover:text-purple-700 cursor-pointer"
+                      date-format="dd/mm/yy"
+                      v-model="startDate" fluid/>
+
+          <Divider layout="vertical" unstyled class="h-1rem pr-3 border-left-1 border-purple-400"/>
+          <!-- end -->
+          <DatePicker id="end-date"
+                      date-format="dd/mm/yy"
+                      aria-label="end date"
+                      input-class="lg:w-6rem pr-0 text-sm text-gray-700 text-right hover:text-purple-700 cursor-pointer"
+                      v-model="endDate" fluid/>
+        </div>
+        <!-- /dates -->
+
+      </div>
+      <!-- /profile | dates -->
+
 
       <!-- left col -->
-      <div class="col-12 lg:col-7 md:pl-0 flex flex-column gap-3">
+      <div class="col-12 lg:col-5 md:pl-0 flex flex-column gap-3">
 
-        <!-- title bar -->
-        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl bg-white">
+        <!-- summary panel -->
+        <div class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-purple-500 text-white">
 
           <!-- category name | category total | dates -->
-          <div class="pb-4 md:flex justify-content-between">
+          <div class="pb-4 md:flex justify-content-between align-items-start">
+
             <!-- category name | category total -->
-            <div class="lg:w-6 text-2xl capitalize">
-              <div>{{ category.name }}</div>
-              <span>{{ category.data.length }}</span>
+            <div class="lg:w-8 lg:pl-4 md:pt-2  text-2xl capitalize">
+              <div class="flex gap-3 align-items-center">
+                <VButtonCube :icon="category.icon" fill="1" class="h-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
+                <div>
+                  <div>{{ category.name }}</div>
+                  <span>{{ category.data.length }}</span>
+                </div>
+              </div>
+
             </div>
             <!-- category name | category total -->
 
-            <Divider layout="vertical" unstyled class="hidden md:block h-3rem pr-3 border-left-1 border-gray-200"/>
-
-            <!-- dates -->
-            <div class="flex gap-3 justify-content-end text-sm text-gray-700">
-              <!-- start -->
-              <div>
-                <DatePicker id="start-date"
-                            date-format="dd/mm/yy"
-                            v-model="startDate"
-                            class="lg:w-10rem md:pl-3 mb-1 border-1 border-gray-300 border-round-3xl text-white" fluid/>
-              </div>
-              <!-- /start -->
-
-              <!-- end -->
-              <div class="text-right">
-                <DatePicker id="end-date"
-                            date-format="dd/mm/yy"
-                            v-model="endDate"
-                            class="lg:w-10rem pl-3 mb-1 border-1 border-gray-300 border-round-3xl" fluid/>
-              </div>
-              <!-- /end -->
-            </div>
-            <!-- /dates -->
           </div>
           <!-- /category name | category total | dates -->
 
 
           <!-- report | manage -->
-          <Divider unstyled class="pt-3 border-top-1 border-gray-200"/>
-          <div class="lg:pt-2 flex justify-content-between align-items-center justify-content-end gap-3">
-            <VButton icon="article" class="border-round-3xl"/>
+          <Divider unstyled class="border-top-1 border-purple-900"/>
+          <div class="lg:pt-3 lg:px-4 pb-3 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
+            <VButton icon="article" class="border-round-3xl text-white"/>
             <VButton icon="settings"
-                     class="border-round-3xl"
-                     @click="manage ? manage = null : manage='items'"/>
+                     class="border-round-3xl text-white"
+                     @click="manageToggle()"/>
           </div>
           <!-- /report | manage -->
 
         </div>
-        <!-- /title bar -->
+        <!-- /summary panel -->
 
 
         <!-- metrics -->
         <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
           <template v-for="(metric, ix) in category.metrics">
             <div>
-              <h2 class="m-0 font-light">{{ metric.value }}</h2>
+              <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
               <div class="capitalize flex align-items-center gap-1 text-sm">
-                <Icon :icon="metric.icon" class="text-sm lg:text-base"/>
+                <Icon :icon="metric.icon"/>
                 <span>{{ metric.name }}</span>
               </div>
             </div>
@@ -99,9 +117,9 @@
         <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
           <template v-for="(status, ix) in category.status">
             <div>
-              <h2 class="m-0 font-light">{{ status.value }}</h2>
+              <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
               <div class="capitalize flex align-items-center gap-1 text-sm">
-                <Icon :icon="status.icon" class=""/>
+                <Icon :icon="status.icon"/>
                 <span class="">{{ status.name }}</span>
               </div>
             </div>
@@ -115,7 +133,7 @@
 
 
       <!-- right col -->
-      <div class="col-12 lg:col-5 flex flex-column gap-3">
+      <div class="col-12 lg:col-7 flex flex-column gap-3">
 
         <!-- chart -->
         <div v-if="!manage"
@@ -123,7 +141,7 @@
           <Chart type="bar"
                  :data="chartData"
                  :options="chartOptions"
-                 class="lg:h-12rem w-full"/>
+                 class="lg:h-14rem w-full"/>
         </div>
         <!-- /chart -->
 
@@ -133,10 +151,9 @@
 
           <!-- header -->
           <div class="px-3 md:px-4 pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
-
             <div class="flex gap-1 align-items-center">
               <span class="material-icons-outlined">access_time</span>
-              <h3 class="m-0 font-light">Recent {{ category.name }}</h3>
+              <h3 class="m-0 font-light sans-serif">Recent {{ category.name }}</h3>
             </div>
 
             <VButton icon="settings" @click="manage='items'"/>
@@ -173,7 +190,7 @@
           <template v-if="manage==='items'">
             <div class="pb-4 pt-2 px-3 md:px-4 flex justify-content-between align-items-center gap-2">
               <InputText v-model="filters['global'].value"
-                         class="h-3rem text-gray-700 border-1 border-gray-200 border-round-3xl"
+                         class="pl-4 h-3rem text-gray-700 border-1 border-gray-200 border-round-3xl text-sm"
                          placeholder="Search"/>
               <VButtonCube text="new" icon="add" fill="1" @click="manage='edit'"/>
             </div>
@@ -186,18 +203,18 @@
           <!-- items -->
           <DataTable v-if="manage==='items' && !item"
                      v-model:filters="filters"
-                     :globalFilterFields="['name', 'id', 'description', 'customer']"
-                     filterDisplay="row"
+                     :globalFilterFields="['name', 'id', 'description', 'customer', 'status', 'sku']"
                      :rows="5"
                      :show-headers="false"
                      :value="category.data"
-                     data-key="documentId" paginator row-hover
-                     table-class="text-xs animation-duration-500 fadein">
+                     data-key="documentId"
+                     paginator row-hover
+                     table-class="text-sm animation-duration-500 fadein">
 
             <!-- columns -->
-            <Column v-for="(prop, ix) in tbl_columns" :field="prop.name">
+            <Column v-for="(prop, key) in tbl_columns" :field="prop.name" :key="prop.name">
               <template #body="{data}">
-                <div class="py-2 pl-3 white-space-nowrap" @click="manage='info'; item=data">
+                <div :class="(key === 0 ? 'pl-3' : '') + ' w-full py-2 white-space-nowrap'" @click="manage='info'; item=data">
                   {{ prop.prefix }}
                   {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
                   {{ prop.suffix }}
@@ -207,7 +224,7 @@
             <!-- /columns -->
 
             <!-- edit -->
-            <Column class="w-4rem">
+            <Column class="text-right pr-2">
               <template #body="{data}">
                 <Button class="bg-transparent text-gray-400 hover:text-yellow-600 lg:justify-content-end"
                         text @click.stop="editItem(data)">
@@ -260,7 +277,7 @@
           <div class="grid m-0 px-3 pb-2" v-if="manage==='info' && item">
 
             <!-- Key props -->
-            <div v-for="prop in category.props.filter(p => p.key && item[p.name])" class="col-12 py-3">
+            <div v-for="prop in category.props.filter(p => p.key && item[p.name])" :class="(prop.name === 'description' ? '' : 'lg:col-6 ') + 'col-12 py-3'">
               <div>{{ prop.prefix }} {{ item[prop.name] }}</div>
               <span class="mt-1 text-xs capitalize text-gray-500">
                 {{ prop.header || prop.name }}
@@ -285,6 +302,30 @@
               </span>
             </div>
             <!-- /other props -->
+
+            <!-- category.categories -->
+            <template v-if="category.categories">
+              <div class="col-12 pt-3 border-top-1 border-gray-300" v-for="sub_category in category.categories">
+                <h2 class="m-0 sans-serif font-light capitalize">{{ sub_category }}</h2>
+
+                <div v-for="(sub_item, key) in item[sub_category]" class="grid m-0 py-2 text-sm">
+                  <div class="col-12 pl-0">
+                    <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
+                  </div>
+
+                  <template v-for="(value, prop) in sub_item">
+                    <div v-if="value" :class="(prop==='description' ? '' : 'lg:col-4') + ' col-12 pl-0'">
+                      <div>{{ value }}</div>
+                      <span class="uppercase text-xs">{{ prop }}</span>
+                    </div>
+                  </template>
+
+                </div>
+
+              </div>
+
+            </template>
+            <!-- /category.categories -->
 
           </div>
           <!-- /details grid -->
@@ -344,6 +385,8 @@ export default defineComponent({
           icon       : "shopping_cart",
           total      : 0,
           annual     : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
+
+          categories: ['products'],
 
           //struct.
           props: [
@@ -452,10 +495,10 @@ export default defineComponent({
               order_no  : "ORD-001",
               products  : {
                 "p-001": {
-                  quantity: 20,
-                  price   : 600,
-                  details : null,
-                  total   : 0
+                  quantity   : 20,
+                  price      : 600,
+                  description: "To be delivered to abc street.",
+                  total      : 0
                 }
               },
               status    : "approved",
@@ -472,10 +515,10 @@ export default defineComponent({
               order_no  : "ORD-002",
               products  : {
                 "p-002": {
-                  quantity: 10,
-                  price   : 600,
-                  details : null,
-                  total   : 0
+                  quantity   : 10,
+                  price      : 600,
+                  description: null,
+                  total      : 0
                 }
               },
               status    : "processing",
@@ -540,14 +583,15 @@ export default defineComponent({
 
             {
               name  : "dimensions",
-              no_tbl: 1
+              no_tbl: 1,
+              suffix: "(cm)"
             },
 
             {
               name   : "discount",
               no_tbl : 1,
               decimal: 1,
-              suffix : "%"
+              suffix : "(%)"
             },
           ],
 
@@ -937,8 +981,8 @@ export default defineComponent({
       //chart options.
       chartOptions: {
         animation          : {
-          duration: 1000,
-          easing  : 'easeOutQuart'
+          animateScale : true,
+          animateRotate: true
         },
         responsive         : true,
         maintainAspectRatio: false,
@@ -960,13 +1004,11 @@ export default defineComponent({
 
       },
 
-      chartData: {},
-
       months: ['Jan', "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 
       //dates.
-      startDate: null,
-      endDate  : null,
+      startDate: new Date().toLocaleDateString(),
+      endDate  : new Date().toLocaleDateString(),
 
       //chart | table.
       displayChart: true,
@@ -999,6 +1041,34 @@ export default defineComponent({
     },
 
 
+    chartData() {
+      return {
+        labels  : this.months,
+        datasets: [
+          {
+            label          : this.category.name,
+            data           : this.category.annual,
+            backgroundColor: [
+              'rgba(249, 115, 22, 0.6)',   // Vibrant Orange
+              'rgba(6, 182, 212, 0.6)',     // Cyan
+              'rgba(107, 114, 128, 0.6)',   // Cool Gray
+              'rgba(139, 92, 246, 0.6)',    // Soft Purple
+              'rgba(16, 185, 129, 0.6)',    // Emerald Green
+              'rgba(244, 63, 94, 0.6)',     // Pink-Red
+              'rgba(234, 179, 8, 0.6)',     // Gold
+              'rgba(59, 130, 246, 0.6)',    // Blue
+              'rgba(20, 184, 166, 0.6)',    // Teal
+              'rgba(217, 70, 239, 0.6)',    // Fuchsia
+              'rgba(5, 150, 105, 0.6)',     // Dark Green
+              'rgba(220, 38, 38, 0.6)'      // Crimson
+            ],
+            borderRadius   : 20
+          }
+        ]
+      }
+    },
+
+
     //category key columns.
     key_columns() {
       if (!this.category) return [];
@@ -1020,6 +1090,15 @@ export default defineComponent({
   },
 
   methods: {
+    //UI.
+    manageToggle() {
+      if (this.manage) {
+        this.manage = null;
+        this.item = null;
+      } else this.manage = 'items';
+    },
+
+
     //CATEGORY.
     //view category.
     viewCategory(category) {
@@ -1049,9 +1128,6 @@ export default defineComponent({
 
       //analyse status.
       this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
-
-      //update charts.
-      this.updateCharts();
     },
 
     // ITEM
@@ -1245,41 +1321,11 @@ export default defineComponent({
       // cat.props_r2['error rate']  = cat.status.cancelled ? (cat.status.cancelled / item_count).toFixed(2) : 0;
     },
 
-    //chart data.
-    updateCharts() {
-      this.chartData = {
-        labels  : this.months,
-        datasets: [
-          {
-            label          : this.category.name,
-            data           : this.category.annual,
-            backgroundColor: [
-              'rgba(249, 115, 22, 0.6)',   // Vibrant Orange
-              'rgba(6, 182, 212, 0.6)',     // Cyan
-              'rgba(107, 114, 128, 0.6)',   // Cool Gray
-              'rgba(139, 92, 246, 0.6)',    // Soft Purple
-              'rgba(16, 185, 129, 0.6)',    // Emerald Green
-              'rgba(244, 63, 94, 0.6)',     // Pink-Red
-              'rgba(234, 179, 8, 0.6)',     // Gold
-              'rgba(59, 130, 246, 0.6)',    // Blue
-              'rgba(20, 184, 166, 0.6)',    // Teal
-              'rgba(217, 70, 239, 0.6)',    // Fuchsia
-              'rgba(5, 150, 105, 0.6)',     // Dark Green
-              'rgba(220, 38, 38, 0.6)'      // Crimson
-            ],
-            borderRadius   : 20
-          }
-        ]
-      }
-    },
   },
 
   beforeMount() {
     //load first category.
     this.viewCategory(this.menu[0]);
-
-    //charts.
-    this.updateCharts();
   }
 })
 </script>

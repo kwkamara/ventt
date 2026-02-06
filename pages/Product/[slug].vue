@@ -33,9 +33,9 @@
 
 
         <!-- thumbnails -->
-        <div class="col-12 lg:col-3 h-6rem lg:pt-0 flex align-items-center lg:flex-column gap-2 lg:gap-3">
+        <div class="col-12 lg:col-3 lg:pt-0 flex lg:flex-column align-items-center gap-2 lg:gap-3">
           <div class="grid m-0">
-            <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:px-0 lg:py-1">
+            <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:px-0 lg:pt-0 lg:pb-2">
               <img
                   :alt="product.name"
                   :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
@@ -81,7 +81,7 @@
         <!-- price -->
         <div class="text-right">
           <div class="text-4xl">{{ formatDecimal(product.price) }}</div>
-          <span class="uppercase text-sm">unit price</span>
+          <span class="uppercase text-xs">unit price</span>
         </div>
         <!-- /price -->
 
@@ -123,12 +123,6 @@
 
         <!-- total | cart controls -->
         <div class="flex justify-content-between align-items-center">
-          <!-- total -->
-          <div>
-            <div class="text-4xl">{{ formatDecimal(product.price * quantity) }}</div>
-            <span class="uppercase text-sm">Total</span>
-          </div>
-
           <!-- controls -->
           <div class="text-right">
             <VButtonCube v-if="cart[product.documentId]"
@@ -145,6 +139,14 @@
                          @click="addToCart(product); notify('cart')"/>
           </div>
           <!-- /controls -->
+
+
+          <!-- total -->
+          <div class="text-right">
+            <div class="text-4xl">{{ formatDecimal(product.price * quantity) }}</div>
+            <span class="uppercase text-xs">item total</span>
+          </div>
+          <!-- /total -->
 
         </div>
         <!-- /total | cart controls -->

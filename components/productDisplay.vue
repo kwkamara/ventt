@@ -12,7 +12,7 @@
 
 
     <div @click="viewShop()"
-         class="w-full h-full p-2 lg:p-4 absolute text-white bg-black-alpha-30 border-round-xl hover:bg-black-alpha-10">
+         class="w-full h-full p-3 lg:p-4 absolute text-white bg-black-alpha-30 border-round-xl hover:bg-black-alpha-10">
       <!-- Discount and Name -->
       <div class="w-full text-right">
         <h2 aria-label="discount-title" class="m-0 text-xl md:text-4xl">{{ discount }}</h2>

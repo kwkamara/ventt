@@ -1,7 +1,7 @@
 <template>
 
   <!-- name | Description -->
-  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 py-2 text-gray-700">
+  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 pb-4 text-gray-700">
 
     <Select v-if="prop.select"
             :id="prop.name + '-ip'"
@@ -9,16 +9,18 @@
             :optionLabel="prop.label"
             :options="getCategoryByName(prop.select).data"
             :placeholder="prop.header || prop.name"
-            class="bg-transparent border-none border-bottom-1 border-gray-400" fluid
+            input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400" fluid
             :option-label="prop.rel || 'name'"
             option-value="id"/>
 
-    <Textarea v-else-if="prop.name ==='description'" class="w-full bg-white text-sm"/>
+    <Textarea v-else-if="prop.name ==='description'"
+              :rows="3"
+              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-400" unstyled fluid/>
 
     <InputText v-else
                :id="prop.name + '-ip'"
                autocomplete="off"
-               class="text-xs bg-transparent h-3rem border-none border-bottom-1 border-gray-300"
+               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-400" unstyled
                v-model="item[prop.name]"
                fluid/>
 
@@ -29,20 +31,20 @@
   <!-- /name | Description -->
 
 
-  <!-- props -->
-  <div class="grid m-0 pt-2">
+  <!-- other props -->
+  <div class="grid m-0">
 
-    <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 p-4">
+    <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 px-4 pb-4">
 
       <InputNumber v-if="prop.decimal"
                    :id="prop.name + '-ip'"
                    v-model="item[prop.name]"
                    :min-fraction-digits="2"
-                   class="pl-0 text-sm border-none border-bottom-1 border-gray-400"
+                   input-class="w-full pl-0 bg-white text-sm h-3rem border-none border-bottom-1 border-gray-400"
                    fluid use-grouping/>
 
       <Select v-else-if="prop.enum"
-              class="bg-transparent border-none border-bottom-1 border-gray-400"
+              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400 text-sm"
               :id="prop.name + '-ip'"
               v-model="item[prop.name]"
               :options="prop.enum"
@@ -60,20 +62,20 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              class="bg-transparent border-none border-bottom-1 border-gray-400" fluid
+              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400 text-sm" fluid
               :option-label="prop.rel || 'name'"
               option-value="id"/>
 
       <InputText v-else-if="prop.number"
                  type="number"
                  :id="prop.name + '-ip'"
-                 class="pl-0 border-none border-bottom-1 border-gray-400"
+                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-400" unstyled
                  v-model="item[prop.name]"
                  fluid/>
 
       <InputText v-else
                  :id="prop.name + '-ip'"
-                 class="pl-0 border-none border-bottom-1 border-gray-400"
+                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-400" unstyled
                  v-model="item[prop.name]"
                  fluid/>
 
