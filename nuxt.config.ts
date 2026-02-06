@@ -22,11 +22,6 @@ export default defineNuxtConfig({
         }
     },
 
-
-    aos: {
-        duration: 800,
-    },
-
     css: [
         'material-icons/iconfont/material-icons.css',
         'material-icons/iconfont/outlined.css',

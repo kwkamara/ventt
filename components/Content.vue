@@ -169,9 +169,12 @@
             <Column v-for="prop in key_props.filter(p => p.name!== 'description')" :field="prop.name">
               <template #body="{data}">
                 <div class="py-2 pl-2" @click="manage='info'; item=data">
-                  {{ prop.prefix }}
-                  {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
-                  {{ prop.suffix }}
+                  <template v-if="prop.date">
+                    {{ new Date(data[prop.name]).toLocaleDateString('en-GB') }}
+                  </template>
+                  <template v-else>
+                    {{ prop.prefix }} {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }} {{ prop.suffix }}
+                  </template>
                 </div>
               </template>
             </Column>
@@ -215,9 +218,12 @@
             <Column v-for="(prop, key) in tbl_columns" :field="prop.name" :key="prop.name">
               <template #body="{data}">
                 <div :class="(key === 0 ? 'pl-3' : '') + ' w-full py-2 white-space-nowrap'" @click="manage='info'; item=data">
-                  {{ prop.prefix }}
-                  {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
-                  {{ prop.suffix }}
+                  <template v-if="prop.date">
+                    {{ new Date(data[prop.name]).toLocaleDateString('en-GB') }}
+                  </template>
+                  <template v-else>
+                    {{ prop.prefix }} {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }} {{ prop.suffix }}
+                  </template>
                 </div>
               </template>
             </Column>
@@ -278,10 +284,18 @@
 
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])" :class="(prop.name === 'description' ? '' : 'lg:col-6 ') + 'col-12 py-3'">
-              <div>{{ prop.prefix }} {{ item[prop.name] }}</div>
+
+              <div>
+                <template v-if="prop.date">
+                  {{ new Date(item[prop.name]).toLocaleDateString('en-GB') }}
+                </template>
+                <template v-else>
+                  {{ prop.prefix }} {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
+                </template>
+              </div>
+
               <span class="mt-1 text-xs capitalize text-gray-500">
-                {{ prop.header || prop.name }}
-                {{ prop.suffix }}
+                {{ prop.header || prop.name }} {{ prop.suffix }}
               </span>
             </div>
             <!-- /Key props -->
@@ -302,6 +316,7 @@
               </span>
             </div>
             <!-- /other props -->
+
 
             <!-- category.categories -->
             <template v-if="category.categories">
@@ -400,6 +415,12 @@ export default defineComponent({
             },
 
             {
+              name: "date",
+              key : 1,
+              date: 1
+            },
+
+            {
               name   : "documentId",
               no_edit: 1,
               no_tbl : 1,
@@ -408,8 +429,8 @@ export default defineComponent({
 
             {
               name  : "description",
-              no_tbl: 1,
-              key   : 1
+              key   : 1,
+              no_tbl: 1
             },
 
             {
@@ -418,6 +439,7 @@ export default defineComponent({
               decimal: 1
             },
 
+            //other props.
             {
               name: "status",
               enum: ['delivered', 'shipped', 'processing', 'cancelled', 'approved', 'returned'],
@@ -488,7 +510,7 @@ export default defineComponent({
               id        : "001",
               amount    : 315.75,
               customer  : "001",
-              date      : "2023-06-15",
+              date      : new Date('Wed Feb 04 2026 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-001",
               files     : [],
               images    : [],
@@ -508,7 +530,7 @@ export default defineComponent({
               id        : "002",
               amount    : 189.50,
               customer  : "002",
-              date      : "2023-06-14",
+              date      : new Date('Mon Jun 08 2025 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-002",
               files     : [],
               images    : [],
@@ -1004,11 +1026,12 @@ export default defineComponent({
 
       },
 
+      //annual chart labels.
       months: ['Jan', "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 
       //dates.
-      startDate: new Date().toLocaleDateString(),
-      endDate  : new Date().toLocaleDateString(),
+      startDate: new Date().toLocaleDateString('en-GB'),
+      endDate  : new Date().toLocaleDateString('en-GB'),
 
       //chart | table.
       displayChart: true,

@@ -17,12 +17,18 @@
               :rows="3"
               class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-400" unstyled fluid/>
 
+    <DatePicker v-else-if="prop.date"
+                :id="prop.name + '-ip'"
+                v-model="item[prop.name]"
+                :aria-label="item[prop.name]"
+                date-format="dd/mm/yy" fluid
+                input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-400"/>
+
     <InputText v-else
                :id="prop.name + '-ip'"
-               autocomplete="off"
-               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-400" unstyled
                v-model="item[prop.name]"
-               fluid/>
+               autocomplete="off"
+               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-400" fluid unstyled/>
 
     <label class="mt-1 text-xs uppercase"
            :for="prop.name + '-ip'">{{ prop.name }}
@@ -54,7 +60,9 @@
       <DatePicker v-else-if="prop.date"
                   :id="prop.name + '-ip'"
                   v-model="item[prop.name]"
-                  fluid/>
+                  :aria-label="item[prop.name]"
+                  date-format="dd/mm/yy" fluid
+                  input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-400"/>
 
       <Select v-else-if="prop.select"
               :id="prop.name + '-ip'"
