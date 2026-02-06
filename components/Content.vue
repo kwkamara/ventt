@@ -24,7 +24,7 @@
     <div :class="(is_sidebar ? 'w-9 md:w-10 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none'">
 
       <!-- profile | dates -->
-      <div class="col-12 pl-0 pt-0 flex justify-content-between align-items-center">
+      <div class="col-12 pl-1 pt-0 md:flex justify-content-between align-items-center">
 
         <!-- profile -->
         <div class="flex align-items-center gap-2">
@@ -34,12 +34,13 @@
         <!-- /profile -->
 
         <!-- dates -->
-        <div class="flex gap-1 align-items-center justify-content-end">
+        <div class="pt-2 md:pt-0 flex gap-1 align-items-center md:justify-content-end">
           <Icon icon="calendar_month"/>
+
           <!-- start -->
           <DatePicker id="start-date"
                       aria-label="start date"
-                      input-class="text-sm text-gray-700 lg:w-7rem hover:text-purple-700 cursor-pointer"
+                      input-class="text-sm text-gray-700 w-7rem hover:text-purple-700 cursor-pointer"
                       date-format="dd/mm/yy"
                       v-model="startDate" fluid/>
 
@@ -48,7 +49,7 @@
           <DatePicker id="end-date"
                       date-format="dd/mm/yy"
                       aria-label="end date"
-                      input-class="lg:w-6rem pr-0 text-sm text-gray-700 text-right hover:text-purple-700 cursor-pointer"
+                      input-class="w-6rem pr-0 text-sm text-gray-700 text-right hover:text-purple-700 cursor-pointer"
                       v-model="endDate" fluid/>
         </div>
         <!-- /dates -->
@@ -67,7 +68,7 @@
           <div class="pb-4 md:flex justify-content-between align-items-start">
 
             <!-- category name | category total -->
-            <div class="lg:w-8 lg:pl-4 md:pt-2  text-2xl capitalize">
+            <div class="lg:w-8 px-3 lg:pl-4 md:pt-2  text-2xl capitalize">
               <div class="flex gap-3 align-items-center">
                 <VButtonCube :icon="category.icon" fill="1" class="h-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
                 <div>
@@ -75,7 +76,6 @@
                   <span>{{ category.data.length }}</span>
                 </div>
               </div>
-
             </div>
             <!-- category name | category total -->
 
@@ -85,7 +85,7 @@
 
           <!-- report | manage -->
           <Divider unstyled class="border-top-1 border-purple-900"/>
-          <div class="lg:pt-3 lg:px-4 pb-3 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
+          <div class="px-3 py-3 lg:px-4 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
             <VButton icon="article" class="border-round-3xl text-white"/>
             <VButton icon="settings"
                      class="border-round-3xl text-white"
