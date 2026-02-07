@@ -9,29 +9,29 @@
             :optionLabel="prop.label"
             :options="getCategoryByName(prop.select).data"
             :placeholder="prop.header || prop.name"
-            input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400" fluid
+            input-class="pl-0 bg-white border-none border-bottom-1 border-gray-300" fluid
             :option-label="prop.rel || 'name'"
             option-value="id"/>
 
     <Textarea v-else-if="prop.name ==='description'"
               :rows="3"
-              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-400" unstyled fluid/>
+              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
 
     <DatePicker v-else-if="prop.date"
                 :id="prop.name + '-ip'"
                 v-model="item[prop.name]"
                 :aria-label="item[prop.name]"
                 date-format="dd/mm/yy" fluid
-                input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-400"/>
+                input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
 
     <InputText v-else
                :id="prop.name + '-ip'"
                v-model="item[prop.name]"
                autocomplete="off"
-               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-400" fluid unstyled/>
+               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-300" fluid unstyled/>
 
-    <label class="mt-1 text-xs uppercase"
-           :for="prop.name + '-ip'">{{ prop.name }}
+    <label class="mt-1 text-xs uppercase text-gray-500" :for="prop.name + '-ip'">
+      {{ prop.name }}
     </label>
   </div>
   <!-- /name | Description -->
@@ -46,7 +46,7 @@
                    :id="prop.name + '-ip'"
                    v-model="item[prop.name]"
                    :min-fraction-digits="2"
-                   input-class="w-full pl-0 bg-white text-sm h-3rem border-none border-bottom-1 border-gray-400"
+                   input-class="w-full pl-0 bg-white text-sm h-3rem border-none border-bottom-1 border-gray-300"
                    fluid use-grouping/>
 
       <Select v-else-if="prop.enum"
@@ -62,7 +62,7 @@
                   v-model="item[prop.name]"
                   :aria-label="item[prop.name]"
                   date-format="dd/mm/yy" fluid
-                  input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-400"/>
+                  input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
 
       <Select v-else-if="prop.select"
               :id="prop.name + '-ip'"
@@ -70,20 +70,20 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400 text-sm" fluid
+              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
               :option-label="prop.rel || 'name'"
               option-value="id"/>
 
       <InputText v-else-if="prop.number"
                  type="number"
                  :id="prop.name + '-ip'"
-                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-400" unstyled
+                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300" unstyled
                  v-model="item[prop.name]"
                  fluid/>
 
       <InputText v-else
                  :id="prop.name + '-ip'"
-                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-400" unstyled
+                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300" unstyled
                  v-model="item[prop.name]"
                  fluid/>
 

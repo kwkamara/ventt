@@ -10,7 +10,7 @@
               :key="cat.name"
               @click="viewCategory(cat)"
               :class="( category_name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
-              ' w-5rem h-4rem border-none shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
+              ' w-5rem h-4rem border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
         <div class="text-center">
           <span class="material-icons-outlined">{{ cat.icon }}</span>
           <div class="text-xs capitalize">{{ cat.name }}</div>
@@ -99,13 +99,13 @@
 
 
         <!-- metrics -->
-        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
+        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
           <template v-for="(metric, ix) in category.metrics">
-            <div>
-              <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
-              <div class="capitalize flex align-items-center gap-1 text-sm">
-                <Icon :icon="metric.icon"/>
-                <span>{{ metric.name }}</span>
+            <div class="w-full flex gap-1 align-items-end">
+              <Icon :icon="metric.icon" class="text-6xl"/>
+              <div>
+                <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
+                <span class="text-xs capitalize">{{ metric.name }}</span>
               </div>
             </div>
             <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
@@ -115,13 +115,13 @@
 
 
         <!-- status -->
-        <div class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center bg-white">
+        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
           <template v-for="(status, ix) in category.status">
-            <div>
-              <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
-              <div class="capitalize flex align-items-center gap-1 text-sm">
-                <Icon :icon="status.icon"/>
-                <span class="">{{ status.name }}</span>
+            <div class="w-full flex gap-1 align-items-end">
+              <Icon :icon="status.icon" class="text-6xl"/>
+              <div>
+                <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
+                <span class="text-xs capitalize">{{ status.name }}</span>
               </div>
             </div>
             <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
@@ -148,10 +148,10 @@
 
 
         <!-- recent -->
-        <div v-if="!manage && category.data" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
+        <div v-if="!manage && category.data" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
 
           <!-- header -->
-          <div class="px-3 md:px-4 pb-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300">
+          <div class="px-3 md:px-4 py-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300 bg-gray-50">
             <div class="flex gap-1 align-items-center">
               <span class="material-icons-outlined">access_time</span>
               <h3 class="m-0 font-light sans-serif">Recent {{ category.name }}</h3>
@@ -188,17 +188,16 @@
 
 
         <!-- manage -->
-        <div v-if="manage" class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
+        <div v-if="manage" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
 
           <!-- search -->
           <template v-if="manage==='items'">
-            <div class="pb-4 pt-2 px-3 md:px-4 flex justify-content-between align-items-center gap-2">
+            <div class="p-3 md:px-4 flex justify-content-between align-items-center gap-2 bg-gray-50">
               <InputText v-model="filters['global'].value"
-                         class="pl-4 h-3rem text-gray-700 border-1 border-gray-200 border-round-3xl text-sm"
-                         placeholder="Search"/>
+                         :placeholder="'Search ' + category.name"
+                         class="w-10rem px-3 text-sm border-gray-300 border-1 border-gray-300 border-round-3xl"/>
               <VButtonCube text="new" icon="add" fill="1" @click="manage='edit'"/>
             </div>
-
             <Divider unstyled class="border-bottom-1 border-gray-300"/>
           </template>
           <!-- /search -->
@@ -245,10 +244,10 @@
 
 
           <!-- header -->
-          <div v-if="manage !=='items'" class="p-3 pt-0 pb-2 flex justify-content-between align-items-center">
+          <div v-if="manage !=='items'" class="p-3 flex justify-content-between align-items-center bg-gray-50">
 
             <!-- category name | item id -->
-            <div class="m-0 lg:pl-2 font-light text-xl text-purple-800 capitalize flex gap-1 align-items-center">
+            <div class="m-0 lg:pl-2 font-light text-xl text-purple-800 capitalize">
               <div>
                 <div>{{ item ? (item.name || item.id) : 'New Item' }}</div>
                 <div class="mt-1 flex align-items-center">
@@ -256,15 +255,15 @@
                   <span class="ml-1 text-xs uppercase text-gray-700">{{ category.name }} </span>
                 </div>
               </div>
-
             </div>
             <!-- /category name | item id -->
 
             <!-- controls -->
-            <div class="pr-2 flex align-items-center gap-3">
+            <div class="md:pr-2 flex align-items-center gap-3">
 
               <template v-if="item">
                 <VButton v-if="manage!=='edit'" icon="edit" @click="manage='edit';"/>
+                <Divider v-if="manage!=='edit' && manage!=='info'" unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>
                 <VButton v-if="manage!=='info'" icon="info" @click="manage='info';"/>
                 <Divider unstyled layout="vertical" class="h-2rem border-left-1 border-gray-200"/>
               </template>
@@ -277,7 +276,7 @@
           <!-- header -->
 
 
-          <Divider v-if="manage!=='items'"/>
+          <Divider v-if="manage!=='items'" unstyled class="border-top-1 border-gray-300"/>
 
 
           <!-- details grid -->
@@ -358,6 +357,63 @@
           </div>
           <!-- /edit -->
 
+
+          <!-- media -->
+          <div v-if="item && ['media', 'files'].includes(manage)" class="grid m-0 p-3 md:px-3">
+
+            <!-- upload -->
+            <div class="col-12 px-2 pb-3 flex justify-content-between align-items-start pb-0 gap-2">
+              <div>
+                <FileUpload v-model="media"
+                            choose-icon="pi pi-folder"
+                            choose-label="select file"
+                            class="bg-purple-700 border-none" mode="basic"/>
+              </div>
+              <VButtonCube :disabled="!media" text="upload" icon="check" class="border-round-3xl"/>
+            </div>
+            <!-- /upload -->
+
+            <Divider class="mx-2 mt-1 mb-5"/>
+
+            <!-- item images -->
+            <div v-if="item.images && manage==='media'" class="grid m-0">
+              <div v-for="(img, ix) in item.images" class="col-12 md:col-4 pt-0 relative">
+
+                <VButton class="absolute right-0 mx-3 mt-2 shadow-1 hover:shadow-3"
+                         :fill="delete_media[ix+1]"
+                         @click="delete_media[ix+1] ? delete(delete_media[ix+1]) : delete_media[ix+1]=1"
+                         icon="delete"/>
+
+                <img :alt="item.description || item.name"
+                     :src="'/' + img.url"
+                     class="w-full border-round border-1 border-purple-100 shadow-1"/>
+              </div>
+            </div>
+            <!-- item images -->
+
+          </div>
+          <!-- media -->
+
+
+          <!-- footer -->
+          <div v-if="item && item.documentId" class="p-3 pb-4 md:px-4 flex justify-content-between gap-3 align-items-center bg-gray-50">
+
+            <div class="flex justify-content-start align-items-center gap-3">
+              <!-- gallery -->
+              <VButton v-if="manage!=='media'" icon="photo" @click="manage='media'"/>
+              <Divider v-if="(manage!=='media' && manage!=='files')"
+                       class="h-2rem border-left-1 border-gray-200" layout="vertical" unstyled/>
+              <!-- files -->
+              <VButton v-if="manage!=='files'" icon="folder" @click="manage='files'"/>
+            </div>
+
+            <!-- update media -->
+            <VButtonCube v-if="['media', 'files'].includes(manage)"
+                         text="update" icon="check_circle" fill="1" @click="updateMedia()"/>
+          </div>
+          <!-- /footer -->
+
+
         </div>
         <!-- /manage -->
 
@@ -384,12 +440,15 @@ export default defineComponent({
 
   data() {
     return {
+      //table filters.
       filters: {
         global: {value: null, matchMode: FilterMatchMode.CONTAINS},
       },
 
       //manage.
-      manage: false,
+      manage      : null,
+      media       : null,
+      delete_media: {},
 
       //menu.
       menu: [
@@ -1065,6 +1124,7 @@ export default defineComponent({
     },
 
 
+    //char data.
     chartData() {
       return {
         labels  : this.months,
@@ -1093,13 +1153,6 @@ export default defineComponent({
     },
 
 
-    //category key columns.
-    key_columns() {
-      if (!this.category) return [];
-      return this.category.props.filter(prop => prop.key);
-    },
-
-
     //category table columns.
     tbl_columns() {
       if (!this.category) return [];
@@ -1118,7 +1171,7 @@ export default defineComponent({
     manageToggle() {
       if (this.manage) {
         this.manage = null;
-        this.item = null;
+        this.item   = null;
       } else this.manage = 'items';
     },
 
@@ -1129,14 +1182,15 @@ export default defineComponent({
       //set active.
       this.category = category;
 
-      //manage reset.
-      this.manage = null;
-
       //load products.
       if (category.name === 'products') this.loadProducts();
 
       //process category.
       this.processCategory();
+
+      //load init item.
+      // this.manage = "media";
+      // this.item = this.category.data[0];
     },
 
     //get category.
@@ -1154,15 +1208,17 @@ export default defineComponent({
       this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
     },
 
+
     // ITEM
     viewItem(item) {
-      this.item = item;
-      this.manage = "info";
+      this.item         = item;
+      this.manage       = "info";
+      this.delete_media = {};
     },
 
     editItem(item) {
-      this.item = item;
-      this.manage = "edit";
+      this.item   = item;
+      this.manage = null;
     },
 
     pushItem(item) {
@@ -1170,7 +1226,7 @@ export default defineComponent({
       if (!item.id) {
 
         //item ID init.
-        item.id = new Date().getTime();
+        item.id         = new Date().getTime();
         item.documentId = new Date().getTime();
 
         //add item.
@@ -1199,6 +1255,19 @@ export default defineComponent({
       }
     },
 
+    //media update.
+    updateMedia() {
+      //update media object.
+      this.delete_media = {};
+
+      //notify popup.
+      this.$toast.add({
+        severity: "info",
+        summary : "media updated",
+        life    : 1000
+      });
+    },
+
     //ANALYSIS.
     //orders.
     analyseOrders() {
@@ -1209,7 +1278,7 @@ export default defineComponent({
       cat.status = {
         approved: 0, processing: 0, cancelled: 0
       };
-      cat.state = {
+      cat.state  = {
         shipped: 0, delivered: 0, returned: 0
       };
 
@@ -1217,7 +1286,7 @@ export default defineComponent({
       cat.total = 0;
 
       //items.
-      let items = 0;
+      let items        = 0;
       const item_count = cat.items.length;
 
       //process items.
@@ -1237,7 +1306,7 @@ export default defineComponent({
 
       //conversion rate | return rate.
       cat.props_r2['return rate'] = cat.state.returned ? (cat.state.returned / item_count).toFixed(2) : 0;
-      cat.props_r2['error rate'] = cat.status.cancelled ? (cat.status.cancelled / item_count).toFixed(2) : 0;
+      cat.props_r2['error rate']  = cat.status.cancelled ? (cat.status.cancelled / item_count).toFixed(2) : 0;
     },
 
     //products.
@@ -1249,20 +1318,20 @@ export default defineComponent({
       cat.status = {
         approved: 0, processing: 0, cancelled: 0
       };
-      cat.state = {
+      cat.state  = {
         "low stock": 0, "out of stock": 0, "in stock": 0
       };
 
       //total.
       cat.total = 0;
-      cat.cost = 0;
+      cat.cost  = 0;
       cat.price = 0;
 
       //items.
-      let items = 0;
+      let items        = 0;
       const item_count = cat.items.length;
-      const intakes = this.getCategoryByName('intakes').items;
-      const orders = this.getCategoryByName('orders').items;
+      const intakes    = this.getCategoryByName('intakes').items;
+      const orders     = this.getCategoryByName('orders').items;
 
       //process items.
       cat.items.forEach(product => {
@@ -1312,7 +1381,7 @@ export default defineComponent({
       cat.status = {
         approved: 0, pending: 0, cancelled: 0
       };
-      cat.state = {
+      cat.state  = {
         shipped: 0, delivered: 0, returned: 0
       };
 
@@ -1320,7 +1389,7 @@ export default defineComponent({
       cat.total = 0;
 
       //items.
-      let items = 0;
+      let items        = 0;
       const item_count = cat.items.length;
 
       //process items.
@@ -1349,7 +1418,7 @@ export default defineComponent({
 
   beforeMount() {
     //load first category.
-    this.viewCategory(this.menu[0]);
+    this.viewCategory(this.menu[1]);
   }
 })
 </script>
