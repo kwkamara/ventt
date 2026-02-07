@@ -1,9 +1,9 @@
 <template>
   <Button
       :class="(fill ? 'bg-purple-800 text-white border-none hover:bg-purple-700 ' : 'bg-white text-purple-800 border-1 border-purple-100 hover:bg-purple-700 hover:text-white ')
-      + 'hover:shadow-3' ">
+      + 'hover:shadow-3 align-items-center '">
     <span class="material-icons-outlined">{{ icon }}</span>
-    <span class="white-space-nowrap capitalize">{{ text }}</span>
+    <span v-if="text" class="white-space-nowrap capitalize">{{ text }}</span>
   </Button>
 </template>
 

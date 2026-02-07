@@ -7,6 +7,7 @@
          class="w-3 md:w-2 lg:w-1 py-5 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
 
       <Button v-for="cat in menu.filter(m => !m.parent)"
+              :key="cat.name"
               @click="viewCategory(cat)"
               :class="( category_name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
               ' w-5rem h-4rem border-none shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
@@ -59,7 +60,7 @@
 
 
       <!-- left col -->
-      <div class="col-12 lg:col-5 md:pl-0 flex flex-column gap-3">
+      <div v-if="category" class="col-12 lg:col-5 md:pl-0 flex flex-column gap-3">
 
         <!-- summary panel -->
         <div class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-purple-500 text-white">
@@ -70,7 +71,7 @@
             <!-- category name | category total -->
             <div class="lg:w-8 px-3 lg:pl-4 md:pt-2  text-2xl capitalize">
               <div class="flex gap-3 align-items-center">
-                <VButtonCube :icon="category.icon" fill="1" class="h-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
+                <VButtonCube :icon="category.icon" fill="1" class="h-4rem w-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
                 <div>
                   <div>{{ category.name }}</div>
                   <span>{{ category.data.length }}</span>
@@ -133,7 +134,7 @@
 
 
       <!-- right col -->
-      <div class="col-12 lg:col-7 flex flex-column gap-3">
+      <div v-if="category" class="col-12 lg:col-7 flex flex-column gap-3">
 
         <!-- chart -->
         <div v-if="!manage"
