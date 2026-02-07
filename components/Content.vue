@@ -101,13 +101,14 @@
         <!-- metrics -->
         <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
           <template v-for="(metric, ix) in category.metrics">
-            <div class="w-full flex gap-1 align-items-end">
-              <Icon :icon="metric.icon" class="text-6xl"/>
-              <div>
+            <div class="w-full">
+              <div class="flex gap-1 align-items-center">
+                <Icon :icon="metric.icon" class="text-6xl"/>
                 <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
-                <span class="text-xs capitalize">{{ metric.name }}</span>
               </div>
+              <div class="text-xs capitalize">{{ metric.name }}</div>
             </div>
+
             <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
           </template>
         </div>
@@ -117,13 +118,14 @@
         <!-- status -->
         <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
           <template v-for="(status, ix) in category.status">
-            <div class="w-full flex gap-1 align-items-end">
-              <Icon :icon="status.icon" class="text-6xl"/>
-              <div>
+            <div class="w-full">
+              <div class="flex gap-1 align-items-center">
+                <Icon :icon="status.icon" class="text-6xl"/>
                 <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
-                <span class="text-xs capitalize">{{ status.name }}</span>
               </div>
+              <div class="text-xs capitalize">{{ status.name }}</div>
             </div>
+
             <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
           </template>
         </div>
