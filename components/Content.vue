@@ -99,7 +99,7 @@
 
 
         <!-- metrics -->
-        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
+        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
           <template v-for="(metric, ix) in category.metrics">
             <div class="w-full">
               <div class="flex gap-1 align-items-center">
@@ -116,7 +116,7 @@
 
 
         <!-- status -->
-        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white">
+        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
           <template v-for="(status, ix) in category.status">
             <div class="w-full">
               <div class="flex gap-1 align-items-center">
