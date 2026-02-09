@@ -38,14 +38,14 @@
                         class="h-16rem"
                         discount="10% Off"
                         image="/men-accessories-1-438.webp"
-                        name="Mens' Accessories"
+                        :name="$t('men_accessories')"
                         type="accessories"/>
 
         <ProductDisplay category="women"
                         class="pt-4 md:pt-0 xl:pt-2 h-16rem"
                         discount="10% Off"
                         image="/women-1-664.webp"
-                        name="Women Casual"
+                        :name="$t('women_casual')"
                         type="casual"/>
       </div>
       <!-- /offers display -->
@@ -62,7 +62,7 @@
             <ProductDisplay category="women"
                             discount="15% Off"
                             image="/women-1-664.webp"
-                            name="Women's Style"
+                            :name="$t('women_style')"
                             type="casual"/>
           </div>
           <div class="col-12 md:col-6 px-3 lg:pr-1">
@@ -73,7 +73,7 @@
                 <ProductDisplay category="women"
                                 discount="10% Off"
                                 image="/women-suits-1-324.webp"
-                                name="women's suits"
+                                :name="$t('women_suits')"
                                 type="official"/>
               </div>
 
@@ -81,7 +81,7 @@
                 <ProductDisplay category="women"
                                 discount="10% Off"
                                 image="/women-hats-1-324.webp"
-                                name="women's hats"
+                                :name="$t('women_hats')"
                                 type="hats"/>
               </div>
 
@@ -91,7 +91,7 @@
               <ProductDisplay category="women"
                               discount="5% Off"
                               image="/women-blouses-1-664.webp"
-                              name="women's blouses"
+                              :name="$t('women_blouses')"
                               type="casual"/>
             </div>
 
@@ -108,16 +108,17 @@
       <div class="col-12 md:col-6 px-0">
         <div class="w-full px-2 md:pr-1 flex gap-3">
           <div class="w-6 h-8rem lg:h-12rem">
-            <ProductDisplay category="kids"
+            <ProductDisplay :name="$t('kids') + ' | ' + $t('casual')"
+                            category="kids"
                             discount="10% Off"
-                            image="/kids-casual-1-324.webp"
-                            name="kids | casual" type="casual"/>
+                            image="/kids-casual-1-324.webp" type="casual"/>
           </div>
           <div class="w-6 h-8rem lg:h-12rem">
-            <ProductDisplay category="kids"
+            <ProductDisplay :name="$t('girls')"
+                            category="kids"
                             discount="20% Off"
                             image="/kids-casual-3-324.webp"
-                            name="girls" type="casual"/>
+                            type="casual"/>
           </div>
         </div>
         <div class="w-full px-2 md:pr-1 flex gap-3 mt-3">
@@ -126,12 +127,13 @@
                           category="kids"
                           type="casual"
                           image="/babies-1-324.webp"
-                          name="babies"/>
-          <ProductDisplay class="w-6 h-8rem lg:h-12rem"
+                          :name="$t('babies')"/>
+          <ProductDisplay category="kids"
+                          class="w-6 h-8rem lg:h-12rem"
+                          discount="10% Off"
                           image="/kids-pyjamas-1-324.webp"
-                          category="kids"
-                          type="casual"
-                          discount="10% Off" name="pyjamas"/>
+                          :name="$t('pyjamas')"
+                          type="casual"/>
         </div>
       </div>
 
@@ -139,13 +141,14 @@
         <ProductDisplay category="kids"
                         discount="15% Off"
                         image="/kids-casual-4-664.webp"
-                        name="kids fashion"
+                        :name="$t('kids_fashion')"
                         type="casual"/>
       </div>
 
     </section>
     <!--  /kids section -->
   </client-only>
+
 
   <!--  footer -->
   <VFooter class="select-none"/>

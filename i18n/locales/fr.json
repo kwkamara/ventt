@@ -33,5 +33,22 @@
   "collection_kids": "Collection enfants",
   "search": "Rechercher",
   "cart": "Panier",
-  "favorites": "Favoris"
+  "favorites": "Favoris",
+
+  "women_blouses": "Blouses pour femmes",
+  "women_suits": "Costumes pour femmes",
+  "women_casual": "Tenues décontractées pour femmes",
+  "women_style": "Style féminin",
+  "women_hats": "Chapeaux pour femmes",
+
+
+  "babies": "Bébés",
+  "pyjamas": "Pyjamas",
+  "kids_fashion": "Mode enfant",
+  "kids_casual": "Enfants | Décontracté",
+  "men_accessories": "Accessoires pour hommes",
+
+  "girls": "Filles",
+
+  "enter_email": "Entrez votre email"
 }

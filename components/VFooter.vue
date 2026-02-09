@@ -64,7 +64,7 @@
             <InputText unstyled fluid
                        autocomplete="off"
                        id="subscribe-email-ip"
-                       placeholder="Enter you email"
+                       :placeholder="$t('enter_email')"
                        class="h-3rem w-full pl-0 bg-transparent shadow-1 border-none border-bottom-1 border-gray-700 text-gray-200"/>
             <div class="pt-3">
               <VButtonCube fill="1"

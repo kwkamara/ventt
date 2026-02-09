@@ -33,5 +33,20 @@
   "collection_kids": "Kids' Collection",
   "search": "Search",
   "cart": "Cart",
-  "favorites": "Favorites"
+  "favorites": "Favorites",
+
+  "women_suits": "Women's Suits",
+  "women_casual": "Women's Casual",
+  "women_style": "Women's Style",
+  "women_hats": "Women's Hats",
+
+  "babies": "Babies",
+  "pyjamas": "Pyjamas",
+  "kids_fashion": "Kids Fashion",
+  "kids_casual": "Kids | Casual",
+  "men_accessories": "Men's Accessories",
+
+  "girls": "Girls",
+
+  "enter_email": "Enter your email"
 }
