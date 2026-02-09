@@ -9,7 +9,7 @@
 
 
   <!-- product -->
-  <section v-if="product" class="grid m-0 px-3 lg:px-5 py-5 text-gray-700 select-none overflow-hidden animation-duration-1000 fadein">
+  <section v-if="product" class="grid m-0 px-3 lg:px-3 py-5 text-gray-700 select-none overflow-hidden animation-duration-1000 fadein">
 
     <!-- image col -->
     <div class="col-12 md:col-6 lg:px-6 lg:py-5 lg:flex">
@@ -182,6 +182,7 @@
 
   <!--  footer -->
   <VFooter class="select-none"/>
+
 </template>
 
 

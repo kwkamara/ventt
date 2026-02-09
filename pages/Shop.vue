@@ -155,6 +155,7 @@
 </template>
 
 
+
 <script lang="js">
 export default defineComponent({
   name: "Shop",
@@ -208,7 +209,7 @@ export default defineComponent({
 
       //active categories.
       const active_categories = Object.keys(this.categories).filter(key => this.categories[key]);
-      const active_types = Object.keys(this.types).filter(key => this.types[key]);
+      const active_types      = Object.keys(this.types).filter(key => this.types[key]);
 
 
       //active_categories filter.
@@ -254,7 +255,6 @@ export default defineComponent({
       return products;
     }
   },
-
 
   methods: {
 

@@ -1,7 +1,7 @@
 <template>
 
   <!-- Nav | Categories | Hero -->
-  <section class="grid m-0 text-gray-700 select-none overflow-hidden bg-white">
+  <section class="grid m-0 text-gray-700 select-none overflow-hidden bg-white" v-cloak>
     <Navbar/>
 
     <Categories/>
@@ -12,11 +12,13 @@
 
   <client-only>
     <!-- New Arrivals -->
-    <section class="grid m-0 pb-7 md:px-7 select-none overflow-hidden bg-white">
+    <section class="grid m-0 pb-7 md:px-6 select-none overflow-hidden bg-white">
 
       <!-- title -->
-      <div class="col-12 pb-0 pl-2">
-        <h2 class="font-light">New Arrivals</h2>
+      <div class="col-12 pb-0">
+        <h2 class="font-light capitalize">
+          {{ $t('new arrivals') }}
+        </h2>
       </div>
       <!-- /title -->
 
@@ -52,18 +54,18 @@
     <!-- /New Arrivals -->
 
 
-    <!--  section 2 -->
-    <section class="grid m-0 md:p-4 lg:px-7 py-4 select-none overflow-hidden bg-purple-900">
+    <!--  women section -->
+    <section class="grid m-0 md:p-4 lg:px-6 py-4 select-none overflow-hidden bg-purple-900">
       <div class="col-12 px-0">
         <div class="grid m-0">
-          <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3">
+          <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3 md:pr-1 md:pl-2">
             <ProductDisplay category="women"
                             discount="15% Off"
                             image="/women-1-664.webp"
                             name="Women's Style"
                             type="casual"/>
           </div>
-          <div class="col-12 md:col-6 px-3">
+          <div class="col-12 md:col-6 px-3 lg:pr-1">
 
             <div class="lg:h-12rem w-full flex gap-3">
 
@@ -97,14 +99,14 @@
         </div>
       </div>
     </section>
-    <!--  /section 2 -->
+    <!--  /women section -->
 
 
     <!--  kids section -->
-    <section class="grid m-0 px-2 lg:px-7 lg:py-5 py-2 select-none">
+    <section class="grid m-0 px-2 lg:px-6 lg:py-5 py-2 select-none">
 
       <div class="col-12 md:col-6 px-0">
-        <div class="w-full px-2 flex gap-3">
+        <div class="w-full px-2 md:pr-1 flex gap-3">
           <div class="w-6 h-8rem lg:h-12rem">
             <ProductDisplay category="kids"
                             discount="10% Off"
@@ -118,16 +120,13 @@
                             name="girls" type="casual"/>
           </div>
         </div>
-
-        <div class="w-full px-2 flex gap-3 mt-3">
+        <div class="w-full px-2 md:pr-1 flex gap-3 mt-3">
           <ProductDisplay class="w-6 h-8rem lg:h-12rem"
                           discount="10% Off"
                           category="kids"
                           type="casual"
                           image="/babies-1-324.webp"
                           name="babies"/>
-
-
           <ProductDisplay class="w-6 h-8rem lg:h-12rem"
                           image="/kids-pyjamas-1-324.webp"
                           category="kids"
@@ -136,7 +135,7 @@
         </div>
       </div>
 
-      <div class="col-12 md:col-6 px-2 h-15rem lg:h-26rem">
+      <div class="col-12 md:col-6 h-15rem lg:h-26rem px-2 md:pl-3">
         <ProductDisplay category="kids"
                         discount="15% Off"
                         image="/kids-casual-4-664.webp"

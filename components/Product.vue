@@ -5,15 +5,17 @@
     <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
 
       <div class="h-9rem md:h-12rem bg-gray-100 relative">
+
         <!-- wishlist | cart -->
         <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
           <!-- wishlist -->
-          <VButton :fill="wishlist[product.documentId]"
+          <VButton v-if="wishlist" :fill="wishlist[product.documentId]"
                    @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
                    icon="favorite_border"/>
 
           <!-- shopping cart -->
-          <VButton :fill="cart[product.documentId]"
+          <VButton v-if="cart"
+                   :fill="cart[product.documentId]"
                    icon="shopping_cart"
                    @click.stop="cart[product.documentId] ? removeFromCart(product) : addToCart(product); notify('cart');"/>
         </div>
@@ -65,6 +67,9 @@ const {removeFromCart} = useRemoveFromCart();
 //wishlist.
 const {addToWishList} = useAddToWishList();
 const {removeFromWishList} = useRemoveFromWishList();
+
+//wishlist
+let wishlist = useState('wishlist').value;
 </script>
 
 

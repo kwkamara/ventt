@@ -16,7 +16,7 @@
 
              role="button" tabindex="0"
              @click="viewCategoryMenu(cat_name, $event)">
-          {{ cat_name }}
+          {{ $t(cat_name) }}
           <span class="material-icons-outlined">keyboard_arrow_down</span>
         </div>
       </div>
@@ -29,6 +29,7 @@
                  @click="$refs.searchPopover.toggle($event)"/>
       </div>
       <!-- Search -->
+
     </div>
 
 

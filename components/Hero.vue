@@ -18,29 +18,30 @@
 
         <!-- Message -->
         <div>
+
           <!-- title -->
           <h2 class="m-0 text-6xl lg:text-7xl font-light">
-            Discover Your <span class="text-gold">Style</span>
+            {{ $t('hero_title_1') }}
+            <span class="text-gold">{{ $t('hero_title_2') }}</span>
           </h2>
 
           <!-- subtitle -->
           <p class="m-0 lg:w-6 py-3 text-left lg:text-lg font-light line-height-3">
-            Elevate your wardrobe with our curated collection of luxury fashion pieces crafted for the modern connoisseur.
+            {{ $t('hero_description') }}
           </p>
 
           <!-- CTA -->
           <div class="pt-3 flex align-items-center gap-3">
+
             <NuxtLink to="/shop">
-              <Button class="bg-purple-800 text-white border-none white-space-nowrap">
-                <span class="font-bold">Shop now</span>
+              <Button class="pl-3 pr-1 bg-purple-800 text-white border-none white-space-nowrap">
+                <span class="font-bold">
+                  {{ $t('shop now') }}
+                </span>
                 <span class="material-icons-outlined">chevron_right</span>
               </Button>
             </NuxtLink>
 
-            <!--            <Button class="bg-gray-100 text-purple-800 border-none white-space-nowrap" outlined @click="viewShop()">-->
-            <!--              <span>New Arrivals</span>-->
-            <!--              <span class="material-icons-outlined">chevron_right</span>-->
-            <!--            </Button>-->
           </div>
           <!-- CTA -->
 

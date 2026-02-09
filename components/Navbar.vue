@@ -1,7 +1,7 @@
 <template>
 
-  <section class="col-12 h-5rem px-4 md:px-7 bg-white flex align-items-center animation-duration-1000 fadein"
-          aria-label="Main Navigation">
+  <section class="col-12 pt-4 md:py-5 px-3 md:px-7 bg-white flex align-items-center animation-duration-1000 fadein"
+           aria-label="Main Navigation">
 
     <!-- Logo -->
     <div aria-label="Ventt Brand"
@@ -9,34 +9,58 @@
 
       <NuxtLink to="/" class="flex gap-2 align-items-center no-underline">
         <img alt="ventt logo" height="50" src="/logo-ventt.svg" width="50"/>
+        <Divider layout="vertical" class="h-3rem"/>
 
-        <h1 class="m-0 title hidden lg:block align-self-end capitalize font-light text-purple-700" style="letter-spacing:0.1em">
-          Ventt
-        </h1>
+        <div>
+          <h1 class="m-0 title hidden lg:block align-self-end uppercase font-light text-purple-700" style="letter-spacing:0.1em">
+            Ventt
+          </h1>
+          <span class="text-gray-700 text-xs font-light">
+            {{ $t('tagline') }}
+          </span>
+        </div>
       </NuxtLink>
     </div>
     <!-- Logo -->
 
 
-    <!-- menu -->
-    <nav class="w-10 lg:w-8 flex align-items-center justify-content-end gap-5 md:gap-1">
-      <!-- Login -->
-      <NuxtLink to="/login">
-        <VButton icon="person"/>
-      </NuxtLink>
-      <Divider layout="vertical" class="h-2rem hidden md:block"/>
+    <!-- menu | locales -->
+    <nav class="w-10 lg:w-8">
 
-      <!-- wishlist -->
-      <VButton icon="favorite_border" :disabled="!Object.keys(wishlist).length"
-               @click="$refs.wishListPopover.toggle($event)"/>
-      <Divider layout="vertical" class="h-2rem hidden md:block"/>
+      <!-- menu -->
+      <div class="flex align-items-center justify-content-end">
+        <!-- Login -->
+        <NuxtLink to="/login">
+          <VButton icon="person"/>
+        </NuxtLink>
+        <Divider layout="vertical" class="h-2rem hidden md:block"/>
 
-      <!-- shopping cart -->
-      <VButton icon="shopping_cart"
-               :disabled="!Object.keys(cart).length"
-               @click="$refs.shoppingCartPopover.toggle($event)"/>
+        <!-- wishlist -->
+        <VButton icon="favorite_border" :disabled="!Object.keys(wishlist).length"
+                 @click="$refs.wishListPopover.toggle($event)"/>
+        <Divider layout="vertical" class="h-2rem hidden md:block"/>
+
+        <!-- shopping cart -->
+        <VButton icon="shopping_cart"
+                 :disabled="!Object.keys(cart).length"
+                 @click="$refs.shoppingCartPopover.toggle($event)"/>
+      </div>
+      <!-- /menu -->
+
+
+      <!-- locales -->
+      <div class="pt-3 flex justify-content-end align-items-center gap-0">
+        <template v-for="(locale_, ix) in locales">
+          <VButtonCube @click="setLocale(locale_.code)"
+                       :class="locale_.code === locale ? 'font-bold' : 'font-light text-gray-500'"
+                       :text="locale_.code"/>
+          <Divider v-if="ix !== (locales.length-1)" layout="vertical" class="h-1rem"/>
+        </template>
+      </div>
+      <!-- /locales -->
+
     </nav>
-    <!-- /menu -->
+    <!-- /menu | locales -->
 
   </section>
 
@@ -106,6 +130,9 @@
 
 <script setup lang="js">
 const {formatDecimal} = useFormatDecimal();
+
+//locale.
+const {locales, setLocale, locale} = useI18n();
 </script>
 
 
