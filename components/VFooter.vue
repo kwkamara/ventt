@@ -93,7 +93,7 @@
         <!-- /payments -->
 
         <!-- copyright -->
-        <div class="py-2 md:p-0 text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center uppercase">
+        <div class="py-2 md:p-0 text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center aling-items-center uppercase">
           <span>&copy; 2026. Ventt</span>
           <Divider layout="vertical"/>
           <NuxtLink to="https://linkedin.com/in/kwkamara"
