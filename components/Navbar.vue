@@ -7,9 +7,9 @@
     <div aria-label="Ventt Brand"
          class="h-full w-4 flex align-items-center gap-2 font-bold uppercase title hover:text-purple-600 cursor-pointer">
 
-      <NuxtLink to="/" class="flex gap-2 align-items-center no-underline">
+      <NuxtLink to="/" class="md:flex gap-2 align-items-center no-underline">
         <img alt="ventt logo" height="50" src="/logo-ventt.svg" width="50"/>
-        <Divider layout="vertical" class="h-3rem"/>
+        <Divider layout="vertical" class="h-3rem hidden md:block"/>
 
         <div>
           <h1 class="m-0 title hidden lg:block align-self-end uppercase font-light text-purple-700" style="letter-spacing:0.1em">
@@ -28,7 +28,7 @@
     <nav class="w-10 lg:w-8">
 
       <!-- menu -->
-      <div class="flex align-items-center justify-content-end">
+      <div class="flex align-items-center justify-content-end gap-4 md:gap-0">
         <!-- Login -->
         <NuxtLink to="/login">
           <VButton icon="person"/>
