@@ -9,7 +9,9 @@
 
     <!-- type -->
     <div class="h-full w-full p-3 xl:p-3 bg-black-alpha-50 hover:bg-black-alpha-10 absolute">
-      <h2 class="m-0 text-xl font-light capitalize text-right">{{ type }}</h2>
+      <h2 class="m-0 text-xl font-light capitalize text-right">
+        {{ $t(type) }}
+      </h2>
     </div>
 
   </div>

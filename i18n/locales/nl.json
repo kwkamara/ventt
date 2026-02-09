@@ -6,9 +6,12 @@
   "men": "heren",
   "women": "dames",
   "kids": "kinderen",
-  "official": "officieel",
-  "casual": "casual",
-  "hats": "hoeden",
+
+  "shoes": "Schoenen",
+  "accessories": "Accessoires",
+  "official": "Officieel",
+  "casual": "Casual",
+  "hats": "Hoeden",
 
   "new arrivals": "Nieuwe items",
   "dashboard": "dashboard",

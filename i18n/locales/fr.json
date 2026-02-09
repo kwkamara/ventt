@@ -6,9 +6,13 @@
   "men": "hommes",
   "women": "femmes",
   "kids": "enfants",
-  "official": "officiel",
-  "casual": "décontracté",
-  "hats": "chapeaux",
+
+
+  "shoes": "Chaussures",
+  "accessories": "Accessoires",
+  "official": "Officiel",
+  "casual": "Décontracté",
+  "hats": "Chapeaux",
 
   "new arrivals": "Nouveautés",
   "dashboard": "tableau de bord",
