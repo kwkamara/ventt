@@ -12,10 +12,10 @@
         <Divider layout="vertical" class="h-3rem hidden md:block"/>
 
         <div>
-          <h1 class="m-0 title hidden lg:block align-self-end uppercase font-light text-purple-700" style="letter-spacing:0.1em">
+          <h1 class="m-0 title align-self-end uppercase font-light text-purple-700" style="letter-spacing:0.1em">
             Ventt
           </h1>
-          <span class="text-gray-700 text-xs font-light">
+          <span class="text-gray-700 text-xs font-light hidden lg:block">
             {{ $t('tagline') }}
           </span>
         </div>
