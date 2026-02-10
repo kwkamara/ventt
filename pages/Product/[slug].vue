@@ -169,7 +169,7 @@
   <section class="grid m-0 px-3 lg:px-6 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
 
     <div class="col-12">
-      <h2 class="m-0 font-light text-3xl">Reviews</h2>
+      <h2 class="m-0 font-light text-3xl">{{ $t('reviews') }}</h2>
     </div>
 
     <div v-for="review in product.reviews" class="col-12 lg:col-6 py-2">
