@@ -12,13 +12,13 @@
   <section  v-if="cart" class="grid m-0 py-5 lg:p-7 select-none">
 
     <!-- cart summary -->
-    <div class="col-12 lg:col-6 py-3 px-4">
+    <div class="col-12 lg:col-7 py-3 px-4">
       <div class="p-4 border-1 border-purple-200 shadow-1 border-round-xl">
 
         <!-- header -->
         <div class="pb-2">
-          <h2 class="m-0 font-light">My Cart</h2>
-          <span class="uppercase text-xs">{{ Object.keys(cart).length }} Products</span>
+          <h2 class="m-0 font-light">{{$t('my_cart')}}</h2>
+          <span class="uppercase text-xs">{{ Object.keys(cart).length }} {{$t('products')}}</span>
         </div>
         <!-- /header -->
 
@@ -57,7 +57,7 @@
         <!-- Total -->
         <div v-if="cartTotal" class="pb-2 pt-4 border-top-1 border-gray-200 text-right">
           <div class="m-0 font-bold text-2xl">{{ formatDecimal(cartTotal) }}</div>
-          <span class="m-0 font-light text-xs text-gray0700 uppercase">cart total</span>
+          <span class="m-0 font-light text-xs text-gray0700 uppercase">{{$t('cart_total')}}</span>
         </div>
         <!-- /Total -->
 
@@ -67,19 +67,19 @@
 
 
     <!-- order summary -->
-    <div class="col-12 lg:col-6 py-3 px-4">
+    <div class="col-12 lg:col-5 py-3 px-4">
 
       <div class="p-4 border-1 border-purple-200 shadow-1 border-round-xl">
 
         <!-- header -->
         <div class="pb-2">
-          <h2 class="m-0 font-light">Order Summary</h2>
+          <h2 class="m-0 font-light">{{$t('order_summary')}}</h2>
         </div>
         <!-- /header -->
 
         <!-- Subtotal -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
-          <div>Subtotal</div>
+          <div>{{ $t('subtotal') }}</div>
           <div>{{ formatDecimal(cartTotal) }}</div>
         </div>
         <!-- /Subtotal -->
@@ -87,7 +87,7 @@
 
         <!-- Shipping -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
-          <div>Shipping (2%)</div>
+          <div>{{ $t('shipping') }} (2%)</div>
           <div>{{ formatDecimal(cartTotal * 0.02) }}</div>
         </div>
         <!-- /Shipping -->
@@ -95,7 +95,7 @@
 
         <!-- Tax -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
-          <div>Tax (16%)</div>
+          <div>{{ $t('tax') }} (16%)</div>
           <div>{{ formatDecimal(cartTotal * 0.16) }}</div>
         </div>
         <!-- /Shipping -->
@@ -104,7 +104,7 @@
 
         <!-- Total -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
-          <div>Total</div>
+          <div>{{ $t('total') }}</div>
           <div>{{ formatDecimal(cartTotal + (cartTotal * 0.16) + (cartTotal * 0.02)) }}</div>
         </div>
         <!-- /Total -->
@@ -112,11 +112,11 @@
 
         <!-- Coupon -->
         <div class="py-3 border-purple-50">
-          <div>Coupon</div>
+          <div>{{ $t('coupon') }}</div>
           <div class="flex align-items-center justify-content-between gap-4">
             <InputText fluid placeholder="Enter code" unstyled
                        class="h-4rem pl-0 border-none border-noround border-bottom-1 border-purple-200 w-full bg-white"/>
-            <VButtonCube icon="check" text="apply" fill="1" class="shadow-1"/>
+            <VButtonCube icon="check" :text="$t('apply')" fill="1" class="w-7 shadow-1"/>
           </div>
         </div>
         <!-- /Coupon -->
