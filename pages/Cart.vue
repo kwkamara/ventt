@@ -16,52 +16,52 @@
       <div class="p-4 border-1 border-purple-200 shadow-1 border-round-xl">
 
         <!-- header -->
-       <div class="pb-2">
-         <h2 class="m-0 font-light">My Cart</h2>
-         <span class="uppercase text-xs">{{ Object.keys(cart).length }} Products</span>
-       </div>
+        <div class="pb-2">
+          <h2 class="m-0 font-light">My Cart</h2>
+          <span class="uppercase text-xs">{{ Object.keys(cart).length }} Products</span>
+        </div>
         <!-- /header -->
 
 
-       <!-- products -->
-       <div v-for="product in cart"
-            @click="viewItem(product)"
-            :key="product.documentId"
-            class="py-4 md:flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 hover:text-yellow-800">
+        <!-- products -->
+        <div v-for="product in cart"
+             @click="viewItem(product)"
+             :key="product.documentId"
+             class="py-4 md:flex justify-content-between align-items-center border-purple-50 hover:border-none border-top-1 hover:text-yellow-800">
 
-         <!-- name | sku -->
-         <div class="w-full pb-3 lg:p-0">
-           <div class="pb-1 font-bold text-lg">{{ product.name }}</div>
-           <div class="text-xs uppercase">{{ product.sku }}</div>
-         </div>
-         <!-- /name | sku -->
+          <!-- name | sku -->
+          <div class="w-full pb-3 lg:p-0">
+            <div class="pb-1 font-bold text-lg">{{ product.name }}</div>
+            <div class="text-xs uppercase">{{ product.sku }}</div>
+          </div>
+          <!-- /name | sku -->
 
-         <!-- quantity -->
-         <div class="flex align-items-center gap-3 md:gap-4">
-           <VButton icon="remove" :disabled="product.cart===1" @click.stop="product.cart > 1 ? product.cart-- : null"/>
-           <span class="w-3rem inline-block text-center text-3xl font-bold">{{ product.cart || 1 }}</span>
-           <VButton fill="1" icon="add" @click.stop="product.cart ? product.cart++ : product.cart = 2"/>
-           <VButton icon="delete" @click.stop="removeFromCart(product)"/>
-         </div>
-         <!-- /quantity -->
+          <!-- quantity -->
+          <div class="flex align-items-center gap-3 md:gap-4">
+            <VButton icon="remove" :disabled="product.cart===1" @click.stop="product.cart > 1 ? product.cart-- : null"/>
+            <span class="w-3rem inline-block text-center text-3xl font-bold">{{ product.cart || 1 }}</span>
+            <VButton fill="1" icon="add" @click.stop="product.cart ? product.cart++ : product.cart = 2"/>
+            <VButton icon="delete" @click.stop="removeFromCart(product)"/>
+          </div>
+          <!-- /quantity -->
 
-         <!-- total -->
-         <div class="w-full pt-3 lg:p-0 md:text-right text-lg">
-           {{ formatDecimal(product.price * product.cart) }}
-         </div>
-         <!-- /total -->
-       </div>
-       <!-- /products -->
+          <!-- total -->
+          <div class="w-full pt-3 lg:p-0 md:text-right text-lg">
+            {{ formatDecimal(product.price * product.cart) }}
+          </div>
+          <!-- /total -->
+        </div>
+        <!-- /products -->
 
 
-       <!-- Total -->
-       <div v-if="cartTotal" class="pb-2 pt-4 border-top-1 border-gray-200 text-right">
-         <div class="m-0 font-bold text-2xl">{{ formatDecimal(cartTotal) }}</div>
-         <span class="m-0 font-light text-xs text-gray0700 uppercase">cart total</span>
-       </div>
-       <!-- /Total -->
+        <!-- Total -->
+        <div v-if="cartTotal" class="pb-2 pt-4 border-top-1 border-gray-200 text-right">
+          <div class="m-0 font-bold text-2xl">{{ formatDecimal(cartTotal) }}</div>
+          <span class="m-0 font-light text-xs text-gray0700 uppercase">cart total</span>
+        </div>
+        <!-- /Total -->
 
-     </div>
+      </div>
     </div>
     <!-- /cart summary -->
 
@@ -80,7 +80,7 @@
         <!-- Subtotal -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
           <div>Subtotal</div>
-          <div>{{formatDecimal(cartTotal)}}</div>
+          <div>{{ formatDecimal(cartTotal) }}</div>
         </div>
         <!-- /Subtotal -->
 
@@ -88,7 +88,7 @@
         <!-- Shipping -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
           <div>Shipping (2%)</div>
-          <div>{{formatDecimal(cartTotal * 0.02)}}</div>
+          <div>{{ formatDecimal(cartTotal * 0.02) }}</div>
         </div>
         <!-- /Shipping -->
 
@@ -96,7 +96,7 @@
         <!-- Tax -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
           <div>Tax (16%)</div>
-          <div>{{formatDecimal(cartTotal * 0.16)}}</div>
+          <div>{{ formatDecimal(cartTotal * 0.16) }}</div>
         </div>
         <!-- /Shipping -->
 
@@ -105,7 +105,7 @@
         <!-- Total -->
         <div class="py-3 flex justify-content-between align-items-center border-purple-50">
           <div>Total</div>
-          <div>{{formatDecimal( cartTotal + (cartTotal * 0.16) + (cartTotal * 0.02) ) }}</div>
+          <div>{{ formatDecimal(cartTotal + (cartTotal * 0.16) + (cartTotal * 0.02)) }}</div>
         </div>
         <!-- /Total -->
 
@@ -141,10 +141,16 @@
   <VFooter class="select-none"/>
 </template>
 
+
 <script setup lang="js">
-const {formatDecimal} = useFormatDecimal();
+const {formatDecimal}  = useFormatDecimal();
 const {removeFromCart} = useRemoveFromCart();
+
+//locale.
+// const {setLocale} = useI18n();
+// setLocale(useState('locale').value);
 </script>
+
 
 <script lang="js">
 export default defineComponent({
@@ -169,13 +175,17 @@ export default defineComponent({
   methods: {
     //view product.
     viewItem(product) {
+      //active product.
       useState('product').value = product;
-      navigateTo(`/Product/${encodeURIComponent(product.name)}`);
+
+      const localePath = useLocalePath();
+      navigateTo(localePath('/Product/' + encodeURIComponent(product.name)));
     }
   }
 
 })
 </script>
+
 
 <style scoped>
 body {

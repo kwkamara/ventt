@@ -38,7 +38,7 @@
           <div class="pb-1 capitalize white-space-nowrap">{{ product.name }}</div>
           <!-- rating -->
           <div class="text-yellow-500 flex align-items-center">
-            <span v-for="(rating, ix) in product.rating" class="material-icons text-sm">star</span>
+            <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-sm">star</span>
           </div>
         </div>
         <!-- /name | rating -->
@@ -112,7 +112,9 @@ export default defineComponent({
     //view item.
     viewItem() {
       useState('product').value = this.product;
-      navigateTo(`/Product/${encodeURIComponent(this.product.name)}`);
+
+      const localePath = useLocalePath();
+      navigateTo(localePath('/Product/' + encodeURIComponent(this.product.name) ));
     }
 
   }

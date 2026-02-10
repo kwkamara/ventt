@@ -36,7 +36,7 @@
             <NuxtLink to="/shop">
               <Button class="pl-3 pr-1 bg-purple-800 text-white border-none white-space-nowrap">
                 <span class="font-bold">
-                  {{ $t('shop now') }}
+                  {{ $t('shop_now') }}
                 </span>
                 <span class="material-icons-outlined">chevron_right</span>
               </Button>

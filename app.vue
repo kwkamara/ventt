@@ -370,24 +370,24 @@ useState('products', () => [
     dimensions : "10x8x4 ",
     documentId : "w-shoes-2-001",
 
-    images     : [
+    images: [
       {url: "women-blue-wedges-1.webp"},
       {url: "women-blue-wedges-2.webp"},
       {url: "women-blue-wedges-3.webp"},
     ],
 
-    name       : "Blue Open Wedges",
-    price      : 3499,
-    rating     : 4,
+    name  : "Blue Open Wedges",
+    price : 3499,
+    rating: 4,
 
-    reviews    : [
+    reviews: [
       {review: "Comfortable even for long walks.", user: "user_4001", rating: 5},
       {review: "Straps dig into ankles after hours.", user: "user_4002", rating: 3},
       {review: "Breathable and stylish.", user: "user_4003", rating: 4}
     ],
 
-    sku        : "b-wedges-001",
-    weight     : "0.9"
+    sku   : "b-wedges-001",
+    weight: "0.9"
   },
 
   {
@@ -841,6 +841,9 @@ useState('products', () => [
   }
 
 ]);
+
+
+useState('locale', () => 'en');
 </script>
 
 
@@ -851,7 +854,7 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
-h1, h2, h3{
+h1, h2, h3 {
   font-family: 'Plaifair', serif;
 }
 
@@ -908,7 +911,6 @@ input:not(:placeholder-shown) {
 .p-inputtext.p-filled {
   background: transparent !important;
 }
-
 
 
 @media screen and (min-width: 992px) {

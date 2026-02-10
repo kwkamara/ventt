@@ -169,7 +169,6 @@ useState('wishlist', () => ({}));
 
 //product.
 useState('product', () => null);
-
 </script>
 
 

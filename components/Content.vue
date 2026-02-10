@@ -139,13 +139,15 @@
       <div v-if="category" class="col-12 lg:col-7 flex flex-column gap-3">
 
         <!-- chart -->
-        <div v-if="!manage"
-             class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between bg-white">
-          <Chart type="bar"
-                 :data="chartData"
-                 :options="chartOptions"
-                 class="lg:h-14rem w-full"/>
-        </div>
+        <client-only>
+          <div v-if="!manage"
+               class="px-3 py-4 lg:px-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between bg-white">
+            <Chart type="bar"
+                   :data="chartData"
+                   :options="chartOptions"
+                   class="lg:h-14rem w-full"/>
+          </div>
+        </client-only>
         <!-- /chart -->
 
 

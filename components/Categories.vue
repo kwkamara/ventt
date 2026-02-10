@@ -223,13 +223,16 @@ export default defineComponent({
       this.$emit('update', true);
 
       //navigate.
-      navigateTo('/Shop');
+      const localePath = useLocalePath();
+      navigateTo(localePath('/shop'));
     },
 
     //view product.
     viewItem(product) {
       useState('product').value = product;
-      navigateTo(`/Product/${encodeURIComponent(product.name)}`);
+      //navigate.
+      const localePath = useLocalePath();
+      navigateTo(localePath('/Product/' + encodeURIComponent(product.name) ));
     }
   },
 })

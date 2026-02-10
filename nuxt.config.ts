@@ -13,7 +13,6 @@ export default defineNuxtConfig({
 
     i18n: {
         defaultLocale: 'en',
-
         locales: [
             { code: 'en', name: 'English', file: 'en.json' },
             { code: 'nl', name: 'Nederlands', file: 'nl.json' },
@@ -32,7 +31,7 @@ export default defineNuxtConfig({
     },
 
     css: [
-        'material-icons/iconfont/material-icons.css',
+        'material-icons/iconfont/outlined.css',
         'primeflex/primeflex.css',
         'primeicons/primeicons.css',
     ],

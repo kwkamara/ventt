@@ -23,7 +23,7 @@
           <div class="pb-2 text-purple-700 flex justify-content-between gap-3">
             <InputText v-model="search"
                        id="search-ip"
-                       placeholder="Search"
+                       :placeholder="$t('search')"
                        class="w-8 px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
                        fluid/>
 
@@ -35,19 +35,21 @@
 
           <!-- min | max price -->
           <div class="flex justify-content-between gap-2 align-items-center text-gray-700">
+            <!-- min price -->
             <div class="w-full py-2 text-xs">
               <InputText id="min-price-ip" v-model="min_price"
                          class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
                          type="number" unstyled/>
-              <label for="min-price-ip" class="block pt-1">Min. Price</label>
+              <label for="min-price-ip" class="block pt-1">{{ $t('min_price') }}</label>
             </div>
 
+            <!-- max price -->
             <div class="w-full text-xs text-right">
               <InputText id="max-price-ip"
                          v-model="max_price"
                          class="h-3rem pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
                          type="number" unstyled/>
-              <label for="max-price-ip" class="block pt-1">Max. Price</label>
+              <label for="max-price-ip" class="block pt-1">{{ $t('max_price') }}</label>
             </div>
           </div>
           <!-- /min | max price -->
@@ -64,12 +66,13 @@
           <div class="flex flex-column gap-4">
 
             <div v-for="(value, category) in categories"
+                 :key="category"
                  class="w-full flex gap-2">
               <Checkbox class="m-0"
                         :id="category + '-ip'"
                         v-model="categories[category]"
                         :binary="true"/>
-              <span class="capitalize">{{ category }}</span>
+              <span class="capitalize">{{ $t(category) }}</span>
             </div>
 
 
@@ -82,7 +85,7 @@
           <!-- types -->
           <div class="flex flex-column gap-4">
             <div v-for="type in Object.keys(types)" class="w-full flex justify-content-end gap-2">
-              <span class="capitalize">{{ type }}</span>
+              <span class="capitalize">{{ $t(type) }}</span>
               <Checkbox class="m-0"
                         v-model="types[type]"
                         binary/>
@@ -99,7 +102,7 @@
           <ProductDisplay discount="10% Off"
                           class="shadow-2"
                           image="/men-accessories-1-438.webp"
-                          name="Mens' Accessories"/>
+                          :name="$t('men_accessories')"/>
         </div>
         <!-- /product display -->
       </div>

@@ -1,7 +1,7 @@
 <template>
   <!-- rating -->
   <div class="flex align-items-center">
-    <span v-for="rate in rate" class="material-icons text-xl text-yellow-600">star</span>
+    <span v-for="rate in rate" class="material-icons-outlined text-xl text-yellow-600">star</span>
   </div>
 </template>
 

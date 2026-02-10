@@ -72,7 +72,7 @@
           <h2 class="m-0 text-4xl font-light capitalize">{{ product.name }}</h2>
           <!-- rating -->
           <div class="text-yellow-600 flex align-items-center">
-            <span v-for="(rating, ix) in product.rating" class="material-icons text-2xl">star</span>
+            <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-2xl">star</span>
           </div>
         </div>
         <!-- /product name | rating -->
@@ -81,7 +81,7 @@
         <!-- price -->
         <div class="text-right">
           <div class="text-4xl">{{ formatDecimal(product.price) }}</div>
-          <span class="uppercase text-xs">unit price</span>
+          <span class="uppercase text-xs">{{ $t('unit_price') }}</span>
         </div>
         <!-- /price -->
 
@@ -107,7 +107,10 @@
       <!-- cart -->
       <div class="pt-3">
 
-        <div class="pt-4 pb-2 font-light text-lg uppercase">Quantity</div>
+        <!-- quantity -->
+        <div class="pt-4 pb-2 font-light text-lg uppercase">
+          {{ $t('quantity') }}
+        </div>
 
         <div class="flex align-items-center justify-content-between gap-3 pb-5">
 
@@ -128,14 +131,14 @@
             <VButtonCube v-if="cart[product.documentId]"
                          class="w-full"
                          icon="remove_shopping_cart"
-                         text="Remove from cart"
+                         :text="$t('remove_from_cart')"
                          @click="removeFromCart(product); notify('cart')"/>
 
             <VButtonCube v-else
                          class="w-full"
                          fill="true"
                          icon="add_shopping_cart"
-                         text="Add to cart"
+                         :text="$t('add_to_cart')"
                          @click="addToCart(product); notify('cart')"/>
           </div>
           <!-- /controls -->
@@ -144,7 +147,7 @@
           <!-- total -->
           <div class="text-right">
             <div class="text-4xl">{{ formatDecimal(product.price * quantity) }}</div>
-            <span class="uppercase text-xs">item total</span>
+            <span class="uppercase text-xs">{{ $t('item_total') }}</span>
           </div>
           <!-- /total -->
 
@@ -231,8 +234,8 @@ export default defineComponent({
     notify(state) {
       //message setup.
       let info = "";
-      if (state === 'cart') info = this.cart[this.product.documentId] ? 'item added to cart' : 'item removed from cart';
-      else info = this.wishlist[this.product.documentId] ? 'item added to wishlist' : 'item removed from wishlist';
+      if (state === 'cart') info = this.cart[this.product.documentId] ? this.$t('item_added_to_cart') : this.$t('item_removed_from_cart');
+      else info = this.wishlist[this.product.documentId] ? this.$t('item_added_to_wishlist') : this.$t('item_removed_from_wishlist');
 
       //show popup.
       this.$toast.add({severity: "info", summary: info, life: 1500});

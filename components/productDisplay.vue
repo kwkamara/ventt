@@ -58,7 +58,8 @@ export default defineComponent({
 
 
       //navigate.
-      navigateTo('/Shop');
+      const localePath = useLocalePath();
+      navigateTo(localePath('/Shop'));
     },
 
 

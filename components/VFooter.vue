@@ -24,6 +24,11 @@
             </div>
             <!-- social -->
 
+            <!-- locales -->
+            <div class="pt-4 flex align-items-center gap-0 text-white">
+              <Locale/>
+            </div>
+            <!-- /locales -->
 
           </div>
         </div>
