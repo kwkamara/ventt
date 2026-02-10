@@ -33,7 +33,7 @@
           <!-- CTA -->
           <div class="pt-3 flex align-items-center gap-3">
 
-            <NuxtLink to="/shop">
+            <NuxtLink :to="$localePath('/shop')">
               <Button class="pl-3 pr-1 bg-purple-800 text-white border-none white-space-nowrap">
                 <span class="font-bold">
                   {{ $t('shop_now') }}
