@@ -13,8 +13,14 @@
             :option-label="prop.rel || 'name'"
             option-value="id"/>
 
+    <Textarea v-else-if="prop.name ==='description' && category.name === 'products'"
+              :rows="3"
+              v-model="item.description.en"
+              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
+
     <Textarea v-else-if="prop.name ==='description'"
               :rows="3"
+              v-model="item.description"
               class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
 
     <DatePicker v-else-if="prop.date"
@@ -23,6 +29,12 @@
                 :aria-label="item[prop.name]"
                 date-format="dd/mm/yy" fluid
                 input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
+
+    <InputText v-else-if="category.name === 'products' && prop.name ==='name'"
+               :id="prop.name + '-ip'"
+               v-model="item.name.en"
+               autocomplete="off"
+               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-300" fluid unstyled/>
 
     <InputText v-else
                :id="prop.name + '-ip'"

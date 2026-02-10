@@ -85,12 +85,9 @@
           </div>
           <!-- /submit -->
 
-
-          <Divider/>
-          <div class="pb-1 uppercase text-gray-600 text-center">
+          <div class="pt-3 pb-1 uppercase text-gray-600 text-center">
           {{ $t('or') }}
           </div>
-
 
           <!-- login | register -->
           <div class="h-4rem flex justify-content-end align-items-center gap-4">

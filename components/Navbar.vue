@@ -82,7 +82,7 @@
            @click="viewItem(product)"
            :key="product.documentId"
            :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
-        <span class="w-full capitalize">{{ product.name }}</span>
+        <span class="w-full capitalize">{{ product.name[locale] }}</span>
         <span>({{ product.cart || 1 }})</span>
         <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
       </div>
@@ -90,7 +90,7 @@
 
       <!-- Cart -->
       <div v-if="cartTotal" class="col-12 px-3 pb-4 pt-4 border-top-1 border-gray-200 text-right">
-        <NuxtLink to="/cart">
+        <NuxtLink :to="$localePath('/cart')">
           <VButtonCube :text="$t('cart')"
                        fill="1"
                        icon="shopping_cart"/>
@@ -109,8 +109,7 @@
 
       <!-- Header -->
       <div class="col-12 p-3 text-right">
-        <span class="m-0 font-light text-xs uppercase">my</span>
-        <div class="m-0 font-light text-2xl">Wishlist</div>
+        <div class="m-0 font-light text-2xl">{{ $t('wishlist') }}</div>
       </div>
       <!-- /Header -->
 
@@ -119,7 +118,7 @@
            @click="viewItem(product)"
            :key="product.documentId"
            :class="'col-12 p-3 flex justify-content-between border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 '">
-        <span class="w-full capitalize">{{ product.name }}</span>
+        <span class="w-full capitalize">{{ product.name[locale] }}</span>
         <span class="w-full text-right">{{ formatDecimal(product.price) }}</span>
       </div>
       <!-- /products -->
@@ -133,6 +132,9 @@
 
 <script setup lang="js">
 const {formatDecimal} = useFormatDecimal();
+
+//locale.
+const {locale} = useI18n();
 </script>
 
 

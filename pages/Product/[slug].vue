@@ -48,7 +48,7 @@
 
 
         <!-- icons -->
-        <div class="col-12 pt-3 lg:pt-0 pl-0 flex gap-3 align-items-start justify-content-center lg:justify-content-start">
+        <div class="col-12 pt-3 lg:pt-0 pl-0 flex gap-3 align-items-center justify-content-center lg:justify-content-start">
           <template v-for="(icon, ix) in ['shield', 'local_shipping', 'payments']" :key="ix">
             <VButton :icon="icon"/>
             <Divider v-if="ix<2" layout="vertical" unstyled class="border-left-1 h-2rem border-gray-200"/>
@@ -69,7 +69,7 @@
 
         <!-- product name | rating -->
         <div>
-          <h2 class="m-0 text-4xl font-light capitalize">{{ product.name }}</h2>
+          <h2 class="m-0 text-4xl font-light capitalize">{{ product.name[locale] }}</h2>
           <!-- rating -->
           <div class="text-yellow-600 flex align-items-center">
             <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-2xl">star</span>
@@ -100,7 +100,7 @@
           <div>{{ product.weight }}</div>
         </div>
 
-        <p class="m-0">{{ product.description }}</p>
+        <p class="m-0">{{ product.description[locale] }}</p>
       </div>
 
 
@@ -165,23 +165,36 @@
   <!-- /product -->
 
 
-
-  <section class="grid m-0 px-3 lg:px-7 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
+  <!--  reviews -->
+  <section class="grid m-0 px-3 lg:px-6 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
 
     <div class="col-12">
       <h2 class="m-0 font-light text-3xl">Reviews</h2>
     </div>
 
-    <div v-for="review in product.reviews" class="col-12 lg:col-6 py-2 border-top-1 border-gray-200">
-      <div>{{review.user}}</div>
-      <div class="pb-3 text-yellow-600 flex align-items-center">
-        <span v-for="(rating, ix) in product.rating" class="material-icons text-xl">star</span>
+    <div v-for="review in product.reviews" class="col-12 lg:col-6 py-2">
+
+      <div class="px-3 py-4 shadow-1 border-round bg-white border-1 border-purple-100">
+
+        <div class="flex gap-2 align-items-start">
+          <VButton icon="person" class="hover:bg-white hover:text-purple-700"/>
+          <div class="pt-1">
+            <div>{{review.user}}</div>
+            <div class="pb-3 text-yellow-600 flex align-items-center">
+              <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-xl">star</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="m-0 pt-3">{{review[locale]}}</p>
+
       </div>
 
-      <p class="m-0">{{review.review}}</p>
     </div>
 
   </section>
+  <!--  /reviews -->
+
 
   <!--  footer -->
   <VFooter class="select-none"/>
@@ -200,6 +213,9 @@ const {removeFromCart} = useRemoveFromCart();
 //wishlist.
 const {addToWishList} = useAddToWishList();
 const {removeFromWishList} = useRemoveFromWishList();
+
+//locale.
+const {locale} = useI18n();
 </script>
 
 

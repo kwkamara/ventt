@@ -33,18 +33,17 @@
 
 
       <!-- offers display -->
-      <div class="col-12 lg:col-4 lg:pt-1 md:flex lg:flex-column align-items-start gap-3 bg-white">
+      <div class="col-12 lg:col-4 lg:pt-0 md:flex lg:flex-column align-items-start gap-3 bg-white">
         <ProductDisplay category="men"
-                        class="h-16rem"
+                        class="h-17rem lg:h-18rem"
                         discount="10% Off"
                         image="/men-accessories-1-438.webp"
                         :name="$t('men_accessories')"
                         type="accessories"/>
-
         <ProductDisplay category="women"
-                        class="pt-4 md:pt-0 xl:pt-2 h-16rem"
+                        class="h-16rem lg:h-17rem pt-4 md:pt-0 xl:pt-1"
                         discount="10% Off"
-                        image="/women-1-664.webp"
+                        image="/women-2.webp"
                         :name="$t('women_casual')"
                         type="casual"/>
       </div>
@@ -186,7 +185,7 @@ export default defineComponent({
       return useState('products').value;
     },
     newProducts() {
-      return this.products.filter(pd => pd.new);
+      return this.products.filter(pd => pd.categories['new arrivals']);
     }
   },
 

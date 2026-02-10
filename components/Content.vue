@@ -177,8 +177,13 @@
                   <template v-if="prop.date">
                     {{ new Date(data[prop.name]).toLocaleDateString('en-GB') }}
                   </template>
+                  <template v-else-if="category.name==='products' && ['name', 'description'].includes(prop.name)">
+                    {{ data[prop.name]['en'] }}
+                  </template>
                   <template v-else>
-                    {{ prop.prefix }} {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }} {{ prop.suffix }}
+                    {{ prop.prefix }}
+                    {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }}
+                    {{ prop.suffix }}
                   </template>
                 </div>
               </template>
@@ -200,7 +205,9 @@
               <InputText v-model="filters['global'].value"
                          :placeholder="'Search ' + category.name"
                          class="w-10rem px-3 text-sm border-gray-300 border-1 border-gray-300 border-round-3xl"/>
-              <VButtonCube text="new" icon="add" fill="1" @click="manage='edit'"/>
+
+              <VButtonCube text="new" icon="add" fill="1" @click="newItemInit"/>
+
             </div>
             <Divider unstyled class="border-bottom-1 border-gray-300"/>
           </template>
@@ -224,6 +231,9 @@
                 <div :class="(key === 0 ? 'pl-3' : '') + ' w-full py-2 white-space-nowrap'" @click="manage='info'; item=data">
                   <template v-if="prop.date">
                     {{ new Date(data[prop.name]).toLocaleDateString('en-GB') }}
+                  </template>
+                  <template v-else-if="category.name==='products' && ['name', 'description'].includes(prop.name)">
+                    {{ data[prop.name]['en'] }}
                   </template>
                   <template v-else>
                     {{ prop.prefix }} {{ prop.decimal ? formatDecimal(data[prop.name]) : data[prop.name] }} {{ prop.suffix }}
@@ -253,7 +263,14 @@
             <!-- category name | item id -->
             <div class="m-0 lg:pl-2 font-light text-xl text-purple-800 capitalize">
               <div>
-                <div>{{ item ? (item.name || item.id) : 'New Item' }}</div>
+
+                <div>
+                  <template v-if="item">
+                    {{ category.name === 'products' ? item.name['en'] : item.name }}
+                  </template>
+                  <template v-else>New Item</template>
+                </div>
+
                 <div class="mt-1 flex align-items-center">
                   <Icon :icon="category.icon" class="text-sm text-gray-700"/>
                   <span class="ml-1 text-xs uppercase text-gray-700">{{ category.name }} </span>
@@ -292,6 +309,9 @@
               <div>
                 <template v-if="prop.date">
                   {{ new Date(item[prop.name]).toLocaleDateString('en-GB') }}
+                </template>
+                <template v-else-if="['name', 'description'].includes(prop.name)">
+                  {{ item[prop.name]['en'] }}
                 </template>
                 <template v-else>
                   {{ prop.prefix }} {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
@@ -1186,6 +1206,8 @@ export default defineComponent({
       //set active.
       this.category = category;
 
+      this.manage = null;
+
       //load products.
       if (category.name === 'products') this.loadProducts();
 
@@ -1214,6 +1236,19 @@ export default defineComponent({
 
 
     // ITEM
+    newItemInit() {
+
+      if (this.category.name === 'products') {
+        this.item = {
+          name       : {en: null},
+          description: {en: null},
+        }
+      }
+
+      //edit mode.
+      this.manage = 'edit'
+    },
+
     viewItem(item) {
       this.item         = item;
       this.manage       = "info";

@@ -54,7 +54,6 @@
           </div>
           <!-- /min | max price -->
 
-
         </div>
         <!-- /search | price filter -->
 
@@ -136,9 +135,11 @@
 
 
           <!-- no products -->
-          <div v-if="!products.length" class="col-12 text-center text-orange-600">
-            <span class="material-icons text-5xl">error_outline</span>
-            <h2 class="text-3xl font-light">No Products Available</h2>
+          <div v-if="!products.length" class="col-12 pt-5 lg:pt-7 text-center text-orange-600">
+            <span class="material-icons-outlined text-5xl">error_outline</span>
+            <h2 class="m-0 text-3xl font-light sans-serif">
+              {{ $t('no_products') }}
+            </h2>
           </div>
           <!-- /no products -->
 
@@ -156,7 +157,6 @@
   <!--  footer -->
   <VFooter class="select-none"/>
 </template>
-
 
 
 <script lang="js">
@@ -183,11 +183,12 @@ export default defineComponent({
       },
 
       types: {
-        casual     : false,
-        official   : false,
-        hats       : false,
-        shoes      : false,
-        accessories: false,
+        casual       : false,
+        official     : false,
+        hats         : false,
+        shoes        : false,
+        accessories  : false,
+        "new arrivals": false,
       }
 
     }

@@ -9,7 +9,7 @@
 
 
   <!-- cart -->
-  <section class="grid m-0 py-5 lg:p-7 select-none">
+  <section  v-if="cart" class="grid m-0 py-5 lg:p-7 select-none">
 
     <!-- cart summary -->
     <div class="col-12 lg:col-6 py-3 px-4">
@@ -31,7 +31,7 @@
 
           <!-- name | sku -->
           <div class="w-full pb-3 lg:p-0">
-            <div class="pb-1 font-bold text-lg">{{ product.name }}</div>
+            <div class="pb-1 font-bold text-lg">{{ product.name[locale] }}</div>
             <div class="text-xs uppercase">{{ product.sku }}</div>
           </div>
           <!-- /name | sku -->
@@ -116,7 +116,7 @@
           <div class="flex align-items-center justify-content-between gap-4">
             <InputText fluid placeholder="Enter code" unstyled
                        class="h-4rem pl-0 border-none border-noround border-bottom-1 border-purple-200 w-full bg-white"/>
-            <VButtonCube icon="check" text="apply" fill class="shadow-1"/>
+            <VButtonCube icon="check" text="apply" fill="1" class="shadow-1"/>
           </div>
         </div>
         <!-- /Coupon -->
@@ -147,8 +147,7 @@ const {formatDecimal}  = useFormatDecimal();
 const {removeFromCart} = useRemoveFromCart();
 
 //locale.
-// const {setLocale} = useI18n();
-// setLocale(useState('locale').value);
+const {locale} = useI18n();
 </script>
 
 
@@ -180,6 +179,13 @@ export default defineComponent({
 
       const localePath = useLocalePath();
       navigateTo(localePath('/Product/' + encodeURIComponent(product.name)));
+    }
+  },
+
+  beforeMount(){
+    if(!this.cart){
+      const localePath = useLocalePath();
+      navigateTo(localePath('/'));
     }
   }
 

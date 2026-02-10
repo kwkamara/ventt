@@ -56,10 +56,13 @@
   "tagline": "The Premium Ecommerce Solution",
   "terms_of_service": "Terms of Service",
   "unit_price": "Unit Price",
+  "wishlist": "Wishlist",
   "women": "women",
   "women_blouses": "Women's Blouses",
   "women_casual": "Women's Casual",
   "women_hats": "Women's Hats",
   "women_style": "Women's Style",
-  "women_suits": "Women's Suits"
+  "women_suits": "Women's Suits",
+
+  "no_products": "No products available"
 }
