@@ -37,7 +37,7 @@
         <ProductDisplay category="men"
                         class="h-17rem lg:h-18rem"
                         discount="10% Off"
-                        image="/men-accessories-1-438.webp"
+                        image="/men-accessories-1.webp"
                         :name="$t('men_accessories')"
                         type="accessories"/>
         <ProductDisplay category="women"
@@ -60,7 +60,7 @@
           <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3 md:pr-1 md:pl-2">
             <ProductDisplay category="women"
                             discount="15% Off"
-                            image="/women-1-664.webp"
+                            image="/women-1.webp"
                             :name="$t('women_style')"
                             type="casual"/>
           </div>
@@ -71,7 +71,7 @@
               <div class="w-6 h-8rem lg:h-12rem">
                 <ProductDisplay category="women"
                                 discount="10% Off"
-                                image="/women-suits-1-324.webp"
+                                image="/women-suits-1.webp"
                                 :name="$t('women_suits')"
                                 type="official"/>
               </div>
@@ -79,7 +79,7 @@
               <div class="w-6 h-8rem lg:h-12rem">
                 <ProductDisplay category="women"
                                 discount="10% Off"
-                                image="/women-hats-1-324.webp"
+                                image="/women-hats-2.webp"
                                 :name="$t('women_hats')"
                                 type="hats"/>
               </div>
@@ -89,7 +89,7 @@
             <div class="h-8rem lg:h-12rem w-full mt-3">
               <ProductDisplay category="women"
                               discount="5% Off"
-                              image="/women-blouses-1-664.webp"
+                              image="/women-blouses-1.webp"
                               :name="$t('women_blouses')"
                               type="casual"/>
             </div>
@@ -110,13 +110,13 @@
             <ProductDisplay :name="$t('kids') + ' | ' + $t('casual')"
                             category="kids"
                             discount="10% Off"
-                            image="/kids-casual-1-324.webp" type="casual"/>
+                            image="/kids-casual-1.webp" type="casual"/>
           </div>
           <div class="w-6 h-8rem lg:h-12rem">
             <ProductDisplay :name="$t('girls')"
                             category="kids"
                             discount="20% Off"
-                            image="/kids-casual-3-324.webp"
+                            image="/kids-casual-3.webp"
                             type="casual"/>
           </div>
         </div>
@@ -125,12 +125,12 @@
                           discount="10% Off"
                           category="kids"
                           type="casual"
-                          image="/babies-1-324.webp"
+                          image="/babies-1.webp"
                           :name="$t('babies')"/>
           <ProductDisplay category="kids"
                           class="w-6 h-8rem lg:h-12rem"
                           discount="10% Off"
-                          image="/kids-pyjamas-1-324.webp"
+                          image="/kids-pyjamas-1.webp"
                           :name="$t('pyjamas')"
                           type="casual"/>
         </div>
@@ -139,7 +139,7 @@
       <div class="col-12 md:col-6 h-15rem lg:h-26rem px-2 md:pl-3">
         <ProductDisplay category="kids"
                         discount="15% Off"
-                        image="/kids-casual-4-664.webp"
+                        image="/kids-casual-4.webp"
                         :name="$t('kids_fashion')"
                         type="casual"/>
       </div>

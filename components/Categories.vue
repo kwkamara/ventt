@@ -62,14 +62,14 @@
           <div class="w-full">
             <!-- name | price -->
             <div class="flex justify-content-between">
-              <div class="w-full">{{ product.name }}</div>
+              <div class="w-full">{{ product.name[locale] }}</div>
               <div class="w-full text-right">{{ formatDecimal(product.price) }}</div>
             </div>
             <!-- /name | price -->
 
             <!-- categories -->
             <div class="pt-2 flex gap-1 text-xs">
-              <template v-for="(key, category) in product.categories">
+              <template v-for="(key, category) in product.categories" :key="key">
                 <span class="uppercase">{{ category }}</span>
                 <Divider layout="vertical" class="h-1rem"/>
               </template>
@@ -97,7 +97,7 @@
 
         <!-- official -->
         <div class="col-12 md:col-4 p-0 h-16rem md:h-14rem lg:h-15rem overflow-hidden hover:shadow-3 text-white text-xs relative">
-          <ProductType :image="`${category}-official-1-288.webp`"
+          <ProductType :image="`${category}-official.webp`"
                        type="official"
                        class="border-bottom-1 md:border-right-1 md:border-bottom-none border-gray-500"
                        @click="viewShop('official');"/>
@@ -108,13 +108,13 @@
         <!-- Casual | Accessories -->
         <div class="col-6 md:col-4 h-10rem md:h-14rem lg:h-15rem p-0 flex flex-column overflow-hidden">
           <!-- Casual -->
-          <ProductType :image="`${category}-casual-2-256.webp`"
+          <ProductType :image="`${category}-casual-1.webp`"
                        type="casual"
                        class="border-gray-500 border-right-1"
                        @click="viewShop('casual');"/>
 
           <!-- Accessories -->
-          <ProductType :image="`${category}-accessories-1-288.webp`"
+          <ProductType :image="`${category}-accessories-1.webp`"
                        type="accessories"
                        class="border-gray-500 border-top-1 border-right-1"
                        @click="viewShop('accessories');"/>
@@ -125,12 +125,12 @@
         <!-- Hats | Shoes -->
         <div class="col-6 md:col-4 h-10rem md:h-14rem lg:h-15rem p-0 flex flex-column overflow-hidden">
           <!-- Hats -->
-          <ProductType :image="`${category}-hats-2-256.webp`"
+          <ProductType :image="`${category}-hats-1.webp`"
                        type="hats"
                        @click="viewShop('hats');"/>
 
           <!-- Shoes -->
-          <ProductType :image="`${category}-shoes-1-288.webp`"
+          <ProductType :image="`${category}-shoes-1.webp`"
                        type="shoes"
                        class="border-gray-500 border-top-1"
                        @click="viewShop('shoes');"/>
@@ -149,6 +149,7 @@
 
 <script setup lang="js">
 const {formatDecimal} = useFormatDecimal();
+const {locale}        = useI18n();
 </script>
 
 
@@ -178,8 +179,9 @@ export default defineComponent({
     products() {
       if (!this.search) return [];
 
+      const {locale} = useI18n();
       return useState('products').value
-          .filter(product => product.name.toLowerCase().includes(this.search))
+          .filter(product => product.name[locale.value].toLowerCase().includes(this.search))
     }
   },
 
@@ -231,8 +233,8 @@ export default defineComponent({
     viewItem(product) {
       useState('product').value = product;
       //navigate.
-      const localePath = useLocalePath();
-      navigateTo(localePath('/Product/' + encodeURIComponent(product.name) ));
+      const localePath          = useLocalePath();
+      navigateTo(localePath('/Product/' + encodeURIComponent(product.name)));
     }
   },
 })

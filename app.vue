@@ -32,9 +32,9 @@ useState('products', () => [
     dimensions: "31x25x3.5 ",
     documentId: "w-hoodie-001",
     images    : [
-      {url: "men-white-hoodie-1-a-454.webp"},
-      {url: "men-white-hoodie-1-b-454.webp"},
-      {url: "men-white-hoodie-1-c-454.webp"}
+      {url: "men-white-hoodie-1.webp"},
+      {url: "men-white-hoodie-1.webp"},
+      {url: "men-white-hoodie-1.webp"}
     ],
     name      : {
       en: "White Hoodie",
@@ -79,6 +79,7 @@ useState('products', () => [
     weight: "0.65"
   },
 
+
   {
     categories : {men: 1, casual: 1},
     description: {
@@ -89,9 +90,9 @@ useState('products', () => [
     dimensions : "33x27x4.5 ",
     documentId : "blue-hoodie-001",
     images     : [
-      {url: "men-hoodie-2-a-454.webp"},
-      {url: "men-hoodie-2-b-454.webp"},
-      {url: "men-hoodie-2-c-454.webp"}
+      {url: "men-hoodie-2-a.webp"},
+      {url: "men-hoodie-2-b.webp"},
+      {url: "men-hoodie-2-c.webp"}
     ],
     name       : {
       en: "Dark Blue Hoodie",
@@ -145,9 +146,9 @@ useState('products', () => [
     dimensions : "29x21x2.5 ",
     documentId : "w-t-shirt-001",
     images     : [
-      {url: "men-tshirt-1-a-454.webp"},
-      {url: "men-tshirt-1-b-454.webp"},
-      {url: "men-tshirt-1-c-454.webp"}
+      {url: "men-tshirt-1-a.webp"},
+      {url: "men-tshirt-1-b.webp"},
+      {url: "men-tshirt-1-c.webp"}
     ],
     name       : {
       en: "White T-Shirt",
@@ -201,9 +202,9 @@ useState('products', () => [
     dimensions : "34x28x6 ",
     documentId : "m-jacket-01",
     images     : [
-      {url: "men-casual-1-a-454.webp"},
-      {url: "men-casual-1-b-454.webp"},
-      {url: "men-casual-1-c-454.webp"}
+      {url: "men-casual-1-a.webp"},
+      {url: "men-casual-1-b.webp"},
+      {url: "men-casual-1-c.webp"}
     ],
     name       : {
       en: "Puffer Jacket",
@@ -259,9 +260,9 @@ useState('products', () => [
     documentId : "men-coat-001",
     image      : "men-coat-1.webp",
     images     : [
-      {url: "men-coat-1-a-454.webp"},
-      {url: "men-coat-1-b-454.webp"},
-      {url: "men-coat-1-c-454.webp"}
+      {url: "men-coat-1-a.webp"},
+      {url: "men-coat-1-b.webp"},
+      {url: "men-coat-1-c.webp"}
     ],
     name       : {
       en: "Brown Coat",
@@ -315,9 +316,9 @@ useState('products', () => [
     dimensions : "44x33x5 ",
     documentId : "m-suit-01",
     images     : [
-      {url: "men-suits-1-454.webp"},
-      {url: "men-suits-2-454.webp"},
-      {url: "men-suits-3-454.webp"}
+      {url: "men-suits-1-a.webp"},
+      {url: "men-suits-1-b.webp"},
+      {url: "men-suits-1-c.webp"}
     ],
     name       : {
       en: "Blue Suit",
@@ -372,9 +373,9 @@ useState('products', () => [
     dimensions : "9x7x2 ",
     documentId : "m-watch-001",
     images     : [
-      {url: "men-watch-1-a-454.webp"},
-      {url: "men-watch-1-b-454.webp"},
-      {url: "men-watch-1-c-454.webp"}
+      {url: "men-watch-1-a.webp"},
+      {url: "men-watch-1-b.webp"},
+      {url: "men-watch-1-c.webp"}
     ],
     name       : {
       en: "Silver Watch",
@@ -428,9 +429,9 @@ useState('products', () => [
     dimensions : "42x31x12 ",
     documentId : "m-shoes-2-001",
     images     : [
-      {url: "men-shoes-2-a-454.webp"},
-      {url: "men-shoes-2-b-454.webp"},
-      {url: "men-shoes-2-c-454.webp"}
+      {url: "men-shoes-2-a.webp"},
+      {url: "men-shoes-2-b.webp"},
+      {url: "men-shoes-2-c.webp"}
     ],
     name       : {
       en: "Black Boots",
@@ -484,9 +485,9 @@ useState('products', () => [
     dimensions : "12x10x4 ",
     documentId : "m-hats-1-001",
     images     : [
-      {url: "men-hats-1-a-454.webp"},
-      {url: "men-hats-1-b-454.webp"},
-      {url: "men-hats-1-c-454.webp"}
+      {url: "men-hats-1-a.webp"},
+      {url: "men-hats-1-b.webp"},
+      {url: "men-hats-1-c.webp"}
     ],
     name       : {
       en: "Ivy Hat",
@@ -533,9 +534,9 @@ useState('products', () => [
     dimensions : "15x11x6 ",
     documentId : "m-shoes-1-001",
     images     : [
-      {url: "men-shoes-1-a-454.webp"},
-      {url: "men-shoes-1-b-454.webp"},
-      {url: "men-shoes-1-c-454.webp"}
+      {url: "men-shoes-1-a.webp"},
+      {url: "men-shoes-1-b.webp"},
+      {url: "men-shoes-1-c.webp"}
     ],
     name       : {
       en: "Black Leather Shoes",
@@ -571,6 +572,7 @@ useState('products', () => [
     weight     : "1.3"
   },
 
+
   {
     categories : {men: 1, accessories: 1},
     color      : "Brown",
@@ -582,9 +584,9 @@ useState('products', () => [
     dimensions : "14x10x6 ",
     documentId : "m-belt-001",
     images     : [
-      {url: "men-belt-1-a-454.webp"},
-      {url: "men-belt-1-b-454.webp"},
-      {url: "men-belt-1-c-454.webp"}
+      {url: "men-belt-1-a.webp"},
+      {url: "men-belt-1-b.webp"},
+      {url: "men-belt-1-c.webp"}
     ],
     name       : {
       en: "Black Belt",
@@ -613,6 +615,7 @@ useState('products', () => [
     weight     : "0.25"
   },
 
+
   {
     categories : {men: 1, accessories: 1, "new arrivals": 1},
     description: {
@@ -623,9 +626,9 @@ useState('products', () => [
     dimensions : "15x6x3 ",
     documentId : "m-glasses-1",
     images     : [
-      {url: "men-accessories-1-a-454.webp"},
-      {url: "men-accessories-1-b-454.webp"},
-      {url: "men-accessories-1-c-454.webp"}
+      {url: "men-accessories-1-a.webp"},
+      {url: "men-accessories-1-b.webp"},
+      {url: "men-accessories-1-c.webp"}
     ],
     name       : {
       en: "Sun Glasses",
@@ -673,9 +676,9 @@ useState('products', () => [
     dimensions : "11x7x3.5 ",
     documentId : "w-heels-001",
     images     : [
-      {url: "women-shoes-1-a-454.webp"},
-      {url: "women-shoes-1-b-454.webp"},
-      {url: "women-shoes-1-c-454.webp"}
+      {url: "women-shoes-1-a.webp"},
+      {url: "women-shoes-1-b.webp"},
+      {url: "women-shoes-1-c.webp"}
     ],
     name       : {
       en: "Black Formal Heels",
@@ -729,9 +732,9 @@ useState('products', () => [
     dimensions : "42x32x5 ",
     documentId : "w-trouser-suit-001",
     images     : [
-      {url: "women-suit-2-a-454.webp"},
-      {url: "women-suit-2-b-454.webp"},
-      {url: "women-suit-2-c-454.webp"}
+      {url: "women-suit-2-a.webp"},
+      {url: "women-suit-2-b.webp"},
+      {url: "women-suit-2-c.webp"}
     ],
     name       : {
       en: "Trouser Suit",
@@ -785,9 +788,9 @@ useState('products', () => [
     dimensions : "10x8x4 ",
     documentId : "w-shoes-2-001",
     images     : [
-      {url: "women-shoes-2-a-454.webp"},
-      {url: "women-shoes-2-b-454.webp"},
-      {url: "women-shoes-2-c-454.webp"}
+      {url: "women-shoes-2-a.webp"},
+      {url: "women-shoes-2-b.webp"},
+      {url: "women-shoes-2-c.webp"}
     ],
     name       : {
       en: "Open Wedges",
@@ -826,29 +829,24 @@ useState('products', () => [
 
   {
     categories: {women: 1, casual: 1, shoes: 1},
-
     description: {
       en: "Trendy open-toe blue wedges with ankle straps for a secure fit. Great for summer outings.",
       nl: "Trendy open wedges met open teen in blauw met enkelbandjes voor een stevige pasvorm. Ideaal voor zomerse uitstapjes.",
       fr: "Sandales compensées bleues à bout ouvert tendance avec brides de cheville pour un bon maintien. Parfaites pour les sorties d’été."
     },
-
     dimensions: "10x8x4 ",
-
     documentId: "w-shoes-2-001",
 
     images: [
-      {url: "women-blue-wedges-1.webp"},
-      {url: "women-blue-wedges-2.webp"},
-      {url: "women-blue-wedges-3.webp"}
+      {url: "women-blue-wedges-1-a.webp"},
+      {url: "women-blue-wedges-1-b.webp"},
+      {url: "women-blue-wedges-1-c.webp"}
     ],
-
     name: {
       en: "Blue Open Wedges",
       nl: "Blauwe open wedges",
       fr: "Sandales compensées ouvertes bleues"
     },
-
     price : 3499,
     rating: 4,
 
@@ -875,7 +873,6 @@ useState('products', () => [
         rating: 4
       }
     ],
-
     sku   : "b-wedges-001",
     weight: "0.9"
   },
@@ -891,9 +888,9 @@ useState('products', () => [
     dimensions : "14x10x6 ",
     documentId : "w-shoes-4-001",
     images     : [
-      {url: "women-black-boots-1.webp"},
-      {url: "women-black-boots-2.webp"},
-      {url: "women-black-boots-3.webp"}
+      {url: "women-black-boots-1-a.webp"},
+      {url: "women-black-boots-1-b.webp"},
+      {url: "women-black-boots-1-c.webp"}
     ],
     name       : {
       en: "Black Boots",
@@ -940,9 +937,9 @@ useState('products', () => [
     dimensions : "44x36x9 ",
     documentId : "fluffy-coat-01",
     images     : [
-      {url: "women-fluffy-coat-1-a-454.webp"},
-      {url: "women-fluffy-coat-1-b-454.webp"},
-      {url: "women-fluffy-coat-1-c-454.webp"}
+      {url: "women-fluffy-coat-1-a.webp"},
+      {url: "women-fluffy-coat-1-b.webp"},
+      {url: "women-fluffy-coat-1-c.webp"}
     ],
     name       : {
       en: "Pink Fluffy Coat",
@@ -990,9 +987,9 @@ useState('products', () => [
     documentId : "w-biker-jacket-001",
     image      : "women-biker-jacket-1.webp",
     images     : [
-      {url: "women-biker-jacket-1-a-454.webp"},
-      {url: "women-biker-jacket-1-b-454.webp"},
-      {url: "women-biker-jacket-1-c-454.webp"}
+      {url: "women-biker-jacket-1-a.webp"},
+      {url: "women-biker-jacket-1-b.webp"},
+      {url: "women-biker-jacket-1-c.webp"}
     ],
     name       : {
       en: "Beige Biker Jacket",
@@ -1039,9 +1036,9 @@ useState('products', () => [
     dimensions : "42x32x5 ",
     documentId : "w-skirt-suit-001",
     images     : [
-      {url: "women-suit-1-a-454.webp"},
-      {url: "women-suit-1-b-454.webp"},
-      {url: "women-suit-1-c-454.webp"}
+      {url: "women-suit-1-a.webp"},
+      {url: "women-suit-1-b.webp"},
+      {url: "women-suit-1-c.webp"}
     ],
     name       : {
       en: "Skirt Suit",
@@ -1088,9 +1085,9 @@ useState('products', () => [
     dimensions : "16x16x4 ",
     documentId : "w-h-001",
     images     : [
-      {url: "women-hat-1-a-454.webp"},
-      {url: "women-hat-1-b-454.webp"},
-      {url: "women-hat-1-c-454.webp"}
+      {url: "women-hat-1-a.webp"},
+      {url: "women-hat-1-b.webp"},
+      {url: "women-hat-1-c.webp"}
     ],
     name       : {
       en: "Sun Hat",
@@ -1137,9 +1134,9 @@ useState('products', () => [
     dimensions : "12x12x6 ",
     documentId : "w-h-002",
     images     : [
-      {url: "women-hat-2-a-454.webp"},
-      {url: "women-hat-2-b-454.webp"},
-      {url: "women-hat-2-c-454.webp"}
+      {url: "women-hat-2-a.webp"},
+      {url: "women-hat-2-b.webp"},
+      {url: "women-hat-2-c.webp"}
     ],
     name       : {
       en: "Gray Woolen Cap",
@@ -1187,9 +1184,9 @@ useState('products', () => [
     dimensions : "72x32x1 ",
     documentId : "w-scarf-001",
     images     : [
-      {url: "women-scarf-1-a-454.webp"},
-      {url: "women-scarf-1-b-454.webp"},
-      {url: "women-scarf-1-c-454.webp"}
+      {url: "women-scarf-1-a.webp"},
+      {url: "women-scarf-1-b.webp"},
+      {url: "women-scarf-1-c.webp"}
     ],
     name       : {
       en: "Cream Wool Scarf",
@@ -1237,9 +1234,9 @@ useState('products', () => [
     dimensions : "8x5x3 ",
     documentId : "k-shoes-1-001",
     images     : [
-      {url: "kids-shoes-1-a-454.webp"},
-      {url: "kids-shoes-1-b-454.webp"},
-      {url: "kids-shoes-1-c-454.webp"}
+      {url: "kids-shoes-1-a.webp"},
+      {url: "kids-shoes-1-b.webp"},
+      {url: "kids-shoes-1-c.webp"}
     ],
     name       : {
       en: "Booties",
@@ -1286,9 +1283,9 @@ useState('products', () => [
     dimensions : "9x6x4 ",
     documentId : "k-shoes-2-001",
     images     : [
-      {url: "kids-shoes-2-a-454.webp"},
-      {url: "kids-shoes-2-b-454.webp"},
-      {url: "kids-shoes-2-c-454.webp"}
+      {url: "kids-shoes-2-a.webp"},
+      {url: "kids-shoes-2-b.webp"},
+      {url: "kids-shoes-2-c.webp"}
     ],
     name       : {
       en: "Rain Boots",
@@ -1335,9 +1332,9 @@ useState('products', () => [
     dimensions : "7x5x3 ",
     documentId : "k-shoes-3-001",
     images     : [
-      {url: "kids-canvas-shoes-1.webp"},
-      {url: "kids-canvas-shoes-2.webp"},
-      {url: "kids-canvas-shoes-3.webp"}
+      {url: "kids-canvas-shoes-1-a.webp"},
+      {url: "kids-canvas-shoes-1-b.webp"},
+      {url: "kids-canvas-shoes-1-c.webp"}
     ],
     name       : {
       en: "Canvas Shoes",
@@ -1384,9 +1381,9 @@ useState('products', () => [
     dimensions : "12x10x1 ",
     documentId : "k-casual-4-001",
     images     : [
-      {url: "kids-pyjamas-1.webp"},
-      {url: "kids-pyjamas-2.webp"},
-      {url: "kids-pyjamas-3.webp"}
+      {url: "kids-pyjamas-1-a.webp"},
+      {url: "kids-pyjamas-1-b.webp"},
+      {url: "kids-pyjamas-1-c.webp"}
     ],
     name       : {
       en: "Cotton Pyjamas",
@@ -1433,9 +1430,9 @@ useState('products', () => [
     dimensions : "14x12x2 ",
     documentId : "k-casual-5-001",
     images     : [
-      {url: "kids-casual-5-a-454.webp"},
-      {url: "kids-casual-5-b-454.webp"},
-      {url: "kids-casual-5-c-454.webp"}
+      {url: "kids-casual-5-a.webp"},
+      {url: "kids-casual-5-b.webp"},
+      {url: "kids-casual-5-c.webp"}
     ],
     name       : {
       en: "Denim Jeans",
@@ -1482,9 +1479,9 @@ useState('products', () => [
     dimensions : "10x10x4 ",
     documentId : "k-hats-3-001",
     images     : [
-      {url: "kids-hats-3-a-454.webp"},
-      {url: "kids-hats-3-b-454.webp"},
-      {url: "kids-hats-3-c-454.webp"}
+      {url: "kids-hats-3-a.webp"},
+      {url: "kids-hats-3-b.webp"},
+      {url: "kids-hats-3-c.webp"}
     ],
     name       : {
       en: "Sun Hat",
@@ -1531,9 +1528,9 @@ useState('products', () => [
     dimensions : "12x10x1 ",
     documentId : "k-official-1-001",
     images     : [
-      {url: "kids-official-1-a-454.webp"},
-      {url: "kids-official-1-b-454.webp"},
-      {url: "kids-official-1-c-454.webp"}
+      {url: "kids-official-1-a.webp"},
+      {url: "kids-official-1-b.webp"},
+      {url: "kids-official-1-c.webp"}
     ],
     name       : {
       en: "Formal White Shirt",
@@ -1580,9 +1577,9 @@ useState('products', () => [
     dimensions : "14x12x2 ",
     documentId : "k-official-2-001",
     images     : [
-      {url: "kids-official-2-a-454.webp"},
-      {url: "kids-official-2-b-454.webp"},
-      {url: "kids-official-2-c-454.webp"}
+      {url: "kids-official-2-a.webp"},
+      {url: "kids-official-2-b.webp"},
+      {url: "kids-official-2-c.webp"}
     ],
     name       : {
       en: "Party Dress",
@@ -1629,9 +1626,9 @@ useState('products', () => [
     dimensions : "15x13x3 ",
     documentId : "k-official-3-001",
     images     : [
-      {url: "kids-official-3-a-454.webp"},
-      {url: "kids-official-3-b-454.webp"},
-      {url: "kids-official-3-c-454.webp"}
+      {url: "kids-official-3-a.webp"},
+      {url: "kids-official-3-b.webp"},
+      {url: "kids-official-3-c.webp"}
     ],
     name       : {
       en: "Brown Suit",
@@ -1678,9 +1675,9 @@ useState('products', () => [
     dimensions : "13x11x2 ",
     documentId : "k-casual-1-001",
     images     : [
-      {url: "kids-casual-1-a-454.webp"},
-      {url: "kids-casual-1-b-454.webp"},
-      {url: "kids-casual-1-c-454.webp"}
+      {url: "kids-casual-1-a.webp"},
+      {url: "kids-casual-1-b.webp"},
+      {url: "kids-casual-1-c.webp"}
     ],
     name       : {
       en: "Blue Sweater",
@@ -1727,9 +1724,9 @@ useState('products', () => [
     dimensions : "16x14x4 ",
     documentId : "k-casual-2-001",
     images     : [
-      {url: "kids-winter-jacket-1.webp"},
-      {url: "kids-winter-jacket-2.webp"},
-      {url: "kids-winter-jacket-3.webp"}
+      {url: "kids-winter-jacket-1-a.webp"},
+      {url: "kids-winter-jacket-1-b.webp"},
+      {url: "kids-winter-jacket-1-c.webp"}
     ],
     name       : {
       en: "Kids Winter Jacket",
@@ -1776,9 +1773,9 @@ useState('products', () => [
     dimensions : "10x10x3 ",
     documentId : "k-hats-1-001",
     images     : [
-      {url: "kids-hats-1-a-454.webp"},
-      {url: "kids-hats-1-b-454.webp"},
-      {url: "kids-hats-1-c-454.webp"}
+      {url: "kids-hats-1-a.webp"},
+      {url: "kids-hats-1-b.webp"},
+      {url: "kids-hats-1-c.webp"}
     ],
     name       : {
       en: "Sun Hat",
@@ -1825,9 +1822,9 @@ useState('products', () => [
     dimensions : "9x9x4 ",
     documentId : "k-hats-2-001",
     images     : [
-      {url: "kids-hats-2-a-454.webp"},
-      {url: "kids-hats-2-b-454.webp"},
-      {url: "kids-hats-2-c-454.webp"}
+      {url: "kids-hats-2-a.webp"},
+      {url: "kids-hats-2-b.webp"},
+      {url: "kids-hats-2-c.webp"}
     ],
     name       : {
       en: "Woolen Winter Hat",

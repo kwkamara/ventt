@@ -100,7 +100,7 @@
         <div class="pt-3 h-15rem md:h-10rem lg:h-15rem w-full">
           <ProductDisplay discount="10% Off"
                           class="shadow-2"
-                          image="/men-accessories-1-438.webp"
+                          image="/men-accessories-1.webp"
                           :name="$t('men_accessories')"/>
         </div>
         <!-- /product display -->
