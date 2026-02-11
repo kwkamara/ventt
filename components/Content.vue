@@ -217,7 +217,7 @@
           <!-- items -->
           <DataTable v-if="manage==='items' && !item"
                      v-model:filters="filters"
-                     :globalFilterFields="['name', 'id', 'description', 'customer', 'status', 'sku']"
+                     :globalFilterFields="['name.en', 'id', 'description', 'customer', 'status', 'sku']"
                      :rows="5"
                      :show-headers="false"
                      :value="category.data"
@@ -622,7 +622,7 @@ export default defineComponent({
               products  : {
                 "p-002": {
                   quantity   : 10,
-                  price      : 600,
+                  price      : 400,
                   description: null,
                   total      : 0
                 }

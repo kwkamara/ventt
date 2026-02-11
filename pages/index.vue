@@ -35,13 +35,13 @@
       <!-- offers display -->
       <div class="col-12 lg:col-4 lg:pt-0 md:flex lg:flex-column align-items-start gap-3 bg-white">
         <ProductDisplay category="men"
-                        class="h-17rem lg:h-18rem"
+                        class="h-16rem md:h-16rem lg:h-18rem"
                         discount="10% Off"
                         image="/men-accessories-1.webp"
                         :name="$t('men_accessories')"
                         type="accessories"/>
         <ProductDisplay category="women"
-                        class="h-16rem lg:h-17rem pt-4 md:pt-0 xl:pt-1"
+                        class="h-16rem md:h-16rem lg:h-17rem pt-4 md:pt-0 xl:pt-1"
                         discount="10% Off"
                         image="/women-2.webp"
                         :name="$t('women_casual')"
