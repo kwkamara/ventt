@@ -828,21 +828,21 @@ useState('products', () => [
 
 
   {
-    categories: {women: 1, casual: 1, shoes: 1},
+    categories : {women: 1, casual: 1, shoes: 1},
     description: {
       en: "Trendy open-toe blue wedges with ankle straps for a secure fit. Great for summer outings.",
       nl: "Trendy open wedges met open teen in blauw met enkelbandjes voor een stevige pasvorm. Ideaal voor zomerse uitstapjes.",
       fr: "Sandales compensées bleues à bout ouvert tendance avec brides de cheville pour un bon maintien. Parfaites pour les sorties d’été."
     },
-    dimensions: "10x8x4 ",
-    documentId: "w-shoes-2-001",
+    dimensions : "10x8x4 ",
+    documentId : "w-shoes-2-001",
 
     images: [
       {url: "women-blue-wedges-1-a.webp"},
       {url: "women-blue-wedges-1-b.webp"},
       {url: "women-blue-wedges-1-c.webp"}
     ],
-    name: {
+    name  : {
       en: "Blue Open Wedges",
       nl: "Blauwe open wedges",
       fr: "Sandales compensées ouvertes bleues"
@@ -873,8 +873,8 @@ useState('products', () => [
         rating: 4
       }
     ],
-    sku   : "b-wedges-001",
-    weight: "0.9"
+    sku    : "b-wedges-001",
+    weight : "0.9"
   },
 
 
@@ -973,6 +973,54 @@ useState('products', () => [
     ],
     sku        : "fluffy-coat-01",
     weight     : "1.3"
+  },
+
+  {
+    categories : {women: 1, official: 1, coats: 1},
+    description: {
+      en: "Elegant black women's coat with a smooth outer finish and warm quilted lining. Designed for cold days with a tailored fit that balances style and comfort.",
+      nl: "Elegante zwarte damesjas met een gladde buitenkant en warme gewatteerde voering. Ontworpen voor koude dagen met een getailleerde pasvorm die stijl en comfort combineert.",
+      fr: "Manteau noir élégant pour femme avec finition extérieure lisse et doublure matelassée chaude. Conçu pour les journées froides avec une coupe ajustée qui allie style et confort."
+    },
+    dimensions : "46x38x10",
+    documentId : "black-women-coat-01",
+    images     : [
+      {url: "women-black-coat-1-a.webp"},
+      {url: "women-black-coat-1-b.webp"},
+      {url: "women-black-coat-1-c.webp"}
+    ],
+    name       : {
+      en: "Black Classic Winter Coat",
+      nl: "Zwarte klassieke winterjas",
+      fr: "Manteau d’hiver noir classique"
+    },
+    price      : 8999,
+    rating     : 5,
+    reviews    : [
+      {
+        en    : "Perfect fit and very warm. Matches everything.",
+        nl    : "Perfecte pasvorm en erg warm. Past overal bij.",
+        fr    : "Coupe parfaite et très chaud. Va avec tout.",
+        user  : "user_7421",
+        rating: 5
+      },
+      {
+        en    : "Great quality fabric and clean design.",
+        nl    : "Stof van hoge kwaliteit en strak ontwerp.",
+        fr    : "Tissu de grande qualité et design épuré.",
+        user  : "user_7422",
+        rating: 5
+      },
+      {
+        en    : "Ideal for both casual and formal wear.",
+        nl    : "Ideaal voor zowel casual als formele kleding.",
+        fr    : "Idéal pour une tenue décontractée ou formelle.",
+        user  : "user_7423",
+        rating: 4
+      }
+    ],
+    sku        : "black-women-coat-01",
+    weight     : "1.4"
   },
 
 
