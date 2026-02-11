@@ -18,66 +18,66 @@
 <script setup lang="js">
 useState('products', () => [
   //men.
-  // {
-  //   categories : {
-  //     men   : 1,
-  //     casual: 1
-  //   },
-  //   description: {
-  //     "en": "A soft, breathable white hoodie made from premium cotton. Perfect for casual outings.",
-  //     "nl": "Een zachte, ademende witte hoodie van hoogwaardig katoen. Perfect voor casual uitstapjes.",
-  //     "fr": "Un sweat à capuche blanc doux et respirant, fabriqué en coton de qualité supérieure. Parfait pour les sorties décontractées."
-  //   },
-  //
-  //   dimensions: "31x25x3.5 ",
-  //   documentId: "w-hoodie-001",
-  //   images    : [
-  //     {url: "men-white-hoodie-1-a.webp"},
-  //     {url: "men-white-hoodie-1-b.webp"},
-  //     {url: "men-white-hoodie-1-c.webp"}
-  //   ],
-  //   name      : {
-  //     en: "White Hoodie",
-  //     nl: "Witte hoodie",
-  //     fr: "Hoodie blanc"
-  //   },
-  //
-  //   price  : 3499,
-  //   rating : 4,
-  //   reviews: [
-  //     {
-  //       en    : "Super comfortable fabric, worth every penny.",
-  //       nl    : "Supercomfortabele stof, elke cent waard.",
-  //       fr    : "Tissu super confortable, ça vaut chaque centime.",
-  //       user  : "user_707",
-  //       rating: 5
-  //     },
-  //     {
-  //       en    : "Fits true to size but slightly expensive.",
-  //       nl    : "Valt normaal qua maat, maar iets aan de dure kant.",
-  //       fr    : "Taille conforme, mais un peu cher.",
-  //       user  : "user_808",
-  //       rating: 4
-  //     },
-  //     {
-  //       en    : "Great for spring, but not thick enough for winter.",
-  //       nl    : "Perfect voor de lente, maar niet dik genoeg voor de winter.",
-  //       fr    : "Idéal pour le printemps, mais pas assez épais pour l’hiver.",
-  //       user  : "user_909",
-  //       rating: 3
-  //     },
-  //     {
-  //       en    : "Love the minimalistic design!",
-  //       nl    : "Geweldig minimalistisch ontwerp!",
-  //       fr    : "J’adore le design minimaliste !",
-  //       user  : "user_112",
-  //       rating: 5
-  //     }
-  //   ],
-  //
-  //   sku   : "w-hoodie-001",
-  //   weight: "0.65"
-  // },
+  {
+    categories : {
+      men   : 1,
+      casual: 1
+    },
+    description: {
+      "en": "A soft, breathable white hoodie made from premium cotton. Perfect for casual outings.",
+      "nl": "Een zachte, ademende witte hoodie van hoogwaardig katoen. Perfect voor casual uitstapjes.",
+      "fr": "Un sweat à capuche blanc doux et respirant, fabriqué en coton de qualité supérieure. Parfait pour les sorties décontractées."
+    },
+
+    dimensions: "31x25x3.5 ",
+    documentId: "w-hoodie-001",
+    images    : [
+      {url: "men-white-hoodie-1-a.webp"},
+      {url: "men-white-hoodie-1-b.webp"},
+      {url: "men-white-hoodie-1-c.webp"}
+    ],
+    name      : {
+      en: "White Hoodie",
+      nl: "Witte hoodie",
+      fr: "Hoodie blanc"
+    },
+
+    price  : 3499,
+    rating : 4,
+    reviews: [
+      {
+        en    : "Super comfortable fabric, worth every penny.",
+        nl    : "Supercomfortabele stof, elke cent waard.",
+        fr    : "Tissu super confortable, ça vaut chaque centime.",
+        user  : "user_707",
+        rating: 5
+      },
+      {
+        en    : "Fits true to size but slightly expensive.",
+        nl    : "Valt normaal qua maat, maar iets aan de dure kant.",
+        fr    : "Taille conforme, mais un peu cher.",
+        user  : "user_808",
+        rating: 4
+      },
+      {
+        en    : "Great for spring, but not thick enough for winter.",
+        nl    : "Perfect voor de lente, maar niet dik genoeg voor de winter.",
+        fr    : "Idéal pour le printemps, mais pas assez épais pour l’hiver.",
+        user  : "user_909",
+        rating: 3
+      },
+      {
+        en    : "Love the minimalistic design!",
+        nl    : "Geweldig minimalistisch ontwerp!",
+        fr    : "J’adore le design minimaliste !",
+        user  : "user_112",
+        rating: 5
+      }
+    ],
+
+    sku   : "w-hoodie-001",
+    weight: "0.65"
+  },
 
 
   {

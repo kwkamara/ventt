@@ -16,7 +16,7 @@
 
       <div class="grid m-0">
 
-        <!-- image | icons -->
+        <!-- image | wishlist -->
         <div class="col-12 lg:col-9 h-14rem lg:h-18rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
           <!-- image -->
           <img :alt="product.name"
@@ -29,7 +29,7 @@
                    @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
                    icon="favorite_border"/>
         </div>
-        <!-- image | icons -->
+        <!-- image | wishlist -->
 
 
         <!-- thumbnails -->
@@ -166,7 +166,7 @@
 
 
   <!--  reviews -->
-  <section class="grid m-0 px-3 lg:px-6 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
+  <section v-if="product" class="grid m-0 px-3 lg:px-6 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
 
     <div class="col-12">
       <h2 class="m-0 font-light text-3xl">{{ $t('reviews') }}</h2>
@@ -177,7 +177,7 @@
       <div class="px-3 py-4 shadow-1 border-round bg-white border-1 border-purple-100">
 
         <div class="flex gap-2 align-items-start">
-          <VButton icon="person" class="hover:bg-white hover:text-purple-700"/>
+          <VButton icon="person" class="text-gray-700"/>
           <div class="pt-1">
             <div>{{review.user}}</div>
             <div class="pb-3 text-yellow-600 flex align-items-center">

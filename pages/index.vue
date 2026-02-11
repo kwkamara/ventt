@@ -12,10 +12,10 @@
 
   <client-only>
     <!-- New Arrivals -->
-    <section class="grid m-0 pb-7 md:px-6 select-none overflow-hidden bg-white">
+    <section class="grid m-0 pb-7 md:pr-6 md:pl-7 select-none overflow-hidden bg-white">
 
       <!-- title -->
-      <div class="col-12 pb-0">
+      <div class="col-12 pb-0 md:pl-1">
         <h2 class="font-light capitalize">
           {{ $t('new arrivals') }}
         </h2>

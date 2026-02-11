@@ -83,7 +83,7 @@
       <!-- /footer box -->
 
       <!-- Copyright bar -->
-      <div class="w-full pt-3 lg:pt-4 md:flex align-items-center justify-content-between border-top-1 border-gray-800">
+      <div class="w-full pt-3 lg:pt-4 md:pr-3 md:pl-2 md:flex align-items-center justify-content-between border-top-1 border-gray-800">
 
         <!-- payments -->
         <div class="py-2 md:p-0 flex-1 flex justify-content-center lg:justify-content-start gap-3 text-xs text-center">

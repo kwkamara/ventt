@@ -11,10 +11,10 @@
 
   <!-- Shop -->
   <client-only>
-    <section class="grid m-0 lg:px-7 pb-5">
+    <section class="grid m-0 lg:pl-7 md:pr-6 pb-5">
 
       <!-- filter section -->
-      <div class="col-12 lg:col-4 pt-3">
+      <div class="col-12 lg:col-4 pt-3 md:pl-0">
 
         <!-- search | price filter -->
         <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl">
@@ -109,16 +109,14 @@
 
 
       <!-- products -->
-      <div class="col-12 lg:col-8">
+      <div class="col-12 lg:col-8 md:pr-1">
 
         <!-- product grid -->
         <div class="grid m-0 pb-5">
 
-          <!-- products -->
           <Product v-for="product in products.slice( pagination.start, pagination.end )"
                    :product="product"
-                   class="fadein animation-duration-1000"/>
-          <!-- /products -->
+                   class="fadein animation-duration-1000"/>          <!-- /products -->
 
 
           <!-- pagination -->
