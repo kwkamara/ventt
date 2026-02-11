@@ -1457,7 +1457,7 @@ export default defineComponent({
 
   beforeMount() {
     //load first category.
-    this.viewCategory(this.menu[1]);
+    this.viewCategory(this.menu[0]);
   }
 })
 </script>
