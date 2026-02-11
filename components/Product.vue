@@ -101,8 +101,8 @@ export default defineComponent({
     notify(state) {
       //message setup.
       let info = "";
-      if (state === 'cart') info = this.cart[this.product.documentId] ? 'Item added to cart' : 'Item removed from cart';
-      else info = this.wishlist[this.product.documentId] ? 'Item added to wishlist' : 'item removed from wishlist';
+      if (state === 'cart') info = this.cart[this.product.documentId] ? this.$t('item_added_to_cart') : this.$t('item_removed_from_cart');
+      else info = this.wishlist[this.product.documentId] ? this.$t('item_added_to_wishlist') : this.$t('item_removed_from_wishlist');
 
       //show popup.
       this.$toast.add({
