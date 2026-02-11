@@ -1,6 +1,6 @@
 <template>
 
-  <div class="col-6 md:col-4 lg:col-4 lg:pt-0" @click="viewItem()" data-aos="fade-up">
+  <div class="col-6 md:col-4 lg:col-4 lg:pt-0" @click="viewItem" data-aos="fade-up">
 
     <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
 
@@ -117,7 +117,8 @@ export default defineComponent({
       useState('product').value = this.product;
 
       const localePath = useLocalePath();
-      navigateTo(localePath('/Product/' + encodeURIComponent(this.product.name) ));
+      const locale = this.$i18n.locale;
+      navigateTo(localePath('/Product/' + encodeURIComponent(this.product.name[locale]) ));
     }
 
   }

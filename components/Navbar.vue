@@ -182,7 +182,8 @@ export default defineComponent({
 
       //navigate.
       const localePath = useLocalePath();
-      navigateTo(localePath('/Product/' + encodeURIComponent(product.name)));
+      const locale = this.$i18n.locale;
+      navigateTo(localePath('/Product/' + encodeURIComponent(product.name[locale])));
     }
   }
 })
