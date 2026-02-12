@@ -24,9 +24,8 @@
             <InputText v-model="search"
                        id="search-ip"
                        :placeholder="$t('search')"
-                       class="w-8 px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
+                       class="w-6 px-3 border-1 border-purple-100 border-round-3xl bg-white shadow-1"
                        fluid/>
-
             <VButton icon="restart_alt"
                      @click="min_price=0; max_price=50000; search=null"/>
           </div>
@@ -34,20 +33,20 @@
 
 
           <!-- min | max price -->
-          <div class="flex justify-content-between gap-2 align-items-center text-gray-700">
+          <div class="py-2 flex justify-content-between gap-3 align-items-center text-gray-700 text-xs">
             <!-- min price -->
-            <div class="w-full py-2 text-xs">
+            <div>
               <InputText id="min-price-ip" v-model="min_price"
-                         class="h-3rem pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
+                         class="py-3 pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
                          type="number" unstyled/>
               <label for="min-price-ip" class="block pt-1">{{ $t('min_price') }}</label>
             </div>
 
             <!-- max price -->
-            <div class="w-full text-xs text-right">
+            <div class="text-right">
               <InputText id="max-price-ip"
                          v-model="max_price"
-                         class="h-3rem pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
+                         class="py-3 pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
                          type="number" unstyled/>
               <label for="max-price-ip" class="block pt-1">{{ $t('max_price') }}</label>
             </div>
@@ -59,38 +58,41 @@
 
 
         <!-- categories -->
-        <div class="p-4 mt-3 flex justify-content-between shadow-1 border-round-xl border-1 border-purple-100 text-xs">
+        <div class="p-4 mt-3 shadow-1 border-round-xl border-1 border-purple-100 text-xs">
 
           <!-- categories -->
-          <div class="flex flex-column gap-4">
+          <div class="grid m-0">
 
             <div v-for="(value, category) in categories"
                  :key="category"
-                 class="w-full flex gap-2">
+                 class="col-4">
               <Checkbox class="m-0"
                         :id="category + '-ip'"
                         v-model="categories[category]"
                         :binary="true"/>
-              <span class="capitalize">{{ $t(category) }}</span>
+              <span class="pl-1 capitalize">{{ $t(category) }}</span>
             </div>
 
-
-            <!-- clear -->
-            <VButton icon="remove" @click="resetFilter"/>
           </div>
           <!-- /categories -->
 
+          <Divider/>
+
 
           <!-- types -->
-          <div class="flex flex-column gap-4">
-            <div v-for="type in Object.keys(types)" class="w-full flex justify-content-end gap-2">
-              <span class="capitalize">{{ $t(type) }}</span>
-              <Checkbox class="m-0"
-                        v-model="types[type]"
-                        binary/>
+          <div class="grid m-0">
+            <div v-for="type in Object.keys(types)" :key="type" class="col-4 pb-5">
+              <Checkbox class="m-0" v-model="types[type]" binary/>
+              <span class="pl-1 capitalize">{{ $t(type) }}</span>
             </div>
           </div>
           <!-- /types -->
+
+
+          <!-- clear -->
+          <div class="text-right">
+            <VButtonCube :text="$t('clear')" fill="1" icon="remove" @click="resetFilter"/>
+          </div>
 
         </div>
         <!-- /categories -->
@@ -206,7 +208,10 @@ export default defineComponent({
 
 
       //search filter.
-      if (this.search) products = products.filter(product => product.name.toLowerCase().includes(this.search))
+      if (this.search) {
+        const locale = this.$i18n.locale;
+        products = products.filter(product => product.name[locale].toLowerCase().includes(this.search.toLowerCase()))
+      }
 
 
       //active categories.
