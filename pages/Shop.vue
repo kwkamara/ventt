@@ -1,5 +1,4 @@
 <template>
-
   <!-- Nav | Categories | Hero -->
   <section class="grid m-0 text-gray-700 select-none bg-gray-700 overflow-hidden">
     <Navbar/>
@@ -18,7 +17,7 @@
       <div class="grid m-0 p-3 shadow-1 border-round-xl border-1 border-purple-100">
 
         <!-- search | price reset -->
-        <div class="col-12 md:col-4 lg:col-8 pb-3 text-xs">
+        <div class="col-10 md:col-4 lg:col-8 pb-3 text-xs">
           <InputText v-model="search"
                      id="search-ip"
                      :placeholder="$t('search')"
@@ -27,8 +26,15 @@
         </div>
         <!-- /search | price reset -->
 
+        <!-- reset -->
+        <div class="col-2 lg:col-4 md:hidden lg:block text-right">
+          <VButton icon="restart_alt"
+                   @click="min_price=0; max_price=50000; search=null"/>
+        </div>
+        <!-- /reset -->
+
         <!-- min price -->
-        <div class="col-6 md:col-3 lg:col-5">
+        <div class="col-6 md:col-3 lg:col-6">
           <InputNumber id="min-price-ip" v-model="min_price"
                        input-class="w-11 py-3 pl-0 border-none border-bottom-1 border-purple-200 bg-white"
                        fluid unstyled/>
@@ -37,7 +43,7 @@
         <!-- /min price -->
 
         <!-- max price -->
-        <div class="col-6 md:col-3 lg:col-5 text-right">
+        <div class="col-6 md:col-3 lg:col-6 text-right">
           <InputNumber id="max-price-ip"
                        v-model="max_price"
                        input-class="w-11 py-3 pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right"
@@ -47,7 +53,7 @@
         <!-- /max price -->
 
         <!-- reset -->
-        <div class="col-12 md:col-2 pt-3 text-right">
+        <div class="col-12 md:col-2 pt-3 hidden md:block lg:hidden text-right">
           <VButton icon="restart_alt"
                    @click="min_price=0; max_price=50000; search=null"/>
         </div>
