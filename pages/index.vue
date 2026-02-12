@@ -10,143 +10,142 @@
   </section>
   <!-- /Nav | Categories | Hero -->
 
-  <client-only>
-    <!-- New Arrivals -->
-    <section class="grid m-0 pb-7 md:pr-6 md:pl-7 select-none overflow-hidden bg-white">
 
-      <!-- title -->
-      <div class="col-12 pb-0 md:pl-1">
-        <h2 class="font-light capitalize">
-          {{ $t('new arrivals') }}
-        </h2>
+  <!-- New Arrivals -->
+  <section class="grid m-0 pb-7 md:pr-6 md:pl-7 select-none overflow-hidden bg-white">
+
+    <!-- title -->
+    <div class="col-12 pb-0 md:pl-1">
+      <h2 class="font-light capitalize">
+        {{ $t('new arrivals') }}
+      </h2>
+    </div>
+    <!-- /title -->
+
+
+    <!-- arrivals product list -->
+    <div class="col-12 lg:col-8 p-0">
+      <div class="grid m-0">
+        <Product v-for="pd in newProducts" :product="pd"/>
       </div>
-      <!-- /title -->
+    </div>
+    <!-- /arrivals product list -->
 
 
-      <!-- arrivals product list -->
-      <div class="col-12 lg:col-8 p-0">
-        <div class="grid m-0">
-          <Product v-for="pd in newProducts" :product="pd"/>
+    <!-- offers display -->
+    <div class="col-12 lg:col-4 lg:pt-0 md:flex lg:flex-column align-items-start gap-3 bg-white">
+      <ProductDisplay category="men"
+                      class="h-16rem md:h-16rem lg:h-18rem"
+                      discount="10% Off"
+                      image="/men-accessories-1.webp"
+                      :name="$t('men_accessories')"
+                      type="accessories"/>
+      <ProductDisplay category="women"
+                      class="h-16rem md:h-16rem lg:h-17rem pt-4 md:pt-0 xl:pt-1"
+                      discount="10% Off"
+                      image="/women-2.webp"
+                      :name="$t('women_casual')"
+                      type="casual"/>
+    </div>
+    <!-- /offers display -->
+
+  </section>
+  <!-- /New Arrivals -->
+
+
+  <!--  women section -->
+  <section class="grid m-0 md:p-4 lg:px-6 py-4 select-none overflow-hidden bg-purple-900">
+    <div class="col-12 px-0">
+      <div class="grid m-0">
+        <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3 md:pr-1 md:pl-2">
+          <ProductDisplay category="women"
+                          discount="15% Off"
+                          image="/women-1.webp"
+                          :name="$t('women_style')"
+                          type="casual"/>
         </div>
-      </div>
-      <!-- /arrivals product list -->
+        <div class="col-12 md:col-6 px-3 lg:pr-1">
 
+          <div class="lg:h-12rem w-full flex gap-3">
 
-      <!-- offers display -->
-      <div class="col-12 lg:col-4 lg:pt-0 md:flex lg:flex-column align-items-start gap-3 bg-white">
-        <ProductDisplay category="men"
-                        class="h-16rem md:h-16rem lg:h-18rem"
-                        discount="10% Off"
-                        image="/men-accessories-1.webp"
-                        :name="$t('men_accessories')"
-                        type="accessories"/>
-        <ProductDisplay category="women"
-                        class="h-16rem md:h-16rem lg:h-17rem pt-4 md:pt-0 xl:pt-1"
-                        discount="10% Off"
-                        image="/women-2.webp"
-                        :name="$t('women_casual')"
-                        type="casual"/>
-      </div>
-      <!-- /offers display -->
-
-    </section>
-    <!-- /New Arrivals -->
-
-
-    <!--  women section -->
-    <section class="grid m-0 md:p-4 lg:px-6 py-4 select-none overflow-hidden bg-purple-900">
-      <div class="col-12 px-0">
-        <div class="grid m-0">
-          <div class="col-12 md:col-6 h-16rem lg:h-26rem px-3 md:pr-1 md:pl-2">
-            <ProductDisplay category="women"
-                            discount="15% Off"
-                            image="/women-1.webp"
-                            :name="$t('women_style')"
-                            type="casual"/>
-          </div>
-          <div class="col-12 md:col-6 px-3 lg:pr-1">
-
-            <div class="lg:h-12rem w-full flex gap-3">
-
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay category="women"
-                                discount="10% Off"
-                                image="/women-suits-1.webp"
-                                :name="$t('women_suits')"
-                                type="official"/>
-              </div>
-
-              <div class="w-6 h-8rem lg:h-12rem">
-                <ProductDisplay category="women"
-                                discount="10% Off"
-                                image="/women-hats-2.webp"
-                                :name="$t('women_hats')"
-                                type="hats"/>
-              </div>
-
-            </div>
-
-            <div class="h-8rem lg:h-12rem w-full mt-3">
+            <div class="w-6 h-8rem lg:h-12rem">
               <ProductDisplay category="women"
-                              discount="5% Off"
-                              image="/women-blouses-1.webp"
-                              :name="$t('women_blouses')"
-                              type="casual"/>
+                              discount="10% Off"
+                              image="/women-suits-1.webp"
+                              :name="$t('women_suits')"
+                              type="official"/>
+            </div>
+
+            <div class="w-6 h-8rem lg:h-12rem">
+              <ProductDisplay category="women"
+                              discount="10% Off"
+                              image="/women-hats-2.webp"
+                              :name="$t('women_hats')"
+                              type="hats"/>
             </div>
 
           </div>
-        </div>
-      </div>
-    </section>
-    <!--  /women section -->
 
-
-    <!--  kids section -->
-    <section class="grid m-0 px-2 lg:px-6 lg:py-5 py-2 select-none">
-
-      <div class="col-12 md:col-6 px-0">
-        <div class="w-full px-2 md:pr-1 flex gap-3">
-          <div class="w-6 h-8rem lg:h-12rem">
-            <ProductDisplay :name="$t('kids') + ' | ' + $t('casual')"
-                            category="kids"
-                            discount="10% Off"
-                            image="/kids-casual-1.webp" type="casual"/>
-          </div>
-          <div class="w-6 h-8rem lg:h-12rem">
-            <ProductDisplay :name="$t('girls')"
-                            category="kids"
-                            discount="20% Off"
-                            image="/kids-casual-3.webp"
+          <div class="h-8rem lg:h-12rem w-full mt-3">
+            <ProductDisplay category="women"
+                            discount="5% Off"
+                            image="/women-blouses-1.webp"
+                            :name="$t('women_blouses')"
                             type="casual"/>
           </div>
+
         </div>
-        <div class="w-full px-2 md:pr-1 flex gap-3 mt-3">
-          <ProductDisplay class="w-6 h-8rem lg:h-12rem"
-                          discount="10% Off"
+      </div>
+    </div>
+  </section>
+  <!--  /women section -->
+
+
+  <!--  kids section -->
+  <section class="grid m-0 px-2 lg:px-6 lg:py-5 py-2 select-none">
+
+    <div class="col-12 md:col-6 px-0">
+      <div class="w-full px-2 md:pr-1 flex gap-3">
+        <div class="w-6 h-8rem lg:h-12rem">
+          <ProductDisplay :name="$t('kids') + ' | ' + $t('casual')"
                           category="kids"
-                          type="casual"
-                          image="/babies-1.webp"
-                          :name="$t('babies')"/>
-          <ProductDisplay category="kids"
-                          class="w-6 h-8rem lg:h-12rem"
                           discount="10% Off"
-                          image="/kids-pyjamas-1.webp"
-                          :name="$t('pyjamas')"
+                          image="/kids-casual-1.webp" type="casual"/>
+        </div>
+        <div class="w-6 h-8rem lg:h-12rem">
+          <ProductDisplay :name="$t('girls')"
+                          category="kids"
+                          discount="20% Off"
+                          image="/kids-casual-3.webp"
                           type="casual"/>
         </div>
       </div>
-
-      <div class="col-12 md:col-6 h-15rem lg:h-26rem px-2 md:pl-3">
+      <div class="w-full px-2 md:pr-1 flex gap-3 mt-3">
+        <ProductDisplay class="w-6 h-8rem lg:h-12rem"
+                        discount="10% Off"
+                        category="kids"
+                        type="casual"
+                        image="/babies-1.webp"
+                        :name="$t('babies')"/>
         <ProductDisplay category="kids"
-                        discount="15% Off"
-                        image="/kids-casual-4.webp"
-                        :name="$t('kids_fashion')"
+                        class="w-6 h-8rem lg:h-12rem"
+                        discount="10% Off"
+                        image="/kids-pyjamas-1.webp"
+                        :name="$t('pyjamas')"
                         type="casual"/>
       </div>
+    </div>
 
-    </section>
-    <!--  /kids section -->
-  </client-only>
+    <div class="col-12 md:col-6 h-15rem lg:h-26rem px-2 md:pl-3">
+      <ProductDisplay category="kids"
+                      discount="15% Off"
+                      image="/kids-casual-4.webp"
+                      :name="$t('kids_fashion')"
+                      type="casual"/>
+    </div>
+
+  </section>
+  <!--  /kids section -->
 
 
   <!--  footer -->
@@ -157,15 +156,6 @@
 
 
 <script setup lang="js">
-//categories init.
-useState('categories', () => ['men', 'women', 'kids']);
-
-//cart struct.
-useState('cart', () => ({}));
-
-//wishlist struct.
-useState('wishlist', () => ({}));
-
 //product.
 useState('product', () => null);
 </script>

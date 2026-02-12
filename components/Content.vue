@@ -258,29 +258,27 @@
 
 
           <!-- header -->
-          <div v-if="manage !=='items'" class="p-3 flex justify-content-between align-items-center bg-gray-50">
+          <div v-if="manage !=='items'" class="p-3 lg:px-4 flex justify-content-between align-items-center bg-gray-50">
 
-            <!-- category name | item id -->
-            <div class="m-0 lg:pl-2 font-light text-xl text-purple-800 capitalize">
-              <div>
-
-                <div>
-                  <template v-if="item">
-                    {{ category.name === 'products' ? item.name['en'] : item.name }}
-                  </template>
-                  <template v-else>New Item</template>
-                </div>
-
-                <div class="mt-1 flex align-items-center">
-                  <Icon :icon="category.icon" class="text-sm text-gray-700"/>
-                  <span class="ml-1 text-xs uppercase text-gray-700">{{ category.name }} </span>
-                </div>
-              </div>
+            <!-- category icon | name -->
+            <div class="flex align-items-center">
+              <Icon :icon="category.icon" class="text-gray-700"/>
+              <span class="ml-1 uppercase text-gray-700">{{ category.name }} </span>
             </div>
-            <!-- /category name | item id -->
+            <!-- /category icon | name -->
+
+            <!-- item name -->
+            <div>
+              <template v-if="item">
+                {{ category.name === 'products' ? item.name['en'] : item.name }}
+              </template>
+              <template v-else>New Item</template>
+            </div>
+            <!-- item name -->
+
 
             <!-- controls -->
-            <div class="md:pr-2 flex align-items-center gap-3">
+            <div class="md:pr-2 flex align-items-center justify-items-end gap-3">
 
               <template v-if="item">
                 <VButton v-if="manage!=='edit'" icon="edit" @click="manage='edit';"/>
@@ -342,29 +340,37 @@
             <!-- /other props -->
 
 
-            <!-- category.categories -->
+            <!-- relative categories -->
             <template v-if="category.categories">
+
               <div class="col-12 pt-3 border-top-1 border-gray-300" v-for="sub_category in category.categories">
-                <h2 class="m-0 sans-serif font-light capitalize">{{ sub_category }}</h2>
+
+                <!-- header -->
+                <div class="py-2 flex justify-content-between align-items-center">
+                  <h2 class="m-0 sans-serif font-light capitalize">{{ sub_category }}</h2>
+                  <VButton icon="edit"/>
+                </div>
+                <!-- /header -->
+
 
                 <div v-for="(sub_item, key) in item[sub_category]" class="grid m-0 py-2 text-sm">
+
                   <div class="col-12 pl-0">
                     <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
                   </div>
 
                   <template v-for="(value, prop) in sub_item">
-                    <div v-if="value" :class="(prop==='description' ? '' : 'lg:col-4') + ' col-12 pl-0'">
-                      <div>{{ value }}</div>
+                    <div v-if="value" :class="(prop==='description' ? '' : 'lg:col-6') + ' col-12 pl-0 py-3'">
+                      <div class="text-lg">{{ value }}</div>
                       <span class="uppercase text-xs">{{ prop }}</span>
                     </div>
                   </template>
-
                 </div>
 
               </div>
 
             </template>
-            <!-- /category.categories -->
+            <!-- /relative categories -->
 
           </div>
           <!-- /details grid -->

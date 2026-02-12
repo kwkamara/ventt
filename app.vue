@@ -5,7 +5,7 @@
   <!-- Toast -->
   <Toast position="top-right" unstyled>
     <template #container="{ message }">
-      <div class="w-full h-full p-3 border-none flex align-items-center gap-2 bg-purple-700 text-white sans-serif border-round-2xl">
+      <div class="w-full h-full p-3 border-none flex align-items-center gap-2 bg-purple-alpha text-white sans-serif border-round-2xl">
         <span class="material-icons-outlined">check_circle</span>
         <span class="capitalize">{{ message.summary }}</span>
       </div>
@@ -16,6 +16,15 @@
 
 
 <script setup lang="js">
+//categories init.
+useState('categories', () => ['men', 'women', 'kids']);
+
+//cart struct.
+useState('cart', () => ({}));
+
+//wishlist struct.
+useState('wishlist', () => ({}));
+
 useState('products', () => [
   //men.
   {
@@ -1983,5 +1992,10 @@ input:not(:placeholder-shown) {
   .lg\:w-36rem {
     width: 36rem !important;
   }
+}
+
+
+.bg-purple-alpha{
+  background-color: rgba(151, 29, 151, 0.8);
 }
 </style>

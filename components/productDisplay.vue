@@ -49,7 +49,6 @@ export default defineComponent({
 
     //load shop UI.
     viewShop() {
-
       //update UI.
       useState('shop').value = {
         category: this.category || "women",
