@@ -36,18 +36,18 @@
           <div class="py-2 flex justify-content-between gap-3 align-items-center text-gray-700 text-xs">
             <!-- min price -->
             <div>
-              <InputText id="min-price-ip" v-model="min_price"
-                         class="py-3 pl-0 border-none border-bottom-1 border-purple-200 bg-white" fluid
-                         type="number" unstyled/>
+              <InputNumber id="min-price-ip" v-model="min_price"
+                           input-class="py-3 pl-0 border-none border-bottom-1 border-purple-200 bg-white"
+                           fluid unstyled/>
               <label for="min-price-ip" class="block pt-1">{{ $t('min_price') }}</label>
             </div>
 
             <!-- max price -->
             <div class="text-right">
-              <InputText id="max-price-ip"
-                         v-model="max_price"
-                         class="py-3 pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right" fluid
-                         type="number" unstyled/>
+              <InputNumber id="max-price-ip"
+                           v-model="max_price"
+                           input-class="py-3 pr-0 border-none border-bottom-1 border-purple-200 bg-white text-right"
+                           fluid unstyled/>
               <label for="max-price-ip" class="block pt-1">{{ $t('max_price') }}</label>
             </div>
           </div>
@@ -58,7 +58,7 @@
 
 
         <!-- categories -->
-        <div class="p-4 mt-3 shadow-1 border-round-xl border-1 border-purple-100 text-xs">
+        <div class="py-4 px-3 mt-3 shadow-1 border-round-xl border-1 border-purple-100 text-xs">
 
           <!-- categories -->
           <div class="grid m-0">
@@ -90,7 +90,7 @@
 
 
           <!-- clear -->
-          <div class="text-right">
+          <div class="pl-2">
             <VButtonCube :text="$t('clear')" fill="1" icon="remove" @click="resetFilter"/>
           </div>
 
@@ -183,11 +183,11 @@ export default defineComponent({
       },
 
       types: {
-        casual       : false,
-        official     : false,
-        hats         : false,
-        shoes        : false,
-        accessories  : false,
+        casual        : false,
+        official      : false,
+        hats          : false,
+        shoes         : false,
+        accessories   : false,
         "new arrivals": false,
       }
 
@@ -203,14 +203,13 @@ export default defineComponent({
 
 
       //price filter.
-      products = products.filter(pd => pd.price > this.min_price) //min price filter
-          .filter(pd => pd.price < this.max_price) //max price filter
+      products = products.filter(pd => (pd.price > this.min_price) && (pd.price < this.max_price));
 
 
       //search filter.
       if (this.search) {
         const locale = this.$i18n.locale;
-        products = products.filter(product => product.name[locale].toLowerCase().includes(this.search.toLowerCase()))
+        products     = products.filter(product => product.name[locale].toLowerCase().includes(this.search.toLowerCase()))
       }
 
 
