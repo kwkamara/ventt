@@ -9,7 +9,7 @@
 
 
   <!-- cart -->
-  <section  v-if="cart" class="grid m-0 py-5 lg:p-7 select-none">
+  <section  v-if="cart" class="grid m-0 py-5 lg:py-7 lg:px-5 select-none">
 
     <!-- cart summary -->
     <div class="col-12 lg:col-7 py-3 px-4">
@@ -186,7 +186,7 @@ export default defineComponent({
   beforeMount(){
     if(!this.cart){
       const localePath = useLocalePath();
-      navigateTo(localePath('/'));
+      navigateTo(localePath('/shop'));
     }
   }
 

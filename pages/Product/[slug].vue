@@ -17,17 +17,17 @@
       <div class="grid m-0">
 
         <!-- image | wishlist -->
-        <div class="col-12 lg:col-9 h-14rem lg:h-18rem p-0 relative overflow-hidden border-round-xl border-1 border-purple-100">
+        <div class="col-12 lg:col-9 h-14rem lg:h-18rem relative overflow-hidden border-round-xl border-1 border-purple-100">
           <!-- image -->
           <img :alt="product.name"
                :src="'/'+product.images[image_ix].url"
-               class="top-0 w-full h-full absolute"/>
+               class="top-0 left-0 w-full h-full absolute"/>
 
           <!-- wishlist -->
           <VButton :fill="wishlist[product.documentId]"
                    class="left-0 ml-3 mt-3"
-                   @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
-                   icon="favorite_border"/>
+                   icon="favorite_border"
+                   @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"/>
         </div>
         <!-- image | wishlist -->
 

@@ -12,7 +12,7 @@
   <section class="grid m-0 md:p-4 lg:pl-7 pb-5 select-none">
 
     <!-- filter section -->
-    <div class="col-12 lg:col-4 pt-3 md:pl-0 lg:pt-2">
+    <div class="col-12 lg:col-4 pt-3 md:pl-0 lg:pt-2 lg:pr-3">
 
       <div class="grid m-0 p-3 shadow-1 border-round-xl border-1 border-purple-100">
 
@@ -60,23 +60,20 @@
         <!-- /reset -->
 
 
-        <Divider/>
+        <div class="col-12">
+          <Divider class="lg:mt-5"/>
+        </div>
 
 
         <!-- categories -->
         <div class="col-12 md:col-8 lg:col-12 pl-0 text-xs">
 
           <!-- categories -->
-          <div class="grid m-0 pb-2">
+          <div class="grid m-0 pb-3">
 
-            <div v-for="(value, category) in categories"
-                 :key="category"
-                 class="col-4">
-              <Checkbox class="m-0"
-                        :id="category + '-ip'"
-                        v-model="categories[category]"
-                        :binary="true"/>
-              <span class="pl-1 capitalize">{{ $t(category) }}</span>
+            <div v-for="(value, category) in categories" :key="category" class="col-4 flex align-items-center gap-2">
+              <Checkbox class="m-0" :id="category + '-ip'" v-model="categories[category]" :binary="true"/>
+              <span class="capitalize">{{ $t(category) }}</span>
             </div>
 
           </div>
@@ -86,19 +83,21 @@
 
 
           <!-- types -->
-          <div class="grid m-0">
-            <div v-for="type in Object.keys(types)" :key="type" class="col-4 pb-5 flex gap-1">
+          <div class="grid m-0 py-3">
+            <div v-for="type in Object.keys(types)" :key="type" class="col-4 pb-5 flex align-items-center gap-1">
               <Checkbox class="m-0" v-model="types[type]" binary/>
               <span class="pl-1 capitalize white-space-nowrap">{{ $t(type) }}</span>
+            </div>
+
+
+            <!-- clear -->
+            <div class="col-12 lg:text-right">
+              <VButtonCube :text="$t('clear')" fill="1" icon="remove" @click="resetFilter"/>
             </div>
           </div>
           <!-- /types -->
 
 
-          <!-- clear -->
-          <div class="pl-2 lg:text-right">
-            <VButtonCube :text="$t('clear')" fill="1" icon="remove" @click="resetFilter"/>
-          </div>
 
         </div>
         <!-- /categories -->

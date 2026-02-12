@@ -322,6 +322,7 @@
             </div>
             <!-- /Key props -->
 
+
             <!-- other props -->
             <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 py-3">
               <!-- rating -->
@@ -347,8 +348,10 @@
 
                 <!-- header -->
                 <div class="py-2 flex justify-content-between align-items-center">
-                  <h2 class="m-0 sans-serif font-light capitalize">{{ sub_category }}</h2>
-                  <VButton icon="edit"/>
+                  <h2 class="m-0 sans-serif font-light capitalize">
+                    {{ Object.keys(item[sub_category]).length }} {{ sub_category }}
+                  </h2>
+                  <VButton icon="edit" :fill="edit_relative" @click="edit_relative = !edit_relative"/>
                 </div>
                 <!-- /header -->
 
@@ -360,9 +363,25 @@
                   </div>
 
                   <template v-for="(value, prop) in sub_item">
-                    <div v-if="value" :class="(prop==='description' ? '' : 'lg:col-6') + ' col-12 pl-0 py-3'">
-                      <div class="text-lg">{{ value }}</div>
-                      <span class="uppercase text-xs">{{ prop }}</span>
+                    <div v-if="value" :class="'col-12 py-3 pl-0 ' + (prop==='description' ? '' : 'lg:col-6') + ' '">
+                      <template v-if="edit_relative">
+                        <Textarea v-if="prop.name === 'description'"
+                                  v-model="sub_item[prop]" class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base"
+                                  :rows="3"
+                                  fluid unstyled/>
+                        <InputText v-else :id="'rel-'+prop"
+                                   v-model="sub_item[prop]"
+                                   :type="['price'].includes(prop) ? 'number' : 'text'"
+                                   class="w-10 pl-0 border-none border-bottom-1 border-gray-300 text-base"
+                                   fluid input-class="py-3 pl-0" unstyled/>
+                        <label class="capitalize block" :for="'rel-' + prop">{{ prop }}</label>
+                      </template>
+
+                      <template v-else>
+                        <div class="text-lg">{{ value }}</div>
+                        <span class="uppercase text-xs">{{ prop }}</span>
+                      </template>
+
                     </div>
                   </template>
                 </div>
@@ -476,9 +495,10 @@ export default defineComponent({
       },
 
       //manage.
-      manage      : null,
-      media       : null,
-      delete_media: {},
+      manage       : null,
+      media        : null,
+      delete_media : {},
+      edit_relative: false,
 
       //menu.
       menu: [
