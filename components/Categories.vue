@@ -6,11 +6,11 @@
     <div class="grid m-0 h-full">
 
       <!-- Category Navigation -->
-      <div class="col-9 lg:col-4 h-full p-0 bg-purple-800 flex align-items-center justify-content-center lg:justify-content-start">
+      <div class="col-9 lg:col-4 h-full p-0 bg-purple-800 flex align-items-center justify-content-between lg:justify-content-start">
         <div v-for="(cat_name, ix) in categories"
              :key="ix"
              :aria-label="`Show ${cat_name} categories`"
-             :class="`w-6rem lg:w-8rem h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
+             :class="`w-full lg:w-8rem px-3 h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
          ( (shop && shop.category === cat_name) || (category === cat_name) ? 'bg-purple-800 text-yellow-800 ' : '' ) +
           (ix === 2 ? 'border-right-1' : null)"
 
