@@ -88,10 +88,10 @@ export default defineComponent({
 
   computed: {
     cart() {
-      return useState('cart').value;
+      return useState('cart').value || [];
     },
     wishlist() {
-      return useState('wishlist').value;
+      return useState('wishlist').value || [];
     },
   },
 
