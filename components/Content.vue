@@ -10,7 +10,7 @@
               :key="cat.name"
               @click="viewCategory(cat)"
               :class="( category_name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
-              ' w-5rem h-4rem border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
+              ' px-3 py-2 border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
         <div class="text-center">
           <span class="material-icons-outlined">{{ cat.icon }}</span>
           <div class="text-xs capitalize">{{ cat.name }}</div>
@@ -272,25 +272,25 @@
           <!-- header -->
           <div v-if="manage !=='items'" class="p-3 lg:pl-4 flex justify-content-between align-items-center bg-gray-50">
 
-            <!-- category icon | name -->
-            <div class="flex align-items-center">
-              <div class="flex align-items-center">
-                <Icon :icon="category.icon" class="text-gray-700"/>
-                <span class="ml-1 uppercase text-gray-700">{{ category.name }} </span>
-              </div>
-
-              <Divider layout="vertical" class="h-2rem"/>
-
+            <!-- active item title -->
+            <div>
               <!-- item name -->
-              <div class="pl-1">
-                <span v-if="item">
+              <div class="text-xl">
+                <span v-if="item" >
                   {{ category.name === 'products' ? item.name['en'] : (item.name || item.id) }}
                 </span>
                 <span v-else>New Item</span>
               </div>
               <!-- item name -->
+
+              <!-- category icon | name -->
+              <div class="flex align-items-center text-xs">
+                <Icon :icon="category.icon" class="text-gray-700 text-sm"/>
+                <span class="ml-1 uppercase text-gray-700">{{ category.name }} </span>
+              </div>
+              <!-- /category icon | name -->
             </div>
-            <!-- /category icon | name -->
+            <!-- /active item title -->
 
 
             <!-- controls -->
@@ -315,7 +315,8 @@
 
 
           <!-- details grid -->
-          <div class="grid m-0 pt-2 pb-2" v-if="manage==='info' && item">
+          <div v-if="manage==='info' && item" class="grid m-0 pt-2 pb-2">
+
 
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])"
@@ -502,6 +503,7 @@ const {formatDecimal} = useFormatDecimal();
 import {FilterMatchMode} from '@primevue/core/api';
 
 export default defineComponent({
+
   name: "Content",
 
   data() {

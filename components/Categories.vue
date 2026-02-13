@@ -234,8 +234,8 @@ export default defineComponent({
       useState('product').value = product;
 
       //navigate.
-      const localePath          = useLocalePath();
-      const locale = this.$i18n.locale;
+      const localePath = useLocalePath();
+      const locale     = this.$i18n.locale;
       navigateTo(localePath('/Product/' + encodeURIComponent(product.name[locale])));
     }
   },
