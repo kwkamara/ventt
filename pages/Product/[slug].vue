@@ -35,7 +35,7 @@
         <!-- thumbnails -->
         <div class="col-12 lg:col-3 lg:pt-0 flex lg:flex-column align-items-center gap-2 lg:gap-3">
           <div class="grid m-0">
-            <div v-for="(image, ix) in product.images" class="col-4 lg:col-12 lg:px-0 lg:pt-0 lg:pb-2">
+            <div v-for="(image, ix) in product.images" :key="ix" class="col-4 lg:col-12 lg:px-0 lg:pt-0 lg:pb-2">
               <img
                   :alt="product.name"
                   :class="'w-full border-round-xl hover:shadow-3 hover:border-2 ' + (image_ix === ix ? 'shadow-3 border-3 border-purple-300' : 'border-1 border-purple-100')"
@@ -72,7 +72,7 @@
           <h2 class="m-0 text-4xl font-light capitalize">{{ product.name[locale] }}</h2>
           <!-- rating -->
           <div class="text-yellow-600 flex align-items-center">
-            <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-2xl">star</span>
+            <span v-for="(rating, ix) in product.rating" :key="ix" class="material-icons-outlined text-2xl">star</span>
           </div>
         </div>
         <!-- /product name | rating -->
@@ -168,29 +168,45 @@
   <!--  reviews -->
   <section v-if="product" class="grid m-0 px-3 lg:px-6 py-5 lg:pb-7 text-sm bg-gray-100 shadow-1">
 
-    <div class="col-12">
-      <h2 class="m-0 font-light text-3xl">{{ $t('reviews') }}</h2>
-    </div>
+    <!-- header -->
+    <div class="col-12 flex justify-content-between">
+      <h2 class="m-0 font-light text-4xl">{{ $t('reviews') }}</h2>
 
-    <div v-for="review in product.reviews" class="col-12 lg:col-6 py-2">
+      <NuxtLink :to="$localePath('/login')">
+        <VButtonCube icon="account_circle"
+                     :text="$t('login_to_review')"/>
+      </NuxtLink>
+    </div>
+    <!-- /header -->
+
+
+    <!-- review col -->
+    <div v-for="(review, ix) in product.reviews" :key="ix" class="col-12 lg:col-6 py-2">
 
       <div class="px-3 py-4 shadow-1 border-round bg-white border-1 border-purple-100">
 
         <div class="flex gap-2 align-items-start">
+
+          <!-- user icon -->
           <VButton icon="person" class="text-gray-700"/>
+
           <div class="pt-1">
+
             <div>{{review.user}}</div>
+
             <div class="pb-3 text-yellow-600 flex align-items-center">
-              <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-xl">star</span>
+              <span v-for="(rating, ix) in product.rating"
+                    :key="ix" class="material-icons-outlined text-xl">star</span>
             </div>
           </div>
+
         </div>
 
         <p class="m-0 pt-3">{{review[locale]}}</p>
-
       </div>
 
     </div>
+    <!-- /review col -->
 
   </section>
   <!--  /reviews -->

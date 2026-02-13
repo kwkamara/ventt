@@ -164,7 +164,7 @@
 
 
         <!-- recent -->
-        <div v-if="!manage && category.data" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
+        <div v-if="!manage && category.data" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white fadein animation-duration-1000">
 
           <!-- header -->
           <div class="px-3 md:px-4 py-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300 bg-gray-50">
@@ -209,7 +209,7 @@
 
 
         <!-- manage -->
-        <div v-if="manage" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white">
+        <div v-if="manage" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white fadein animation-duration-1000">
 
           <!-- search -->
           <template v-if="manage==='items'">
@@ -479,7 +479,6 @@
                          text="update" icon="check_circle" fill="1" @click="updateMedia()"/>
           </div>
           <!-- /footer -->
-
 
         </div>
         <!-- /manage -->
