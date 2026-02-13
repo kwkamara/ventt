@@ -1,68 +1,70 @@
 <template>
 
-  <!-- name | Description -->
-  <div v-for="prop in category.props.filter(p => p.key)" class="px-4 pb-4 text-gray-700">
-
-    <Select v-if="prop.select"
-            :id="prop.name + '-ip'"
-            v-model="item[prop.name]"
-            :optionLabel="prop.label"
-            :options="getCategoryByName(prop.select).data"
-            :placeholder="prop.header || prop.name"
-            input-class="pl-0 bg-white border-none border-bottom-1 border-gray-300" fluid
-            :option-label="prop.rel || 'name'"
-            option-value="id"/>
-
-    <Textarea v-else-if="prop.name ==='description' && category.name === 'products'"
-              :rows="3"
-              v-model="item.description.en"
-              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
-
-    <Textarea v-else-if="prop.name ==='description'"
-              :rows="3"
-              v-model="item.description"
-              class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
-
-    <DatePicker v-else-if="prop.date"
-                :id="prop.name + '-ip'"
-                v-model="item[prop.name]"
-                :aria-label="item[prop.name]"
-                date-format="dd/mm/yy" fluid
-                input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
-
-    <InputText v-else-if="category.name === 'products' && prop.name ==='name'"
-               :id="prop.name + '-ip'"
-               v-model="item.name.en"
-               autocomplete="off"
-               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-300" fluid unstyled/>
-
-    <InputText v-else
-               :id="prop.name + '-ip'"
-               v-model="item[prop.name]"
-               autocomplete="off"
-               class="w-full pl-0 bg-transparent h-3rem border-none border-bottom-1 border-gray-300" fluid unstyled/>
-
-    <label class="mt-1 text-xs uppercase text-gray-500" :for="prop.name + '-ip'">
-      {{ prop.name }}
-    </label>
-  </div>
-  <!-- /name | Description -->
-
-
-  <!-- other props -->
   <div class="grid m-0">
 
-    <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)" class="col-6 px-4 pb-4">
+    <!-- name | Description -->
+    <div v-for="prop in category.props.filter(p => p.key)"
+         :class="'col-12 px-4 pt-4 pb-5 text-gray-700 ' + (prop.name === 'description' ? '': 'lg:col-4')">
+
+      <Select v-if="prop.select"
+              :id="prop.name + '-ip'"
+              v-model="item[prop.name]"
+              :optionLabel="prop.label"
+              :options="getCategoryByName(prop.select).data"
+              :placeholder="prop.header || prop.name"
+              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-300" fluid
+              :option-label="prop.rel || 'name'"
+              option-value="id"/>
+
+      <Textarea v-else-if="prop.name ==='description' && category.name === 'products'"
+                :rows="3"
+                v-model="item.description.en"
+                class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
+
+      <Textarea v-else-if="prop.name ==='description'"
+                :rows="3"
+                v-model="item.description"
+                class="w-full pl-0 bg-white border-none border-bottom-1 border-gray-300" unstyled fluid/>
+
+      <DatePicker v-else-if="prop.date"
+                  :id="prop.name + '-ip'"
+                  v-model="item[prop.name]"
+                  :aria-label="item[prop.name]"
+                  date-format="dd/mm/yy" fluid
+                  input-class="pl-0 h-3rem text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
+
+      <InputText v-else-if="category.name === 'products' && prop.name ==='name'"
+                 :id="prop.name + '-ip'"
+                 v-model="item.name.en"
+                 autocomplete="off"
+                 class="w-full pl-0 h-3rem bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
+
+      <InputText v-else
+                 :id="prop.name + '-ip'"
+                 v-model="item[prop.name]"
+                 autocomplete="off"
+                 class="w-full pl-0 h-3rem bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
+
+      <label class="mt-1 text-xs uppercase text-gray-500" :for="prop.name + '-ip'">
+        {{ prop.name }}
+      </label>
+    </div>
+    <!-- /name | Description -->
+
+
+    <!-- other props -->
+    <div v-for="prop in category.props.filter(p => !p.no_edit && !p.key)"
+         class="col-6 lg:col-4 p-4 pb-5">
 
       <InputNumber v-if="prop.decimal"
                    :id="prop.name + '-ip'"
                    v-model="item[prop.name]"
                    :min-fraction-digits="2"
-                   input-class="w-full pl-0 bg-white text-sm h-3rem border-none border-bottom-1 border-gray-300"
+                   input-class="w-full pl-0 h-3rem bg-white text-sm border-none border-bottom-1 border-gray-300"
                    fluid use-grouping/>
 
       <Select v-else-if="prop.enum"
-              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-400 text-sm"
+              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-400 text-sm capitalize"
               :id="prop.name + '-ip'"
               v-model="item[prop.name]"
               :options="prop.enum"
@@ -74,7 +76,7 @@
                   v-model="item[prop.name]"
                   :aria-label="item[prop.name]"
                   date-format="dd/mm/yy" fluid
-                  input-class="pl-0 pb-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
+                  input-class="pl-0 h-3rem text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
 
       <Select v-else-if="prop.select"
               :id="prop.name + '-ip'"
@@ -82,42 +84,36 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              input-class="pl-0 bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
+              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
               :option-label="prop.rel || 'name'"
               option-value="id"/>
 
-      <InputText v-else-if="prop.number"
-                 type="number"
-                 :id="prop.name + '-ip'"
-                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300" unstyled
-                 v-model="item[prop.name]"
-                 fluid/>
-
       <InputText v-else
                  :id="prop.name + '-ip'"
-                 class="w-full pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300" unstyled
                  v-model="item[prop.name]"
-                 fluid/>
+                 :type="prop.number ? 'number' : 'text'"
+                 class="w-full h-3rem pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300"
+                 fluid unstyled/>
 
-      <label class="mt-1 pb-1 block text-xs capitalize" :for="prop.name + '-ip'">
+
+      <label class="mt-1 pb-1 block text-xs uppercase" :for="prop.name + '-ip'">
         {{ prop.header || prop.name }} {{ prop.suffix }}
       </label>
     </div>
+    <!-- /props -->
+
+
+    <!-- submit -->
+    <div class="col-12 p-4 flex align-items-center justify-content-end">
+      <VButtonCube :text="item.documentId? 'Update' : 'Submit' "
+                   icon="check_circle_outline"
+                   class="w-full"
+                   fill="1"
+                   @click="updateItem()"/>
+    </div>
+    <!-- /submit -->
 
   </div>
-  <!-- /props -->
-
-
-  <!-- submit -->
-  <div class="p-4 flex align-items-center justify-content-end">
-    <VButtonCube :text="item.documentId? 'Update' : 'Submit' "
-                 icon="check_circle_outline"
-                 class="w-full"
-                 fill="1"
-                 @click="updateItem()"/>
-  </div>
-  <!-- /submit -->
-
 </template>
 
 

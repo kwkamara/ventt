@@ -4,7 +4,7 @@
     <!-- menu -->
     <div v-if="is_sidebar"
          @click="useState('item').value=null;"
-         class="w-3 md:w-2 lg:w-1 py-5 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
+         class="w-3 md:w-2 lg:w-1 pt-4 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
 
       <Button v-for="cat in menu.filter(m => !m.parent)"
               :key="cat.name"
@@ -25,7 +25,7 @@
     <div :class="(is_sidebar ? 'w-9 md:w-10 lg:w-11' : 'w-full') + ' grid m-0 px-2 lg:px-5 py-4 select-none'">
 
       <!-- profile | dates -->
-      <div class="col-12 pl-1 pt-0 md:flex justify-content-between align-items-center">
+      <div class="col-12 pl-1 pt-0 pb-3 md:flex justify-content-between align-items-center">
 
         <!-- profile -->
         <div class="flex align-items-center gap-2">
@@ -88,6 +88,15 @@
           <Divider unstyled class="border-top-1 border-purple-900"/>
           <div class="px-3 py-3 lg:px-4 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
             <VButton icon="article" class="border-round-3xl text-white"/>
+
+            <template v-if="category.categories">
+              <VButton v-for="(cat_name, ix) in category.categories"
+                       class="border-round-3xl text-white"
+                       @click="category=getCategoryByName(cat_name)"
+                       :icon="getCategoryByName(cat_name).icon"/>
+            </template>
+
+
             <VButton icon="settings"
                      class="border-round-3xl text-white"
                      @click="manageToggle()"/>
@@ -99,8 +108,10 @@
 
 
         <!-- metrics -->
-        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
-          <template v-for="(metric, ix) in category.metrics">
+        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
+
+          <template v-for="(metric, ix) in category.metrics" :key="ix">
+
             <div class="w-full">
               <div class="flex gap-1 align-items-center">
                 <Icon :icon="metric.icon" class="text-6xl"/>
@@ -109,14 +120,15 @@
               <div class="text-xs capitalize">{{ metric.name }}</div>
             </div>
 
-            <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
+            <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
           </template>
+
         </div>
         <!-- /metrics -->
 
 
         <!-- status -->
-        <div class="px-3 py-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
+        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
           <template v-for="(status, ix) in category.status">
             <div class="w-full">
               <div class="flex gap-1 align-items-center">
@@ -126,7 +138,7 @@
               <div class="text-xs capitalize">{{ status.name }}</div>
             </div>
 
-            <Divider v-if="ix!==2" layout="vertical" unstyled class="h-2rem border-left-1 border-gray-300"/>
+            <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
           </template>
         </div>
         <!-- /status -->
@@ -258,23 +270,27 @@
 
 
           <!-- header -->
-          <div v-if="manage !=='items'" class="p-3 lg:px-4 flex justify-content-between align-items-center bg-gray-50">
+          <div v-if="manage !=='items'" class="p-3 lg:pl-4 flex justify-content-between align-items-center bg-gray-50">
 
             <!-- category icon | name -->
             <div class="flex align-items-center">
-              <Icon :icon="category.icon" class="text-gray-700"/>
-              <span class="ml-1 uppercase text-gray-700">{{ category.name }} </span>
+              <div class="flex align-items-center">
+                <Icon :icon="category.icon" class="text-gray-700"/>
+                <span class="ml-1 uppercase text-gray-700">{{ category.name }} </span>
+              </div>
+
+              <Divider layout="vertical" class="h-2rem"/>
+
+              <!-- item name -->
+              <div class="pl-1">
+                <span v-if="item">
+                  {{ category.name === 'products' ? item.name['en'] : (item.name || item.id) }}
+                </span>
+                <span v-else>New Item</span>
+              </div>
+              <!-- item name -->
             </div>
             <!-- /category icon | name -->
-
-            <!-- item name -->
-            <div>
-              <template v-if="item">
-                {{ category.name === 'products' ? item.name['en'] : item.name }}
-              </template>
-              <template v-else>New Item</template>
-            </div>
-            <!-- item name -->
 
 
             <!-- controls -->
@@ -299,10 +315,11 @@
 
 
           <!-- details grid -->
-          <div class="grid m-0 px-3 pb-2" v-if="manage==='info' && item">
+          <div class="grid m-0 pt-2 pb-2" v-if="manage==='info' && item">
 
             <!-- Key props -->
-            <div v-for="prop in category.props.filter(p => p.key && item[p.name])" :class="(prop.name === 'description' ? '' : 'lg:col-6 ') + 'col-12 py-3'">
+            <div v-for="prop in category.props.filter(p => p.key && item[p.name])"
+                 :class="(prop.name === 'description' ? '' : 'lg:col-4 ') + 'col-12 p-4'">
 
               <div>
                 <template v-if="prop.date">
@@ -324,7 +341,7 @@
 
 
             <!-- other props -->
-            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 py-3">
+            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 p-4">
               <!-- rating -->
               <div v-if="prop.name === 'rating'" class="flex align-items-center">
                 <span v-for="rate in Number(item.rating)" class="material-icons text-xl text-yellow-600">star</span>
@@ -344,31 +361,38 @@
             <!-- relative categories -->
             <template v-if="category.categories">
 
-              <div class="col-12 pt-3 border-top-1 border-gray-300" v-for="sub_category in category.categories">
+              <div class="col-12 bg-gray-100 px-3 border-top-1 border-gray-300" v-for="sub_category in category.categories">
 
                 <!-- header -->
-                <div class="py-2 flex justify-content-between align-items-center">
+                <div class="pl-1 pr-2 flex justify-content-between align-items-center">
+                  <!-- relative category title -->
                   <h2 class="m-0 sans-serif font-light capitalize">
                     {{ Object.keys(item[sub_category]).length }} {{ sub_category }}
                   </h2>
-                  <VButton icon="edit" :fill="edit_relative" @click="edit_relative = !edit_relative"/>
+
+                  <!-- edit relative category -->
+                  <div class="pt-2">
+                    <VButton :fill="edit_relative"
+                             :icon="edit_relative ? 'check' : 'edit'"
+                             @click="edit_relative ? notify('updated'): null; edit_relative = !edit_relative"/>
+                  </div>
                 </div>
                 <!-- /header -->
 
 
                 <div v-for="(sub_item, key) in item[sub_category]" class="grid m-0 py-2 text-sm">
-
-                  <div class="col-12 pl-0">
+                  <div class="col-12">
                     <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
                   </div>
 
                   <template v-for="(value, prop) in sub_item">
-                    <div v-if="value" :class="'col-12 py-3 pl-0 ' + (prop==='description' ? '' : 'lg:col-6') + ' '">
+                    <div v-if="value" :class="'col-12 px-2 py-3 ' + (prop==='description' ? '' : 'lg:col-4') + ' '">
+
+                      <!-- edit sub-item -->
                       <template v-if="edit_relative">
                         <Textarea v-if="prop.name === 'description'"
-                                  v-model="sub_item[prop]" class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base"
-                                  :rows="3"
-                                  fluid unstyled/>
+                                  v-model="sub_item[prop]" :rows="3"
+                                  class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base" fluid unstyled/>
                         <InputText v-else :id="'rel-'+prop"
                                    v-model="sub_item[prop]"
                                    :type="['price'].includes(prop) ? 'number' : 'text'"
@@ -377,11 +401,11 @@
                         <label class="capitalize block" :for="'rel-' + prop">{{ prop }}</label>
                       </template>
 
+                      <!-- sub-item info -->
                       <template v-else>
-                        <div class="text-lg">{{ value }}</div>
+                        <div class="text-lg">{{ prop === 'price' ? formatDecimal(value) : value }}</div>
                         <span class="uppercase text-xs">{{ prop }}</span>
                       </template>
-
                     </div>
                   </template>
                 </div>
@@ -396,15 +420,8 @@
 
 
           <!-- edit -->
-          <div v-if="manage==='edit'" class="pt-3">
-            <!-- form -->
-            <ItemForm :item="item || {}"
-                      @update="pushItem($event)"
-                      :categories="menu"
-                      :category="category"/>
-            <!-- /form -->
-          </div>
-          <!-- /edit -->
+          <ItemForm v-if="manage==='edit'" :categories="menu" :category="category"
+                    :item="item || {}" @update="pushItem($event)"/>
 
 
           <!-- media -->
@@ -418,7 +435,7 @@
                             choose-label="select file"
                             class="bg-purple-700 border-none" mode="basic"/>
               </div>
-              <VButtonCube :disabled="!media" text="upload" icon="check" class="border-round-3xl"/>
+              <VButtonCube :disabled="!media" :text="'upload ' + manage" icon="check" class="border-round-3xl"/>
             </div>
             <!-- /upload -->
 
@@ -445,7 +462,7 @@
 
 
           <!-- footer -->
-          <div v-if="item && item.documentId" class="p-3 pb-4 md:px-4 flex justify-content-between gap-3 align-items-center bg-gray-50">
+          <div v-if="item && item.documentId" class="p-3 md:px-4 flex justify-content-end gap-3 align-items-center bg-gray-50">
 
             <div class="flex justify-content-start align-items-center gap-3">
               <!-- gallery -->
@@ -1217,6 +1234,17 @@ export default defineComponent({
   },
 
   methods: {
+    //notifications.
+    notify(info) {
+      //show popup.
+      this.$toast.add({
+        severity: "info",
+        summary : info,
+        life    : 1500
+      });
+    },
+
+
     //UI.
     manageToggle() {
       if (this.manage) {
@@ -1283,7 +1311,7 @@ export default defineComponent({
 
     editItem(item) {
       this.item   = item;
-      this.manage = null;
+      this.manage = "edit";
     },
 
     pushItem(item) {
