@@ -1,10 +1,12 @@
 <template>
+
+  <!-- content col -->
   <div class="col-12 p-0 flex text-gray-700">
 
     <!-- menu -->
     <div v-if="is_sidebar"
-         @click="useState('item').value=null;"
-         class="w-3 md:w-2 lg:w-1 pt-4 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
+         class="w-3 md:w-2 lg:w-1 pt-4 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5"
+         @click="useState('item').value=null;">
 
       <template v-if="category">
         <Button v-for="cat in menu.filter(m => !m.parent)"
@@ -322,151 +324,14 @@
           <Divider v-if="manage!=='items'" unstyled class="border-top-1 border-gray-300"/>
 
 
-          <!-- details grid -->
-          <div v-if="manage==='info' && item" class="grid m-0 pt-2">
-
-            <!-- Key props -->
-            <div v-for="prop in category.props.filter(p => p.key && item[p.name])"
-                 :class="(prop.name === 'description' ? 'col-12 ' : 'col-6 md:col-4 ') + ' p-3 md:p-4'">
-
-              <div>
-                <template v-if="prop.date">
-                  {{ new Date(item[prop.name]).toLocaleDateString('en-GB') }}
-                </template>
-                <template v-else-if="['name', 'description'].includes(prop.name)">
-                  {{ item[prop.name]['en'] }}
-                </template>
-                <template v-else>
-                  {{ prop.prefix }} {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
-                </template>
-              </div>
-
-              <span class="mt-1 text-xs uppercase text-gray-500">
-                {{ prop.header || prop.name }} {{ prop.suffix }}
-              </span>
-            </div>
-            <!-- /Key props -->
-
-
-            <!-- other props -->
-            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 p-3 md:p-4">
-              <!-- rating -->
-              <div v-if="prop.name === 'rating'" class="flex align-items-center">
-                <span v-for="rate in Number(item.rating)" class="material-icons text-xl text-yellow-600">star</span>
-              </div>
-
-              <div v-else>
-                {{ prop.prefix }}
-                {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
-              </div>
-              <span class="mt-1 text-xs uppercase">
-                {{ prop.name }} {{ prop.suffix }}
-              </span>
-            </div>
-            <!-- /other props -->
-
-
-            <!-- relative categories -->
-            <template v-if="category.categories">
-
-              <div v-for="(sub_category, ix) in category.categories" :key="ix"
-                   class="col-12 bg-gray-50 pl-3 pr-4 md:px-4 border-top-1 border-bottom-1 border-gray-300">
-
-                <!-- header -->
-                <div class="pb-4 flex justify-content-between align-items-center">
-                  <!-- relative category title -->
-                  <h2 class="m-0 sans-serif font-light capitalize">
-                    {{ Object.keys(item[sub_category]).length }} {{ sub_category }}
-                  </h2>
-
-                  <!-- edit relative category -->
-                  <div class="pt-2 flex gap-1 align-items-center">
-                    <VButton fill="1"
-                             icon="add"
-                             @click=""/>
-                    <template v-if="Object.keys(item[sub_category]).length">
-                      <Divider layout="vertical" class="h-2rem"/>
-                      <VButton :fill="edit_relative"
-                               :icon="edit_relative ? 'check' : 'edit'"
-                               @click="edit_relative ? updateItem() : edit_relative=true"/>
-                    </template>
-                  </div>
-                </div>
-                <!-- /header -->
-
-
-                <div v-for="(sub_item, key) in item[sub_category]" :key="key" class="grid m-0 text-sm hover:text-yellow-800">
-
-                  <!-- rel item ID -->
-                  <div :class="'col-12 pl-0 pr-0 flex justify-content-between md:justify-content-start ' + (edit_relative ? 'md:col-4' : 'md:col-2')">
-                    <div>
-                      <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
-                      <label class="uppercase text-xs text-gray-500">item id</label>
-                    </div>
-
-                    <!-- close -->
-                    <div class="md:hidden text-right">
-                      <VButton icon="close" @click="delete(item[sub_category][key])"/>
-                    </div>
-                    <!-- /close -->
-                  </div>
-                  <!-- /rel item ID -->
-
-
-                  <!-- rel item props -->
-                  <template v-for="(value, prop) in sub_item" :key="prop">
-                    <template v-if="prop!=='description'">
-
-                      <!-- edit sub-item mode -->
-                      <div v-if="edit_relative && prop!=='total'" class="col-4 lg:col-4 pt-0 pb-3">
-                        <Textarea v-if="prop.name === 'description'"
-                                  v-model="sub_item[prop]" :rows="3"
-                                  class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base" fluid unstyled/>
-
-                        <InputText v-else :id="'rel-' + prop"
-                                   v-model="sub_item[prop]"
-                                   :type="['price'].includes(prop) ? 'number' : 'text'"
-                                   class="h-3rem w-10 pl-0 pb-0 border-none border-bottom-1 border-gray-300 text-base"
-                                   fluid unstyled/>
-                        <label class="mt-2 uppercase text-xs block text-gray-500" :for="'rel-' + prop">{{ prop }}</label>
-                      </div>
-                      <!-- /edit sub-item mode -->
-
-
-                      <!-- sub-item info -->
-                      <div v-else-if="!edit_relative" class="col-4 md:col-3 pl-0 pb-3 lg:px-4 lg:text-right">
-                        <div class="text-lg">
-                          {{ ['price', 'total'].includes(prop) ? formatDecimal(value) : value }}
-                        </div>
-                        <span class="uppercase text-xs text-gray-500">{{ prop }}</span>
-                        <Divider/>
-                      </div>
-                      <!-- /sub-item info -->
-
-                    </template>
-                  </template>
-                  <!-- rel item props -->
-
-
-                  <!-- md:close -->
-                  <div v-if="!edit_relative" class="hidden md:block col-12 md:col-1 text-right">
-                    <VButton icon="close" @click="delete(item[sub_category][key])"/>
-                  </div>
-                  <!-- /md:close -->
-
-                </div>
-
-              </div>
-
-            </template>
-            <!-- /relative categories -->
-
-          </div>
-          <!-- /details grid -->
-
+          <!-- details -->
+          <DetailsGrid v-if="manage==='info' && item"
+                       :categories="category.linked_categories"
+                       :props="category.props"
+                       :item="item || {}"/>
 
           <!-- edit -->
-          <ItemForm v-if="manage==='edit'" :categories="menu" :category="category"
+          <ItemForm v-if="manage === 'edit'" :categories="menu" :category="category"
                     :item="item || {}" @update="pushItem($event)"/>
 
 
@@ -535,6 +400,8 @@
     <!-- /content -->
 
   </div>
+  <!-- /content col -->
+
 
   <!-- product searchPopover -->
   <Popover ref="searchPopover">
@@ -553,7 +420,7 @@
       <div v-for="product in getCategoryByName(category.categories[0]).data.filter(p => p.name.en.toLowerCase().includes(search))"
            :key="product.documentId"
            class="col-12 p-3"
-           @click="item[rel_cat_name][product.id] = {documentId: product.documentId, id: product.id, price: product.price, quantity: 0, total: 0}">
+           @click="addRelativeItem(category.categories[0], product)">
         <div class="font-bold"> {{ product.name.en }}</div>
         <div class="uppercase text-xs"> {{ product.sku }}</div>
       </div>
@@ -566,6 +433,8 @@
 
 
 <script setup lang="js">
+import DetailsGrid from "~/components/backend/detailsGrid.vue";
+
 const {formatDecimal} = useFormatDecimal();
 </script>
 
@@ -604,6 +473,27 @@ export default defineComponent({
           annual     : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
           categories: ['products'],
+
+          linked_categories: {
+            "products": [
+              {
+                name   : "price",
+                decimal: 1
+              },
+              {
+                name  : "quantity",
+                number: 1
+              },
+              {
+                name   : "total",
+                decimal: 1
+              },
+              {
+                name: "description",
+                text: 1
+              },
+            ]
+          },
 
           //struct.
           props: [
@@ -1328,6 +1218,12 @@ export default defineComponent({
   },
 
   methods: {
+
+    //addRelativeItem.
+    addRelativeItem(cat_name, subItem) {
+      this.item[cat_name][product.documentId] = {price: product.price, quantity: 0, total: 0}
+    },
+
     //notifications.
     notify(info) {
       //show popup.
