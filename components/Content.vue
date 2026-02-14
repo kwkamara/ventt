@@ -383,7 +383,7 @@
                   <div class="pt-2 flex gap-1 align-items-center">
                     <VButton fill="1"
                              icon="add"
-                             @click="$refs.searchPopover.toggle($event)"/>
+                             @click=""/>
                     <template v-if="Object.keys(item[sub_category]).length">
                       <Divider layout="vertical" class="h-2rem"/>
                       <VButton :fill="edit_relative"
