@@ -213,14 +213,16 @@
 
           <!-- search -->
           <template v-if="manage==='items'">
+
             <div class="p-3 md:px-4 flex justify-content-between align-items-center gap-2 bg-gray-50">
               <InputText v-model="filters['global'].value"
+                         id="search-ip"
                          :placeholder="'Search ' + category.name"
                          class="w-10rem px-3 text-sm border-gray-300 border-1 border-gray-300 border-round-3xl"/>
 
               <VButtonCube text="new" icon="add" fill="1" @click="newItemInit"/>
-
             </div>
+
             <Divider unstyled class="border-bottom-1 border-gray-300"/>
           </template>
           <!-- /search -->
@@ -276,7 +278,7 @@
             <div>
               <!-- item name -->
               <div class="text-xl">
-                <span v-if="item" >
+                <span v-if="item">
                   {{ category.name === 'products' ? item.name['en'] : (item.name || item.id) }}
                 </span>
                 <span v-else>New Item</span>
@@ -320,7 +322,7 @@
 
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])"
-                 :class="(prop.name === 'description' ? '' : 'lg:col-4 ') + 'col-12 p-4'">
+                 :class="(prop.name === 'description' ? '' : 'lg:col-4 ') + 'col-6 md:col-4 p-4'">
 
               <div>
                 <template v-if="prop.date">
@@ -334,7 +336,7 @@
                 </template>
               </div>
 
-              <span class="mt-1 text-xs capitalize text-gray-500">
+              <span class="mt-1 text-xs uppercase text-gray-500">
                 {{ prop.header || prop.name }} {{ prop.suffix }}
               </span>
             </div>
@@ -352,7 +354,7 @@
                 {{ prop.prefix }}
                 {{ prop.decimal ? formatDecimal(item[prop.name]) : item[prop.name] }}
               </div>
-              <span class="mt-1 text-xs capitalize">
+              <span class="mt-1 text-xs uppercase">
                 {{ prop.name }} {{ prop.suffix }}
               </span>
             </div>
@@ -362,43 +364,52 @@
             <!-- relative categories -->
             <template v-if="category.categories">
 
-              <div class="col-12 bg-gray-100 px-3 border-top-1 border-gray-300" v-for="sub_category in category.categories">
+              <div v-for="(sub_category, ix) in category.categories" :key="ix" class="col-12 bg-gray-50 px-3 border-top-1 border-gray-300">
 
                 <!-- header -->
-                <div class="pl-1 pr-2 flex justify-content-between align-items-center">
+                <div class="pl-1 pr-2 pb-2 flex justify-content-between align-items-center">
                   <!-- relative category title -->
                   <h2 class="m-0 sans-serif font-light capitalize">
                     {{ Object.keys(item[sub_category]).length }} {{ sub_category }}
                   </h2>
 
                   <!-- edit relative category -->
-                  <div class="pt-2">
-                    <VButton :fill="edit_relative"
-                             :icon="edit_relative ? 'check' : 'edit'"
-                             @click="edit_relative ? notify('updated'): null; edit_relative = !edit_relative"/>
+                  <div class="pt-2 flex gap-1 align-items-center">
+                    <VButton fill="1"
+                             icon="add"
+                             @click=""/>
+                    <template v-if="Object.keys(item[sub_category]).length">
+                      <Divider layout="vertical" class="h-2rem"/>
+                      <VButton :fill="edit_relative"
+                               :icon="edit_relative ? 'check' : 'edit'"
+                               @click="edit_relative ? notify('updated'): null; edit_relative = !edit_relative"/>
+                    </template>
+
                   </div>
                 </div>
                 <!-- /header -->
 
 
-                <div v-for="(sub_item, key) in item[sub_category]" class="grid m-0 py-2 text-sm">
-                  <div class="col-12">
+                <div v-for="(sub_item, key) in item[sub_category]" :key="key" class="grid m-0 pt-2 text-sm border-bottom-1 border-gray-300 hover:text-yellow-600">
+                  <div class="col-4 lg:col-3">
                     <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
                   </div>
 
-                  <template v-for="(value, prop) in sub_item">
-                    <div v-if="value" :class="'col-12 px-2 py-3 ' + (prop==='description' ? '' : 'lg:col-4') + ' '">
+                  <template v-for="(value, prop) in sub_item" :key="prop">
+                    <div v-if="value && prop !=='description'" class="col-4 lg:col-3 px-2 pb-3">
 
                       <!-- edit sub-item -->
                       <template v-if="edit_relative">
+
                         <Textarea v-if="prop.name === 'description'"
                                   v-model="sub_item[prop]" :rows="3"
                                   class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base" fluid unstyled/>
+
                         <InputText v-else :id="'rel-'+prop"
                                    v-model="sub_item[prop]"
                                    :type="['price'].includes(prop) ? 'number' : 'text'"
-                                   class="w-10 pl-0 border-none border-bottom-1 border-gray-300 text-base"
-                                   fluid input-class="py-3 pl-0" unstyled/>
+                                   class="h-3rem w-10 pl-0 pb-0 border-none border-bottom-1 border-gray-300 text-base"
+                                   fluid  unstyled/>
                         <label class="capitalize block" :for="'rel-' + prop">{{ prop }}</label>
                       </template>
 
@@ -407,8 +418,13 @@
                         <div class="text-lg">{{ prop === 'price' ? formatDecimal(value) : value }}</div>
                         <span class="uppercase text-xs">{{ prop }}</span>
                       </template>
+
                     </div>
                   </template>
+
+                  <div class="col-12 lg:col-3 text-right">
+                    <VButton icon="close" @click="delete(item[sub_category][key])"/>
+                  </div>
                 </div>
 
               </div>
@@ -646,10 +662,16 @@ export default defineComponent({
               products  : {
                 "p-001": {
                   quantity   : 20,
-                  price      : 600,
+                  price      : 200,
                   description: "To be delivered to abc street.",
                   total      : 0
-                }
+                },
+                "p-002": {
+                  quantity   : 20,
+                  price      : 800,
+                  description: "To be delivered to xyz street.",
+                  total      : 0
+                },
               },
               status    : "approved",
               state     : "delivered",
