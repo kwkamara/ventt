@@ -33,7 +33,7 @@
     </div>
 
 
-    <!-- searchPopover -->
+    <!-- product searchPopover -->
     <Popover ref="searchPopover">
       <div class="grid m-0 w-20rem lg:w-26rem select-none overflow-hidden">
 
@@ -83,7 +83,7 @@
 
       </div>
     </Popover>
-    <!-- /searchPopover -->
+    <!-- /product searchPopover -->
 
 
     <!-- Categories Popover -->

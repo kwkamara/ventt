@@ -10,7 +10,7 @@
 
 
     <!-- right menu -->
-    <div :class="(sidebar ? 'w-9 lg:w-11' : 'w-full') + ' px-3 md:px-5 flex justify-content-between align-items-center'">
+    <div :class="(sidebar ? 'w-9 md:w-10 lg:w-11' : 'w-full') + ' px-3 lg:px-5 flex justify-content-between align-items-center'">
 
       <!-- toggle | profile -->
       <div class="flex align-items-center gap-5">
@@ -20,7 +20,6 @@
         menu
       </span>
 
-<!--        <Icon icon="person"/>-->
       </div>
       <!-- /toggle | profile -->
 

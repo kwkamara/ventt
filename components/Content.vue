@@ -9,8 +9,8 @@
       <Button v-for="cat in menu.filter(m => !m.parent)"
               :key="cat.name"
               @click="viewCategory(cat)"
-              :class="( category_name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
-              ' px-3 py-2 border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
+              :class="( this.category.name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
+              ' w-10 py-3 border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
         <div class="text-center">
           <span class="material-icons-outlined">{{ cat.icon }}</span>
           <div class="text-xs capitalize">{{ cat.name }}</div>
@@ -62,86 +62,93 @@
       <!-- left col -->
       <div v-if="category" class="col-12 lg:col-5 md:pl-0 flex flex-column gap-3">
 
-        <!-- summary panel -->
-        <div class="pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-purple-500 text-white">
+        <div class="grid m-0">
 
-          <!-- category name | category total | dates -->
-          <div class="pb-4 md:flex justify-content-between align-items-start">
+          <!-- summary panel -->
+          <div class="col-12 md:col-6 lg:col-12 p-0 md:pl-2 md:pb-0">
+            <div class="h-full pt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-purple-500 text-white">
 
-            <!-- category name | category total -->
-            <div class="lg:w-8 px-3 lg:pl-4 md:pt-2  text-2xl capitalize">
-              <div class="flex gap-3 align-items-center">
-                <VButtonCube :icon="category.icon" fill="1" class="h-4rem w-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
-                <div>
-                  <div>{{ category.name }}</div>
-                  <span>{{ category.data.length }}</span>
+              <!-- category name | category total | dates -->
+              <div class="pb-4 md:flex justify-content-between align-items-start">
+
+                <!-- category name | category total -->
+                <div class="lg:w-8 px-3 lg:pl-4 md:pt-2  text-2xl capitalize">
+                  <div class="flex gap-3 align-items-center">
+                    <VButtonCube :icon="category.icon" fill="1" class="h-4rem w-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
+                    <div>
+                      <div>{{ category.name }}</div>
+                      <span>{{ category.data.length }}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <!-- category name | category total -->
+                <!-- category name | category total -->
 
+              </div>
+              <!-- /category name | category total | dates -->
+
+
+              <!-- report | manage -->
+              <Divider unstyled class="border-top-1 border-purple-900"/>
+              <div class="px-3 py-3 lg:px-4 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
+                <VButton icon="article" class="border-round-3xl text-white"/>
+
+                <template v-if="category.categories">
+                  <VButton v-for="(cat_name, ix) in category.categories"
+                           class="border-round-3xl text-white"
+                           @click="category=getCategoryByName(cat_name)"
+                           :icon="getCategoryByName(cat_name).icon"/>
+                </template>
+
+
+                <VButton icon="settings"
+                         class="border-round-3xl text-white"
+                         @click="manageToggle()"/>
+              </div>
+              <!-- /report | manage -->
+
+            </div>
           </div>
-          <!-- /category name | category total | dates -->
+          <!-- /summary panel -->
 
 
-          <!-- report | manage -->
-          <Divider unstyled class="border-top-1 border-purple-900"/>
-          <div class="px-3 py-3 lg:px-4 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
-            <VButton icon="article" class="border-round-3xl text-white"/>
+          <div class="col-12 md:col-6 lg:col-12 px-0 pt-3 md:py-0 md:pl-3 lg:pt-3 lg:pl-2">
+            <!-- metrics -->
+            <div class="p-3 md:p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
 
-            <template v-if="category.categories">
-              <VButton v-for="(cat_name, ix) in category.categories"
-                       class="border-round-3xl text-white"
-                       @click="category=getCategoryByName(cat_name)"
-                       :icon="getCategoryByName(cat_name).icon"/>
-            </template>
+              <template v-for="(metric, ix) in category.metrics" :key="ix">
+
+                <div class="w-full">
+                  <div class="flex gap-1 align-items-center">
+                    <Icon :icon="metric.icon" class="text-2xl md:text-3xl lg:text-6xl"/>
+                    <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
+                  </div>
+                  <div class="text-xs capitalize">{{ metric.name }}</div>
+                </div>
+
+                <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
+              </template>
+
+            </div>
+            <!-- /metrics -->
 
 
-            <VButton icon="settings"
-                     class="border-round-3xl text-white"
-                     @click="manageToggle()"/>
+            <!-- status -->
+            <div class="mt-3 p-3 md:p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
+              <template v-for="(status, ix) in category.status">
+                <div class="w-full">
+                  <div class="flex gap-1 align-items-center">
+                    <Icon :icon="status.icon" class="text-2xl md:text-3xl lg:text-6xl"/>
+                    <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
+                  </div>
+                  <div class="text-xs capitalize">{{ status.name }}</div>
+                </div>
+
+                <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
+              </template>
+            </div>
+            <!-- /status -->
           </div>
-          <!-- /report | manage -->
-
         </div>
-        <!-- /summary panel -->
-
-
-        <!-- metrics -->
-        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
-
-          <template v-for="(metric, ix) in category.metrics" :key="ix">
-
-            <div class="w-full">
-              <div class="flex gap-1 align-items-center">
-                <Icon :icon="metric.icon" class="text-6xl"/>
-                <h2 class="m-0 font-light sans-serif">{{ metric.value }}</h2>
-              </div>
-              <div class="text-xs capitalize">{{ metric.name }}</div>
-            </div>
-
-            <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
-          </template>
-
-        </div>
-        <!-- /metrics -->
-
-
-        <!-- status -->
-        <div class="p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
-          <template v-for="(status, ix) in category.status">
-            <div class="w-full">
-              <div class="flex gap-1 align-items-center">
-                <Icon :icon="status.icon" class="text-6xl"/>
-                <h2 class="m-0 font-light sans-serif">{{ status.value }}</h2>
-              </div>
-              <div class="text-xs capitalize">{{ status.name }}</div>
-            </div>
-
-            <Divider v-if="ix!==2" layout="vertical" class="h-2rem"/>
-          </template>
-        </div>
-        <!-- /status -->
 
       </div>
       <!-- /left col -->
@@ -272,8 +279,7 @@
 
 
           <!-- header -->
-          <div v-if="manage !=='items'" class="p-3 lg:pl-4 flex justify-content-between align-items-center bg-gray-50">
-
+          <div v-if="manage !=='items'" class="p-3 md:pl-4 flex justify-content-between align-items-center bg-gray-50">
             <!-- active item title -->
             <div>
               <!-- item name -->
@@ -294,7 +300,6 @@
             </div>
             <!-- /active item title -->
 
-
             <!-- controls -->
             <div class="md:pr-2 flex align-items-center justify-items-end gap-3">
 
@@ -308,7 +313,6 @@
               <VButton icon="close" @click="manage='items'; item=null"/>
             </div>
             <!-- /controls -->
-
           </div>
           <!-- header -->
 
@@ -317,12 +321,11 @@
 
 
           <!-- details grid -->
-          <div v-if="manage==='info' && item" class="grid m-0 pt-2 pb-2">
-
+          <div v-if="manage==='info' && item" class="grid m-0 pt-2">
 
             <!-- Key props -->
             <div v-for="prop in category.props.filter(p => p.key && item[p.name])"
-                 :class="(prop.name === 'description' ? '' : 'lg:col-4 ') + 'col-6 md:col-4 p-4'">
+                 :class="(prop.name === 'description' ? 'col-12 ' : 'col-6 md:col-4 ') + ' p-3 md:p-4'">
 
               <div>
                 <template v-if="prop.date">
@@ -344,7 +347,7 @@
 
 
             <!-- other props -->
-            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 p-4">
+            <div v-for="prop in category.props.filter(p => !p.no_info && !p.key && item[p.name])" class="col-6 p-3 md:p-4">
               <!-- rating -->
               <div v-if="prop.name === 'rating'" class="flex align-items-center">
                 <span v-for="rate in Number(item.rating)" class="material-icons text-xl text-yellow-600">star</span>
@@ -364,10 +367,11 @@
             <!-- relative categories -->
             <template v-if="category.categories">
 
-              <div v-for="(sub_category, ix) in category.categories" :key="ix" class="col-12 bg-gray-50 px-3 border-top-1 border-gray-300">
+              <div v-for="(sub_category, ix) in category.categories" :key="ix"
+                   class="col-12 bg-gray-50 pl-3 pr-4 md:px-4 border-top-1 border-bottom-1 border-gray-300">
 
                 <!-- header -->
-                <div class="pl-1 pr-2 pb-2 flex justify-content-between align-items-center">
+                <div class="pb-4 flex justify-content-between align-items-center">
                   <!-- relative category title -->
                   <h2 class="m-0 sans-serif font-light capitalize">
                     {{ Object.keys(item[sub_category]).length }} {{ sub_category }}
@@ -382,49 +386,72 @@
                       <Divider layout="vertical" class="h-2rem"/>
                       <VButton :fill="edit_relative"
                                :icon="edit_relative ? 'check' : 'edit'"
-                               @click="edit_relative ? notify('updated'): null; edit_relative = !edit_relative"/>
+                               @click="edit_relative ? updateItem() : edit_relative=true"/>
                     </template>
-
                   </div>
                 </div>
                 <!-- /header -->
 
 
-                <div v-for="(sub_item, key) in item[sub_category]" :key="key" class="grid m-0 pt-2 text-sm border-bottom-1 border-gray-300 hover:text-yellow-600">
-                  <div class="col-4 lg:col-3">
-                    <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
+                <div v-for="(sub_item, key) in item[sub_category]" :key="key" class="grid m-0 text-sm hover:text-yellow-800">
+
+                  <!-- rel item ID -->
+                  <div :class="'col-12 pl-0 pr-0 flex justify-content-between md:justify-content-start ' + (edit_relative ? 'md:col-4' : 'md:col-2')">
+                    <div>
+                      <h3 class="m-0 sans-serif uppercase">{{ key }}</h3>
+                      <label class="uppercase text-xs text-gray-500">item id</label>
+                    </div>
+
+                    <!-- close -->
+                    <div class="md:hidden text-right">
+                      <VButton icon="close" @click="delete(item[sub_category][key])"/>
+                    </div>
+                    <!-- /close -->
                   </div>
+                  <!-- /rel item ID -->
 
+
+                  <!-- rel item props -->
                   <template v-for="(value, prop) in sub_item" :key="prop">
-                    <div v-if="value && prop !=='description'" class="col-4 lg:col-3 px-2 pb-3">
+                    <template v-if="prop!=='description'">
 
-                      <!-- edit sub-item -->
-                      <template v-if="edit_relative">
-
+                      <!-- edit sub-item mode -->
+                      <div v-if="edit_relative && prop!=='total'" class="col-4 lg:col-4 pt-0 pb-3">
                         <Textarea v-if="prop.name === 'description'"
                                   v-model="sub_item[prop]" :rows="3"
                                   class="w-full bg-white border-none border-bottom-1 border-gray-300 text-base" fluid unstyled/>
 
-                        <InputText v-else :id="'rel-'+prop"
+                        <InputText v-else :id="'rel-' + prop"
                                    v-model="sub_item[prop]"
                                    :type="['price'].includes(prop) ? 'number' : 'text'"
                                    class="h-3rem w-10 pl-0 pb-0 border-none border-bottom-1 border-gray-300 text-base"
-                                   fluid  unstyled/>
-                        <label class="capitalize block" :for="'rel-' + prop">{{ prop }}</label>
-                      </template>
+                                   fluid unstyled/>
+                        <label class="mt-2 uppercase text-xs block text-gray-500" :for="'rel-' + prop">{{ prop }}</label>
+                      </div>
+                      <!-- /edit sub-item mode -->
+
 
                       <!-- sub-item info -->
-                      <template v-else>
-                        <div class="text-lg">{{ prop === 'price' ? formatDecimal(value) : value }}</div>
-                        <span class="uppercase text-xs">{{ prop }}</span>
-                      </template>
+                      <div v-else-if="!edit_relative" class="col-4 md:col-3 pl-0 pb-3 lg:px-4 lg:text-right">
+                        <div class="text-lg">
+                          {{ ['price', 'total'].includes(prop) ? formatDecimal(value) : value }}
+                        </div>
+                        <span class="uppercase text-xs text-gray-500">{{ prop }}</span>
+                        <Divider/>
+                      </div>
+                      <!-- /sub-item info -->
 
-                    </div>
+                    </template>
                   </template>
+                  <!-- rel item props -->
 
-                  <div class="col-12 lg:col-3 text-right">
+
+                  <!-- md:close -->
+                  <div v-if="!edit_relative" class="hidden md:block col-12 md:col-1 text-right">
                     <VButton icon="close" @click="delete(item[sub_category][key])"/>
                   </div>
+                  <!-- /md:close -->
+
                 </div>
 
               </div>
@@ -506,6 +533,33 @@
     <!-- /content -->
 
   </div>
+
+  <!-- product searchPopover -->
+  <Popover ref="searchPopover">
+    <div class="grid m-0 w-20rem lg:w-26rem select-none overflow-hidden">
+
+      <!-- search -->
+      <div class="col-12">
+        <InputText v-model="search"
+                   autofocus
+                   class="w-full h-4rem bg-transparent border-none border-bottom-1 border-gray-400"
+                   fluid placeholder="Search Products" unstyled/>
+      </div>
+      <!-- search -->
+
+      <!-- products -->
+      <div v-for="product in getCategoryByName(category.categories[0]).data.filter(p => p.name.en.toLowerCase().includes(search))"
+           :key="product.documentId"
+           class="col-12 p-3"
+           @click="item[rel_cat_name][product.id] = {documentId: product.documentId, id: product.id, price: product.price, quantity: 0, total: 0}">
+        <div class="font-bold"> {{ product.name.en }}</div>
+        <div class="uppercase text-xs"> {{ product.sku }}</div>
+      </div>
+      <!-- /products -->
+
+    </div>
+  </Popover>
+  <!-- /product searchPopover -->
 </template>
 
 
@@ -524,9 +578,11 @@ export default defineComponent({
   data() {
     return {
       //table filters.
-      filters: {
+      filters     : {
         global: {value: null, matchMode: FilterMatchMode.CONTAINS},
       },
+      search      : null,
+      sub_category: null,
 
       //manage.
       manage       : null,
@@ -578,8 +634,16 @@ export default defineComponent({
             },
 
             {
-              name   : "amount",
+              name   : "quantity",
               key    : 1,
+              no_edit: 1,
+              decimal: 1
+            },
+
+            {
+              name   : "total",
+              key    : 1,
+              no_edit: 1,
               decimal: 1
             },
 
@@ -652,7 +716,7 @@ export default defineComponent({
           data: [
             {
               id        : "001",
-              amount    : 315.75,
+              total     : 0,
               customer  : "001",
               date      : new Date('Wed Feb 04 2026 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-001",
@@ -664,7 +728,7 @@ export default defineComponent({
                   quantity   : 20,
                   price      : 200,
                   description: "To be delivered to abc street.",
-                  total      : 0
+                  total      : 100
                 },
                 "p-002": {
                   quantity   : 20,
@@ -678,7 +742,7 @@ export default defineComponent({
             },
             {
               id        : "002",
-              amount    : 189.50,
+              total     : 0,
               customer  : "002",
               date      : new Date('Mon Jun 08 2025 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-002",
@@ -1195,6 +1259,11 @@ export default defineComponent({
   },
 
   computed: {
+    rel_cat_name() {
+      if (!this.category.categories) return null;
+      return this.category.categories[0];
+    },
+
     //key props.
     key_props() {
       if (!this.category) return [];
@@ -1309,6 +1378,31 @@ export default defineComponent({
 
       //analyse status.
       this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+
+      //category total update.
+      this.category.total = this.category.data.length;
+
+      //price | quantity | sub categories check.
+      if (this.category.props.find(prop => prop.name === 'total') && this.category.categories) {
+        this.category.data.forEach(item => {
+
+          //item total init.
+          item.total = 0;
+
+          //sub-items.
+          this.category.categories.forEach(cat_name => {
+            let sub_item_keys = Object.keys(item[cat_name]);
+            sub_item_keys.forEach(sub_item_id => {
+              let sub_item   = item[cat_name][sub_item_id];
+              sub_item.total = sub_item.quantity * sub_item.price;
+              item.total += sub_item.total;
+            });
+          });
+          //sub-items.
+
+        }); //item.
+      }
+
     },
 
 
@@ -1363,6 +1457,18 @@ export default defineComponent({
 
       //process category.
       this.processCategory();
+    },
+
+    updateItem() {
+      //validate.
+      if (!this.item) return;
+
+      //update category.
+      this.processCategory();
+
+      //update UI | notify.
+      this.edit_relative = false;
+      this.notify('updated');
     },
 
     loadProducts() {
@@ -1535,6 +1641,9 @@ export default defineComponent({
   beforeMount() {
     //load first category.
     this.viewCategory(this.menu[0]);
+
+    //products_init.
+    this.getCategoryByName('products').data = useState('products').value;
   }
 })
 </script>
