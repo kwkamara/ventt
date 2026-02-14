@@ -6,16 +6,18 @@
          @click="useState('item').value=null;"
          class="w-3 md:w-2 lg:w-1 pt-4 px-2 bg-white border-right-1 border-gray-200 flex flex-column align-items-center gap-5">
 
-      <Button v-for="cat in menu.filter(m => !m.parent)"
-              :key="cat.name"
-              @click="viewCategory(cat)"
-              :class="( this.category.name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
+      <template v-if="category">
+        <Button v-for="cat in menu.filter(m => !m.parent)"
+                :key="cat.name"
+                @click="viewCategory(cat)"
+                :class="( category.name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
               ' w-10 py-3 border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
-        <div class="text-center">
-          <span class="material-icons-outlined">{{ cat.icon }}</span>
-          <div class="text-xs capitalize">{{ cat.name }}</div>
-        </div>
-      </Button>
+          <div class="text-center">
+            <span class="material-icons-outlined">{{ cat.icon }}</span>
+            <div class="text-xs capitalize">{{ cat.name }}</div>
+          </div>
+        </Button>
+      </template>
 
     </div>
     <!-- menu -->
@@ -381,7 +383,7 @@
                   <div class="pt-2 flex gap-1 align-items-center">
                     <VButton fill="1"
                              icon="add"
-                             @click=""/>
+                             @click="$refs.searchPopover.toggle($event)"/>
                     <template v-if="Object.keys(item[sub_category]).length">
                       <Divider layout="vertical" class="h-2rem"/>
                       <VButton :fill="edit_relative"
