@@ -159,7 +159,7 @@
 
 
       <!-- right col -->
-      <div v-if="category" class="col-12 lg:col-7 flex flex-column gap-3">
+      <div v-if="category" class="col-12 lg:col-7">
 
         <!-- chart -->
         <client-only>
@@ -175,7 +175,7 @@
 
 
         <!-- recent -->
-        <div v-if="!manage && category.data" class="shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white fadein animation-duration-1000">
+        <div v-if="!manage && category.data" class="mt-3 shadow-1 border-1 border-purple-100 border-round-xl overflow-hidden bg-white fadein animation-duration-1000">
 
           <!-- header -->
           <div class="px-3 md:px-4 py-3 flex gap-2 align-items-center justify-content-between border-bottom-1 border-gray-300 bg-gray-50">
@@ -326,17 +326,19 @@
 
           <!-- details -->
           <DetailsGrid v-if="manage==='info' && item"
+                       @update="updateItem()"
                        :categories="category.linked_categories"
                        :props="category.props"
                        :item="item || {}"/>
 
+
           <!-- edit -->
-          <ItemForm v-if="manage === 'edit'" :categories="menu" :category="category"
+          <ItemForm v-else-if="manage === 'edit'" :categories="menu" :category="category"
                     :item="item || {}" @update="pushItem($event)"/>
 
 
           <!-- media -->
-          <div v-if="item && ['media', 'files'].includes(manage)" class="grid m-0 p-3 md:px-3">
+          <div v-else-if="item && ['media', 'files'].includes(manage)" class="grid m-0 p-3 md:px-3">
 
             <!-- upload -->
             <div class="col-12 px-2 pb-3 flex justify-content-between align-items-start pb-0 gap-2">
@@ -434,6 +436,7 @@
 
 <script setup lang="js">
 import DetailsGrid from "~/components/backend/detailsGrid.vue";
+import ItemForm from "~/components/backend/ItemForm.vue";
 
 const {formatDecimal} = useFormatDecimal();
 </script>
@@ -472,13 +475,12 @@ export default defineComponent({
           total      : 0,
           annual     : [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
-          categories: ['products'],
-
           linked_categories: {
             "products": [
               {
                 name   : "price",
-                decimal: 1
+                decimal: 1,
+                no_edit: 1
               },
               {
                 name  : "quantity",
@@ -486,7 +488,8 @@ export default defineComponent({
               },
               {
                 name   : "total",
-                decimal: 1
+                decimal: 1,
+                no_edit: 1
               },
               {
                 name: "description",
@@ -607,50 +610,26 @@ export default defineComponent({
           //data.
           data: [
             {
-              id        : "001",
-              total     : 0,
               customer  : "001",
               date      : new Date('Wed Feb 04 2026 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-001",
               files     : [],
+              id        : "001",
               images    : [],
-              order_no  : "ORD-001",
-              products  : {
-                "p-001": {
-                  quantity   : 20,
-                  price      : 200,
-                  description: "To be delivered to abc street.",
-                  total      : 100
-                },
-                "p-002": {
-                  quantity   : 20,
-                  price      : 800,
-                  description: "To be delivered to xyz street.",
-                  total      : 0
-                },
-              },
+              products  : {},
               status    : "approved",
-              state     : "delivered",
+              total     : 0
             },
             {
-              id        : "002",
-              total     : 0,
               customer  : "002",
               date      : new Date('Mon Jun 08 2025 00:00:00 GMT+0300 (East Africa Time)'),
               documentId: "ord-002",
               files     : [],
+              id        : "002",
               images    : [],
-              order_no  : "ORD-002",
-              products  : {
-                "p-002": {
-                  quantity   : 10,
-                  price      : 400,
-                  description: null,
-                  total      : 0
-                }
-              },
+              products  : {},
               status    : "processing",
-              state     : "shipped",
+              total     : 0
             }
           ]
         },
@@ -1280,26 +1259,36 @@ export default defineComponent({
       //category total update.
       this.category.total = this.category.data.length;
 
-      //price | quantity | sub categories check.
-      if (this.category.props.find(prop => prop.name === 'total') && this.category.categories) {
-        this.category.data.forEach(item => {
 
-          //item total init.
-          item.total = 0;
+      //linked_categories check.
+      if (!this.category.linked_categories) return;
 
-          //sub-items.
-          this.category.categories.forEach(cat_name => {
-            let sub_item_keys = Object.keys(item[cat_name]);
-            sub_item_keys.forEach(sub_item_id => {
-              let sub_item   = item[cat_name][sub_item_id];
-              sub_item.total = sub_item.quantity * sub_item.price;
-              item.total += sub_item.total;
-            });
-          });
-          //sub-items.
+      //get linked cat names.
+      const linked_cat_names = Object.keys(this.category.linked_categories)
+          .filter(c_name => this.category.linked_categories[c_name].find(p => p.name === 'total'));
 
-        }); //item.
-      }
+      //category data.
+      this.category.data.forEach(item => {
+
+        //total init.
+        item.total = 0;
+
+        //linked cat_names.
+        linked_cat_names.forEach(cat_name => {
+          //sub item.
+          Object.keys(item[cat_name]).forEach(sub_item_id => {
+            //sub item.
+            let sub_item = item[cat_name][sub_item_id];
+
+            //sub item total.
+            sub_item.total = ((sub_item.quantity || 0) * sub_item.price);
+
+            //item total.
+            item.total += sub_item.total;
+          }); //sub item.
+        }); //linked cat_names.
+
+      }); //category data.
 
     },
 

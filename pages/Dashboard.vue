@@ -1,8 +1,10 @@
 <template>
 
   <section id="dashboard" class="grid m-0 bg-gray-100 text-gray-700 sans-serif">
-    <DNav/>
-    <Content/>
+    <client-only>
+      <DNav/>
+      <Content/>
+    </client-only>
   </section>
 
 </template>
@@ -319,7 +321,7 @@ useState('admin', () => [
     },
 
     //items.
-    data: []
+    data: useState('products').value
   },
 
 
@@ -660,7 +662,11 @@ useState('admin', () => [
 
 <script lang="js">
 export default defineComponent({
-  name: "DNav"
+  name: "DNav",
+
+  beforeMount() {
+
+  }
 });
 </script>
 

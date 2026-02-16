@@ -3,7 +3,7 @@
   <div class="grid m-0">
 
     <!-- name | Description -->
-    <div v-for="prop in category.props.filter(p => p.key)"
+    <div v-for="prop in category.props.filter(p => p.key && !p.no_edit)"
          :class="'col-12 px-4 pt-4 pb-5 text-gray-700 ' + (prop.name === 'description' ? '': 'lg:col-4')">
 
       <Select v-if="prop.select"
@@ -12,7 +12,7 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-300" fluid
+              input-class="h-2rem pl-0 bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
               :option-label="prop.rel || 'name'"
               option-value="id"/>
 
@@ -31,19 +31,19 @@
                   v-model="item[prop.name]"
                   :aria-label="item[prop.name]"
                   date-format="dd/mm/yy" fluid
-                  input-class="pl-0 h-3rem text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
+                  input-class="h-2rem pl-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
 
       <InputText v-else-if="category.name === 'products' && prop.name ==='name'"
                  :id="prop.name + '-ip'"
                  v-model="item.name.en"
                  autocomplete="off"
-                 class="w-full pl-0 h-3rem bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
+                 class="w-full h-2rem pl-0 bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
 
       <InputText v-else
                  :id="prop.name + '-ip'"
                  v-model="item[prop.name]"
                  autocomplete="off"
-                 class="w-full pl-0 h-3rem bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
+                 class="w-full h-2rem pl-0 pb-1 bg-transparent border-none border-bottom-1 border-gray-300" fluid unstyled/>
 
       <label class="mt-1 text-xs uppercase text-gray-500" :for="prop.name + '-ip'">
         {{ prop.name }}
@@ -60,11 +60,11 @@
                    :id="prop.name + '-ip'"
                    v-model="item[prop.name]"
                    :min-fraction-digits="2"
-                   input-class="w-full pl-0 h-3rem bg-white text-sm border-none border-bottom-1 border-gray-300"
+                   input-class="w-full h-2rem pl-0 bg-white text-sm border-none border-bottom-1 border-gray-300"
                    fluid use-grouping/>
 
       <Select v-else-if="prop.enum"
-              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-400 text-sm capitalize"
+              input-class="h-2rem pl-0 bg-white border-none border-bottom-1 border-gray-400 text-sm capitalize"
               :id="prop.name + '-ip'"
               v-model="item[prop.name]"
               :options="prop.enum"
@@ -76,7 +76,7 @@
                   v-model="item[prop.name]"
                   :aria-label="item[prop.name]"
                   date-format="dd/mm/yy" fluid
-                  input-class="pl-0 h-3rem text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
+                  input-class="h-2rem pl-0 text-sm text-gray-700 hover:text-purple-700 cursor-pointer border-none border-bottom-1 border-gray-300"/>
 
       <Select v-else-if="prop.select"
               :id="prop.name + '-ip'"
@@ -84,7 +84,7 @@
               :optionLabel="prop.label"
               :options="getCategoryByName(prop.select).data"
               :placeholder="prop.header || prop.name"
-              input-class="pl-0 h-3rem bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
+              input-class="h-2rem pl-0 bg-white border-none border-bottom-1 border-gray-300 text-sm" fluid
               :option-label="prop.rel || 'name'"
               option-value="id"/>
 
@@ -92,7 +92,7 @@
                  :id="prop.name + '-ip'"
                  v-model="item[prop.name]"
                  :type="prop.number ? 'number' : 'text'"
-                 class="w-full h-3rem pl-0 bg-white text-base h-3rem border-none border-bottom-1 border-gray-300"
+                 class="w-full h-2rem pl-0 bg-white text-base border-none border-bottom-1 border-gray-300"
                  fluid unstyled/>
 
 
