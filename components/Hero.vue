@@ -34,12 +34,7 @@
           <div class="pt-3 flex align-items-center gap-3">
 
             <NuxtLink :to="$localePath('/shop')">
-              <Button class="pl-3 pr-1 bg-purple-800 text-white border-none white-space-nowrap">
-                <span class="font-bold">
-                  {{ $t('shop_now') }}
-                </span>
-                <span class="material-icons-outlined">chevron_right</span>
-              </Button>
+              <VButtonCube icon="chevron_right" icon_right="1" :text="$t('shop_now')" fill="1"/>
             </NuxtLink>
 
           </div>

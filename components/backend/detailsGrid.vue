@@ -1,11 +1,10 @@
 <template>
   <!-- details grid -->
-  <div class="grid m-0">
+  <div class="grid m-0 pt-2">
 
     <!-- Key props -->
     <div v-for="prop in props.filter( p => p.key && item[p.name] )"
-         :key="prop"
-         :class="(prop.name === 'description' ? 'col-12 ' : 'col-6 md:col-4 ') + ' p-3 md:p-4'">
+         :key="prop" :class="(prop.name === 'description' ? 'col-12 ' : 'col-6') + ' p-3 md:p-4'">
 
       <!-- prop value -->
       <div>
@@ -37,12 +36,12 @@
 
     <!-- other props -->
     <div v-for="prop in props.filter(p => !p.no_info && !p.key && item[p.name])"
-         :key="prop"
-         class="col-6 p-3 md:p-4">
+         :key="prop" class="col-6 p-3 md:p-4">
 
       <!-- rating -->
       <div v-if="prop.name === 'rating'" class="flex align-items-center">
-        <span v-for="rate in Number(item.rating)" class="material-icons text-xl text-yellow-600">star</span>
+        <span v-for="(rate, ix) in Number(item.rating)" :key="ix"
+              class="material-icons-outlined text-xl text-yellow-600">star</span>
       </div>
       <!-- /rating -->
 
@@ -66,8 +65,7 @@
 
     <!-- categories -->
     <div v-for="(props, cat_name_) in categories"
-         :key="cat_name_"
-         class="col-12 bg-gray-50 pl-3 pr-4 pt-3 md:px-4 border-top-1 border-bottom-1 border-gray-300">
+         :key="cat_name_" class="col-12 bg-gray-50 pl-3 pr-4 pt-3 md:px-4 border-top-1 border-bottom-1 border-gray-300">
 
 
       <!-- header -->
@@ -94,8 +92,7 @@
 
       <!-- sub_items -->
       <div v-for="(sub_item, key) in item[cat_name_]"
-           :key="key"
-           class="grid m-0 text-sm hover:text-purple-800">
+           :key="key" class="grid m-0 text-sm hover:text-purple-800">
 
         <!-- sub item ID -->
         <div class="col-12 md:col-2 lg:col-4 pl-0 pr-0 flex justify-content-between md:justify-content-start">
@@ -228,8 +225,6 @@ export default defineComponent({
     //delete.
     deleteItem(key, cat_name) {
 
-      console.log(cat_name);
-
       //validate.
       if (!key || !cat_name || !this.item) return;
 
@@ -248,6 +243,11 @@ export default defineComponent({
       //get sub item category.
       const category                       = this.cache.categories[this.cat_name] || useState('admin').value.find(c => c.name === this.cat_name);
       this.cache.categories[this.cat_name] = category;
+
+
+      //sub item cat init.
+      if (!this.item[this.cat_name]) this.item[this.cat_name] = {};
+
 
       //validate sub item category.
       if (category) {

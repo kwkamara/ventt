@@ -72,9 +72,10 @@
                        :placeholder="$t('enter_email')"
                        class="h-3rem w-full pl-0 bg-transparent shadow-1 border-none border-bottom-1 border-gray-700 text-gray-200"/>
             <div class="pt-3">
-              <VButtonCube fill="1"
-                           icon="send"
-                           text="Subscribe"/>
+              <VButtonCube :text="$t('subscribe')"
+                           icon_right="1"
+                           fill="1"
+                           icon="send"/>
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@ useState('admin', () => [
 
 
     //linked categories props.
-    categories: {
+    linked_categories: {
       "products": [
         {
           name   : "price",
@@ -148,11 +148,6 @@ useState('admin', () => [
       },
     ],
 
-    //metrics_1.
-    metrics_1: {
-      aov       : 0,
-      conversion: 0
-    },
 
     //data.
     data: [
@@ -212,7 +207,7 @@ useState('admin', () => [
   //PRODUCTS.
   {
     name  : "products",
-    icon  : "grid_view",
+    icon  : "inventory_2",
     total : 0,
     annual: [100, 325, 300, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
@@ -314,99 +309,238 @@ useState('admin', () => [
       },
     ],
 
-    //metrics_1.
-    metrics_1: {
-      "avg price": 0,
-      "avg cost" : 0
-    },
-
     //items.
     data: useState('products').value
   },
 
 
+  //INTAKES.
   {
-    name    : "intakes",
-    icon    : "box_add",
-    quantity: 0,
-    total   : 18750.80,
+    name  : "intakes",
+    icon  : "output",
+    total : 0,
+    annual: [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
 
     //struct.
     props: [
-      {name: "description", header: "details"},
-      {extra: 1, header: "supplier", label: "name", name: "suppliers", select: "suppliers"},
-      {key: 1, extra: 1, name: "po_number", header: "purchase number"},
+      //key props.
+      {
+        name   : "id",
+        prefix : "#",
+        key    : 1,
+        header : "intake number", //timestamp.
+        no_edit: 1,
+      },
+
+      {
+        name: "date",
+        key : 1,
+        date: 1
+      },
+
+      {
+        name   : "documentId",
+        no_edit: 1,
+        no_tbl : 1,
+        no_info: 1,
+      },
+
+      {
+        name  : "description",
+        key   : 1,
+        no_tbl: 1
+      },
+
+      {
+        name   : "total",
+        key    : 1,
+        no_edit: 1,
+        decimal: 1
+      },
+
+      //other props.
+      {
+        name: "status",
+        enum: ['delivered', 'processing', 'approved', 'returned'],
+      },
+
+      {
+        name  : "payment",
+        enum  : ['Cash', 'PayPal', 'Credit', 'M-PESA'],
+        header: "payment mode"
+      },
+
+      {
+        name  : "supplier",
+        key   : 1,
+        select: "suppliers",
+        rel   : "name",
+        prefix: "sup-"
+      },
     ],
 
-    //status | state.
-    status: {approved: 0, pending: 0, cancelled: 0},
-    state : {shipped: 0, delivered: 0, returned: 0},
-
-    //analysis.
-    props_r1: {"avg cost": 0, "error rate": 0},
-    // props_r2: {"top supplier": "Vendor-X", backorders: 7},
-
-    //items.
-    data  : [
-      {
-        categories: {},
-        cost      : 2450.75,
-        documentId: "In-001",
-        files     : [],
-        images    : [],
-        po_number : "PO-3021",
-
-        products: {
-          "p-001": {
-            cost    : 300,
-            details : null,
-            price   : 600,
-            quantity: 100,
-            total   : 0
-          },
-          "p-002": {
-            cost    : 450,
-            details : null,
-            price   : 600,
-            quantity: 200,
-            total   : 0
-          },
+    //linked categories props.
+    linked_categories: {
+      "products": [
+        {
+          name   : "price",
+          decimal: 1
         },
+        {
+          name  : "quantity",
+          number: 1
+        },
+        {
+          name   : "total",
+          decimal: 1,
+          no_edit: 1
+        },
+        {
+          name: "description",
+          text: 1
+        },
+      ]
+    },
 
-        status  : "pending",
-        state   : "shipped",
-        supplier: null
+    //metrics.
+    metrics: [
+      {
+        name : "processing",
+        value: 0,
+        icon : "info"
       },
       {
-        categories: {},
-        cost      : 1899.99,
-        documentId: "In-002",
-        files     : [],
-        images    : [],
-
-        products: {
-          "p-003": {
-            cost    : 245,
-            details : null,
-            price   : 600,
-            quantity: 100,
-            total   : 0
-          },
-          "p-004": {
-            cost    : 700,
-            details : null,
-            price   : 900,
-            quantity: 200,
-            total   : 0
-          },
-        },
-
-        po_number: "PO-3020",
-        status   : "approved",
-        state    : "delivered",
-        supplier : null
-      }
+        name : "approved",
+        value: 0,
+        icon : "beenhere"
+      },
+      {
+        name : "cancelled",
+        value: 0,
+        icon : "block"
+      },
     ],
+
+    //items.
+    data   : [],
+    parent : "products",
+    related: []
+  },
+
+
+  //RETURNS.
+  {
+    name  : "returns",
+    icon  : "assignment_return",
+    total : 0,
+    annual: [540, 325, 702, 620, 540, 325, 702, 620, 540, 325, 702, 620],
+
+
+    //struct.
+    props: [
+      //key props.
+      {
+        name   : "id",
+        prefix : "#",
+        key    : 1,
+        header : "intake number", //timestamp.
+        no_edit: 1,
+      },
+
+      {
+        name: "date",
+        key : 1,
+        date: 1
+      },
+
+      {
+        name   : "documentId",
+        no_edit: 1,
+        no_tbl : 1,
+        no_info: 1,
+      },
+
+      {
+        name  : "description",
+        key   : 1,
+        no_tbl: 1
+      },
+
+      {
+        name   : "total",
+        key    : 1,
+        no_edit: 1,
+        decimal: 1
+      },
+
+      //other props.
+      {
+        name: "status",
+        enum: ['delivered', 'processing', 'approved', 'returned'],
+      },
+
+      {
+        name  : "payment",
+        enum  : ['Cash', 'PayPal', 'Credit', 'M-PESA'],
+        header: "payment mode"
+      },
+
+      {
+        name  : "supplier",
+        key   : 1,
+        select: "suppliers",
+        rel   : "name",
+        prefix: "sup-"
+      },
+    ],
+
+
+    //linked categories props.
+    linked_categories: {
+      "products": [
+        {
+          name   : "price",
+          decimal: 1
+        },
+        {
+          name  : "quantity",
+          number: 1
+        },
+        {
+          name   : "total",
+          decimal: 1,
+          no_edit: 1
+        },
+        {
+          name: "description",
+          text: 1
+        },
+      ]
+    },
+
+
+    //metrics.
+    metrics: [
+      {
+        name : "processing",
+        value: 0,
+        icon : "info"
+      },
+      {
+        name : "approved",
+        value: 0,
+        icon : "beenhere"
+      },
+      {
+        name : "cancelled",
+        value: 0,
+        icon : "block"
+      },
+    ],
+
+
+    //items.
+    data  : [],
     parent: "products"
   },
 
@@ -564,12 +698,6 @@ useState('admin', () => [
       },
     ],
 
-    //metrics 1.
-    metrics_1: {
-      "avg rating": 4.6,
-      "lead time" : 3.8
-    },
-
     //items.
     data: [
       {
@@ -612,39 +740,85 @@ useState('admin', () => [
 
 
   {
-    name    : "discounts",
-    icon    : "money_off",
-    quantity: 23,
-    total   : 4500.25,
+    name  : "discounts",
+    icon  : "money_off",
+    total : 0,
+    annual: [100, 600, 702, 200, 540, 325, 400, 620, 200, 325, 702, 620],
 
+
+    //struct.
     props: [
-      {name: "description"},
+      {
+        name: "start",
+        date: 1,
+        key : 1
+      },
 
-      {key: 1, extra: 1, name: "code"},
-      {key: 1, extra: 1, name: "value", header: "value (%)"},
+      {
+        name: "end",
+        date: 1,
+        key : 1
+      },
 
-      {date: 1, extra: 1, header: "start date", name: "start"},
-      {date: 1, extra: 1, header: "end date", name: "end"},
+
+      {
+        name  : "description",
+        key   : 1,
+        no_tbl: 1
+      },
+
+
+      {
+        name: "type",
+        enum: ['fixed', 'percentage'],
+      },
+
+      {
+        name: "code",
+      },
+
+      {
+        name   : "amount",
+        decimal: 1
+      },
+
+      {
+        name: "status",
+        enum: ['active', 'expired', 'review']
+      }
     ],
 
-    //status | state.
-    status: {active: 18, expired: 5, review: 7},
-    state : {percentage: 15, fixed: 8, bundles: 3},
+    //metrics.
+    metrics: [
+      {
+        name : "active",
+        value: 0,
+        icon : "info"
+      },
+      {
+        name : "expired",
+        value: 0,
+        icon : "beenhere"
+      },
+      {
+        name : "review",
+        value: 0,
+        icon : "block"
+      },
+    ],
 
-    //analysis.
-    props_r1: {"avg discount": 19.5, savings: 4500.25},
-    props_r2: {"most used": "SUMMER25", redemption: 68.4},
+    //linked categories props.
+    linked_categories: {
+      "products": [
+        {
+          name   : "price",
+          decimal: 1
+        },
+      ]
+    },
 
     //items.
-    items: [
-      {
-        documentId: "d-001", code: "SUMMER25",
-        status    : "active", type: "Percentage", value: "25%", uses: 142, start: "2025-04-01", images: [], categories: {}, files: []
-      },
-      {documentId: "d-002", code: "FREESHIP", status: "suspended", type: "Fixed", value: "Free Shipping", uses: 89, start: "2025-04-07", images: [], categories: {}, files: []},
-      {documentId: "d-003", code: "WINTER25", status: "expired", type: "Percentage", value: "10%", uses: 89, start: "2025-04-14", images: [], categories: {}, files: []},
-      {documentId: "d-004", code: "FREESHIP", status: "expired", type: "Fixed", value: "Free Shipping", uses: 89, start: "2025-04-21", images: [], categories: {}, files: []},
-    ],
+    data: [],
 
     //parent category.
     parent: "products"
@@ -654,7 +828,7 @@ useState('admin', () => [
   {
     name  : "report",
     icon  : "pi pi-file",
-    parent: "products"
+    parent: "product"
   },
 ])
 </script>
@@ -664,13 +838,12 @@ useState('admin', () => [
 export default defineComponent({
   name: "DNav",
 
+  methods: {},
+
   beforeMount() {
 
   }
+
 });
 </script>
 
-
-<style scoped>
-
-</style>

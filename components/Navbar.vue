@@ -139,8 +139,8 @@ const {locale} = useI18n();
 
 
 <script lang="js">
-
 export default defineComponent({
+
   name: "Navbar",
 
   data() {

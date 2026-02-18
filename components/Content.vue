@@ -12,7 +12,7 @@
         <Button v-for="cat in menu.filter(m => !m.parent)"
                 :key="cat.name"
                 @click="viewCategory(cat)"
-                :class="( category.name === cat.name ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
+                :class="( [category.name, category.parent].includes(cat.name) ? 'bg-purple-700 text-white' : 'text-purple-700 bg-white') +
               ' w-10 py-3 border-none border-round-xl shadow-1 hover:text-white hover:bg-purple-800 hover:shadow-3 flex align-items-center justify-content-center'">
           <div class="text-center">
             <span class="material-icons-outlined">{{ cat.icon }}</span>
@@ -78,7 +78,9 @@
                 <!-- category name | category total -->
                 <div class="lg:w-8 px-3 lg:pl-4 md:pt-2  text-2xl capitalize">
                   <div class="flex gap-3 align-items-center">
-                    <VButtonCube :icon="category.icon" fill="1" class="h-4rem w-4rem border-round-xl shadow-1 border-1 border-purple-300"/>
+                    <VButtonCube :icon="category.icon"
+                                 class="h-4rem w-4rem border-round-xl shadow-1 border-1 border-purple-300"
+                                 fill="1" @click="manageToggle()"/>
                     <div>
                       <div>{{ category.name }}</div>
                       <span>{{ category.data.length }}</span>
@@ -96,17 +98,20 @@
               <div class="px-3 py-3 lg:px-4 flex justify-content-between align-items-center justify-content-end gap-3 bg-purple-600">
                 <VButton icon="article" class="border-round-3xl text-white"/>
 
-                <template v-if="category.categories">
-                  <VButton v-for="(cat_name, ix) in category.categories"
+                <template v-if="category.linked_categories">
+                  <VButton v-for="(ix, c_name) in category.linked_categories"
+                           :key="ix"
+                           :icon="getCategoryByName(c_name).icon"
                            class="border-round-3xl text-white"
-                           @click="category=getCategoryByName(cat_name)"
-                           :icon="getCategoryByName(cat_name).icon"/>
+                           @click="category=getCategoryByName(c_name); manage=null; item=null;"/>
                 </template>
 
 
-                <VButton icon="settings"
+                <VButton v-for="(cat, ix) in menu.filter(c => c.parent === category.name)"
+                         :key="ix"
+                         :icon="cat.icon"
                          class="border-round-3xl text-white"
-                         @click="manageToggle()"/>
+                         @click="category=cat; manage='items'; item=null;"/>
               </div>
               <!-- /report | manage -->
 
@@ -137,7 +142,8 @@
 
 
             <!-- status -->
-            <div class="mt-3 p-3 md:p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
+            <div v-if="category.status"
+                 class="mt-3 p-3 md:p-4 shadow-1 border-1 border-purple-100 border-round-xl flex justify-content-between align-items-center gap-3 bg-white overflow-hidden">
               <template v-for="(status, ix) in category.status">
                 <div class="w-full">
                   <div class="flex gap-1 align-items-center">
@@ -375,7 +381,7 @@
 
 
           <!-- footer -->
-          <div v-if="item && item.documentId" class="p-3 md:px-4 flex justify-content-end gap-3 align-items-center bg-gray-50">
+          <div v-if="item && item.documentId" class="p-3 md:px-4 flex justify-content-end gap-3 align-items-center bg-gray-100">
 
             <div class="flex justify-content-start align-items-center gap-3">
               <!-- gallery -->
@@ -600,12 +606,6 @@ export default defineComponent({
               icon : "assignment_return"
             },
           ],
-
-          //metrics_1.
-          metrics_1: {
-            aov       : 0,
-            conversion: 0
-          },
 
           //data.
           data: [
@@ -1244,7 +1244,7 @@ export default defineComponent({
 
     //get category.
     getCategoryByName(cat_name) {
-      return this.menu.find(cat => cat.name === cat_name);
+      return this.menu.find(c => c.name === cat_name);
     },
 
 
@@ -1254,7 +1254,9 @@ export default defineComponent({
       this.category.metrics.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
 
       //analyse status.
-      this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+      if (this.category.status) {
+        this.category.status.forEach(metric => metric.value = this.category.data.filter(item => item.status === metric.name).length);
+      }
 
       //category total update.
       this.category.total = this.category.data.length;
@@ -1526,11 +1528,11 @@ export default defineComponent({
   },
 
   beforeMount() {
+    //populate menu.
+    this.menu = useState('admin').value;
+
     //load first category.
     this.viewCategory(this.menu[0]);
-
-    //products_init.
-    this.getCategoryByName('products').data = useState('products').value;
   }
 })
 </script>
