@@ -8,27 +8,25 @@
       <!-- Category Navigation -->
       <div class="col-9 lg:col-4 h-full p-0 bg-purple-800 flex align-items-center justify-content-between lg:justify-content-start">
         <div v-for="(cat_name, ix) in categories"
-             :key="ix"
+             :key="cat_name"
              :aria-label="`Show ${cat_name} categories`"
-             :class="`w-full px-3 h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ` +
-         ( (shop && shop.category === cat_name) || (category === cat_name) ? 'bg-purple-800 text-yellow-800 ' : '' ) +
-          (ix === 2 ? 'border-right-1' : null)"
-
-             role="button" tabindex="0"
-             @click="viewCategoryMenu(cat_name, $event)">
+             :class="categoryTabClass(cat_name, ix)"
+             role="button"
+             tabindex="0"
+             @click="openCategoriesPopup(cat_name, $event)">
           {{ $t(cat_name) }}
           <span class="material-icons-outlined">keyboard_arrow_down</span>
         </div>
       </div>
-      <!-- Category Navigation -->
+      <!-- /Category Navigation -->
 
-      <!-- Search -->
+      <!-- Product Search -->
       <div class="col-3 lg:col-8 pr-4 md:pr-0 text-right">
         <VButton fill="1"
                  icon="search"
                  @click="$refs.searchPopover.toggle($event)"/>
       </div>
-      <!-- Search -->
+      <!-- /Product Search -->
 
     </div>
 
@@ -41,8 +39,8 @@
         <div class="col-12">
           <InputText v-model="search"
                      class="w-full h-4rem bg-transparent border-none border-bottom-1 border-gray-400"
-                     autofocus
-                     fluid placeholder="Search Products"
+                     autofocus fluid
+                     :placeholder="$t('search_products')"
                      unstyled/>
         </div>
         <!-- search -->
@@ -54,15 +52,16 @@
              class="col-12 p-3 border-purple-50 hover:shadow-3 hover:bg-purple-700 hover:text-white hover:border-none border-top-1 flex justify-content-between gap-2">
 
           <!-- image -->
-          <img :src="'/' + product.images[0].url"
-               :alt="product.name"
+          <img v-if="product.images?.length"
+               :alt="product.name[locale] || product.name?.en"
+               :src="'/' + product.images[0].url"
                class="w-4rem border-round"/>
 
           <!-- name | price | categories -->
           <div class="w-full">
             <!-- name | price -->
             <div class="flex justify-content-between">
-              <div class="w-full">{{ product.name[locale] }}</div>
+              <div class="w-full">{{ product.name[locale] || product.name?.en || product.name }}</div>
               <div class="w-full text-right">{{ formatDecimal(product.price) }}</div>
             </div>
             <!-- /name | price -->
@@ -179,22 +178,18 @@ export default defineComponent({
     products() {
       if (!this.search) return [];
 
-      const {locale} = useI18n();
+      const locale = this.$i18n.locale;
+
       return useState('products').value
-          .filter(product => product.name[locale.value].toLowerCase().includes(this.search))
+          .filter(product => (product.name[locale] || product.name?.en || '')
+              .toLowerCase().includes(this.search))
     }
   },
 
   methods: {
 
-    //notify popup.
-    notify(summary, severity = 'info') {
-      this.$toast.add({severity: severity, summary: summary, life: 1000});
-    },
-
-
-    //view category menu
-    viewCategoryMenu(cat_name, $event) {
+    //show category menu popup.
+    openCategoriesPopup(cat_name, $event) {
       //validate.
       if (!cat_name) return;
 
@@ -237,7 +232,23 @@ export default defineComponent({
       const localePath = useLocalePath();
       const locale     = this.$i18n.locale;
       navigateTo(localePath('/Product/' + encodeURIComponent(product.name[locale])));
+    },
+
+
+    //category tab classes.
+    categoryTabClass(cat_name, ix) {
+      //active category.
+      const active = (this.shop?.category === cat_name) || (this.category === cat_name);
+
+      let category_class = 'w-full px-3 h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ';
+      if (active) category_class += 'bg-purple-800 text-yellow-800 ';
+      if (ix === 2) category_class += 'border-right-1 ';
+
+      //return.
+      return category_class;
     }
+
+
   },
 })
 </script>
