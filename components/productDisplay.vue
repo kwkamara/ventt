@@ -1,5 +1,5 @@
 <template>
-  <section class="h-full w-full relative"
+  <section class="h-full w-full relative border-round-xl overflow-hidden"
            aria-labelledby="product category banner"
            data-aos="fade-up"
            @click="viewShop();">
@@ -7,7 +7,7 @@
     <!-- Product Image -->
     <img :alt="`Ventt Ecommerce Platform - ${name}`"
          :src="image" aria-hidden="true"
-         class="w-full h-full absolute border-round-xl"
+         class="w-full h-full absolute"
          loading="lazy"/>
 
 

@@ -2,7 +2,7 @@
 
   <div class="col-6 md:col-4 lg:pt-0" @click="viewItem" data-aos="fade-up">
 
-    <div class="border-1 border-purple-100 hover:border-purple-400 border-round-2xl overflow-hidden hover:shadow-4 bg-purple-900 transition-all transition-duration-200 cursor-pointer">
+    <div class="border-1 border-gray-200 hover:border-purple-100 border-round-2xl overflow-hidden hover:shadow-4 bg-purple-900 cursor-pointer">
 
       <div class="h-10rem md:h-12rem bg-purple-800 relative">
 

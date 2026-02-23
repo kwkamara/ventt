@@ -26,12 +26,14 @@
         </div>
         <!-- /search | price reset -->
 
+
         <!-- reset -->
         <div class="col-2 lg:col-4 md:hidden lg:block text-right">
           <VButton icon="restart_alt"
                    @click="min_price=0; max_price=50000; search=null"/>
         </div>
         <!-- /reset -->
+
 
         <!-- min price -->
         <div class="col-6 md:col-3 lg:col-6">
@@ -41,6 +43,7 @@
           <label for="min-price-ip" class="block pt-1 text-sm">{{ $t('min_price') }}</label>
         </div>
         <!-- /min price -->
+
 
         <!-- max price -->
         <div class="col-6 md:col-3 lg:col-6 text-right">
@@ -52,10 +55,10 @@
         </div>
         <!-- /max price -->
 
+
         <!-- reset -->
         <div class="col-12 md:col-2 pt-3 hidden md:block lg:hidden text-right">
-          <VButton icon="restart_alt"
-                   @click="min_price=0; max_price=50000; search=null"/>
+          <VButton icon="restart_alt" @click="min_price=0; max_price=50000; search=null"/>
         </div>
         <!-- /reset -->
 
@@ -79,6 +82,7 @@
           </div>
           <!-- /categories -->
 
+
           <Divider/>
 
 
@@ -98,7 +102,6 @@
           <!-- /types -->
 
 
-
         </div>
         <!-- /categories -->
 
@@ -109,9 +112,9 @@
                           :image="'/' + category_name + '-accessories-1.webp'"
                           :name="$t( category_name + '_accessories' )"
                           class="h-14rem shadow-2"
-                          @click="types.accessories = true"
                           discount="10% Off"
-                          type="accessories"/>
+                          type="accessories"
+                          @click="types[category_name]=true"/>
         </div>
         <!-- /product display -->
 
