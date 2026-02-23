@@ -1,13 +1,13 @@
 <template>
 
-  <div class="col-6 md:col-4 lg:col-4 lg:pt-0" @click="viewItem" data-aos="fade-up">
+  <div class="col-6 md:col-4 lg:pt-0" @click="viewItem" data-aos="fade-up">
 
-    <div class="border-3 border-purple-50 hover:border-3 hover:border-purple-300 border-round-xl overflow-hidden hover:shadow-3">
+    <div class="border-1 border-purple-100 hover:border-purple-400 border-round-2xl overflow-hidden hover:shadow-4 bg-purple-900 transition-all transition-duration-200 cursor-pointer">
 
-      <div class="h-9rem md:h-11rem bg-gray-100 relative">
+      <div class="h-10rem md:h-12rem bg-purple-800 relative">
 
         <!-- wishlist | cart -->
-        <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-center">
+        <div class="w-full p-3 absolute z-4 flex justify-content-between align-items-start">
           <!-- wishlist -->
           <VButton v-if="wishlist" :fill="wishlist[product.documentId]"
                    @click.stop="wishlist[product.documentId] ? removeFromWishList(product) : addToWishList(product); notify('wishlist');"
@@ -31,20 +31,38 @@
 
 
       <!-- footer -->
-      <div class="p-3 bg-purple-800 text-white">
+      <div class="p-3 bg-purple-900 text-white">
 
         <!-- name | rating -->
-        <div>
-          <div class="pb-1 capitalize white-space-nowrap">{{ product.name[locale] }}</div>
+        <div class="flex flex-column gap-1">
+          <div class="capitalize text-sm md:text-base font-medium line-height-3 text-overflow-ellipsis white-space-nowrap overflow-hidden">
+            {{ product.name[locale] }}
+          </div>
+
           <!-- rating -->
-          <div class="text-yellow-500 flex align-items-center">
-            <span v-for="(rating, ix) in product.rating" class="material-icons-outlined text-sm">star</span>
+          <div class="flex align-items-center gap-1">
+            <div class="text-yellow-400 flex align-items-center">
+              <span v-for="(rating, ix) in product.rating"
+                    :key="ix"
+                    class="material-icons-outlined text-xs md:text-sm">
+                star
+              </span>
+            </div>
+            <span class="text-2xs text-purple-200" v-if="product.rating_count">
+              ({{ product.rating_count }})
+            </span>
           </div>
         </div>
         <!-- /name | rating -->
 
         <!-- price -->
-        <div class="pt-3">{{ formatDecimal(product.price) }}</div>
+        <div class="pt-3 flex align-items-center justify-content-between">
+          <div class="text-base md:text-lg font-semibold">
+            {{ formatDecimal(product.price) }}
+          </div>
+
+
+        </div>
 
       </div>
       <!-- /footer -->

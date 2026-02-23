@@ -1,121 +1,182 @@
 <template>
-  <section class="grid m-0">
-    <div class="col-12 px-2 py-5 lg:pt-7 lg:px-6 bg-gray-900 text-gray-400">
+  <section class="grid m-0 bg-purple-800 text-gray-300">
+    <div class="col-12 px-3 py-6 lg:pt-7 lg:px-6">
 
       <!-- footer box -->
-      <div class="grid m-0 pb-2 w-full mb-5 align-items-start">
+      <div class="grid m-0 pb-2 w-full mb-5">
 
         <div class="col-12 md:col-3 pb-4 md:pb-0">
           <div class="h-3rem m-0 pb-3 flex align-items-center title uppercase">
             <img src="/logo-ventt.svg" alt="ventt logo" width="60" height="60"/>
           </div>
-          <div class="pt-2 flex flex flex-column gap-2 text-xs">
-            <h2 class="m-0 title uppercase text-lg font-light">
+          <div class="pt-2 flex flex flex-column gap-3 text-xs">
+            <h2 class="m-0 title uppercase text-xl font-light tracking-wide">
               Ventt | <span class="uppercase">{{ $t('ecommerce') }}</span>
             </h2>
-            <div>{{ $t('tagline') }}</div>
+            <div class="text-sm opacity-90">
+              {{ $t('tagline') }}
+            </div>
 
 
             <!-- social -->
-            <div class="pt-3 flex gap-2">
+            <div class="py-3 flex gap-2">
               <Button v-for="social in ['linkedin', 'facebook', 'twitter']"
                       :icon="'pi pi-' + social"
-                      class="bg-gray-800 text-gray-400 border-none shadow-1"/>
+                      class="bg-purple-900 border-none shadow-2 text-gray-300 hover:bg-purple-700 hover:text-yellow-300 transition-colors transition-duration-150 rounded-full w-2.5rem h-2.5rem"/>
             </div>
             <!-- social -->
-
-            <!-- locales -->
-            <div class="pt-4 flex align-items-center gap-0 text-white">
-              <Locale/>
-            </div>
-            <!-- /locales -->
 
           </div>
         </div>
 
 
         <div class="col-6 md:col-3">
-          <h3 class="m-0 pb-3 flex align-items-center font-light">
+          <h3 class="m-0 pb-3 flex align-items-center font-light text-purple-100 text-sm tracking-wide uppercase">
             {{ $t('product_range') }}
           </h3>
-          <div class="flex flex flex-column gap-3 text-sm capitalize">
-            <div v-for="category in [$t('collection_men'), $t('collection_women'), $t('collection_kids')]">
-              {{ category }}
+          <div class="text-sm capitalize">
+            <div v-for="category in [$t('collection_men'), $t('collection_women'), $t('collection_kids')]"
+                 class="pb-3 flex align-items-center gap-2 cursor-pointer text-purple-200 hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="material-icons-outlined text-xs opacity-70">arrow_right</span>
+              <span>{{ category }}</span>
             </div>
           </div>
         </div>
 
 
         <div class="col-6 md:col-3 text-right md:text-left">
-          <h3 class="m-0 pb-3 font-light text-right md:text-left">
+          <h3 class="m-0 pb-3 font-light text-right md:text-left text-purple-100 text-sm tracking-wide uppercase">
             {{ $t('help') }}
           </h3>
-          <div class="flex flex flex-column gap-3 text-sm">
-            <div>FAQ</div>
-            <div>{{ $t('shipping_link') }}</div>
-            <div>{{ $t('contact_us') }}</div>
+          <div class="text-sm">
+            <div class="pb-3 cursor-pointer text-purple-200 hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('faq') }}
+            </div>
+            <div class="pb-3 cursor-pointer text-purple-200 hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('shipping_link') }}
+            </div>
+            <div class="pb-3 cursor-pointer text-purple-200 hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('contact_us') }}
+            </div>
           </div>
         </div>
 
 
+        <!-- Customer links -->
+        <div class="col-6 md:col-3">
+
+          <h3 class="m-0 pb-3 font-light text-purple-100 text-sm tracking-wide uppercase">
+            {{ $t('footer_customer') }}
+          </h3>
+
+          <div class="text-sm text-purple-200">
+            <div class="pb-3 cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="mr-1 material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('footer_customer_my_account') }}
+            </div>
+            <div class="pb-3 cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="mr-1 material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('footer_customer_order_tracking') }}
+            </div>
+            <div class="pb-3 cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              <span class="mr-1 material-icons-outlined text-xs opacity-70">arrow_right</span>
+              {{ $t('footer_customer_returns_portal') }}
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Company links -->
+        <div class="col-6 md:col-3 pt-4 md:pt-0 hidden">
+          <h3 class="m-0 pb-3 font-light text-purple-100 text-sm tracking-wide uppercase text-right md:text-left">
+            {{ $t('footer_company') }}
+          </h3>
+          <div class="flex flex-column gap-3 text-sm text-purple-200">
+            <span class="cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              {{ $t('footer_company_about') }}
+            </span>
+            <span class="cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              {{ $t('footer_company_blog') }}
+            </span>
+            <span class="cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              {{ $t('footer_company_careers') }}
+            </span>
+            <span class="cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              {{ $t('privacy_policy') }}
+            </span>
+            <span class="cursor-pointer hover:text-yellow-400 transition-colors transition-duration-150">
+              {{ $t('terms_of_service') }}
+            </span>
+          </div>
+        </div>
+
+
+        <!-- Mailing list -->
         <div class="col-12 md:col-3 pt-4 md:pt-2">
-          <h3 class="m-0 pb-1 flex align-items-center font-light">
+          <h3 class="m-0 pb-1 flex align-items-center font-light text-purple-100 text-sm tracking-wide uppercase">
             {{ $t('mailing_title') }}
           </h3>
-          <p class="m-0 text-sm">
+          <p class="m-0 text-sm text-purple-200">
             {{ $t('mailing_subtitle') }}
           </p>
-          <div>
+          <div class="pt-3">
             <InputText unstyled fluid
                        autocomplete="off"
                        id="subscribe-email-ip"
                        :placeholder="$t('enter_email')"
-                       class="h-3rem w-full pl-0 bg-transparent shadow-1 border-none border-bottom-1 border-gray-700 text-gray-200"/>
-            <div class="pt-3">
+                       class="h-3rem w-full pl-3 bg-purple-900 border-round-xl border-1 border-purple-700 text-purple-50 shadow-2 focus:outline-none focus:border-purple-400"/>
+            <div class="pt-3 flex gap-2 align-items-center">
               <VButtonCube :text="$t('subscribe')"
                            icon_right="1"
+                           class="bg-gold shadow-1"
                            fill="1"
                            icon="send"/>
             </div>
           </div>
+
+          <!-- locales -->
+          <div class="pt-4 flex align-items-center gap-1 text-white">
+            <Locale/>
+          </div>
+          <!-- /locales -->
+
         </div>
 
       </div>
       <!-- /footer box -->
 
       <!-- Copyright bar -->
-      <div class="w-full pt-3 lg:pt-4 md:pr-3 md:pl-2 md:flex align-items-center justify-content-between border-top-1 border-gray-800">
+      <div class="w-full pt-3 lg:pt-4 md:pr-3 md:pl-2 md:flex align-items-center justify-content-between border-top-1 border-purple-900">
 
         <!-- payments -->
-        <div class="py-2 md:p-0 flex-1 flex justify-content-center lg:justify-content-start gap-3 text-xs text-center">
-          <span>Paypal</span>
-          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
-          <span>M-PESA</span>
-          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
-          <NuxtLink to="/dashboard" class="no-underline text-gray-400 capitalize">
+        <div class="py-2 md:p-0 flex-1 flex align-items-center justify-content-center lg:justify-content-start gap-3 text-xs text-center text-purple-200">
+          <span class="px-2 py-1 border-round-lg bg-purple-900 border-1 border-purple-700">
+            {{ $t('payment_paypal') }}
+          </span>
+          <Divider layout="vertical" unstyled class="border-left-1 border-purple-700"/>
+          <span class="px-2 py-1 border-round-lg bg-purple-900 border-1 border-purple-700">
+            {{ $t('payment_mpesa') }}
+          </span>
+          <Divider layout="vertical" unstyled class="border-left-1 border-purple-700"/>
+          <NuxtLink to="/dashboard" class="no-underline text-purple-200 hover:text-yellow-400 capitalize transition-colors transition-duration-150">
             {{ $t('dashboard') }}
           </NuxtLink>
         </div>
         <!-- /payments -->
 
         <!-- copyright -->
-        <div class="py-2 md:p-0 text-xs md:text-sm font-light flex-1 flex gap-1 justify-content-center aling-items-center uppercase">
+        <div class="py-2 md:p-0 text-xs md:text-sm font-light flex justify-content-right gap-1 align-items-center uppercase text-purple-300">
           <span>&copy; 2026. Ventt</span>
-          <Divider layout="vertical"/>
+          <Divider layout="vertical" class="border-left-1 border-purple-700"/>
           <NuxtLink to="https://linkedin.com/in/kwkamara"
                     target="_blank"
-                    class="text-gray-300 no-underline hover:text-purple-400 text-sm">
+                    class="text-purple-200 no-underline hover:text-yellow-400 text-sm transition-colors transition-duration-150">
             Kevin <span class="font-bold">Kamara</span>
           </NuxtLink>
         </div>
-
-        <!-- Terms -->
-        <div class="pt-2 md:p-0 flex-1 flex justify-content-center lg:justify-content-end gap-3 text-xs">
-          <span>{{ $t('privacy_policy') }}</span>
-          <Divider layout="vertical" unstyled class="border-left-1 border-gray-500"/>
-          <span>{{ $t('terms_of_service') }}</span>
-        </div>
-        <!-- Terms -->
 
       </div>
       <!-- /Copyright bar -->

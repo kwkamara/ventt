@@ -77,5 +77,16 @@
   "women_style": "Damesstijl",
   "women_suits": "Damespakken",
   "reviews": "Beoordelingen",
-  "login_to_review": "Log in om een beoordeling achter te laten"
+  "login_to_review": "Log in om een beoordeling achter te laten",
+  "no_spam_promise": "We sturen je alleen het beste — geen spam.",
+  "footer_customer": "Klant",
+  "footer_customer_my_account": "Mijn account",
+  "footer_customer_order_tracking": "Bestelling volgen",
+  "footer_customer_returns_portal": "Retourportaal",
+  "footer_company": "Bedrijf",
+  "footer_company_about": "Over Ventt",
+  "footer_company_blog": "Blog & verhalen",
+  "footer_company_careers": "Carrières",
+  "payment_paypal": "Paypal",
+  "payment_mpesa": "M-PESA"
 }

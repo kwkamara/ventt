@@ -77,5 +77,16 @@
   "women_suits": "Women's Suits",
   "total": "Total",
   "reviews": "Reviews",
-  "login_to_review": "Log in to leave a review"
+  "login_to_review": "Log in to leave a review",
+  "no_spam_promise": "We only send you the good stuff—no spam, ever.",
+  "footer_customer": "Customer",
+  "footer_customer_my_account": "My account",
+  "footer_customer_order_tracking": "Order tracking",
+  "footer_customer_returns_portal": "Returns portal",
+  "footer_company": "Company",
+  "footer_company_about": "About Ventt",
+  "footer_company_blog": "Blog & stories",
+  "footer_company_careers": "Careers",
+  "payment_paypal": "Paypal",
+  "payment_mpesa": "M-PESA"
 }

@@ -15,7 +15,10 @@
              tabindex="0"
              @click="openCategoriesPopup(cat_name, $event)">
           {{ $t(cat_name) }}
-          <span class="material-icons-outlined">keyboard_arrow_down</span>
+          <span class="material-icons-outlined text-xs ml-1"
+                :class="{'rotate-180 transition-transform transition-duration-200': isActiveCategory(cat_name)}">
+            keyboard_arrow_down
+          </span>
         </div>
       </div>
       <!-- /Category Navigation -->
@@ -87,7 +90,7 @@
 
     <!-- Categories Popover -->
     <Popover ref="categoriesPopup"
-             class="border-none shadow-2"
+             class="border-none shadow-3 border-round-xl overflow-hidden"
              close-on-escape unstyled>
 
       <div aria-labelledby="categories-popover-title"
@@ -235,13 +238,19 @@ export default defineComponent({
     },
 
 
+    //category active helper.
+    isActiveCategory(cat_name) {
+      return (this.shop?.category === cat_name) || (this.category === cat_name);
+    },
+
+
     //category tab classes.
     categoryTabClass(cat_name, ix) {
       //active category.
-      const active = (this.shop?.category === cat_name) || (this.category === cat_name);
+      const active = this.isActiveCategory(cat_name);
 
-      let category_class = 'w-full px-3 h-full border-left-1 border-purple-700 uppercase md:text-lg font-light hover:bg-purple-800 hover:text-yellow-800 flex align-items-center justify-content-center ';
-      if (active) category_class += 'bg-purple-800 text-yellow-800 ';
+      let category_class = 'w-full px-3 md:px-4 h-full border-left-1 border-purple-700 uppercase md:text-sm font-normal flex align-items-center justify-content-center gap-1 cursor-pointer transition-colors transition-duration-200 hover:bg-purple-700 hover:text-yellow-500 ';
+      if (active) category_class += 'bg-purple-900 text-yellow-400 shadow-2 border-round-top ';
       if (ix === 2) category_class += 'border-right-1 ';
 
       //return.

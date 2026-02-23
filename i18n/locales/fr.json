@@ -77,5 +77,16 @@
   "women_style": "Style féminin",
   "women_suits": "Costumes pour femmes",
   "reviews": "Avis",
-  "login_to_review": "Connectez-vous pour laisser un avis"
+  "login_to_review": "Connectez-vous pour laisser un avis",
+  "no_spam_promise": "Nous vous envoyons seulement l'essentiel — jamais de spam.",
+  "footer_customer": "Client",
+  "footer_customer_my_account": "Mon compte",
+  "footer_customer_order_tracking": "Suivi de commande",
+  "footer_customer_returns_portal": "Portail des retours",
+  "footer_company": "Entreprise",
+  "footer_company_about": "À propos de Ventt",
+  "footer_company_blog": "Blog & histoires",
+  "footer_company_careers": "Carrières",
+  "payment_paypal": "Paypal",
+  "payment_mpesa": "M-PESA"
 }
