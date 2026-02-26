@@ -174,6 +174,7 @@
             <Chart type="bar"
                    :data="chartData"
                    :options="chartOptions"
+                   :key="category?.name"
                    class="lg:h-14rem w-full"/>
           </div>
         </client-only>
@@ -1088,8 +1089,8 @@ export default defineComponent({
       //chart options.
       chartOptions: {
         animation          : {
-          animateScale : true,
-          animateRotate: true
+          duration: 800,
+          easing  : 'easeOutQuart'
         },
         responsive         : true,
         maintainAspectRatio: false,

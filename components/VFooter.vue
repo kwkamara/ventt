@@ -20,7 +20,7 @@
                        autocomplete="off"
                        id="subscribe-email-ip"
                        :placeholder="$t('enter_email')"
-                       class="h-3rem w-full pl-3 bg-purple-900 border-round-xl border-1 border-purple-700 text-purple-50 shadow-2 focus:outline-none focus:border-purple-400"/>
+                       class="h-3rem w-full lg:w-8 pl-3 bg-purple-900 border-round-xl border-1 border-purple-700 text-purple-50 shadow-2 focus:outline-none focus:border-purple-400"/>
 
             <VButtonCube :text="$t('subscribe')"
                          class="lg:w-5  mt-3 lg:m-0 bg-gold shadow-1"
@@ -135,8 +135,6 @@
         </div>
 
 
-
-
       </div>
       <!-- /footer box -->
 
@@ -195,6 +193,48 @@
 
     </div>
   </section>
+
+  <Drawer v-model:visible="show_cookies_notice"
+          position="bottom"
+          modal
+          blockScroll
+          dismissableMask="false"
+          style="height: auto"
+          @hide="useState('cookies').value = 'shown'">
+
+    <template #header>
+      <div class="flex align-items-center gap-2">
+        <span class="material-icons-outlined text-purple-500">cookie</span>
+        <span class="uppercase text-sm font-medium text-purple-900 tracking-wide">
+          Ventt Cookies
+        </span>
+      </div>
+    </template>
+
+    <div class="p-3 md:p-4 flex flex-column md:flex-row gap-3 md:gap-4 align-items-start md:align-items-center">
+      <div class="flex-1 text-sm text-gray-700">
+        <p class="m-0 mb-2">
+          We use cookies to personalize content, tailor recommendations, and measure traffic so we can keep improving your Ventt experience.
+        </p>
+        <p class="m-0 text-xs text-gray-500">
+          You can change your cookie preferences at any time in the settings.
+        </p>
+      </div>
+
+      <div class="flex gap-2 justify-content-end w-full md:w-auto">
+        <Button class="p-button-text text-xs md:text-sm text-gray-700 border-round-2xl px-3 py-2"
+                @click="show_cookies_notice = false; useState('cookies').value = 'shown'">
+          Manage preferences
+        </Button>
+
+        <Button class="bg-purple-700 border-none text-xs md:text-sm border-round-2xl px-3 py-2 hover:bg-purple-800"
+                @click="show_cookies_notice = false; useState('cookies').value = 'shown'">
+          Accept all
+        </Button>
+      </div>
+    </div>
+  </Drawer>
+
 </template>
 
 
@@ -203,6 +243,8 @@
 const scrollToTop = () => {
   window.scrollTo({top: 0, behavior: "smooth"});
 };
+
+useState('cookies', () => null);
 </script>
 
 
@@ -211,7 +253,14 @@ export default defineComponent({
   name: "VFooter",
 
   data() {
-    return {}
+    return {
+      show_cookies_notice: false,
+    }
+  },
+
+  mounted() {
+    //show cookie notice.
+    if (!useState('cookies').value) this.show_cookies_notice = true;
   }
 })
 </script>
