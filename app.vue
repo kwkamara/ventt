@@ -25,6 +25,8 @@ useState('cart', () => ({}));
 //wishlist struct.
 useState('wishlist', () => ({}));
 
+
+//products.
 useState('products', () => [
   //men.
   {
@@ -1920,6 +1922,10 @@ useState('products', () => [
 
 ]);
 
+
+//config.
+const config = useRuntimeConfig();
+console.log(config);
 </script>
 
 
@@ -1996,7 +2002,7 @@ input:not(:placeholder-shown) {
 }
 
 
-.bg-purple-alpha{
+.bg-purple-alpha {
   background-color: rgba(151, 29, 151, 0.8);
 }
 </style>

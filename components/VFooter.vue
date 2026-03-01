@@ -51,12 +51,14 @@
         </div>
 
 
+        <!-- product range -->
         <div class="col-6 md:col-3">
           <h3 class="m-0 pb-3 flex align-items-center font-light text-purple-100 text-sm text-spaced uppercase">
             {{ $t('product_range') }}
           </h3>
           <div class="text-sm capitalize">
-            <div v-for="category in [$t('collection_men'), $t('collection_women'), $t('collection_kids')]"
+            <div v-for="(category, key) in ['collection_men', 'collection_women', 'collection_kids']"
+                 :key="key"
                  class="pb-3 flex align-items-center gap-2 cursor-pointer text-purple-200 hover:text-yellow-400 transition-colors transition-duration-150">
               <span class="material-icons-outlined text-xs opacity-70">arrow_right</span>
               <span>{{ $t(category) }}</span>

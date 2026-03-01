@@ -14,9 +14,9 @@ export default defineNuxtConfig({
     i18n: {
         defaultLocale: 'en',
         locales: [
-            { code: 'en', name: 'English', file: 'en.json' },
-            { code: 'nl', name: 'Nederlands', file: 'nl.json' },
-            { code: 'fr', name: 'French', file: 'fr.json' },
+            {code: 'en', name: 'English', file: 'en.json'},
+            {code: 'nl', name: 'Nederlands', file: 'nl.json'},
+            {code: 'fr', name: 'French', file: 'fr.json'},
         ]
     },
 
@@ -39,5 +39,9 @@ export default defineNuxtConfig({
     fonts: {
         provider: 'local',
     },
+
+    runtimeConfig: {
+
+    }
 
 })
